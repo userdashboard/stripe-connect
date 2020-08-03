@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">人 ${person.id}</h1>
-  <p translate="yes">可能已提交未显示的其他信息。</p>
+  <p translate="yes">可能已提交了未显示的其他信息。</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">作用</th>
+        <th translate="yes">角色</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -28,11 +28,11 @@
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">名字</th>
+        <th translate="yes">名称</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">所需信息</th>
+        <th translate="yes">要求（提供）的信息</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

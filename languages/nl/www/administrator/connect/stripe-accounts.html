@@ -2,17 +2,17 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe rekeningen</title>
+  <title translate="yes">Stripe-accounts</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe rekeningen</h1>
+  <h1 translate="yes">Stripe-accounts</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Er zijn nog geen Stripe accounts gemaakt.</p>
+    <p translate="yes">Er zijn nog geen Stripe-accounts aangemaakt.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -20,7 +20,7 @@
         <th>ID</th>
         <th translate="yes">Type</th>
         <th translate="yes">Naam</th>
-        <th translate="yes">Status</th>
+        <th translate="yes">Toestand</th>
         <th translate="yes">Gemaakt</th>
         <th translate="yes">Ingediend</th>
       </tr>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Nog niet verstrekt</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,19 +48,19 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Het geld wordt betaald naar rekening x</p>
+    <p translate="yes">Geld wordt gestort op rekening x</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Bankgegevens moeten worden verstrekt om geld te ontvangen.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">De inschrijving is niet ingediend.</p>
+    <p translate="yes">De registratie is niet ingediend.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">De inschrijving is ingediend op ${account.dateFormatted}.</p>
+    <p translate="yes">De registratie is ingediend op ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nog niet ingediend</span>
+    <span translate="yes">nog niet ingediend</span>
   </template>
   <template id="verified">
     <span translate="yes">Registratie is geaccepteerd</span>
@@ -72,7 +72,7 @@
     <span translate="yes">Vereist aanvullende informatie</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">In behandeling zijnde indiening</span>
+    <span translate="yes">In afwachting van indiening</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Vereist aanvullende informatie</span>
@@ -93,10 +93,10 @@
     <span translate="yes">Meer informatie is vereist</span>
   </template>
   <template id="listed">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Uitgeschakeld door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Persona ${person.id}</h1>
-  <p translate="yes">Iespējams, ir iesniegta papildinformācija, kas netiek rādīta.</p>
+  <p translate="yes">Iespējams, ir iesniegta papildu informācija, kas netiek parādīta.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Lomu</th>
+        <th translate="yes">Loma</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -28,7 +28,7 @@
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">vārds</th>
+        <th translate="yes">Vārds</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

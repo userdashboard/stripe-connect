@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Hanova ny ${stripeAccount.id}</title>
+  <title translate="yes">Edit ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,22 +17,22 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Hanova ny ${stripeAccount.id}</h1>
+    <h1 translate="yes">Edit ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">URL momba ny tranonkala</label>
+        <label for="business_profile_url" translate="yes">URL an'ny tranonkala</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">Famaritana ireo vokatra</label>
+        <label for="business_profile_product_description" translate="yes">Mombamomba ny vokatra</label>
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">Mpivarotra naman ny mari-pamantarana</label>
+        <label for="business_profile_mcc" translate="yes">Kaody sokajy mpivarotra</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
-            Safidio ny mari-pamantarana ho an' ny raharahan' ny
+            Safidio ny kaody anao amin'ny orinasanao
           </option>
         </select>
       </div>
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Anaran' ny fandraharahana</label>
+            <label for="name" translate="yes">Anaran'ny orinasa</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Laharana FAMANTARANA ny hetra</label>
+            <label for="tax_id" translate="yes">Isan'ny kaonty haba</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
             <a id="name_kana-anchor"></a>
-            <label for="name_kana" translate="yes">Kana ny anaran' ny fandraharahana</label>
+            <label for="name_kana" translate="yes">Anaran'ny raharaham-barotra Kana</label>
             <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">Kanji ny anaran' ny fandraharahana</label>
+            <label for="name_kanji" translate="yes">Anaran'ny orinasa kanji</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">URL momba ny tranonkala</label>
+            <label for="business_profile_url" translate="yes">URL an'ny tranonkala</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="pure-u-11-24">
           <div id="phone-container" class="pure-control-group">
             <a id="phone-anchor"></a>
-            <label for="phone" translate="yes">Laharan' ny telefaonina</label>
+            <label for="phone" translate="yes">Nomeraon-telefaona</label>
             <input required="required" id="phone" name="phone" type="text" maxlength="50">
           </div>
         </div>
@@ -91,70 +91,70 @@
       <div id="company-verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <h2 translate="yes">Andiany incorporation</h2>
-        <label for="verification_document_front" translate="yes">Eo aloha/sary</label>
+        <h2 translate="yes">Fikambanan'ny orinasa</h2>
+        <label for="verification_document_front" translate="yes">Fialam-baravarana / sary</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Hijery haingana ny sary</label>
+        <label for="verification_document_back" translate="yes">Back scan / sary</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Fampahalalana mikasika ny tena manokana</h2>
+      <h2 translate="yes">Fampahalalana manokana</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
-            <label for="first_name" translate="yes">Fanampin' anarana</label>
+            <label for="first_name" translate="yes">Fanampin'anarana</label>
             <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name-container" class="pure-control-group">
-            <label for="last_name" translate="yes">Anarana farany</label>
+            <label for="last_name" translate="yes">Anarana</label>
             <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div id="email-container" class="pure-control-group">
-        <label for="email" translate="yes">Adiresy Email</label>
+        <label for="email" translate="yes">Adiresy mailaka</label>
         <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
-        <label for="phone" translate="yes">Laharan' ny telefaonina</label>
+        <label for="phone" translate="yes">Nomeraon-telefaona</label>
         <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100">
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">Kana ny mombamomba ny tena manokana</h2>
+      <h2 translate="yes">Fampahalalana manokana an'ny Kana</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
-            <label for="first_name_kana" translate="yes">Fanampin' anarana</label>
+            <label for="first_name_kana" translate="yes">Fanampin'anarana</label>
             <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kana-container" class="pure-control-group">
-            <label for="last_name_kana" translate="yes">Anarana farany</label>
+            <label for="last_name_kana" translate="yes">Anarana</label>
             <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
           </div>
         </div>
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Kanji ny mombamomba ny tena manokana</h2>
+      <h2 translate="yes">Fampahalalana manokana Kanji</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
-            <label for="first_name_kanji" translate="yes">Fanampin' anarana</label>
+            <label for="first_name_kanji" translate="yes">Fanampin'anarana</label>
             <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kanji-container" class="pure-control-group">
-            <label for="last_name_kanji" translate="yes">Anarana farany</label>
+            <label for="last_name_kanji" translate="yes">Anarana</label>
             <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -167,40 +167,40 @@
       <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
     </div>
     <div id="ssn_last_4-container" class="pure-control-group">
-      <label for="ssn_last_4" translate="yes">SSN 4 digits</label>
+      <label for="ssn_last_4" translate="yes">SSN farany 4 isa</label>
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Samy lahy</label>
+      <label for="gender" translate="yes">Gender</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Vavy</span></label>
-        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Lahy</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Female</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Male</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
       <h2 translate="yes">Famantarana manokana</h2>
-      <label for="id_number" translate="yes">Laharan' ny pasipaoro na ID</label>
+      <label for="id_number" translate="yes">Ny isan'ny pasipaoro na ny laharan'ny ID</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Eo aloha/sary</label>
+      <label for="verification_document_front" translate="yes">Fialam-baravarana / sary</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Hijery haingana ny sary</label>
+      <label for="verification_document_back" translate="yes">Back scan / sary</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Porofon' ny lahateny</h2>
+      <h2 translate="yes">Porofon'ny adiresy</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Eo aloha/sary</label>
+      <label for="verification_additional_document_front" translate="yes">Fialam-baravarana / sary</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Hijery haingana ny sary</label>
+      <label for="verification_additional_document_back" translate="yes">Back scan / sary</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
-      <h2 translate="yes">Lahateny</h2>
+      <h2 translate="yes">Address</h2>
       <div id="address_line1-container" class="pure-control-group">
         <label for="address_line1" translate="yes">Andalana 1</label>
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
@@ -210,16 +210,16 @@
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">Tanàna</label>
+        <label for="address_city" translate="yes">City</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <div class="pure-g">
           <div id="address_state-container" class="pure-u-17-24">
-            <label for="address_state" translate="yes">Faritany na faritra faritany</label>
+            <label for="address_state" translate="yes">Faritany</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Fanteno ny toetra
+                Safidio ny fanjakana
               </option>
             </select>
           </div>
@@ -234,53 +234,53 @@
       </div>
     </div>
     <div id="kana-address-container">
-      <h2 translate="yes">Kana lahateny</h2>
+      <h2 translate="yes">Adiresy Kana</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
         <label for="address_kana_line1" translate="yes">Andalana 1</label>
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">Tanàna</label>
+        <label for="address_kana_city" translate="yes">City</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
-        <label for="address_kana_town" translate="yes">Tanàna</label>
+        <label for="address_kana_town" translate="yes">Town</label>
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">Toetry</label>
+        <label for="address_kana_state" translate="yes">State</label>
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Amin' ny paositra ny mari-pamantarana</label>
+        <label for="address_kana_postal_code" translate="yes">Kaody postaly</label>
         <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="kanji-address-container">
-      <h2 translate="yes">Kanji lahateny</h2>
+      <h2 translate="yes">Adiresy Kanji</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
         <label for="address_kanji_line1" translate="yes">Andalana 1</label>
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">Tanàna</label>
+        <label for="address_kanji_city" translate="yes">City</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
-        <label for="address_kanji_town" translate="yes">Tanàna</label>
+        <label for="address_kanji_town" translate="yes">Town</label>
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">Toetry</label>
+        <label for="address_kanji_state" translate="yes">State</label>
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Amin' ny paositra ny mari-pamantarana</label>
+        <label for="address_kanji_postal_code" translate="yes">Kaody postaly</label>
         <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Fanavaozana Stripe tantara</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Hanavao ny kaonty Stripe</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -291,218 +291,218 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">Fahombiazana! Ny tantara Stripe dia nohavaozina</span>
-      <a href="/account/connect" translate="yes">Miverina manao tantara</a>
+      <span translate="yes">Fahombiazana! Ny kaonty Stripe dia nohavaozina</span>
+      <a href="/account/connect" translate="yes">Miverena amin'ny kaonty</a>
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fahadisoana! Tsy fantatra ny fahadisoana ocurred
+      Error! Nisy hadisoana tsy fantatra
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Fahadisoana! Nisy tsy fetezana nitranga nampiditra sary firaketana
+      Error! Nisy hadisoana nitranga tamin'ny fandefasana sary sary
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Fahadisoana! Nisy fahadisoana nitranga tamin' ny fandefasana endrika
+      Error! Nisy hadisoana nitranga tamin'ny fandefasana ny taratasy
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita URL
+      Error! URL na orinasa tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny raharaham-barotra Mpivarotra naman ny Sokajy
+      Error! Fehezan-dalàna sokajy Merchant Category code tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita ny famaritana ny raharaham-barotra.
+      Error! Ny famaritana vokatra vokatra tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny taratasy na ny sary eo anoloana
+      Error! Fikarohana na sary tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny taratasy na ny sary tsy hita maso
+      Error! Tahirin-tsary na sary tsy very na tsy hita
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny taratasy na ny sary eo anoloana
+      Error! Tsy diso na tsy misy antontan-taratasy fanampiny na sary taloha
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny taratasy na ny sary tsy misy
+      Error! Tsy diso na tsy hita intsony ny antontan-taratasy miverimberina na sary
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy ampy ny laharana FAMANTARANA ny tena manokana
+      Error! Kaonty ID tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na ny anaran' ny fandraharahana.
+      Error! Anaran'ny orinasa tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na kana ny raharaham-barotra.
+      Error! Anaran'ny raharaham-barotra tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na kanji ny raharaham-barotra.
+      Error! Anaran'ny orinasa kanji tsy mety na tsy hita
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita ny raharaha momba ny hetra.
+      Error! Id ny hetra diso na tsy hita
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny laharana an-tariby.
+      Error! Laharana finday tsy mety na tsy hita
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy misy na inona na inona.
+      Error! Vehivavy tsy diso na tsy misy
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza 4 digits ny Laharan' ny Tambazotra Ifaneraserana
+      Error! Tsy diso na tsy hita ny isa 4 farany an'ny laharan'ny fiarovana sosialy
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na daty very.
+      Error! Tsy teraka na tsy hita ny daty nahaterahany
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na daty very.
+      Error! Tsy teraka na tsy hita ny daty nahaterahany
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na daty very.
+      Error! Tsy teraka na tsy hita ny daty nahaterahany
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy misy anarana
+      Error! Tsy diso na tsy hita anarana voalohany
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na very anarana Kana
+      Error! Tsy diso na tsy hita ny anarany voalohany Kana
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na very anarana Kanji
+      Error! Anarana tsy nahy na tsy hita Kanji
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na banga ny anarana.
+      Error! Tsy diso na tsy hita anarana farany
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na Kana ny anarana farany.
+      Error! Tsy mety na tsy hita i Kana farany anarana farany tany
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na Kanji ny anarana farany.
+      Error! Anaram-baovao tsy hita na tsy hita Kanji
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na ny email tsy hita.
+      Error! Mailaka tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy misy adiresy an-tsarimihetsika manokana.
+      Error! Tanàna adiresy tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita ny fomba fanaovana lahateny manokana
+      Error! Toerana adiresy manokana tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita ny andalana 1
+      Error! Tsipika adiresy tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny mari-pamantarana amin' ny paositra manokana.
+      Error! Kaody ady tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza Kana ny lahateny manokana.
+      Error! Tanàna adiresy tena tsy misy na tsy hita i Kana
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy Kana ny lahateny manokana.
+      Error! Toerana adiresy manokana momba ny tsy izy na tsy hita
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza Kana an-tanàna manokana.
+      Error! Tsy misy na tsy hita ny tanànan'ny adiresy manokana any Kana
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza Kana ny lahateny ataon' ny tena manokana 1
+      Error! Tsipika adiresy tsy misy na tsy hita any Kana
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na Kana ny lahateny manokana amin' ny paositra.
+      Error! Kaody adiresy paositra tsy hita na tsy misy na tsy misy any Kana
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza Kanji ny lahateny manokana.
+      Error! Tanànan'ny adiresy Kanji tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy Kanji ny lahateny manokana.
+      Error! Fanjakana tsy fantatra na tsy hita ny tenin'i Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza Kanji an-tanàna manokana.
+      Error! Tsy misy na tsy hita ny tanànan'i Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza Kanji ny lahateny ataon' ny tena manokana 1
+      Error! Lisitry ny adiresy Kanji manokana tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na Kanji ny lahateny manokana amin' ny paositra.
+      Error! Kaody tsy misy na tsy misy Kanji manokana adiresy paositra
     </div>
   </template>
 </body>

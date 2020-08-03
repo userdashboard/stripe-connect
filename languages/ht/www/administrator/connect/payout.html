@@ -18,17 +18,17 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Montan</th>
+        <th translate="yes">Kantite lajan</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Kont Stripe</th>
+        <th translate="yes">Stripe kont</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">Estati</th>
+        <th translate="yes">Ki dènye nouvèl</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Pa gen kont labank ki te jwenn</span>
+    <span translate="yes">Pa gen okenn kont labank jwenn</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Lajan envalid</span>
+    <span translate="yes">Valid valab</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Nimewo kont envalid</span>
+    <span translate="yes">Nimewo kont Invalid</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Lajan pa sifi</span>
+    <span translate="yes">Fon ase</span>
   </template>
   <template id="declined">
     <span translate="yes">Bank te refize transfere</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Pa gen kont labank</span>
+    <span translate="yes">Pa gen debi kont labank</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Pa t ka travay</span>
+    <span translate="yes">Pa t 'kapab travay sou</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Pwopriyete bank chanje</span>
+    <span translate="yes">An komen Bank chanje</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Kont labank limite</span>
+    <span translate="yes">Kont Bank limite</span>
   </template>
   <template id="account_frozen">
     <span translate="yes">Kont labank jele</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Kont labank femen</span>
+    <span translate="yes">Kont labank fèmen</span>
   </template>
 </body>
 </html>

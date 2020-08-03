@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Excluir ${person.id}</h1>
-  <p translate="yes">A informação do proprietário será eliminada imediatamente e não pode ser recuperada.</p>
+  <p translate="yes">As informações do proprietário serão excluídas imediatamente e não poderão ser recuperadas.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Excluir</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Que sucesso! O dono da empresa foi eliminado.
+      Sucesso! O proprietário da empresa foi excluído
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Um erro ocorreu ao eliminar o proprietário da empresa
+      Erro! Ocorreu um erro ao excluir o proprietário da empresa
     </div>
   </template>
 </body>

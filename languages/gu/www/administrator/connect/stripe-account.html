@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">દેખાવ ${stripeAccount.id}</title>
+  <title translate="yes">જુઓ ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">દેખાવ ${stripeAccount.id}</h1>
+  <h1 translate="yes">જુઓ ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table data-table">
     <tbody id="${stripeAccount.id}">
@@ -32,50 +32,50 @@
         <td id="account-status"></td>
       </tr>
       <tr>
-        <th translate="yes">બનાવેલ છે</th>
+        <th translate="yes">બનાવ્યું</th>
         <td>${stripeAccount.createdFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">સબમિટ થયેલ છે</th>
+        <th translate="yes">સબમિટ કરેલ</th>
         <td>${stripeAccount.metadata.submittedFormatted}</td>
       </tr>
     </tbody>
   </table>
   <template id="not-submitted">
-    <span translate="yes">હજુ સબમિટ થયેલ નથી</span>
+    <span translate="yes">હજી રજુ નથી કરાઈ</span>
   </template>
   <template id="verified">
-    <span translate="yes">રજિસ્ટ્રેશન સ્વીકારવામાં આવ્યું છે</span>
+    <span translate="yes">નોંધણી સ્વીકારવામાં આવી છે</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe દ્દારા નિષ્ક્રિય થયેલ છે</span>
+    <span translate="yes">Stripe દ્વારા અક્ષમ કરેલ</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">વધારાની જાણકારીની જરૂર છે</span>
+    <span translate="yes">વધારાની માહિતીની જરૂર છે</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">વધારાની જાણકારીની જરૂર છે</span>
+    <span translate="yes">વધારાની માહિતીની જરૂર છે</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">બાકી રજૂઆત</span>
+    <span translate="yes">બાકી સબમિશન</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">વધારાની જાણકારીની જરૂર છે</span>
+    <span translate="yes">વધારાની માહિતીની જરૂર છે</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe દ્વારા નકારવામાં આવે છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe દ્વારા નકારી, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe દ્વારા નકારવામાં આવે છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe દ્વારા નકારી, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe દ્વારા નકારવામાં આવે છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe દ્વારા નકારી, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe દ્વારા નકારવામાં આવે છે, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe દ્વારા નકારી, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">વધુ જાણકારીની જરૂર છે</span>
+    <span translate="yes">વધુ માહિતી જરૂરી છે</span>
   </template>
   <template id="listed">
     <span translate="yes">Stripe દ્વારા સમીક્ષા હેઠળ</span>
@@ -84,7 +84,7 @@
     <span translate="yes">Stripe દ્વારા સમીક્ષા હેઠળ</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe દ્દારા નિષ્ક્રિય થયેલ, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe દ્વારા અક્ષમ, જુઓ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

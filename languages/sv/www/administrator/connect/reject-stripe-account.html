@@ -13,7 +13,7 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Orsak till avslag</label>
+      <label for="reason" translate="yes">Avvisningsskäl</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
           Välj orsak
@@ -22,34 +22,34 @@
           Bedrägeri
         </option>
         <option value="terms_of_service" translate="yes">
-          Brott mot användarvillkoren
+          Servicevillkor
         </option>
         <option value="other" translate="yes">
-          Andra
+          Övrig
         </option>
       </select>
     </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Avvisa</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Framgång! Det Stripe kontot har avvisats
+      Framgång! Stripe-kontot har avvisats
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Fel! Kontot måste ha ett /bin/sh-saldo innan det avvisas
+      Fel! Kontot måste ha en / bin / sh-saldo innan den avvisas
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fel! Ett fel uppstod när Stripe-kontot avvisades
+      Fel! Ett fel uppstod vid utmatning av Stripe-kontot
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Inte inlämnad ännu</span>
+    <span translate="yes">Inte skickat ännu</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registreringen har accepterats</span>
+    <span translate="yes">Registrering har accepterats</span>
   </template>
   <template id="verified">
     <span translate="yes">Inaktiverad av Stripe</span>
@@ -61,19 +61,19 @@
     <span translate="yes">Kräver ytterligare information</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Väntande inlämning</span>
+    <span translate="yes">Väntar på inlämning</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Mer information krävs</span>

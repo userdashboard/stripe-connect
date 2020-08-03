@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Persoon ${person.id}</h1>
-  <p translate="yes">Mogelijk is aanvullende informatie ingediend die niet wordt weergegeven.</p>
+  <p translate="yes">Mogelijk is er aanvullende informatie ingediend die niet wordt weergegeven.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Role</th>
+        <th translate="yes">Rol</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -32,7 +32,7 @@
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Vereiste informatie</th>
+        <th translate="yes">Benodigde informatie</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

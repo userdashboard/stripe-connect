@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Watu kwa ${stripeAccount.id}</title>
+  <title translate="yes">Watu wa ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,9 +11,9 @@
 <body>
   <h1 translate="yes">Watu</h1>
   <div id="representative-container">
-    <h2 translate="yes">Mwakilishi wa kampuni</h2>
-    <p translate="yes">Kama hali ya mtu aliyeoteuliwa ni lazima uunde Mwakilishi mpya.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Unda Mwakilishi mpya</a></p>
+    <h2 translate="yes">Mwakilishi wa Kampuni</h2>
+    <p translate="yes">Ikiwa hali ya mtu aliyeteuliwa inabadilika lazima uwe na mwakilishi mpya.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Unda mwakilishi mpya</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -25,8 +25,8 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Wamiliki wa manufaa</h2>
-    <p translate="yes">Lazima utoe nyaraka kwa mtu yeyote mwingine kumiliki asilimia (25 +) ya kampuni au kwa malipo ya kampuni, fedha au shughuli zake.</p>
+    <h2 translate="yes">Wamiliki wa faida</h2>
+    <p translate="yes">Lazima upe hati kwa mtu yeyote anayemiliki asilimia kubwa (25+) ya kampuni au anayesimamia kampuni, fedha zake au shughuli.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Ongeza mmiliki</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -39,8 +39,8 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Wakurugenzi wa kampuni</h2>
-    <p translate="yes">Lazima utoe nyaraka za Bodi ya Wakurugenzi.</p>
+    <h2 translate="yes">Wakurugenzi wa Kampuni</h2>
+    <p translate="yes">Lazima upe hati kwa bodi ya wakurugenzi.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Ongeza mmiliki</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Ongeza taarifa</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Ongeza habari</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

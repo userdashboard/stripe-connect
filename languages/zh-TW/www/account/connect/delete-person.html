@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">刪除 ${person.id}</h1>
-  <p translate="yes">擁有者資訊將立即刪除,無法恢復。</p>
+  <p translate="yes">所有者信息將立即刪除，無法恢復。</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">刪除</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      成功!公司擁有者已被刪除
+      成功！公司所有者已被刪除
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      錯誤!刪除公司擁有者時發生錯誤
+      錯誤！刪除公司所有者時發生錯誤
     </div>
   </template>
 </body>

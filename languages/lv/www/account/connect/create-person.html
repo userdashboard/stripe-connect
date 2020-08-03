@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Izveidot jaunu personu ${stripeAccount.id}</title>
+  <title translate="yes">Izveidojiet jaunu personu ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Izveidot jaunu personu</h1>
-    <p translate="yes">Direktoru padomei, īpašniekiem un pārstāvim ir jābūt atjauninātai, jo mainās jūsu informācija.</p>
+    <h1 translate="yes">Izveidojiet jaunu personu</h1>
+    <p translate="yes">Direktoru padomei, īpašniekiem un pārstāvim jābūt pastāvīgi atjauninātam, mainoties jūsu informācijai.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Saistība ar uzņēmumu</h2>
@@ -22,11 +22,11 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Amata, lomas vai attiecību nosaukums</label>
+        <label for="relationship_title" translate="yes">Amats, loma vai attiecību nosaukums</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Piederošie procenti (ja ir)</label>
+        <label for="relationship_percent_ownership" translate="yes">Īpašuma procents (ja tāds ir)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
@@ -36,22 +36,22 @@
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Panākumus! Reģistrācija ir atjaunināta
+      Panākumi! Reģistrācija ir atjaunināta
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kļūda! Veidojot reģistrāciju , radās kļūda
+      Kļūda! Veidojot reģistrāciju, radās kļūda
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Jūsu Stripe kontam nav nepieciešama informācija par īpašuma beneficiātu
+      Jūsu Stripe kontā nav nepieciešama faktiskā īpašnieka informācija
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Jūsu Stripe kontam nav nepieciešama uzņēmuma direktora informācija
+      Jūsu Stripe kontā nav nepieciešama uzņēmuma direktora informācija
     </div>
   </template>
   <template id="invalid-executive">
@@ -61,17 +61,17 @@
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Jāizvēlas pārstāvis, direktors vai īpašnieks.
+      Jāizvēlas pārstāvis, direktors vai īpašnieks
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgi vai trūkstoši procenti īpašumtiesības (0, ja nav)
+      Kļūda! Nederīga vai trūkstoša procentuālā piederība (0, ja nav)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs attiecību nosaukums vai tā trūkst
+      Kļūda! Nederīgs vai trūkstošs attiecību nosaukums
     </div>
   </template>
 </body>

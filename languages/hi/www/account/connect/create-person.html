@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">इसके लिए नया व्यक्ति बनाएं ${stripeAccount.id}</title>
+  <title translate="yes">के लिए नया व्यक्ति बनाएँ ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">नया व्यक्ति बनाएं</h1>
-    <p translate="yes">निदेशक मंडल, मालिकों और प्रतिनिधि को आपकी जानकारी में परिवर्तन के रूप में अप-टू-डेट रखा जाना चाहिए ।</p>
+    <h1 translate="yes">नया व्यक्ति बनाएँ</h1>
+    <p translate="yes">आपकी जानकारी में परिवर्तन होते ही निदेशक मंडल, मालिकों और प्रतिनिधि को अप-टू-डेट रखा जाना चाहिए।</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">कंपनी से संबंध</h2>
@@ -26,7 +26,7 @@
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">प्रतिशत स्वामित्व (यदि कोई हो)</label>
+        <label for="relationship_percent_ownership" translate="yes">स्वामित्व स्वामित्व (यदि कोई हो)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
@@ -36,42 +36,42 @@
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      सफलता! पंजीकरण अपडेट किया गया है
+      सफलता! पंजीकरण अद्यतन किया गया है
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! पंजीकरण बनाने में हुई त्रुटि
+      त्रुटि! पंजीकरण बनाते समय एक त्रुटि हुई
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      आपके Stripe खाते को लाभकारी मालिक जानकारी की आवश्यकता नहीं है
+      आपके Stripe खाते को लाभकारी स्वामी जानकारी की आवश्यकता नहीं है
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      आपके Stripe खाते में कंपनी निदेशक की जानकारी की आवश्यकता नहीं है
+      आपके Stripe खाते को कंपनी के निदेशक की जानकारी की आवश्यकता नहीं है
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      कंपनी के प्रतिनिधियों के अधिकारी होना चाहिए
+      कंपनी के प्रतिनिधियों को कार्यकारी होना चाहिए
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      या तो प्रतिनिधि, निदेशक या मालिक का चयन किया जाना चाहिए
+      या तो प्रतिनिधि, निर्देशक या मालिक का चयन किया जाना चाहिए
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता प्रतिशत स्वामित्व (0 अगर कोई नहीं)
+      त्रुटि! अमान्य या अनुपलब्ध प्रतिशत स्वामित्व (0 यदि कोई नहीं)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता संबंध शीर्षक
+      त्रुटि! अमान्य या अनुपलब्ध संबंध शीर्षक
     </div>
   </template>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Senden Sie Besitzer für ${stripeAccount.id}</title>
+  <title translate="yes">Senden Sie Eigentümer für ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Senden Sie Besitzer für ${stripeAccount.id}</h1>
-  <p translate="yes">Wenn Sie alle anderen Besitzer hinzugefügt haben, falls vorhanden, senden Sie sie zur Überprüfung.</p>
+  <h1 translate="yes">Senden Sie Eigentümer für ${stripeAccount.id}</h1>
+  <p translate="yes">Wenn Sie alle anderen Eigentümer hinzugefügt haben, reichen Sie sie zur Überprüfung ein.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Günstige Eigentümer</h2>
+    <h2 translate="yes">Wirtschaftliche Eigentümer</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namen</th>
-          <th translate="yes">Erfordert</th>
+          <th translate="yes">Name</th>
+          <th translate="yes">Benötigt</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Submit-Besitzer</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Eigentümer einreichen</button>
     </div>
   </form>
   <template id="person-row">
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Hinzufügen von Informationen</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Information hinzufügen</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fehler! Es gibt Eigentümer, die noch Informationen benötigen.
+      Error! Es gibt Eigentümer, die noch Informationen benötigen.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Erfolg! Die Eigentümer des Unternehmens wurden
+      Erfolg! Die Eigentümer des Unternehmens wurden eingereicht
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fehler! Beim Senden der Besitzer ist ein Fehler aufgetreten.
+      Error! Beim Senden der Eigentümer ist ein Fehler aufgetreten
     </div>
   </template>
 </body>

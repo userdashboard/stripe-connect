@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Asmuo ${person.id}</h1>
-  <p translate="yes">Gali būti pateikta papildoma informacija, kuri nerodoma.</p>
+  <p translate="yes">Gali būti pateikta papildomos informacijos, kuri nerodoma.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,21 +18,21 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Vaidmenį</th>
+        <th translate="yes">Vaidmuo</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Santykius</th>
+        <th translate="yes">Santykiai</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">vardas, pavadinimas</th>
+        <th translate="yes">vardas</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Reikalinga informacija</th>
+        <th translate="yes">Būtina informacija</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Crea una persona nova per a ${stripeAccount.id}</title>
+  <title translate="yes">Creeu una persona nova per a ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Crear una persona nova</h1>
-    <p translate="yes">El Consell d'administració, els propietaris i els representants s'han de mantenir actualitzats a mesura que canvia la informació.</p>
+    <h1 translate="yes">Crea una persona nova</h1>
+    <p translate="yes">Cal que el consell d’administració, els propietaris i el representant estiguin al dia a mesura que canviï la informació.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Relació amb l'empresa</h2>
@@ -22,11 +22,11 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Títol de treball, paper o relació</label>
+        <label for="relationship_title" translate="yes">Títol del treball, del paper o de la relació</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Percentatge de propietat (si escau)</label>
+        <label for="relationship_percent_ownership" translate="yes">Percentatge de propietat (si n’hi ha)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
@@ -36,7 +36,7 @@
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Èxit! El registre s'ha actualitzat
+      Èxit! El registre s’ha actualitzat
     </div>
   </template>
   <template id="unknown-error">
@@ -46,32 +46,32 @@
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      El teu compte Stripe no requereix informació de propietari beneficiosa
+      El vostre compte Stripe no requereix informació beneficiosa per al propietari
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      El vostre compte Stripe no requereix informació de director d'empresa
+      El vostre compte Stripe no requereix informació del director de l'empresa
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Els representants de la societat han de ser executius
+      Els representants de l’empresa han de ser executius
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      El representant, el director o el propietari han d'estar seleccionats
+      Cal seleccionar qualsevol representant, director o propietari
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Error! La propietat per percentatge no és vàlida o falta (0 si cap)
+      Error! Propietat no vàlida o desapareguda per cent (0 si no)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Error! Títol de la relació no vàlid o que falta
+      Error! El títol de relació no és vàlid o falta
     </div>
   </template>
 </body>

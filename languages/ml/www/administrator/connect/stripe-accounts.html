@@ -19,10 +19,10 @@
       <tr>
         <th>ID</th>
         <th translate="yes">തരം</th>
-        <th translate="yes">പേരു്</th>
-        <th translate="yes">നില</th>
-        <th translate="yes">സൃഷ്ടിക്കപ്പെട്ടത്</th>
-        <th translate="yes">സമര് പ്പിച്ച</th>
+        <th translate="yes">പേര്</th>
+        <th translate="yes">പദവി</th>
+        <th translate="yes">സൃഷ്ടിച്ചു</th>
+        <th translate="yes">സമർപ്പിച്ചു</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">ഇതുവരെ നൽകിയിട്ടില്ല</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,16 +48,16 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">അക്കൗണ്ട് x-ലേക്ക് പണം നൽകുന്നു</p>
+    <p translate="yes">X അക്കൗണ്ടിലേക്ക് ഫണ്ടുകൾ അടയ്ക്കുന്നു</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">പണം സ്വീകരിക്കുന്നതിന് ബാങ്കിംഗ് വിശദാംശങ്ങൾ നൽകണം.</p>
+    <p translate="yes">ഫണ്ട് ലഭിക്കുന്നതിന് ബാങ്കിംഗ് വിശദാംശങ്ങൾ നൽകണം.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിച്ചിട്ടില്ല.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">രജിസ് ട്രേഷന് ഓണ് ചെയ്തു ${account.dateFormatted}.</p>
+    <p translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിച്ചു ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല</span>
@@ -66,37 +66,37 @@
     <span translate="yes">രജിസ്ട്രേഷൻ സ്വീകരിച്ചു</span>
   </template>
   <template id="verified">
-    <span translate="yes">Disabled by Stripe</span>
+    <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+    <span translate="yes">അധിക വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">സമർപ്പിക്കൽ ബാക്കി</span>
+    <span translate="yes">സമർപ്പിക്കൽ തീർപ്പുകൽപ്പിച്ചിട്ടില്ല</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+    <span translate="yes">അധിക വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Stripe അവലോകനത്തിലാണ്</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Stripe അവലോകനത്തിലാണ്</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

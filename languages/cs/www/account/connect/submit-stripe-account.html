@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Odeslat ${stripeAccount.id}</title>
+  <title translate="yes">Předložit ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Odeslat ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> ověření odesláním dokončené registrace.</p>
+  <h1 translate="yes">Předložit ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> ověřovací proces odesláním dokončené registrace.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Skuteční vlastníci</h2>
+    <h2 translate="yes">Prospěšní vlastníci</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Jméno</th>
+          <th translate="yes">název</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Ředitelé společností</h2>
+    <h2 translate="yes">Ředitelé společnosti</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Jméno</th>
+          <th translate="yes">název</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Odeslat registraci</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Odešlete registraci</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Registrace má neúplné registrační informace
+      Registrace obsahuje neúplné registrační údaje
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Chyba! Musíte předložit ředitele společnosti
+      Chyba! Musíte odeslat ředitele společnosti
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Chyba! Musíte předložit skutečné vlastníky společnosti
+      Chyba! Musíte předložit skutečný vlastník společnosti
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Chyba! Musíte předložit informace o zástupci společnosti.
+      Chyba! Musíte poskytnout informace o zástupci společnosti
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Chyba! Registrace má neúplné platební údaje
+      Chyba! Registrace obsahuje neúplné platební údaje
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Úspěch! Registrace byla podána
+      Úspěch! Registrace byla odeslána
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Chyba! Při odesílání registrace došlo k chybě.
+      Chyba! Při odesílání registrace došlo k chybě
     </div>
   </template>
 </body>

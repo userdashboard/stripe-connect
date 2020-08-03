@@ -13,13 +13,13 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">अस्वीकृति कारण</label>
+      <label for="reason" translate="yes">अस्वीकृति का कारण</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          कारण चुनें
+          कारण का चयन करें
         </option>
         <option value="fraud" translate="yes">
-          धोखाधड़ी
+          धोखा
         </option>
         <option value="terms_of_service" translate="yes">
           सेवा उल्लंघन की शर्तें
@@ -37,12 +37,12 @@
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      त्रुटि! खारिज करने से पहले खाते में एक/बिन/श शेष होना चाहिए
+      त्रुटि! अस्वीकार करने से पहले खाते में / बिन / श शेष होना चाहिए
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! Stripe खाते को अस्वीकार करने में त्रुटि
+      त्रुटि! Stripe खाते को अस्वीकार करने में त्रुटि हुई
     </div>
   </template>
   <template id="not-submitted">
@@ -52,7 +52,7 @@
     <span translate="yes">पंजीकरण स्वीकार कर लिया गया है</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe द्वारा विकलांग</span>
+    <span translate="yes">Stripe द्वारा अक्षम किया गया</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">अतिरिक्त जानकारी की आवश्यकता है</span>
@@ -61,19 +61,19 @@
     <span translate="yes">अतिरिक्त जानकारी की आवश्यकता है</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">जमा करना लंबित</span>
+    <span translate="yes">लंबित जमा</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe द्वारा अस्वीकार कर दिया, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe द्वारा अस्वीकार कर दिया, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe द्वारा अस्वीकार कर दिया, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe द्वारा अस्वीकार कर दिया, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">अधिक जानकारी की आवश्यकता है</span>
@@ -85,7 +85,7 @@
     <span translate="yes">Stripe द्वारा समीक्षा के तहत</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe से विकलांग, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe द्वारा अक्षम, देखें</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

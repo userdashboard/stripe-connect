@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe Connect comptes</title>
+  <title translate="yes">Comptes Stripe Connect</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,29 +10,29 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe Connect comptes</h1>
-  <p><span translate="yes">Fes-te proveïdor verificant la teva identitat personal i la informació de l'empresa a</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Comptes Stripe Connect</h1>
+  <p><span translate="yes">Convertiu-vos en venedor verificant la vostra identitat personal i informació de l'empresa a través</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Requeriments individuals</h2>
+        <h2 translate="yes">Requisits individuals</h2>
         <ol>
-          <li translate="yes">Dades personals veridades</li>
-          <li translate="yes">Resident d'un país admès</li>
-          <li translate="yes">Compte bancari en un país admès</li>
+          <li translate="yes">Informació personal verificada</li>
+          <li translate="yes">Resident d’un país amb suport</li>
+          <li translate="yes">Compte bancari d’un país suportat</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Inici inscripció individual</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Comença el registre individual</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Requeriments empresarials</h2>
+        <h2 translate="yes">Requisits empresarials</h2>
         <ol>
-          <li translate="yes">Dades personals veridades</li>
-          <li translate="yes">Negoci registrat en un país admès</li>
-          <li translate="yes">Compte bancari en un país admès</li>
+          <li translate="yes">Informació personal verificada</li>
+          <li translate="yes">Empresa registrada en un país suportat</li>
+          <li translate="yes">Compte bancari d’un país suportat</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Inici inscripció empresa</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Iniciar el registre d’empresa</a>
       </div>
     </div>
   </div>
@@ -44,22 +44,22 @@
           <th>ID</th>
           <th translate="yes">Nom</th>
           <th translate="yes">Estat</th>
-          <th translate="yes">Creada</th>
-          <th translate="yes">Presentat</th>
+          <th translate="yes">Creat</th>
+          <th translate="yes">Enviat</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="company-container">
-    <h2 translate="yes">Inscripcions per empreses</h2>
+    <h2 translate="yes">Registres d’empresa</h2>
     <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nom</th>
           <th translate="yes">Estat</th>
-          <th translate="yes">Creada</th>
-          <th translate="yes">Presentat</th>
+          <th translate="yes">Creat</th>
+          <th translate="yes">Enviat</th>
         </tr>
       </thead>
     </table>
@@ -69,7 +69,7 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Encara no està proporcionat</td>
+      <td id="blank-name-${account.id}" translate="yes">Encara no es proporciona</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
@@ -79,7 +79,7 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">No presentat encara</span>
+    <span translate="yes">No enviat encara</span>
   </template>
   <template id="verified">
     <span translate="yes">S'ha acceptat la inscripció</span>
@@ -91,7 +91,7 @@
     <span translate="yes">Requereix tornar a enviar informació addicional</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pendent d'enviament</span>
+    <span translate="yes">Pendent de la tramesa</span>
   </template>
   <template id="rejected.fraud">
     <span>
@@ -118,13 +118,13 @@
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Es requereix més informació</span>
+    <span translate="yes">Es necessita més informació</span>
   </template>
   <template id="listed">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="disabled">
     <span>

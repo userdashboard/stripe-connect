@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Sealladh ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Sealladh ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th>ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Seòrsa</th>
+        <td id="business" translated="yes">Company registration</td>
+        <td id="individual" translated="yes">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">Ainm</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Dùthaich</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Inbhe</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Air a chuir a-steach</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2" translate="yes">Cha deach a chuir a-steach fhathast</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">Fiosrachadh clàraidh</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+      <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+    </p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">Riochdaire companaidh</h2>
+    <p translate="yes">Gus aimhreit cunntais a sheachnadh cuir a-steach fiosrachadh riochdachail ùr ma dh ’fhàgas an neach ainmichte no mura h-eil e a’ riochdachadh a ’chompanaidh tuilleadh.</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Ainm</th>
+          <th translate="yes">Fiosrachadh a tha a dhìth</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+    </p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Fiosrachadh sealbhadairean buannachdail eile</h2>
+    <p translate="yes">Feumaidh tu sgrìobhainnean a thoirt seachad do dhuine sam bith eile aig a bheil seilbh mòr (25+) sa cheud den chompanaidh no a tha os cionn a ’chompanaidh, ionmhas no obair.</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Ainm</th>
+          <th translate="yes">Feum</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Fiosrachadh mu stiùirichean companaidh</h2>
+    <p translate="yes">Feumaidh tu làn ainmean a thoirt do bhòrd riaghlaidh a ’chompanaidh agad agus / no na daoine le uallach airson gèilleadh riaghlaidh a chumail suas.</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Ainm</th>
+          <th translate="yes">Feum</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">Fiosrachadh pàighidh</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options">
+      <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+      <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
+    </p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">Cuir a-steach clàradh</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Cuir fiosrachadh ris</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">Tha airgead air a phàigheadh gu cunntas ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">Feumar mion-fhiosrachadh bancaidh a thoirt seachad gus airgead fhaighinn.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">Cha deach an clàradh a-steach.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">Chaidh an clàradh a-steach ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">Cha deach am fiosrachadh clàraidh a thoirt seachad.</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">Chaidh am fiosrachadh clàraidh a thoirt seachad.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Cha deach a chuir a-steach fhathast</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Chaidh gabhail ri clàradh</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Feumaidh fiosrachadh a bharrachd</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">A ’feitheamh ri tagradh</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Air a dhiùltadh le Stripe, faic</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Air a dhiùltadh le Stripe, faic</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Air a dhiùltadh le Stripe, faic</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Air a dhiùltadh le Stripe, faic</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Fo sgrùdadh le Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Fo sgrùdadh le Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Air a dhiùltadh le Stripe, faic</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Feumaidh fiosrachadh a bharrachd</span>
+  </template>
+</body>
+</html>

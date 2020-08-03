@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Oseba ${person.id}</h1>
-  <p translate="yes">Morda so bile predložene dodatne informacije, ki niso prikazane.</p>
+  <p translate="yes">Morda so bile poslane dodatne informacije, ki niso prikazane.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,17 +18,17 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Vlogo</th>
+        <th translate="yes">Vloga</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Odnos</th>
+        <th translate="yes">Razmerje</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">ime</th>
+        <th translate="yes">Ime</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

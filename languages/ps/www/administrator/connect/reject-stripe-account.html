@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ئړک در ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ئړک در ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">لیلد در د</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          ئکاټو لیالد
+        </option>
+        <option value="fraud" translate="yes">
+          يلغرد
+        </option>
+        <option value="terms_of_service" translate="yes">
+          طیارش تمدخ د
+        </option>
+        <option value="other" translate="yes">
+          رون
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">ئړک در</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      وش در باسح E_P_I_R_T_S د !ایرب
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      يرلو نزاوت ش / نب / وی هخمد ولودر د دیاب باسح !هنتورېت
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      هوش هتځنمار هنتورېت هوی ېک ولتسیا هپ نوe ګ E_P_I_R_T_S د !هنتورېت
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">یوش لراپس ید هن هسوارت</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">لوش لنمو لوتبث</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">یوش ناوتان اوخل E_P_I_R_T_S د</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">يرل ایتړا هت وتامولعم يفاضا</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">يرل ایتړا هت وتامولعم يفاضا</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">لوک راظتنا</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">ئروګو ، یوش در اوخل E_P_I_R_T_S د</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">ئروګو ، یوش در اوخل E_P_I_R_T_S د</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">ئروګو ، یوش در اوخل E_P_I_R_T_S د</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">ئروګو ، یوش در اوخل E_P_I_R_T_S د</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">هد ایتړا هت وتامولعم ورون</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">ېدنال هنتکایب اوخل E_P_I_R_T_S د</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">ېدنال هنتکایب اوخل E_P_I_R_T_S د</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">ئروګو ، یوش بویعم اوخل E_P_I_R_T_S د</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

@@ -9,45 +9,45 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Personnes</h1>
+  <h1 translate="yes">Des personnes</h1>
   <div id="representative-container">
-    <h2 translate="yes">Représentant de l’entreprise</h2>
-    <p translate="yes">Si le statut de la personne nommée change, vous devez créer un nouveau représentant.</p>
+    <h2 translate="yes">Représentant d'un groupe</h2>
+    <p translate="yes">Si le statut de la personne désignée change, vous devez créer un nouveau représentant.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Créer un nouveau représentant</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nom</th>
-          <th translate="yes">Exige</th>
+          <th translate="yes">A besoin</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Propriétaires bénéficiaires</h2>
-    <p translate="yes">Vous devez fournir des documents à toute autre personne possédant un pourcentage substantiel (25+) de l’entreprise ou en charge de l’entreprise, ses finances ou ses opérations.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Ajouter le propriétaire</a></p>
+    <h2 translate="yes">Bénéficiaires effectifs</h2>
+    <p translate="yes">Vous devez fournir des documents pour toute personne détenant une part substantielle (25+) de l'entreprise ou en charge de l'entreprise, de ses finances ou de ses opérations.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Ajouter un propriétaire</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nom</th>
-          <th translate="yes">Exige</th>
+          <th translate="yes">A besoin</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Administrateurs d’entreprise</h2>
-    <p translate="yes">Vous devez fournir des documents au conseil d’administration.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Ajouter le propriétaire</a></p>
+    <h2 translate="yes">Administrateurs d'entreprise</h2>
+    <p translate="yes">Vous devez fournir de la documentation pour le conseil d'administration.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Ajouter un propriétaire</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nom</th>
-          <th translate="yes">Exige</th>
+          <th translate="yes">A besoin</th>
         </tr>
       </thead>
     </table>

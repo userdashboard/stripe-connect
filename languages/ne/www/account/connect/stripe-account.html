@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">हेर्नुहोस् ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">हेर्नुहोस् ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th>ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">प्रकार</th>
+        <td id="business" translated="yes">Company registration</td>
+        <td id="individual" translated="yes">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">नाम</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">देश</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">स्थिति</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">बुझाउनु</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2" translate="yes">अहिलेसम्म बुझाइएको छैन</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">दर्ता जानकारी</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+      <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+    </p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">कम्पनी प्रतिनिधि</h2>
+    <p translate="yes">खाता अवरोधबाट बच्न नयाँ प्रतिनिधि जानकारी पेश गर्नुहोस् यदि निर्दिष्ट व्यक्तिले छोड्छ वा लामो समय सम्म कम्पनीको प्रतिनिधित्व गर्दैन।</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">नाम</th>
+          <th translate="yes">आवश्यक जानकारी</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+    </p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">अन्य लाभदायक मालिकहरूको जानकारी</h2>
+    <p translate="yes">तपाईंले कम्पनीको पर्याप्त (२++) प्रतिशत वा कम्पनीको स्वामित्व, वित्त वा अपरेशनहरूको स्वामित्वका लागि कागजात उपलब्ध गराउनु पर्नेछ।</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">नाम</th>
+          <th translate="yes">आवाश्यक हुन्छ</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">कम्पनी निर्देशक जानकारी</h2>
+    <p translate="yes">तपाइँ तपाइँको कम्पनी को संचालन बोर्ड र / वा नियामक अनुपालन कायम को लागी जिम्मेवार व्यक्तिको पूरा नाम प्रदान गर्नुपर्नेछ।</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">नाम</th>
+          <th translate="yes">आवाश्यक हुन्छ</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">भुक्तान जानकारी</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options">
+      <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+      <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
+    </p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">दर्ता बुझाउनुहोस्</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">जानकारी थप्नुहोस्</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">कोष खातामा भुक्तान गरिन्छ ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">बैंकिंग विवरण कोषहरू प्राप्त गर्न प्रदान गरिनु पर्दछ।</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">दर्ता बुझाइएको छैन।</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">रेजिष्ट्रेसन पेस गरिएको थियो ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">दर्ता जानकारी प्रदान गरिएको छैन।</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">दर्ता जानकारी प्रदान गरिएको छ।</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">अहिलेसम्म बुझाइएको छैन</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">दर्ता स्वीकार गरिएको छ</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">थप जानकारी आवश्यक छ</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">पेन्डिंग पेन्डिंग</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, हेर्नुहोस्</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, हेर्नुहोस्</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, हेर्नुहोस्</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, हेर्नुहोस्</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe द्वारा समीक्षा अन्तर्गत</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe द्वारा समीक्षा अन्तर्गत</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe द्वारा अस्वीकृत, हेर्नुहोस्</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">थप जानकारी आवश्यक छ</span>
+  </template>
+</body>
+</html>

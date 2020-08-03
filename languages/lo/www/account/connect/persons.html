@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ບຸກຄົນ ສຳ ລັບ ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ບຸກຄົນ</h1>
+  <div id="representative-container">
+    <h2 translate="yes">ຕົວແທນຂອງບໍລິສັດ</h2>
+    <p translate="yes">ຖ້າສະຖານະພາບຂອງຜູ້ທີ່ຖືກແຕ່ງຕັ້ງປ່ຽນແປງທ່ານຕ້ອງສ້າງຕົວແທນ ໃໝ່.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">ສ້າງຕົວແທນ ໃໝ່</a></p>
+    <table id="representatives-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">ຊື່</th>
+          <th translate="yes">ຕ້ອງການ</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">ເຈົ້າຂອງທີ່ມີປະໂຫຍດ</h2>
+    <p translate="yes">ທ່ານຕ້ອງສະ ໜອງ ເອກະສານ ສຳ ລັບຜູ້ອື່ນທີ່ຖືຫຸ້ນສ່ວນໃຫຍ່ (25+) ເປີເຊັນຂອງບໍລິສັດຫລືຮັບຜິດຊອບບໍລິສັດ, ການເງິນຫລືການ ດຳ ເນີນງານຂອງມັນ.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">ເພີ່ມເຈົ້າຂອງ</a></p>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">ຊື່</th>
+          <th translate="yes">ຕ້ອງການ</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">ຜູ້ ອຳ ນວຍການບໍລິສັດ</h2>
+    <p translate="yes">ທ່ານຕ້ອງໃຫ້ເອກະສານ ສຳ ລັບຄະນະ ກຳ ມະການ.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">ເພີ່ມເຈົ້າຂອງ</a></p>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">ຊື່</th>
+          <th translate="yes">ຕ້ອງການ</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="person-row">
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">ເພີ່ມຂໍ້ມູນ</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
+  </template>
+</body>
+</html>

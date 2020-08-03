@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Redigeerida ${stripeAccount.id}</title>
+  <title translate="yes">Redigeeri ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,15 +17,15 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Redigeerida ${stripeAccount.id}</h1>
+    <h1 translate="yes">Redigeeri ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">Veebisaidi URL</label>
+        <label for="business_profile_url" translate="yes">Veebilehe aadress</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">Toote kirjeldus</label>
+        <label for="business_profile_product_description" translate="yes">Tootekirjeldus</label>
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Maksu ID-kood</label>
+            <label for="tax_id" translate="yes">Maksu-ID number</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">Veebisaidi URL</label>
+            <label for="business_profile_url" translate="yes">Veebilehe aadress</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -92,14 +92,14 @@
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
         <h2 translate="yes">Ettevõtte asutamine</h2>
-        <label for="verification_document_front" translate="yes">Esiskaneerimine/foto</label>
+        <label for="verification_document_front" translate="yes">Eest skaneerimine / foto</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Tagasi skannimine/foto</label>
+        <label for="verification_document_back" translate="yes">Tagasi skaneerimine / foto</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Isikuandmeid</h2>
+      <h2 translate="yes">Isiklik informatsioon</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
@@ -125,7 +125,7 @@
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">Kana isikuandmed</h2>
+      <h2 translate="yes">Kana isiklik teave</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
@@ -143,7 +143,7 @@
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Kanji isikuandmed</h2>
+      <h2 translate="yes">Kanji isiklik teave</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
@@ -171,55 +171,55 @@
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Soolise</label>
+      <label for="gender" translate="yes">Sugu</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Naissoost</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Naine</span></label>
         <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Mees</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
-      <h2 translate="yes">Isikukood</h2>
-      <label for="id_number" translate="yes">Passi või ID-number</label>
+      <h2 translate="yes">Isiku tuvastamine</h2>
+      <label for="id_number" translate="yes">Pass või ID number</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Esiskaneerimine/foto</label>
+      <label for="verification_document_front" translate="yes">Eest skaneerimine / foto</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Tagasi skannimine/foto</label>
+      <label for="verification_document_back" translate="yes">Tagasi skaneerimine / foto</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Aadressi tõendamine</h2>
+      <h2 translate="yes">Aadressi tõend</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Esiskaneerimine/foto</label>
+      <label for="verification_additional_document_front" translate="yes">Eest skaneerimine / foto</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Tagasi skannimine/foto</label>
+      <label for="verification_additional_document_back" translate="yes">Tagasi skaneerimine / foto</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
       <h2 translate="yes">Aadress</h2>
       <div id="address_line1-container" class="pure-control-group">
-        <label for="address_line1" translate="yes">Rida 1</label>
+        <label for="address_line1" translate="yes">1. rida</label>
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
-        <label for="address_line2" translate="yes">Rida 2</label>
+        <label for="address_line2" translate="yes">2. rida</label>
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">City</label>
+        <label for="address_city" translate="yes">Linn</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <div class="pure-g">
           <div id="address_state-container" class="pure-u-17-24">
-            <label for="address_state" translate="yes">Osariik või provints</label>
+            <label for="address_state" translate="yes">Osariik või maakond</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Vali olek
+                Valige olek
               </option>
             </select>
           </div>
@@ -236,51 +236,51 @@
     <div id="kana-address-container">
       <h2 translate="yes">Kana aadress</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
-        <label for="address_kana_line1" translate="yes">Rida 1</label>
+        <label for="address_kana_line1" translate="yes">1. rida</label>
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">City</label>
+        <label for="address_kana_city" translate="yes">Linn</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
-        <label for="address_kana_town" translate="yes">Linna</label>
+        <label for="address_kana_town" translate="yes">Linn</label>
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">Riigi</label>
+        <label for="address_kana_state" translate="yes">Osariik</label>
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Sihtnumber</label>
+        <label for="address_kana_postal_code" translate="yes">Postiindeks</label>
         <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="kanji-address-container">
       <h2 translate="yes">Kanji aadress</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
-        <label for="address_kanji_line1" translate="yes">Rida 1</label>
+        <label for="address_kanji_line1" translate="yes">1. rida</label>
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">City</label>
+        <label for="address_kanji_city" translate="yes">Linn</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
-        <label for="address_kanji_town" translate="yes">Linna</label>
+        <label for="address_kanji_town" translate="yes">Linn</label>
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">Riigi</label>
+        <label for="address_kanji_state" translate="yes">Osariik</label>
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Sihtnumber</label>
+        <label for="address_kanji_postal_code" translate="yes">Postiindeks</label>
         <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Uuenda Stripe kontot</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Uuendage Stripe kontot</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -292,7 +292,7 @@
   <template id="success">
     <div class="success message">
       <span translate="yes">Edu! Stripe konto on värskendatud</span>
-      <a href="/account/connect" translate="yes">Tagasi kontole</a>
+      <a href="/account/connect" translate="yes">Naase kontole</a>
     </div>
   </template>
   <template id="unknown-error">
@@ -302,207 +302,207 @@
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Viga! Dokumendipiltide üleslaadimisel ilmnes tõrge
+      Viga! Dokumendipiltide üleslaadimisel ilmnes viga
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Viga! Vormi edastamisel ilmnes tõrge
+      Viga! Vormi esitamisel ilmnes viga
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv ettevõtte URL
+      Viga! Vale või puudub ettevõtte URL
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv äri Kaupmehe kategooria kood
+      Viga! Kehtetu või puudub ettevõtte kaupmehe kategooria kood
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv äritoote kirjeldus
+      Viga! Vale või puudub ettevõtte tootekirjeldus
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Viga! Vigane või puuduv dokumendi esiskannimine või foto
+      Viga! Vale või puuduv dokumendi eest skaneerimine või foto
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Viga! Vigane või puuduv dokumendi tagasiskannimine või foto
+      Viga! Vale või puuduv dokumendi tagasi skaneerimine või foto
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Viga! Vigane või puudub täiendav dokumendi esiosa skannimine või foto
+      Viga! Vale või puuduv täiendav dokumendi eest skannimine või foto
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Viga! Vigane või puudub täiendav dokument tagasi skannida või foto
+      Viga! Vale või puuduv täiendav dokumendi taga skannimine või foto
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv isikukood
+      Viga! Isiklik ID number on vale või puudub
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv ärinimi
+      Viga! Kehtetu või puudub ettevõtte nimi
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv Kana ärinimi
+      Viga! Kana ärinimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv kanji-ärinimi
+      Viga! Kanji ärinimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv ettevõttemaksu ID
+      Viga! Kehtetu või puudub ettevõtte maksu ID
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv telefoninumber
+      Viga! Vale või puuduv telefoninumber
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv sugu
+      Viga! Kehtetu või puuduv sugu
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Viga! Sotsiaalkindlustusnumbri kehtetu või puudub 4 viimast numbrit
+      Viga! Sotsiaalkindlustuse numbri neli viimast numbrit on kehtetud või puuduvad
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv sünniaeg
+      Viga! Vale või puudub sünnikuupäev
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv sünniaeg
+      Viga! Vale või puudub sünnikuupäev
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv sünniaeg
+      Viga! Vale või puudub sünnikuupäev
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Viga! Eesnimi ei sobi või puudub
+      Viga! Kehtetu või puudub eesnimi
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puudub Kana eesnimi
+      Viga! Kana eesnimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puudub Kanji eesnimi
+      Viga! Kanji eesnimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Viga! Perekonnanimi ei sobi või puudub
+      Viga! Perekonnanimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puudub Kana perekonnanimi
+      Viga! Kana perekonnanimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv Kanji perekonnanimi
+      Viga! Kanji perekonnanimi on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv meil
+      Viga! Vale või puudub e-posti aadress
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv isiklik aadressilinn
+      Viga! Vale või puudub isiklik aadressilinn
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puuduv isiklik aadressiolek
+      Viga! Isikliku aadressi olek on vale või puudub
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv isiklik aadressirida 1
+      Viga! Kehtetu või puudub isiklik aadressirida 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv isiklik sihtnumber
+      Viga! Isiklik postiindeks on vale või puudub
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puudub Kana isiklik aadressilinn
+      Viga! Kana isiklik aadressilinn on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puudub Kana isikliku aadressi olek
+      Viga! Kana isikliku aadressi olek on vale või puudub
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv Kana eraaadressilinn
+      Viga! Kana isiklik aadressilinn on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puudub Kana isiklik aadressirida 1
+      Viga! Kana isiklik aadressirida 1 on vale või puudub
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puudub Kana isiklik aadress sihtnumber
+      Viga! Kana isikliku aadressi postiindeks on vale või puudub
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puudub Kanji eraaadressi linn
+      Viga! Kanji isiklik aadressilinn on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puudub Kanji isikliku aadressi olek
+      Viga! Kanji isikliku aadressi olek on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puuduv Kanji eraaadressilinn
+      Viga! Kanji isiklik aadressilinn on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Viga! Sobimatu või puudub Kanji isikliku aadressi rida 1
+      Viga! Kanji isiklik aadressirida 1 on kehtetu või puudub
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Viga! Kehtetu või puudub Kanji eraaadressi sihtnumber
+      Viga! Kanji isikliku aadressi postiindeks on vale või puudub
     </div>
   </template>
 </body>

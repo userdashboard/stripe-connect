@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Fafao ${person.id}</title>
+  <title translate="yes">Mamafa ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Fafao ${person.id}</h1>
-  <p translate="yes">Ny fampahalalana momba ny tompony dia ho voafafa avy hatrany ary tsy azo atao.</p>
+  <h1 translate="yes">Mamafa ${person.id}</h1>
+  <p translate="yes">Hesorina avy hatrany ny fampahalalana ny tompony ary tsy ho sitrana.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Fafao</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Mamafa</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Fahombiazana! Voafafa ilay andian-tsarety.
+      Fahombiazana! Nesorina ny tompon'ny orinasa
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fahadisoana! Nisy tsy fetezana ocurred deleting ilay andian-tsarety.
+      Error! Nisy ny lesoka nitranga tamin'ny fanafoanana ny tompon'ny orinasa
     </div>
   </template>
 </body>

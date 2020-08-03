@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">支払情報 ${stripeAccount.id}</title>
+  <title translate="yes">お支払い情報 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,7 +27,7 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">支払情報 ${stripeAccount.id}</h1>
+  <h1 translate="yes">お支払い情報 ${stripeAccount.id}</h1>
   <p translate="yes">収益の支払いを受け取る銀行口座を更新します。</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
@@ -35,13 +35,13 @@
       <label for="country" translate="yes">銀行の国</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          選択
+          選択する
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">勘定タイプ</label>
+      <label translate="yes">口座の種類</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,26 +52,26 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">口座通貨</label>
+          <label for="currency" translate="yes">アカウント通貨</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              選択
+              選択する
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">アカウント所有者の名前</label>
+      <label for="account-holder-name" translate="yes">口座名義</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">BSB 番号</label>
+        <label for="bsb_number" translate="yes">BSB番号</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">輸送番号</label>
+        <label for="transit_number" translate="yes">トランジット番号</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -93,7 +93,7 @@
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -130,15 +130,15 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">代替形式</h2>
+      <h2 translate="yes">代替フォーマット</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">コードの並べ替え</label>
+          <label for="sort_code" translate="yes">スペルコード</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">勘定番号</label>
+          <label for="account_number" translate="yes">口座番号</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -149,7 +149,7 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">コードのクリア</label>
+        <label for="clearing_code" translate="yes">決済コード</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -157,7 +157,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -171,7 +171,7 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">銀行コード</label>
+        <label for="bank_code" translate="yes">銀行番号</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -179,7 +179,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -201,7 +201,7 @@
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -215,7 +215,7 @@
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -233,7 +233,7 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">銀行コード</label>
+        <label for="bank_code" translate="yes">銀行番号</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -241,7 +241,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -263,12 +263,12 @@
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">勘定番号</label>
+        <label for="account_number" translate="yes">口座番号</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">支払情報の保存</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">支払い情報を保存する</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,12 +283,12 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      成功！支払情報が更新されました
+      成功！支払い情報が更新されました
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      エラー！支払情報の更新中にエラーが発生しました
+      エラー！支払い情報の更新中にエラーが発生しました
     </div>
   </template>
   <template id="invalid-country">
@@ -298,47 +298,47 @@
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      エラー！無効または不足している口座の通貨
+      エラー！アカウントの通貨が無効または欠落している
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      エラー！無効なまたは見つからない種類のアカウント
+      エラー！無効または欠落しているタイプのアカウント
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      エラー！無効なまたは見つからない口座番号
+      エラー！無効または不足しているアカウント番号
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      エラー！BSB 番号が無効か、または見つかりません
+      エラー！無効または欠落しているBSB番号
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      エラー！無効または銀行コード番号がありません
+      エラー！無効または行方不明の銀行コード番号
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      エラー！無効または見つからない並べ替えコード
+      エラー！無効または不足している並べ替えコード
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      エラー！無効または未指定の教育機関番号
+      エラー！無効または不足している機関番号
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      エラー！無効または未指定の輸送番号
+      エラー！無効または欠落している交通機関番号
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      エラー！無効または不足している消込コード番号
+      エラー！無効または不足している清算コード番号
     </div>
   </template>
   <template id="invalid-branch_code">
@@ -348,17 +348,17 @@
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      エラー！アカウント所有者名が無効か、または見つかりません
+      エラー！無効または不足しているアカウント所有者名
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      エラー！無効なまたは見つかりません IBAN 番号
+      エラー！無効または欠落しているIBAN番号
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      エラー！無効または未指定の輸送番号
+      エラー！無効または欠落している交通機関番号
     </div>
   </template>
 </body>

@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Olona ${person.id}</title>
+  <title translate="yes">olona ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Olona ${person.id}</h1>
-  <p translate="yes">Mety ho nisy ny fanazavana fanampiny izay tsy aseho.</p>
+  <h1 translate="yes">olona ${person.id}</h1>
+  <p translate="yes">Fampahalalana fanampiny dia azo naroso izay tsy aseho.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,21 +18,21 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Anjara</th>
+        <th translate="yes">anjara asa</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Fifandraisana</th>
+        <th translate="yes">Relationship</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Anaran'</th>
+        <th translate="yes">Anarana</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Fampahafantarana izay takiana</th>
+        <th translate="yes">Fampahalalana ilaina</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

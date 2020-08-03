@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Créer l’inscription</title>
+  <title translate="yes">Créer une inscription</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Créer l’inscription</h1>
-  <p translate="yes">Une inscription complète vous permet de recevoir des paiements de revenus par l’intermédiaire de Stripe Connect.</p>
+  <h1 translate="yes">Créer une inscription</h1>
+  <p translate="yes">Une inscription terminée vous permet de recevoir des paiements de revenus via Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,15 +21,15 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Pays de résidence / incorporation</label>
+      <label for="country" translate="yes">Pays de résidence / constitution</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Sélectionner un pays
+          Choisissez le pays
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Commencer l’inscription</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Commencer l'inscription</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Erreur! Une erreur s’est produite créant l’enregistrement
+      Erreur! Une erreur s'est produite lors de la création de l'enregistrement
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Erreur! Pays invalide ou disparu
+      Erreur! Pays invalide ou manquant
     </div>
   </template>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Редактировать ${stripeAccount.id}</title>
+  <title translate="yes">редактировать ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,19 +17,19 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Редактировать ${stripeAccount.id}</h1>
+    <h1 translate="yes">редактировать ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">URL-адрес веб-сайта</label>
+        <label for="business_profile_url" translate="yes">URL веб-сайта</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">Описание продукта</label>
+        <label for="business_profile_product_description" translate="yes">Описание товара</label>
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">Код торговой категории</label>
+        <label for="business_profile_mcc" translate="yes">Код категории продавца</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
             Выберите код для вашего бизнеса
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Название бизнеса</label>
+            <label for="name" translate="yes">Наименование фирмы</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Номер налогового удостоверения</label>
+            <label for="tax_id" translate="yes">Идентификационный номер налогоплательщика</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
             <a id="name_kana-anchor"></a>
-            <label for="name_kana" translate="yes">Название бизнеса Кана</label>
+            <label for="name_kana" translate="yes">Kana название компании</label>
             <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">Название бизнеса Kanji</label>
+            <label for="name_kanji" translate="yes">Название кандзи</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">URL-адрес веб-сайта</label>
+            <label for="business_profile_url" translate="yes">URL веб-сайта</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="pure-u-11-24">
           <div id="phone-container" class="pure-control-group">
             <a id="phone-anchor"></a>
-            <label for="phone" translate="yes">Номер телефона</label>
+            <label for="phone" translate="yes">Телефонный номер</label>
             <input required="required" id="phone" name="phone" type="text" maxlength="50">
           </div>
         </div>
@@ -92,14 +92,14 @@
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
         <h2 translate="yes">Регистрация компании</h2>
-        <label for="verification_document_front" translate="yes">Переднее сканирование/фото</label>
+        <label for="verification_document_front" translate="yes">Фронт сканирования / фото</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Сканирование назад/фото</label>
+        <label for="verification_document_back" translate="yes">Скан назад / фото</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Личная информация</h2>
+      <h2 translate="yes">Персональные данные</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
@@ -120,12 +120,12 @@
         <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
-        <label for="phone" translate="yes">Номер телефона</label>
+        <label for="phone" translate="yes">Телефонный номер</label>
         <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100">
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">Личная информация Кана</h2>
+      <h2 translate="yes">Kana личная информация</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
@@ -143,7 +143,7 @@
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Личная информация Кандзи</h2>
+      <h2 translate="yes">Кандзи личная информация</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
@@ -171,32 +171,32 @@
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Гендерного</label>
+      <label for="gender" translate="yes">Пол</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Женский</span></label>
-        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Мужской</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">женский</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">мужчина</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
-      <h2 translate="yes">Личная идентификация</h2>
+      <h2 translate="yes">Идентификация личности</h2>
       <label for="id_number" translate="yes">Паспорт или идентификационный номер</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Переднее сканирование/фото</label>
+      <label for="verification_document_front" translate="yes">Фронт сканирования / фото</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Сканирование назад/фото</label>
+      <label for="verification_document_back" translate="yes">Скан назад / фото</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Доказательство адреса</h2>
+      <h2 translate="yes">Подтверждение адреса</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Переднее сканирование/фото</label>
+      <label for="verification_additional_document_front" translate="yes">Фронт сканирования / фото</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Сканирование назад/фото</label>
+      <label for="verification_additional_document_back" translate="yes">Скан назад / фото</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
@@ -206,11 +206,11 @@
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
-        <label for="address_line2" translate="yes">Строка 2</label>
+        <label for="address_line2" translate="yes">Линия 2</label>
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">Города</label>
+        <label for="address_city" translate="yes">город</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -219,7 +219,7 @@
             <label for="address_state" translate="yes">Штат или провинция</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Выберите состояние
+                Выберите штат
               </option>
             </select>
           </div>
@@ -234,53 +234,53 @@
       </div>
     </div>
     <div id="kana-address-container">
-      <h2 translate="yes">Адрес Кана</h2>
+      <h2 translate="yes">Кана адрес</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
         <label for="address_kana_line1" translate="yes">Линия 1</label>
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">Города</label>
+        <label for="address_kana_city" translate="yes">город</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
-        <label for="address_kana_town" translate="yes">Города</label>
+        <label for="address_kana_town" translate="yes">Город</label>
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">Государства</label>
+        <label for="address_kana_state" translate="yes">государство</label>
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Почтовый код</label>
+        <label for="address_kana_postal_code" translate="yes">Почтовый индекс</label>
         <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="kanji-address-container">
-      <h2 translate="yes">Адрес Кандзи</h2>
+      <h2 translate="yes">Адрес кандзи</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
         <label for="address_kanji_line1" translate="yes">Линия 1</label>
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">Города</label>
+        <label for="address_kanji_city" translate="yes">город</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
-        <label for="address_kanji_town" translate="yes">Города</label>
+        <label for="address_kanji_town" translate="yes">Город</label>
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">Государства</label>
+        <label for="address_kanji_state" translate="yes">государство</label>
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Почтовый код</label>
+        <label for="address_kanji_postal_code" translate="yes">Почтовый индекс</label>
         <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Обновление учетной записи Stripe</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Обновить аккаунт Stripe</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -291,218 +291,218 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">Успех! Обновлена учетная запись Stripe</span>
-      <a href="/account/connect" translate="yes">Возвращение на учетную запись</a>
+      <span translate="yes">Успех! Аккаунт Stripe обновлен</span>
+      <a href="/account/connect" translate="yes">Вернуться к аккаунту</a>
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ошибка! Неизвестная ошибка, понесенная
+      Ошибка! Произошла неизвестная ошибка
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Ошибка! Произошла ошибка при загрузке изображений документов
+      Ошибка! Произошла ошибка при загрузке изображений документа
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Ошибка! Произошла ошибка отправки формы
+      Ошибка! Произошла ошибка при отправке формы
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий бизнес URL
+      Ошибка! Неверный или отсутствующий служебный URL
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий код категории торговца делами
+      Ошибка! Неверный или отсутствующий код категории коммерсанта
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее описание бизнес-продукта
+      Ошибка! Неверное или отсутствующее описание бизнес-продукта
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее спередие сканирование документа или фото
+      Ошибка! Недопустимый или отсутствующий документ на передней панели или фотография
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее сканирование документа или фото
+      Ошибка! Недействительный или отсутствующий документ, отсканированное назад или фотография
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее дополнительное сканирование или фото документа
+      Ошибка! Недопустимый или отсутствующий дополнительный документ на передней панели или фотография
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий дополнительный документ обратно сканирования или фото
+      Ошибка! Недопустимый или отсутствующий дополнительный документ, отсканированное изображение назад или фотография
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий личный идентификационный номер
+      Ошибка! Неверный или отсутствующий персональный идентификационный номер
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее название бизнеса
+      Ошибка! Неверное или отсутствующее фирменное наименование
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее название бизнеса Kana
+      Ошибка! Неверное или пропущенное название компании KANA
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее название бизнеса kanji
+      Ошибка! Неверное или отсутствующее фирменное наименование кандзи
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий идентификатор налога на бизнес
+      Ошибка! Неверный или отсутствующий налоговый идентификатор
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер телефона
+      Ошибка! Неверный или отсутствующий номер телефона
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий пол
+      Ошибка! Неверный или отсутствующий пол
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Ошибка! Недействительные или отсутствующие последние 4 цифры номера социального страхования
+      Ошибка! Неверные или отсутствующие последние 4 цифры номера социального страхования
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая дата рождения
+      Ошибка! Неверная или отсутствующая дата рождения
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая дата рождения
+      Ошибка! Неверная или отсутствующая дата рождения
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая дата рождения
+      Ошибка! Неверная или отсутствующая дата рождения
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее имя
+      Ошибка! Неверное или отсутствующее имя
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее имя Кана
+      Ошибка! Неверное или пропущенное имя Кана
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее имя Kanji
+      Ошибка! Неверное или отсутствующее имя кандзи
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая фамилия
+      Ошибка! Неверная или отсутствующая фамилия
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая фамилия Кана
+      Ошибка! Неверная или отсутствующая фамилия Кана
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая фамилия Кандзи
+      Ошибка! Неверная или отсутствующая фамилия кандзи
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая электронная почта
+      Ошибка! Неверный или отсутствующий адрес электронной почты
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий личный адрес города
+      Ошибка! Неверный или отсутствующий личный адрес города
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее состояние личного адреса
+      Ошибка! Неверный или отсутствующий персональный адрес
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Ошибка! Инвалидная или отсутствующая личная адресная строка 1
+      Ошибка! Неверный или отсутствующий личный адрес 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий личный почтовый код
+      Ошибка! Неверный или отсутствующий личный почтовый индекс
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Ошибка! Инвалид или пропавший город адресов Кана
+      Ошибка! Неверный или отсутствующий личный адрес Кана
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее состояние личного адреса Кана
+      Ошибка! Неверное или отсутствующее состояние личного адреса Kana
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или пропавший город по личному адресу Кана
+      Ошибка! Неверный или отсутствующий Kana личный адрес города
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Ошибка! Инвалидная или отсутствующая строка личного адреса Кана 1
+      Ошибка! Неверный или пропущенный Kana личная адресная строка 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий почтовый адрес Кана
+      Ошибка! Неверный или отсутствующий личный адрес Канны
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или пропавший город с личным адресом Кандзи
+      Ошибка! Неверный или отсутствующий личный адрес города
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее состояние личного адреса Кандзи
+      Ошибка! Неверный или отсутствующий штатный адрес Кандзи
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или пропавший город по личному адресу Кандзи
+      Ошибка! Неверный или отсутствующий личный адрес Кандзи
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Ошибка! Инвалидная или отсутствующая строка личного адреса Кандзи 1
+      Ошибка! Неверный или отсутствующий личный адрес кандзи 1
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий почтовый адрес Кандзи
+      Ошибка! Неверный или отсутствующий личный адрес кандзи почтовый индекс
     </div>
   </template>
 </body>

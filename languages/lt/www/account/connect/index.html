@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe Connect sąskaitos</title>
+  <title translate="yes">Stripe Connect paskyros</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,26 +10,26 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe Connect sąskaitos</h1>
-  <p><span translate="yes">Tapkite tiekėju tikrindami savo asmeninę tapatybę ir įmonės informaciją per</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe Connect paskyros</h1>
+  <p><span translate="yes">Tapkite pardavėju patvirtindami savo asmens tapatybę ir įmonės informaciją per</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Individualūs reikalavimai</h2>
         <ol>
-          <li translate="yes">Patvirtinta asmeninė informacija</li>
+          <li translate="yes">Patikrinta asmeninė informacija</li>
           <li translate="yes">Remiamos šalies gyventojas</li>
           <li translate="yes">Banko sąskaita palaikomoje šalyje</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Pradėti individualią registraciją</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Pradėkite individualią registraciją</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Verslo reikalavimai</h2>
         <ol>
-          <li translate="yes">Patvirtinta asmeninė informacija</li>
-          <li translate="yes">Įmonė, registruota remiamoje šalyje</li>
+          <li translate="yes">Patikrinta asmeninė informacija</li>
+          <li translate="yes">Verslas registruotas palaikomoje šalyje</li>
           <li translate="yes">Banko sąskaita palaikomoje šalyje</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Pradėti įmonės registraciją</a>
@@ -42,8 +42,8 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
-          <th translate="yes">Būsena</th>
+          <th translate="yes">vardas</th>
+          <th translate="yes">Statusas</th>
           <th translate="yes">Sukurta</th>
           <th translate="yes">Pateikta</th>
         </tr>
@@ -56,8 +56,8 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
-          <th translate="yes">Būsena</th>
+          <th translate="yes">vardas</th>
+          <th translate="yes">Statusas</th>
           <th translate="yes">Sukurta</th>
           <th translate="yes">Pateikta</th>
         </tr>
@@ -75,45 +75,45 @@
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">ne</td>
+      <td id="not-submitted-${account.id}" translate="yes">Ne</td>
     </tr>
   </template>
   <template id="not-submitted">
     <span translate="yes">Dar nepateikta</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registracija priimta</span>
+    <span translate="yes">Registracija buvo priimta</span>
   </template>
   <template id="verified">
     <span translate="yes">Išjungta Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Reikia iš naujo pateikti papildomą informaciją</span>
+    <span translate="yes">Reikia pateikti iš naujo su papildoma informacija</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">Laukiama pateikimo</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Neįgalus Stripe, žr.</span>
+      <span translate="yes">Išjungta Stripe, žr. Bendrąsias priežastis</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Neįgalus Stripe, žr.</span>
+      <span translate="yes">Išjungta Stripe, žr. Bendrąsias priežastis</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Neįgalus Stripe, žr.</span>
+      <span translate="yes">Išjungta Stripe, žr. Bendrąsias priežastis</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Neįgalus Stripe, žr.</span>
+      <span translate="yes">Išjungta Stripe, žr. Bendrąsias priežastis</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
@@ -121,14 +121,14 @@
     <span translate="yes">Reikia daugiau informacijos</span>
   </template>
   <template id="listed">
-    <span translate="yes">Peržiūri Stripe</span>
+    <span translate="yes">Peržiūrima Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Peržiūri Stripe</span>
+    <span translate="yes">Peržiūrima Stripe</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Neįgalus Stripe, žr.</span>
+      <span translate="yes">Išjungta Stripe, žr. Bendrąsias priežastis</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Criar uma nova pessoa para ${stripeAccount.id}</title>
+  <title translate="yes">Criar nova pessoa para ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Criar uma nova pessoa</h1>
-    <p translate="yes">O conselho de administração, os proprietários e o representante devem ser mantidos atualizados à medida que a sua informação muda.</p>
+    <h1 translate="yes">Criar nova pessoa</h1>
+    <p translate="yes">O conselho de administração, os proprietários e o representante devem ser mantidos atualizados à medida que suas informações são alteradas.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Relação com a empresa</h2>
@@ -22,36 +22,36 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Título de emprego, papel ou relacionamento</label>
+        <label for="relationship_title" translate="yes">Cargo, cargo ou cargo</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Por cento detido (se houver)</label>
+        <label for="relationship_percent_ownership" translate="yes">Porcentagem de propriedade (se houver)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Atualização de registo</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Atualizar registro</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Que sucesso! O registo foi atualizado
+      Sucesso! O registro foi atualizado
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro ao criar o registo
+      Erro! Ocorreu um erro ao criar o registro
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      A sua conta Stripe não requer informações benéficas do proprietário
+      Sua conta Stripe não requer informações úteis do proprietário
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      A sua conta Stripe não requer informações do diretor da empresa
+      Sua conta Stripe não requer informações do diretor da empresa
     </div>
   </template>
   <template id="invalid-executive">
@@ -61,17 +61,17 @@
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Ou representante, diretor ou proprietário deve ser selecionado
+      Representante, diretor ou proprietário deve ser selecionado
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Um erro! Propriedade inválida ou por cento em falta (0 se nenhuma)
+      Erro! Porcentagem de propriedade inválida ou ausente (0 se não houver)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Um erro! Título de relacionamento inválido ou em falta
+      Erro! Título de relacionamento inválido ou ausente
     </div>
   </template>
 </body>

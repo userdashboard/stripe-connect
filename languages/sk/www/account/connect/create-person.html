@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vytvoriť novú osobu pre ${stripeAccount.id}</title>
+  <title translate="yes">Vytvorte novú osobu pre ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Vytvoriť novú osobu</h1>
-    <p translate="yes">Predstavenstvo, vlastníci a zástupca musia byť aktualizované, keď sa vaše informácie zmenia.</p>
+    <h1 translate="yes">Vytvorte novú osobu</h1>
+    <p translate="yes">Správna rada, vlastníci a zástupcovia musia byť neustále informovaní o zmenách vašich informácií.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Vzťah k spoločnosti</h2>
@@ -22,15 +22,15 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Názov úlohy, úlohy alebo vzťahu</label>
+        <label for="relationship_title" translate="yes">Názov práce, role alebo vzťahu</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Percento vo vlastníctve (ak existuje)</label>
+        <label for="relationship_percent_ownership" translate="yes">Vlastnené percento (ak existuje)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Registrácia aktualizácie</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizujte registráciu</button>
       </div>
     </div>
   </form>
@@ -46,27 +46,27 @@
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Váš Stripe účet nevyžaduje informácie o vlastníkovi požitkov
+      Váš účet Stripe nevyžaduje užitočné informácie o vlastníkovi
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Váš Stripe účet nevyžaduje informácie o riaditeľovi spoločnosti
+      Váš účet Stripe nevyžaduje informácie o riaditeľovi spoločnosti
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Zástupcovia spoločnosti musia byť vedúcimi
+      Zástupcovia spoločnosti musia byť konatelia
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Buď zástupca, riaditeľ alebo vlastník musí byť vybraný
+      Musí byť vybraný zástupca, riaditeľ alebo vlastník
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce percento vlastníctva (0 ak žiadne)
+      Chyba! Neplatné alebo chýbajúce percento vlastníctva (0, ak neexistuje)
     </div>
   </template>
   <template id="invalid-relationship_title">

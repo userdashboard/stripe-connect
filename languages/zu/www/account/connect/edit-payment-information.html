@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Imininingwane yokukhokha ye ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <style>
+    form {
+      max-width: 40rem
+    }
+
+    .country {
+      margin-bottom: 1rem
+    }
+
+    .country select,
+    .country button {
+      display: inline-block
+    }
+
+    .country button {
+      margin-left: 1rem
+    }
+  </style>
+</head>
+<body>
+  <h1 translate="yes">Imininingwane yokukhokha ye ${stripeAccount.id}</h1>
+  <p translate="yes">Vuselela i-akhawunti yasebhange ezothola imali oyikhokhayo.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="country pure-control-group">
+      <label for="country" translate="yes">Izwe lasebhange</label>
+      <select class="country" name="country" id="country">
+        <option value="" translate="yes">
+          Khetha
+        </option>
+      </select>
+      <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
+    </div>
+    <div class="pure-control-group">
+      <label translate="yes">Uhlobo lwe-akhawunti</label>
+      <div class="pure-checkbox">
+        <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
+      </div>
+      <div class="pure-checkbox">
+        <label><input id="company" type="radio" name="account_holder_type" value="company"> Company</label>
+      </div>
+    </div>
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div class="pure-control-group">
+          <label for="currency" translate="yes">Imali ye-akhawunti</label>
+          <select class="currency" name="currency" id="currency">
+            <option value="" translate="yes">
+              Khetha
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="pure-control-group">
+      <label for="account-holder-name" translate="yes">Igama lomnikazi we-akhawunti</label>
+      <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
+    </div>
+    <div id="AU-container">
+      <div class="pure-control-group">
+        <label for="bsb_number" translate="yes">Inombolo ye-BSB</label>
+        <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="AT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="BE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="CA-container">
+      <div class="pure-control-group">
+        <label for="transit_number" translate="yes">Inombolo yokuhamba</label>
+        <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="institution_number" translate="yes">Inombolo yesikhungo</label>
+        <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="CH-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="DE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="DK-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="EE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="ES-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="FI-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="FR-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="GB-container">
+      <div class="pure-control-group">
+        <label for="iban" >IBAN</label>
+        <input required="required" id="iban" name="iban" type="text" maxlength="50">
+      </div>
+      <h2 translate="yes">Enye indlela</h2>
+      <div class="pure-g">
+        <div class="pure-u-8-24 pure-control-group">
+          <label for="sort_code" translate="yes">Ikhodi yokupela</label>
+          <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
+        </div>
+        <div class="pure-u-1-24"></div>
+        <div class="pure-u-15-24 pure-control-group">
+          <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+          <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+        </div>
+      </div>
+    </div>
+    <div id="GR-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="HK-container">
+      <div class="pure-control-group">
+        <label for="clearing_code" translate="yes">Ikhodi yokuhlanza</label>
+        <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="branch_code" translate="yes">Ikhodi yegatsha</label>
+        <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="IE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="IT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="JP-container">
+      <div class="pure-control-group">
+        <label for="bank_code" translate="yes">Ikhodi yasebhange</label>
+        <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="branch_code" translate="yes">Ikhodi yegatsha</label>
+        <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="LT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="LU-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="LV-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="MY-container" class="pure-control-group">
+      <div class="pure-control-group">
+        <label for="routing_number" translate="yes">Inombolo yomzila</label>
+        <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="NL-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="NZ-container" class="pure-control-group">
+      <div class="pure-control-group">
+        <label for="routing_number" translate="yes">Inombolo yomzila</label>
+        <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="NO-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="PL-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="PT-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="SG-container">
+      <div class="pure-control-group">
+        <label for="bank_code" translate="yes">Ikhodi yasebhange</label>
+        <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="branch_code" translate="yes">Ikhodi yegatsha</label>
+        <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div id="SE-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="SI-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="SK-container" class="pure-control-group">
+      <label for="iban" >IBAN</label>
+      <input required="required" id="iban" name="iban" type="text" maxlength="50">
+    </div>
+    <div id="US-container">
+      <div class="pure-control-group">
+        <label for="routing_number" translate="yes">Inombolo yomzila</label>
+        <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
+      </div>
+      <div class="pure-control-group">
+        <label for="account_number" translate="yes">Inombolo Ye-akhawunti</label>
+        <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
+      </div>
+    </div>
+    <div class="pure-controls">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Gcina imininingwane yokukhokha</button>
+    </div>
+  </form>
+  <template id="country-option">
+    <option value="${country.code}">
+      ${country.name}
+    </option>
+  </template>
+  <template id="currency-option">
+    <option value="${currency.currency}">
+      ${currency.name}
+    </option>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Impumelelo! Imininingwane yokukhokha ibuyekeziwe
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Iphutha! Kuvele iphutha kubuyekezwa imininingwane yokukhokha
+    </div>
+  </template>
+  <template id="invalid-country">
+    <div class="error message" translate="yes">
+      Iphutha! Izwe lebhange elingasebenzi noma elahlekile
+    </div>
+  </template>
+  <template id="invalid-currency">
+    <div class="error message" translate="yes">
+      Iphutha! Uhlobo lwemali olungasebenzi noma olungekho lwe-akhawunti
+    </div>
+  </template>
+  <template id="invalid-account_holder_type">
+    <div class="error message" translate="yes">
+      Iphutha! Uhlobo lwe-akhawunti olungasebenzi noma olungatholakali
+    </div>
+  </template>
+  <template id="invalid-account_number">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo ye-akhawunti engasebenzi noma elahlekile
+    </div>
+  </template>
+  <template id="invalid-bsb_number">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo ye-BSB engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-bank_code">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo yeKhodi yeBhange engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-sort_code">
+    <div class="error message" translate="yes">
+      Iphutha! Ikhodi yokuhlunga engavumelekile noma elahlekile
+    </div>
+  </template>
+  <template id="invalid-institution_number">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo yeSikhungo engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-routing_number">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo yokuhamba engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-clearing_code">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo yeKhodi yokuhlanza engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-branch_code">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo yeKhodi Yegatsha engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-account_holder_name">
+    <div class="error message" translate="yes">
+      Iphutha! Igama lomnikazi we-akhawunti ongavumelekile noma olahlekile
+    </div>
+  </template>
+  <template id="invalid-iban">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo ye-IBAN engasebenzi noma engekho
+    </div>
+  </template>
+  <template id="invalid-transit_number">
+    <div class="error message" translate="yes">
+      Iphutha! Inombolo yokuhamba engasebenzi noma engekho
+    </div>
+  </template>
+</body>
+</html>

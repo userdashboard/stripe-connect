@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">जमा करें ${stripeAccount.id}</title>
+  <title translate="yes">प्रस्तुत ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">जमा करें ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> अपना पूरा पंजीकरण जमा करके सत्यापन प्रक्रिया।</p>
+  <h1 translate="yes">प्रस्तुत ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> अपना पूर्ण पंजीकरण जमा करके सत्यापन प्रक्रिया।</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">फायदेमंद मालिक</h2>
+    <h2 translate="yes">लाभदायक स्वामी</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">कंपनी निदेशक</h2>
+    <h2 translate="yes">कंपनी के निदेशक</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">पंजीकरण जमा करें</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">पंजीकरण सबमिट करें</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      पंजीकरण में अधूरी है पंजीकरण जानकारी
+      पंजीकरण में अपूर्ण पंजीकरण जानकारी है
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      त्रुटि! आपको कंपनी के निदेशकों को सबमिट करना होगा
+      त्रुटि! आपको कंपनी के निदेशकों को प्रस्तुत करना होगा
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      त्रुटि! आपको कंपनी के लाभकारी मालिकों को सबमिट करना होगा
+      त्रुटि! आपको कंपनी के लाभकारी मालिकों को जमा करना होगा
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      त्रुटि! आपको कंपनी प्रतिनिधि की जानकारी सबमिट करनी होगी
+      त्रुटि! आपको कंपनी के प्रतिनिधि की जानकारी जमा करनी होगी
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      त्रुटि! पंजीकरण में भुगतान की अधूरी जानकारी है
+      त्रुटि! पंजीकरण में अपूर्ण भुगतान जानकारी है
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      सफलता! पंजीकरण प्रस्तुत कर दिया गया है
+      सफलता! पंजीकरण जमा कर दिया गया है
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! पंजीकरण जमा करने में हुई त्रुटि
+      त्रुटि! पंजीकरण सबमिट करने में त्रुटि हुई
     </div>
   </template>
 </body>

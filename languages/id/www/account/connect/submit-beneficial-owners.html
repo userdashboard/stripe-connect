@@ -12,16 +12,16 @@
 </head>
 <body>
   <h1 translate="yes">Kirim pemilik untuk ${stripeAccount.id}</h1>
-  <p translate="yes">Setelah selesai menambahkan semua pemilik lain, jika ada, kirimkan untuk ditinjau.</p>
+  <p translate="yes">Setelah Anda selesai menambahkan semua pemilik lain, jika ada, kirimkan untuk ditinjau.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Pemilik yang menguntungkan</h2>
+    <h2 translate="yes">Pemilik menguntungkan</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nama</th>
-          <th translate="yes">Memerlukan</th>
+          <th translate="yes">Membutuhkan</th>
         </tr>
       </thead>
     </table>
@@ -38,19 +38,19 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Tambah informasi</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Menambahkan informasi</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Kesalahan! Ada pemilik masih memerlukan informasi.
+      Kesalahan! Ada pemilik yang masih membutuhkan informasi.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Sukses! Pemilik perusahaan telah diserahkan
+      Keberhasilan! Pemilik perusahaan telah diajukan
     </div>
   </template>
   <template id="unknown-error">

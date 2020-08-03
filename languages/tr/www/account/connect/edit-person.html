@@ -18,7 +18,7 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Kişiyi edin</h1>
+    <h1 translate="yes">Kişiyi düzenle</h1>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Şirketle ilişki</h2>
@@ -29,20 +29,20 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">İş, rol veya ilişki unvanı</label>
+        <label for="relationship_title" translate="yes">İş, rol veya ilişki başlığı</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <label for="relationship_percent_ownership" translate="yes">Sahip olunan yüzde (varsa)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Kişisel bilgiler</h2>
+      <h2 translate="yes">Kişisel bilgi</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name-container" class="pure-control-group">
               <a id="first_name-anchor"></a>
-              <label for="first_name" translate="yes">Ad soyad</label>
+              <label for="first_name" translate="yes">İsim</label>
              <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">E-posta adresi</label>
+              <label for="email" translate="yes">E</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -79,7 +79,7 @@
           <div class="pure-u-12-24">
             <div id="first_name_kana-container" class="pure-control-group">
               <a id="first_name_kana-anchor"></a>
-              <label for="first_name_kana" translate="yes">Ad soyad</label>
+              <label for="first_name_kana" translate="yes">İsim</label>
               <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
             </div>
           </div>
@@ -99,7 +99,7 @@
           <div class="pure-u-12-24">
             <div id="first_name_kanji-container" class="pure-control-group">
               <a id="first_name_kanji-anchor"></a>
-              <label for="first_name_kanji" translate="yes">Ad soyad</label>
+              <label for="first_name_kanji" translate="yes">İsim</label>
               <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -131,7 +131,7 @@
         </div>
       </div>
       <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4" translate="yes">SSN son 4 basamak</label>
+        <label for="ssn_last_4" translate="yes">SSN son 4 hane</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
@@ -143,18 +143,18 @@
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Ön tiz/fotoğraf</label>
+        <label for="verification_document_front" translate="yes">Ön tarama / fotoğraf</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Geri tazyik/fotoğraf</label>
+        <label for="verification_document_back" translate="yes">Geri tarama / fotoğraf</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
         <h2 translate="yes">Adres kanıtı</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Ön tiz/fotoğraf</label>
+        <label for="verification_additional_document_front" translate="yes">Ön tarama / fotoğraf</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Geri tazyik/fotoğraf</label>
+        <label for="verification_additional_document_back" translate="yes">Geri tarama / fotoğraf</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -166,22 +166,22 @@
         </div>
         <div id="address_line2-container" class="pure-control-group">
           <a id="address_line2-anchor"></a>
-          <label for="address_line2" translate="yes">Satır 2</label>
+          <label for="address_line2" translate="yes">Hat 2</label>
          <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
         </div>
         <div id="address_city-container" class="pure-control-group">
           <a id="address_city-anchor"></a>
-          <label for="address_city" translate="yes">Şehir</label>
+          <label for="address_city" translate="yes">Kent</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
             <div id="address_state-container" class="pure-u-16-24">
               <a id="address_state-anchor"></a>
-              <label for="address_state" translate="yes">Eyalet veya il</label>
+              <label for="address_state" translate="yes">Eyalet veya İl</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
-                  Seçin
+                  seçmek
                 </option>
               </select>
             </div>
@@ -197,7 +197,7 @@
           <div class="pure-g">
             <div class="pure-u-16-24">
               <a id="address_country-anchor"></a>
-              <label for="address_country" translate="yes">Ülke</label>
+              <label for="address_country" translate="yes">ülke</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
                   Ülke seçin
@@ -220,12 +220,12 @@
           <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
         </div>
         <div id="address_kana_city-container" class="pure-control-group">
-          <label for="address_kana_city" translate="yes">Şehir</label>
+          <label for="address_kana_city" translate="yes">Kent</label>
           <a id="address_kana_city-anchor"></a>
           <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
         </div>
         <div id="address_kana_town-container" class="pure-control-group">
-          <label for="address_kana_town" translate="yes">Kasaba</label>
+          <label for="address_kana_town" translate="yes">kasaba</label>
           <a id="address_kana_town-anchor"></a>
           <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
         </div>
@@ -249,12 +249,12 @@
         </div>
         <div id="address_kanji_city-container" class="pure-control-group">
           <a id="address_kanji_city-anchor"></a>
-          <label for="address_kanji_city" translate="yes">Şehir</label>
+          <label for="address_kanji_city" translate="yes">Kent</label>
           <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
         </div>
         <div id="address_kanji_town-container" class="pure-control-group">
           <a id="address_kanji_town-anchor"></a>
-          <label for="address_kanji_town" translate="yes">Kasaba</label>
+          <label for="address_kanji_town" translate="yes">kasaba</label>
           <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
@@ -269,7 +269,7 @@
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Kaydı güncelleştir</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Kaydı güncelleyin</button>
       </div>
     </div>
   </form>
@@ -290,12 +290,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hata! Bilgilerin udpating bir hata oluştu
+      Hata! Bilgiler güncellenirken bir hata oluştu
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Hata! Fotoğraf veya tarak yükleme de bir hata oluştu
+      Hata! Fotoğraf yüklenirken veya taranırken bir hata oluştu
     </div>
   </template>
   <template id="invalid-id_number">
@@ -310,7 +310,7 @@
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Hata! Sosyal Güvenlik Numarasının geçersiz veya eksik son 4 hanesi
+      Hata! Sosyal Güvenlik Numarasının son 4 rakamı geçersiz veya eksik
     </div>
   </template>
   <template id="invalid-dob_day">
@@ -335,7 +335,7 @@
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik Kana ilk adı
+      Hata! Geçersiz veya eksik Kana adı
     </div>
   </template>
   <template id="invalid-first_name_kanji">
@@ -370,37 +370,37 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik yüzde sahipliği
+      Hata! Geçersiz veya eksik yüzde sahiplik
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik belge ön tonu veya fotoğraf
+      Hata! Geçersiz veya eksik belge önden tarama veya fotoğraf
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik belge geri tonu veya fotoğraf
+      Hata! Geçersiz veya eksik belge geri taraması veya fotoğraf
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik ek belge ön tkişi veya fotoğraf
+      Hata! Geçersiz veya eksik ek belge önden tarama veya fotoğraf
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik ek belge geri tonu veya fotoğraf
+      Hata! Geçersiz veya eksik ek belge geri taraması veya fotoğraf
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik kişisel adres ülke
+      Hata! Geçersiz veya eksik kişisel adres ülkesi
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik kişisel adres şehir
+      Hata! Geçersiz veya eksik kişisel adres şehri
     </div>
   </template>
   <template id="invalid-address_state">
@@ -420,7 +420,7 @@
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik Kana kişisel adres şehir
+      Hata! Geçersiz veya eksik Kana kişisel adres şehri
     </div>
   </template>
   <template id="invalid-address_kana_state">
@@ -445,7 +445,7 @@
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik Kanji kişisel adres şehir
+      Hata! Geçersiz veya eksik Kanji kişisel adres şehri
     </div>
   </template>
   <template id="invalid-address_kanji_state">
@@ -455,7 +455,7 @@
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik Kanji kişisel adres kasaba
+      Hata! Geçersiz veya eksik Kanji kişisel adres kasabası
     </div>
   </template>
   <template id="invalid-address_kanji_line1">

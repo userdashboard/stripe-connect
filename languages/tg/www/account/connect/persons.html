@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Шахсони барои ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Шахсоне</h1>
+  <div id="representative-container">
+    <h2 translate="yes">Намояндаи ширкат</h2>
+    <p translate="yes">Агар вазъияти шахси пешбаришуда тағир ёбад, шумо бояд намояндаи нав таъсис диҳед.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Намояндаи нав таъсис диҳед</a></p>
+    <table id="representatives-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Ном</th>
+          <th translate="yes">Талаб мекунад</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Соҳибони фоидаовар</h2>
+    <p translate="yes">Шумо бояд ҳуҷҷатҳоро барои шахси дигаре дошта бошед, ки дорои саҳмияҳои назарраси (25+) ширкат ё молики ширкат ё молия будааст.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Илова соҳиби</a></p>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Ном</th>
+          <th translate="yes">Талаб мекунад</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Директорони ширкат</h2>
+    <p translate="yes">Шумо бояд ҳуҷҷатҳоро ба шӯрои директорон пешниҳод кунед.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Илова соҳиби</a></p>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Ном</th>
+          <th translate="yes">Талаб мекунад</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="person-row">
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Илова кардани маълумот</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
+  </template>
+</body>
+</html>

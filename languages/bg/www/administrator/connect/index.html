@@ -2,22 +2,22 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Connect приложение</title>
+  <title translate="yes">Администриране на Connect</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Connect приложение</h1>
+  <h1 translate="yes">Администриране на Connect</h1>
   <div id="registrations-container">
-    <h2 translate="yes">Последни регистрации</h2>
+    <h2 translate="yes">Скорошни регистрации</h2>
     <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Име</th>
-          <th translate="yes">Статут</th>
+          <th translate="yes">име</th>
+          <th translate="yes">Статус</th>
           <th translate="yes">Създаден</th>
         </tr>
       </thead>
@@ -35,10 +35,10 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Все още не е подадено</span>
+    <span translate="yes">Все още не е изпратено</span>
   </template>
   <template id="verified">
-    <span translate="yes">Регистрацията е приета</span>
+    <span translate="yes">Регистрацията беше приета</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Изисква допълнителна информация</span>
@@ -47,34 +47,34 @@
     <span translate="yes">Изисква допълнителна информация</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Чакащи за подаване</span>
+    <span translate="yes">Предстои изпращане</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms_of_service">
-    <span translate="yes">Отхвърлени за нарушение на условията за ползване</span>
+    <span translate="yes">Отхвърлен поради нарушение на условията на услугата</span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.pending_verification">
-    <span translate="yes">Чакаща проверка</span>
+    <span translate="yes">В очакване на проверка</span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Повече информация е необходима</span>
+    <span translate="yes">Изисква се повече информация</span>
   </template>
   <template id="listed">
-    <span translate="yes">В процес на преразглеждане от Stripe</span>
+    <span translate="yes">В процес на преглед от Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">В процес на преразглеждане от Stripe</span>
+    <span translate="yes">В процес на преглед от Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Забранено от Stripe, вижте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Деактивирано от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

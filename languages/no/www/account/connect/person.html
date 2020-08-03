@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Person ${person.id}</h1>
-  <p translate="yes">Ytterligere informasjon kan ha blitt sendt som ikke vises.</p>
+  <p translate="yes">Det kan være sendt inn ytterligere informasjon som ikke vises.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Rolle</th>
+        <th translate="yes">rolle</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -28,7 +28,7 @@
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">navn</th>
+        <th translate="yes">Navn</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

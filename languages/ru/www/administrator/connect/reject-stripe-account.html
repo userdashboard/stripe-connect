@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Отклонить ${stripeAccount.id}</title>
+  <title translate="yes">отклонять ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Отклонить ${stripeAccount.id}</h1>
+  <h1 translate="yes">отклонять ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
@@ -19,40 +19,40 @@
           Выберите причину
         </option>
         <option value="fraud" translate="yes">
-          Мошенничества
+          мошенничество
         </option>
         <option value="terms_of_service" translate="yes">
-          Условия нарушения сервиса
+          Нарушение условий обслуживания
         </option>
         <option value="other" translate="yes">
-          Других
+          Другой
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Отклонить</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">отклонять</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Учетная запись Stripe была отклонена
+      Успех! Аккаунт Stripe отклонен
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Ошибка! Учетная запись должна иметь баланс /bin/sh перед отклонением
+      Ошибка! Учетная запись должна иметь баланс / bin / sh, прежде чем отклонить
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ошибка! Ошибка, допущенная при отклонении учетной записи Stripe
+      Ошибка! Произошла ошибка при удалении учетной записи Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Еще не представлено</span>
+    <span translate="yes">Еще не отправлено</span>
   </template>
   <template id="verified">
-    <span translate="yes">Регистрация принята</span>
+    <span translate="yes">Регистрация была принята</span>
   </template>
   <template id="verified">
-    <span translate="yes">Инвалид по Stripe</span>
+    <span translate="yes">Отключено Stripe</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Требуется дополнительная информация</span>
@@ -61,7 +61,7 @@
     <span translate="yes">Требуется дополнительная информация</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">До представления</span>
+    <span translate="yes">В ожидании представления</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Отклонено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -76,16 +76,16 @@
     <span><span translate="yes">Отклонено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Требуется дополнительная информация</span>
+    <span translate="yes">Требуется больше информации</span>
   </template>
   <template id="listed">
-    <span translate="yes">Под контролем Stripe</span>
+    <span translate="yes">На рассмотрении Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Под контролем Stripe</span>
+    <span translate="yes">На рассмотрении Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Инвалид по Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отключено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

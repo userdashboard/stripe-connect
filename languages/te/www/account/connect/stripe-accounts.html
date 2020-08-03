@@ -11,29 +11,29 @@
 </head>
 <body>
   <h1 translate="yes">Stripe ఖాతాలు</h1>
-  <p><span translate="yes">ద్వారా మీ వ్యక్తిగత గుర్తింపు మరియు కంపెనీ సమాచారాన్ని వెరిఫై చేయడం ద్వారా వెండర్ అవ్వండి</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">మీ వ్యక్తిగత గుర్తింపు మరియు కంపెనీ సమాచారాన్ని ధృవీకరించడం ద్వారా విక్రేత అవ్వండి</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">ఇంకా ఎలాంటి Stripe అకౌంట్ లు సృష్టించబడలేదు.</p>
+    <p translate="yes">ఇంకా Stripe ఖాతాలు సృష్టించబడలేదు.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">వ్యక్తిగత అవసరాలు</h2>
         <ol>
-          <li translate="yes">ధృవీకరించబడ్డ వ్యక్తిగత సమాచారం</li>
-          <li translate="yes">మద్దతు ఇచ్చే దేశం యొక్క నివాసి</li>
-          <li translate="yes">మద్దతు ఇచ్చే దేశంలో బ్యాంకు ఖాతా</li>
+          <li translate="yes">వ్యక్తిగత సమాచారం ధృవీకరించబడింది</li>
+          <li translate="yes">మద్దతు ఉన్న దేశం యొక్క నివాసి</li>
+          <li translate="yes">మద్దతు ఉన్న దేశంలో బ్యాంక్ ఖాతా</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">వ్యక్తిగత రిజిస్ట్రేషన్ ప్రారంభించండి</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">వ్యక్తిగత నమోదును ప్రారంభించండి</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">వ్యాపార అవసరాలు</h2>
         <ol>
-          <li translate="yes">ధృవీకరించబడ్డ వ్యక్తిగత సమాచారం</li>
-          <li translate="yes">మద్దతు ఇచ్చే దేశంలో రిజిస్టర్ చేయబడ్డ వ్యాపారం</li>
-          <li translate="yes">మద్దతు ఇచ్చే దేశంలో బ్యాంకు ఖాతా</li>
+          <li translate="yes">వ్యక్తిగత సమాచారం ధృవీకరించబడింది</li>
+          <li translate="yes">మద్దతు ఉన్న దేశంలో వ్యాపారం నమోదు చేయబడింది</li>
+          <li translate="yes">మద్దతు ఉన్న దేశంలో బ్యాంక్ ఖాతా</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">కంపెనీ రిజిస్ట్రేషన్ ప్రారంభించండి</a>
       </div>
@@ -41,29 +41,29 @@
   </div>
   <div id="registrations-container">
     <div id="individual-container">
-      <h2 translate="yes">వ్యక్తిగత రిజిస్ట్రేషన్</h2>
+      <h2 translate="yes">వ్యక్తిగత నమోదు</h2>
       <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
             <th translate="yes">పేరు</th>
             <th translate="yes">స్థితి</th>
-            <th translate="yes">సృష్టించబడింది</th>
-            <th translate="yes">సమర్పించబడింది</th>
+            <th translate="yes">రూపొందించబడింది</th>
+            <th translate="yes">Submitted</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h2 translate="yes">కంపెనీ రిజిస్ట్రేషన్ లు</h2>
+      <h2 translate="yes">కంపెనీ రిజిస్ట్రేషన్లు</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">వ్యాపార నామం</th>
+            <th translate="yes">వ్యాపారం పేరు</th>
             <th translate="yes">స్థితి</th>
-            <th translate="yes">సృష్టించబడింది</th>
-            <th translate="yes">సమర్పించబడింది</th>
+            <th translate="yes">రూపొందించబడింది</th>
+            <th translate="yes">Submitted</th>
           </tr>
         </thead>
       </table>
@@ -84,43 +84,43 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">ఇంకా సబ్మిట్ చేయలేదు</span>
+    <span translate="yes">ఇంకా సమర్పించలేదు</span>
   </template>
   <template id="verified">
-    <span translate="yes">రిజిస్ట్రేషన్ ఆమోదించబడింది</span>
+    <span translate="yes">నమోదు అంగీకరించబడింది</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe ద్వారా నిలిపివేయబడింది</span>
+    <span translate="yes">Stripe చే నిలిపివేయబడింది</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">అదనపు సమాచారం అవసరం</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">పెండింగ్ లో ఉన్న సమర్పణ</span>
+    <span translate="yes">సమర్పణ పెండింగ్u200cలో ఉంది</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe ద్వారా తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe చే తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe ద్వారా తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe చే తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe ద్వారా తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe చే తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe ద్వారా తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe చే తిరస్కరించబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">మరింత సమాచారం అవసరం</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe ద్వారా సమీక్ష</span>
+    <span translate="yes">Stripe సమీక్షలో ఉంది</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe ద్వారా సమీక్ష</span>
+    <span translate="yes">Stripe సమీక్షలో ఉంది</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe ద్వారా నిలిపివేయబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe చే నిలిపివేయబడింది, చూడండి</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">అదనపు సమాచారం అవసరం</span>

@@ -18,21 +18,21 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Roli</th>
+        <th translate="yes">Rola</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Relacji</th>
+        <th translate="yes">Związek</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Nazwa</th>
+        <th translate="yes">Imię</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Wymagane informacje</th>
+        <th translate="yes">Wymagana informacja</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

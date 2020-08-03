@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stuur bestuurders indienen voor ${stripeAccount.id}</title>
+  <title translate="yes">Regisseurs indienen voor ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Stuur bestuurders indienen voor ${stripeAccount.id}</h1>
-  <p translate="yes">Wanneer u klaar bent met het toevoegen van de directeuren van het bedrijf, indien van toepassing, legt u ze voor beoordeling.</p>
+  <h1 translate="yes">Regisseurs indienen voor ${stripeAccount.id}</h1>
+  <p translate="yes">Als u klaar bent met het toevoegen van de directeuren van het bedrijf, dient u deze ter beoordeling in.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Bedrijfsleiders</h2>
+    <h2 translate="yes">Bedrijfsdirecteuren</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Bestuurders indienen</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Regisseurs indienen</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,12 +45,12 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fout! Er zijn nog steeds bestuurders die informatie nodig hebben
+      Fout! Er zijn bestuurders die nog informatie nodig hebben
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Succes! De bestuurders van het bedrijf zijn
+      Succes! De directeuren van het bedrijf zijn ingediend
     </div>
   </template>
   <template id="unknown-error">

@@ -2,57 +2,57 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Menolak ${stripeAccount.id}</title>
+  <title translate="yes">Tolak ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Menolak ${stripeAccount.id}</h1>
+  <h1 translate="yes">Tolak ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Alasan penolakan</label>
+      <label for="reason" translate="yes">Sebab penolakan</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          Pilih sebab
+          Pilih alasan
         </option>
         <option value="fraud" translate="yes">
           Penipuan
         </option>
         <option value="terms_of_service" translate="yes">
-          Terma pelanggaran Perkhidmatan
+          Pelanggaran syarat perkhidmatan
         </option>
         <option value="other" translate="yes">
-          Lain
+          Yang lain
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Menolak</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tolak</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Kejayaan! Akaun Stripe telah ditolak
+      Berjaya! Akaun Stripe telah ditolak
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Ralat! Akaun mesti mempunyai baki/bin/SH sebelum menolak
+      Ralat! Akaun mesti mempunyai baki / bin / sh sebelum menolak
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ralat! Ralat ocurred menolak akaun Stripe
+      Ralat! Berlaku ralat semasa mengeluarkan akaun Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Belum hantar</span>
+    <span translate="yes">Belum dihantar</span>
   </template>
   <template id="verified">
     <span translate="yes">Pendaftaran telah diterima</span>
   </template>
   <template id="verified">
-    <span translate="yes">Dinyahdaya oleh Stripe</span>
+    <span translate="yes">Dilumpuhkan oleh Stripe</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Memerlukan maklumat tambahan</span>
@@ -61,7 +61,7 @@
     <span translate="yes">Memerlukan maklumat tambahan</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Penghantaran belum selesai</span>
+    <span translate="yes">Penyerahan belum selesai</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Ditolak oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -76,16 +76,16 @@
     <span><span translate="yes">Ditolak oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Maklumat lanjut diperlukan</span>
+    <span translate="yes">Lebih banyak maklumat diperlukan</span>
   </template>
   <template id="listed">
-    <span translate="yes">Di bawah kajian oleh Stripe</span>
+    <span translate="yes">Sedang dikaji oleh Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Di bawah kajian oleh Stripe</span>
+    <span translate="yes">Sedang dikaji oleh Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Dinyahdaya oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Dilumpuhkan oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

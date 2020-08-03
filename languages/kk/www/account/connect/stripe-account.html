@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Көрініс ${stripeAccount.id}</title>
+  <title translate="yes">Көру ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Көрініс ${stripeAccount.id}</h1>
+  <h1 translate="yes">Көру ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -22,7 +22,7 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Атауы</th>
+        <th translate="yes">Аты</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -36,14 +36,14 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Ұсынылған</th>
+        <th translate="yes">Жіберілді</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Әзірге жіберілмеген</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Тіркеу туралы мәліметтер</h2>
+    <h2 translate="yes">Тіркеу туралы ақпарат</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,12 +52,12 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Компания өкілі</h2>
-    <p translate="yes">Тіркелгінің бұзылуын болдырмау үшін, егер көрсетілген адам шығып кетсе немесе бұдан былай компанияға өкілдік бермесе, жаңа өкіл ақпарат береді.</p>
+    <p translate="yes">Есептік жазбаның бұзылуын болдырмас үшін, егер аталған адам компанияны қалдырған немесе бұдан былай өкілдік етпесе, жаңа өкілдік ақпаратты ұсыныңыз.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Атауы</th>
+          <th translate="yes">Аты</th>
           <th translate="yes">Қажетті ақпарат</th>
         </tr>
       </thead>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Бенефициарлық меншік иелері туралы басқа да ақпарат</h2>
-    <p translate="yes">Сіз компанияның елеулі (25+) пайызын иеленетін немесе компанияның, қаржының немесе операциялардың басқа біреуге құжаттама ұсынуы қажет.</p>
+    <h2 translate="yes">Басқа пайдалы иелер туралы ақпарат</h2>
+    <p translate="yes">Сіз компанияның едәуір (25+) пайызына иелік ететін немесе компанияны басқаратын, қаржы немесе операцияларды басқаратын кез-келген адамға құжаттаманы ұсынуыңыз керек.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Атауы</th>
-          <th translate="yes">Талап етеді</th>
+          <th translate="yes">Аты</th>
+          <th translate="yes">Қажет</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Компанияның директорлары туралы ақпарат</h2>
-    <p translate="yes">Сіз компанияңыздың басқарушы кеңесінің және/немесе реттеуші сәйкестікті сақтауға жауапты адамдардың толық атауларын көрсетуіңіз қажет.</p>
+    <h2 translate="yes">Компания директорлары туралы ақпарат</h2>
+    <p translate="yes">Сіз өзіңіздің компанияңыздың басқарушы кеңесі және / немесе нормативтік талаптарды сақтау үшін жауапты адамдардың аты-жөндерін көрсетуіңіз керек.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Атауы</th>
-          <th translate="yes">Талап етеді</th>
+          <th translate="yes">Аты</th>
+          <th translate="yes">Қажет</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Төлем туралы мәліметтер</h2>
+    <h2 translate="yes">Төлем туралы ақпарат</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Тіркеуден тапсыру</h2>
+    <h2 translate="yes">Тіркелу</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,67 +120,67 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Ақпаратты қосу</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Ақпарат қосу</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Қаражат есепке алынады ${bank_account.bank_name}.</p>
+    <p translate="yes">Шотқа қаражат төленеді ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Қаражатты алу үшiн банктiк деректемелер берiлуi тиiс.</p>
+    <p translate="yes">Қаражатты алу үшін банктік деректемелер ұсынылуы керек.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Тiркеу берiлмеген.</p>
+    <p translate="yes">Тіркеу ұсынылған жоқ.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Тіркеу 200_ж. ұсынылды ${account.dateFormatted}.</p>
+    <p translate="yes">Тіркелу жіберілді ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Тiркеу туралы мәлiметтер берiлмеген.</p>
+    <p translate="yes">Тіркеу туралы ақпарат берілмеген.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Тіркеу туралы мәліметтер берілді.</p>
+    <p translate="yes">Тіркеу туралы ақпарат берілді.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Әлі ұсынылмаған</span>
+    <span translate="yes">Әзірге жіберілмеген</span>
   </template>
   <template id="verified">
-    <span translate="yes">Тіркеу 20__ ж. «___» ____________ қабылданды</span>
+    <span translate="yes">Тіркелу қабылданды</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Қосымша ақпаратты талап етеді</span>
+    <span translate="yes">Қосымша ақпаратты қажет етеді</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Ұсынуды күтуде</span>
+    <span translate="yes">Жіберу күтілуде</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe қарап жатыр</span>
+    <span translate="yes">Stripe қарастыруда</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe қарап жатыр</span>
+    <span translate="yes">Stripe қарастыруда</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Қосымша ақпаратты талап етеді</span>
+    <span translate="yes">Қосымша ақпаратты қажет етеді</span>
   </template>
 </body>
 </html>

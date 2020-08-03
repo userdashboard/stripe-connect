@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Kurti naują asmenį ${stripeAccount.id}</title>
+  <title translate="yes">Sukurti naują žmogų ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,7 +10,7 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Kurti naują asmenį</h1>
+    <h1 translate="yes">Sukurti naują žmogų</h1>
     <p translate="yes">Direktorių valdyba, savininkai ir atstovas turi būti nuolat atnaujinami, kai keičiasi jūsų informacija.</p>
     <div id="message-container"></div>
     <div id="form-container">
@@ -22,21 +22,21 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Užduotis, vaidmuo arba ryšio pavadinimas</label>
+        <label for="relationship_title" translate="yes">Pareigos, vaidmuo ar santykiai</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Priklausantis procentas (jei yra)</label>
+        <label for="relationship_percent_ownership" translate="yes">Priklauso procentas (jei yra)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Atnaujinti registraciją</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Atnaujinkite registraciją</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Sėkmės! Registracija atnaujinta
+      Sėkmė! Registracija atnaujinta
     </div>
   </template>
   <template id="unknown-error">
@@ -46,17 +46,17 @@
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Jūsų Stripe paskyra nereikalauja tikrojo savininko informacijos
+      Jūsų Stripe sąskaita nereikalauja tikrojo savininko informacijos
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Jūsų Stripe paskyra nereikalauja įmonės direktoriaus informacijos
+      Jūsų Stripe paskyrai nereikia įmonės direktoriaus informacijos
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Įmonių atstovai turi būti vadovai
+      Įmonės atstovai turi būti vadovai
     </div>
   </template>
   <template id="invalid-selection">
@@ -66,12 +66,12 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Klaida! Netinkama arba trūksta procentų nuosavybės (0, jei nėra)
+      Klaida! Netinkamas procentas arba jo nėra (0, jei jo nėra)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Klaida! Neleistinas arba trūkstamas ryšio pavadinimas
+      Klaida! Netinkamas arba trūksta santykių pavadinimo
     </div>
   </template>
 </body>

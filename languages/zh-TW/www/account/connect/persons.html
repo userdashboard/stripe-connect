@@ -2,18 +2,18 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">人員 ${stripeAccount.id}</title>
+  <title translate="yes">適用於 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">人</h1>
+  <h1 translate="yes">人數</h1>
   <div id="representative-container">
     <h2 translate="yes">公司代表</h2>
-    <p translate="yes">如果被提名者的狀態發生變化,則必須創建新代表。</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">建立新代表</a></p>
+    <p translate="yes">如果被提名人的身份發生變化，則必須創建一個新的代表。</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">創建新代表</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -25,9 +25,9 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">受益所有人</h2>
-    <p translate="yes">您必須為擁有公司大量(25%以上)%或負責公司財務或運營的其他人提供檔。</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">新增擁有者</a></p>
+    <h2 translate="yes">實益擁有人</h2>
+    <p translate="yes">您必須為擁有公司實質（25 +）％或負責公司，其財務或運營的任何其他人提供文件。</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">添加所有者</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -40,8 +40,8 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">公司董事</h2>
-    <p translate="yes">您必須為董事會提供檔。</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">新增擁有者</a></p>
+    <p translate="yes">您必須為董事會提供文件。</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">添加所有者</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">新增資訊</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">添加信息</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

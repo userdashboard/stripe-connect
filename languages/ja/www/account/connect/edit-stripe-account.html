@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">編集 ${stripeAccount.id}</title>
+  <title translate="yes">編集する ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,22 +17,22 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">編集 ${stripeAccount.id}</h1>
+    <h1 translate="yes">編集する ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">ウェブサイトの URL</label>
+        <label for="business_profile_url" translate="yes">ウェブサイトのURL</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">製品の説明</label>
+        <label for="business_profile_product_description" translate="yes">製品説明</label>
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">販売者カテゴリ コード</label>
+        <label for="business_profile_mcc" translate="yes">販売者のカテゴリコード</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
-            ビジネスのコードを選択する
+            ビジネスのコードを選択してください
           </option>
         </select>
       </div>
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">会社名</label>
+            <label for="name" translate="yes">商号</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">税 ID 番号</label>
+            <label for="tax_id" translate="yes">納税者番号</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
             <a id="name_kana-anchor"></a>
-            <label for="name_kana" translate="yes">カナ事業名</label>
+            <label for="name_kana" translate="yes">かなビジネス名</label>
             <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">漢字事業名</label>
+            <label for="name_kanji" translate="yes">漢字商号</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">ウェブサイトの URL</label>
+            <label for="business_profile_url" translate="yes">ウェブサイトのURL</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -103,20 +103,20 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
-            <label for="first_name" translate="yes">名</label>
+            <label for="first_name" translate="yes">ファーストネーム</label>
             <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name-container" class="pure-control-group">
-            <label for="last_name" translate="yes">姓</label>
+            <label for="last_name" translate="yes">苗字</label>
             <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div id="email-container" class="pure-control-group">
-        <label for="email" translate="yes">メールアドレス</label>
+        <label for="email" translate="yes">電子メールアドレス</label>
         <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
@@ -125,18 +125,18 @@
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">カナ個人情報</h2>
+      <h2 translate="yes">かな個人情報</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
-            <label for="first_name_kana" translate="yes">名</label>
+            <label for="first_name_kana" translate="yes">ファーストネーム</label>
             <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kana-container" class="pure-control-group">
-            <label for="last_name_kana" translate="yes">姓</label>
+            <label for="last_name_kana" translate="yes">苗字</label>
             <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
           </div>
         </div>
@@ -147,14 +147,14 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
-            <label for="first_name_kanji" translate="yes">名</label>
+            <label for="first_name_kanji" translate="yes">ファーストネーム</label>
             <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kanji-container" class="pure-control-group">
-            <label for="last_name_kanji" translate="yes">姓</label>
+            <label for="last_name_kanji" translate="yes">苗字</label>
             <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -167,7 +167,7 @@
       <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
     </div>
     <div id="ssn_last_4-container" class="pure-control-group">
-      <label for="ssn_last_4" translate="yes">SSN の最後の 4 桁</label>
+      <label for="ssn_last_4" translate="yes">SSN下4桁</label>
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
@@ -178,7 +178,7 @@
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
-      <h2 translate="yes">個人識別</h2>
+      <h2 translate="yes">個人の識別</h2>
       <label for="id_number" translate="yes">パスポートまたはID番号</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
@@ -200,26 +200,26 @@
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
-      <h2 translate="yes">アドレス</h2>
+      <h2 translate="yes">住所</h2>
       <div id="address_line1-container" class="pure-control-group">
-        <label for="address_line1" translate="yes">1号線</label>
+        <label for="address_line1" translate="yes">ライン1</label>
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
-        <label for="address_line2" translate="yes">2号線</label>
+        <label for="address_line2" translate="yes">2行目</label>
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">都市</label>
+        <label for="address_city" translate="yes">市</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <div class="pure-g">
           <div id="address_state-container" class="pure-u-17-24">
-            <label for="address_state" translate="yes">都道府県</label>
+            <label for="address_state" translate="yes">州または県</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                状態の選択
+                州を選択
               </option>
             </select>
           </div>
@@ -234,13 +234,13 @@
       </div>
     </div>
     <div id="kana-address-container">
-      <h2 translate="yes">カナアドレス</h2>
+      <h2 translate="yes">かな住所</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
-        <label for="address_kana_line1" translate="yes">1号線</label>
+        <label for="address_kana_line1" translate="yes">ライン1</label>
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">都市</label>
+        <label for="address_kana_city" translate="yes">市</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
@@ -259,11 +259,11 @@
     <div id="kanji-address-container">
       <h2 translate="yes">漢字アドレス</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
-        <label for="address_kanji_line1" translate="yes">1号線</label>
+        <label for="address_kanji_line1" translate="yes">ライン1</label>
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">都市</label>
+        <label for="address_kanji_city" translate="yes">市</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
@@ -280,7 +280,7 @@
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">アカウントStripe更新</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Stripeアカウントを更新</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -291,7 +291,7 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">成功！Stripe アカウントが更新されました</span>
+      <span translate="yes">成功！ Stripeアカウントが更新されました</span>
       <a href="/account/connect" translate="yes">アカウントに戻る</a>
     </div>
   </template>
@@ -302,7 +302,7 @@
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      エラー！ドキュメント イメージのアップロード中にエラーが発生しました
+      エラー！ドキュメント画像のアップロード中にエラーが発生しました
     </div>
   </template>
   <template id="invalid-token">
@@ -312,197 +312,197 @@
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      エラー！無効または欠落しているビジネス URL
+      エラー！無効または存在しないビジネスURL
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      エラー！無効または見つからないビジネスマーチャントカテゴリコード
+      エラー！無効または不足しているビジネスの販売者カテゴリコード
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      エラー！ビジネス製品の説明が無効か、見つかりません
+      エラー！無効または不足しているビジネス製品の説明
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      エラー！ドキュメントのフロント スキャンまたは写真が無効または不足しています
+      エラー！無効または不足しているドキュメントのフロントスキャンまたは写真
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      エラー！ドキュメントのバック スキャンまたは写真が無効または不足しています
+      エラー！無効または見つからないドキュメントのバックスキャンまたは写真
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      エラー！ドキュメントのフロント スキャンまたは写真が無効であるか、または見つかりません
+      エラー！追加のドキュメントのフロントスキャンまたは写真が無効または欠落している
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      エラー！ドキュメントのバック スキャンまたは写真が無効であるか、または見つかりません
+      エラー！追加のドキュメントのスキャンまたは写真が無効または欠落している
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      エラー！無効なまたは不足している個人 ID 番号
+      エラー！個人ID番号が無効または欠落しています
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      エラー！無効またはビジネス名がありません
+      エラー！無効または不足しているビジネス名
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      エラー！かなビジネス名が無効か、または見つかりません
+      エラー！かなビジネス名が無効または欠落しています
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      エラー！無効なまたは見つからない漢字ビジネス名
+      エラー！無効または不足している漢字ビジネス名
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      エラー！無効またはビジネス税 ID がありません
+      エラー！無効または不足している事業税ID
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      エラー！無効な電話番号または電話番号が見つかりません
+      エラー！電話番号が無効または欠落している
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      エラー！無効または存在しない性別
+      エラー！無効または欠落している性別
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      エラー！社会保障番号の下 4 桁が無効または不足しています
+      エラー！社会保障番号の下4桁が無効または欠落している
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      エラー！生年月日が無効または欠落しています
+      エラー！生年月日が無効または存在しない
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      エラー！生年月日が無効または欠落しています
+      エラー！生年月日が無効または存在しない
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      エラー！生年月日が無効または欠落しています
+      エラー！生年月日が無効または存在しない
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      エラー！無効または名が見つかりません
+      エラー！名が無効または欠落しています
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      エラー！カナ名が無効か、または見つかりません
+      エラー！かな名が無効または欠落しています
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      エラー！無効なか、または漢字の名が見つかりません
+      エラー！漢字の名が無効または欠落しています
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      エラー！名が無効か、または姓が見つかりません
+      エラー！姓が無効または欠落しています
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      エラー！カナの姓が無効か、または見つかりません
+      エラー！かなの姓が無効または欠落しています
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      エラー！無効な、または入力されていない漢字の姓
+      エラー！漢字姓が無効または欠落しています
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      エラー！無効なまたは見つからない電子メール
+      エラー！無効または欠落したメール
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      エラー！無効または住所が見つかりません
+      エラー！個人の住所の市が無効または欠落しています
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      エラー！無効または個人用アドレスの状態がありません
+      エラー！個人住所の状態が無効または欠落しています
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      エラー！無効または欠落している個人アドレス行 1
+      エラー！個人の住所行1が無効または欠落しています
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      エラー！無効または個人の郵便番号がありません
+      エラー！個人の郵便番号が無効または欠落している
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      エラー！カナ個人住所市が無効または欠落しています
+      エラー！かな個人住所の都市が無効または欠落しています
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      エラー！カナの個人アドレス状態が無効または欠落しています
+      エラー！かな住所が無効または欠落している
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      エラー！カナの個人住所の町が無効または欠落しています
+      エラー！無効または欠落しているかな個人住所の町
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      エラー！カナの個人アドレス行 1 が無効であるか、または見つかりません
+      エラー！無効または欠落しているカナ個人住所行1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      エラー！カナの個人住所の郵便番号が無効または欠落しています
+      エラー！かなの個人住所の郵便番号が無効または欠落している
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      エラー！漢字の個人住所が無効または欠落しています
+      エラー！漢字個人住所の市区町村が無効または欠落しています
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      エラー！無効または欠落している個人住所の状態の漢字
+      エラー！漢字個人住所の状態が無効または欠落しています
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      エラー！漢字の住所が無効または欠落しています
+      エラー！漢字個人住所の町が無効または欠落している
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      エラー！無効または欠落している漢字の個人アドレス行 1
+      エラー！漢字個人住所行が無効または欠落しています1
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      エラー！漢字の個人住所の郵便番号が無効か、または見つかりません
+      エラー！漢字個人住所の郵便番号が無効または欠落している
     </div>
   </template>
 </body>

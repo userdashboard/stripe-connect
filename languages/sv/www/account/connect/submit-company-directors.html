@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Skicka in styrelseledamöter för ${stripeAccount.id}</title>
+  <title translate="yes">Skicka direktörer för ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,16 +11,16 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Skicka in styrelseledamöter för ${stripeAccount.id}</h1>
-  <p translate="yes">När du har lagt till företagets styrelseledamöter, om någon, skicka in dem för granskning.</p>
+  <h1 translate="yes">Skicka direktörer för ${stripeAccount.id}</h1>
+  <p translate="yes">När du är klar med att lägga till bolagets styrelseledamöter, om några, skicka dem till granskning.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Företagsledare</h2>
+    <h2 translate="yes">Företagets ledare</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
           <th translate="yes">Kräver</th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Skicka in styrelseledamöter</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Skicka direktörer</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fel! Det finns styrelseledamöter som fortfarande behöver information
+      Fel! Det finns fortfarande styrelseledamöter som behöver information
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Framgång! Bolagets styrelseledamöter har lämnats in
+      Framgång! Företagets styrelseledamöter har lämnats in
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fel! Ett fel uppstod när direktörerna skickades in
+      Fel! Ett fel uppstod när styrelseledamöterna lämnades in
     </div>
   </template>
 </body>

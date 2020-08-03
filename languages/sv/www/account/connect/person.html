@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Person ${person.id}</h1>
-  <p translate="yes">Ytterligare information kan ha skickats som inte visas.</p>
+  <p translate="yes">Ytterligare information kan ha lämnats in som inte visas.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -24,15 +24,15 @@
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Förhållande</th>
+        <th translate="yes">Relation</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Namn</th>
+        <th translate="yes">namn</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Nödvändig information</th>
+        <th translate="yes">Obligatorisk information</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

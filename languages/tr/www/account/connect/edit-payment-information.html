@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Ödeme bilgileri için ${stripeAccount.id}</title>
+  <title translate="yes">İçin ödeme bilgileri ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,7 +27,7 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">Ödeme bilgileri için ${stripeAccount.id}</h1>
+  <h1 translate="yes">İçin ödeme bilgileri ${stripeAccount.id}</h1>
   <p translate="yes">Gelir ödemelerinizi alacak banka hesabını güncelleyin.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
@@ -35,13 +35,13 @@
       <label for="country" translate="yes">Bankanın ülkesi</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Seçin
+          seçmek
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Hesap türü</label>
+      <label translate="yes">Hesap tipi</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -55,14 +55,14 @@
           <label for="currency" translate="yes">Hesap para birimi</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Seçin
+              seçmek
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Hesap sahibinin adı</label>
+      <label for="account-holder-name" translate="yes">Hesap Sahibinin Adı</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -133,7 +133,7 @@
       <h2 translate="yes">Alternatif biçim</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Kodu sıralama</label>
+          <label for="sort_code" translate="yes">Yazım kodu</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -153,7 +153,7 @@
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Şube kodu</label>
+        <label for="branch_code" translate="yes">Şube Kodu</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,11 +171,11 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Banka kodu</label>
+        <label for="bank_code" translate="yes">banka kodu</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Şube kodu</label>
+        <label for="branch_code" translate="yes">Şube Kodu</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,11 +233,11 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Banka kodu</label>
+        <label for="bank_code" translate="yes">banka kodu</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Şube kodu</label>
+        <label for="branch_code" translate="yes">Şube Kodu</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Ödeme bilgilerini kaydetme</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Ödeme bilgilerini kaydet</button>
     </div>
   </form>
   <template id="country-option">
@@ -288,17 +288,17 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hata! Ödeme bilgilerinin güncellenmesinde hata oluştu
+      Hata! Ödeme bilgileri güncellenirken bir hata oluştu
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Hata! Bankanın geçersiz veya kayıp ülkesi
+      Hata! Geçersiz veya eksik banka ülkesi
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Hata! Hesabın geçersiz veya eksik para birimi
+      Hata! Geçersiz veya eksik hesap para birimi
     </div>
   </template>
   <template id="invalid-account_holder_type">
@@ -348,7 +348,7 @@
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik hesap sahibinin adı
+      Hata! Geçersiz veya eksik hesap sahibi adı
     </div>
   </template>
   <template id="invalid-iban">

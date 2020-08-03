@@ -2,26 +2,26 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Изплащания</title>
+  <title translate="yes">Плащания</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Изплащания</h1>
+  <h1 translate="yes">Плащания</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Все още не са възникнали плащания.</p>
+    <p translate="yes">Все още няма изплащания.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Сума</th>
-        <th translate="yes">Stripe сметка</th>
-        <th translate="yes">Статут</th>
-        <th translate="yes">Описание</th>
+        <th translate="yes">Количество</th>
+        <th translate="yes">Stripe акаунт</th>
+        <th translate="yes">Статус</th>
+        <th translate="yes">описание</th>
         <th translate="yes">Създаден</th>
       </tr>
     </thead>
@@ -65,25 +65,25 @@
     <span translate="yes">Недостатъчни средства</span>
   </template>
   <template id="declined">
-    <span translate="yes">Отклонена банка</span>
+    <span translate="yes">Банката отказа превода</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Няма дебит на банкова сметка</span>
+    <span translate="yes">Без дебит на банкова сметка</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Грешка при обработка</span>
+    <span translate="yes">Не можа да се обработи</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Промяна в собствеността на банката</span>
+    <span translate="yes">Собствеността на банката се промени</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Банкова сметка с ограничена</span>
+    <span translate="yes">Банковата сметка е ограничена</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Банкова сметка замразена</span>
+    <span translate="yes">Банковата сметка е замразена</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Банкова сметка закрита</span>
+    <span translate="yes">Банковата сметка е закрита</span>
   </template>
 </body>
 </html>

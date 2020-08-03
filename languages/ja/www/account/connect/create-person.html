@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">新しいユーザーの作成 ${stripeAccount.id}</title>
+  <title translate="yes">新しい人を作成 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">新しいユーザーの作成</h1>
-    <p translate="yes">取締役会、所有者、代表者は、お客様の情報が変更された場合に最新の状態に保つ必要があります。</p>
+    <h1 translate="yes">新しい人を作成</h1>
+    <p translate="yes">取締役会、所有者、代表者は、情報が変更されたときに最新の状態に保つ必要があります。</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">会社との関係</h2>
@@ -22,15 +22,15 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">ジョブ、ロール、または顧客間関係のタイトル</label>
+        <label for="relationship_title" translate="yes">役職、役割、または関係のタイトル</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">所有率 (存在する場合)</label>
+        <label for="relationship_percent_ownership" translate="yes">所有率（ある場合）</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">登録の更新</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">登録を更新</button>
       </div>
     </div>
   </form>
@@ -46,32 +46,32 @@
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Stripeアカウントには有益な所有者情報は必要ありません
+      Stripeアカウントには、有益な所有者情報は必要ありません
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Stripeアカウントには会社の取締役情報は必要ありません
+      Stripeアカウントには、会社の取締役情報は必要ありません
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      会社の代表者は役員でなければなりません
+      会社の代表者は幹部でなければなりません
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      代表者、取締役、または所有者のいずれかを選択する必要があります
+      代表者、取締役または所有者のいずれかを選択する必要があります
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      エラー！所有権が無効または欠落している (なしの場合は 0)
+      エラー！所有権が無効または欠落している（ない場合は0）
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      エラー！無効または不明なリレーションシップ のタイトル
+      エラー！無効または不足している関係のタイトル
     </div>
   </template>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Prosleđivanje ${stripeAccount.id}</title>
+  <title translate="yes">прихвати ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Prosleđivanje ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proces verifikacije prosleđivanjem vaše dovršene registracije.</p>
+  <h1 translate="yes">прихвати ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> поступка верификације подношењем завршене регистрације.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Korisni vlasnici</h2>
+    <h2 translate="yes">Погодни власници</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Ime</th>
+          <th translate="yes">Име</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Direktori kompanija</h2>
+    <h2 translate="yes">Директори предузећа</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Ime</th>
+          <th translate="yes">Име</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Prosledi registraciju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Пошаљите регистрацију</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Registracija ima nepotpune informacije o registraciji
+      Регистрација има непотпуне податке о регистрацији
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Greška! Morate predati direktore kompanije
+      Грешка! Морате да предате директоре компаније
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Greška! Morate predati korisne vlasnike kompanije
+      Грешка! Морате да предате корисне власнике компаније
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Greška! Morate proslediti informacije predstavnika kompanije
+      Грешка! Морате доставити податке представника компаније
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Greška! Registracija ima nepotpune informacije o plaćanju
+      Грешка! Регистрација има непотпуне податке о плаћању
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspeh! Registracija je podneta
+      Успех! Регистрација је поднета
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Greška! Došlo je do greške prilikom prosleđivanja registracije
+      Грешка! Дошло је до грешке приликом слања регистрације
     </div>
   </template>
 </body>

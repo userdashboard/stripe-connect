@@ -2,18 +2,18 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">కొరకు వ్యక్తులు ${stripeAccount.id}</title>
+  <title translate="yes">కోసం వ్యక్తులు ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">వ్యక్తులు</h1>
+  <h1 translate="yes">పర్సన్స్</h1>
   <div id="representative-container">
     <h2 translate="yes">కంపెనీ ప్రతినిధి</h2>
-    <p translate="yes">నామినేటెడ్ పర్సన్ స్టేటస్ మారినట్లయితే మీరు విధిగా ఒక కొత్త ప్రతినిధిని సృష్టించాలి.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">కొత్త ప్రతినిధిని సృష్టించు</a></p>
+    <p translate="yes">నామినేటెడ్ వ్యక్తి యొక్క స్థితి మారితే మీరు తప్పనిసరిగా క్రొత్త ప్రతినిధిని సృష్టించాలి.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">క్రొత్త ప్రతినిధిని సృష్టించండి</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -25,9 +25,9 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">లాభదాయక యజమానులు</h2>
-    <p translate="yes">కంపెనీ యొక్క గణనీయమైన (25+) శాతం లేదా కంపెనీ, దాని ఫైనాన్స్ లేదా ఆపరేషన్ స్ ఇన్ ఛార్జ్ అయిన మరెవరికైనా మీరు డాక్యుమెంటేషన్ ని అందించాలి.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">యజమానిని జోడించు</a></p>
+    <h2 translate="yes">ప్రయోజనకరమైన యజమానులు</h2>
+    <p translate="yes">సంస్థ యొక్క గణనీయమైన (25+) శాతం లేదా సంస్థ, దాని ఆర్థిక లేదా కార్యకలాపాల బాధ్యత కలిగిన ఎవరికైనా మీరు డాక్యుమెంటేషన్ అందించాలి.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">యజమానిని జోడించండి</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -40,8 +40,8 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">కంపెనీ డైరెక్టర్లు</h2>
-    <p translate="yes">డైరెక్టర్ల బోర్డు కొరకు మీరు విధిగా డాక్యుమెంటేషన్ అందించాలి.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">యజమానిని జోడించు</a></p>
+    <p translate="yes">మీరు డైరెక్టర్ల బోర్డు కోసం డాక్యుమెంటేషన్ అందించాలి.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">యజమానిని జోడించండి</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">సమాచారాన్ని జోడించు</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">సమాచారాన్ని జోడించండి</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

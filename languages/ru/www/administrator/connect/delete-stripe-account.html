@@ -15,8 +15,8 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Имя</th>
-        <th translate="yes">Статус</th>
+        <th translate="yes">название</th>
+        <th translate="yes">Положение дел</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -35,31 +35,31 @@
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Учетная запись Stripe удалена
+      Успех! Аккаунт Stripe был удален
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ошибка! Ошибка, допущенная при удалении учетной записи Stripe
+      Ошибка! Произошла ошибка при удалении учетной записи Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Еще не представлено</span>
+    <span translate="yes">Еще не отправлено</span>
   </template>
   <template id="verified">
-    <span translate="yes">Регистрация принята</span>
+    <span translate="yes">Регистрация была принята</span>
   </template>
   <template id="verified">
-    <span translate="yes">Инвалид по Stripe</span>
+    <span translate="yes">Отключено Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Требуется дополнительная информация</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">До представления</span>
+    <span translate="yes">В ожидании представления</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">До представления</span>
+    <span translate="yes">В ожидании представления</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Отклонено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -74,19 +74,19 @@
     <span><span translate="yes">Отклонено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Требуется дополнительная информация</span>
+    <span translate="yes">Требуется больше информации</span>
   </template>
   <template id="listed">
-    <span translate="yes">Под контролем Stripe</span>
+    <span translate="yes">На рассмотрении Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Под контролем Stripe</span>
+    <span translate="yes">На рассмотрении Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Инвалид по Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отключено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Удалены</span>
+    <span translate="yes">Исключен</span>
   </template>
 </body>
 </html>

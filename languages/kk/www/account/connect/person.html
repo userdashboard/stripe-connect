@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Адам ${person.id}</title>
+  <title translate="yes">Тұлға ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Адам ${person.id}</h1>
-  <p translate="yes">Көрсетілмеген қосымша ақпарат ұсынылуы мүмкін.</p>
+  <h1 translate="yes">Тұлға ${person.id}</h1>
+  <p translate="yes">Қосымша ақпарат көрсетілмеген болуы мүмкін.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -24,11 +24,11 @@
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Қатынас</th>
+        <th translate="yes">Қарым-қатынас</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Атауы</th>
+        <th translate="yes">Аты</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

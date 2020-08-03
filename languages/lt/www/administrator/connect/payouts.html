@@ -12,7 +12,7 @@
   <h1 translate="yes">Išmokos</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Dar neįvyko jokių išmokų.</p>
+    <p translate="yes">Išmokos dar neįvyko.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -20,8 +20,8 @@
         <th>ID</th>
         <th translate="yes">Suma</th>
         <th translate="yes">Stripe sąskaita</th>
-        <th translate="yes">Būsena</th>
-        <th translate="yes">Aprašymas / kontrolė</th>
+        <th translate="yes">Statusas</th>
+        <th translate="yes">apibūdinimas</th>
         <th translate="yes">Sukurta</th>
       </tr>
     </thead>
@@ -50,10 +50,10 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Banko sąskaitos nerasta</span>
+    <span translate="yes">Nerasta banko sąskaitos</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Netinkama valiuta</span>
+    <span translate="yes">Neteisinga valiuta</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
@@ -62,10 +62,10 @@
     <span translate="yes">Netinkamas sąskaitos numeris</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Nepakankamos lėšos</span>
+    <span translate="yes">Nepakanka lėšų</span>
   </template>
   <template id="declined">
-    <span translate="yes">Banko atmestas pervedimas</span>
+    <span translate="yes">Bankas atmetė pervedimą</span>
   </template>
   <template id="debit_not_authorized">
     <span translate="yes">Nėra banko sąskaitos debeto</span>
@@ -74,10 +74,10 @@
     <span translate="yes">Nepavyko apdoroti</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Banko nuosavybė pakeista</span>
+    <span translate="yes">Banko nuosavybė pasikeitė</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Apribota banko sąskaita</span>
+    <span translate="yes">Banko sąskaita apribota</span>
   </template>
   <template id="account_frozen">
     <span translate="yes">Banko sąskaita užšaldyta</span>

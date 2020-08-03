@@ -28,20 +28,20 @@
 </head>
 <body>
   <h1 translate="yes">Informații de plată pentru ${stripeAccount.id}</h1>
-  <p translate="yes">Actualizați contul bancar care va primi plățile veniturilor.</p>
+  <p translate="yes">Actualizați contul bancar care va primi plata veniturilor.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">Țara băncii</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Selectaţiaţiaţiaţiaţiaţi
+          Selectațiațiațiațiațiați
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Tip cont</label>
+      <label translate="yes">Tip de cont</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,17 +52,17 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Moneda contului</label>
+          <label for="currency" translate="yes">Valuta contului</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Selectaţiaţiaţiaţiaţiaţi
+              Selectațiațiațiațiațiați
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Numele titularului contului</label>
+      <label for="account-holder-name" translate="yes">Numele titularului de cont</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -71,7 +71,7 @@
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Număr de tranzit</label>
+        <label for="transit_number" translate="yes">Numărul de tranzit</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -93,7 +93,7 @@
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -133,12 +133,12 @@
       <h2 translate="yes">Format alternativ</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Cod sortare</label>
+          <label for="sort_code" translate="yes">Cod ortografic</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">Număr cont</label>
+          <label for="account_number" translate="yes">Numar de cont</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -149,15 +149,15 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Cod de golire</label>
+        <label for="clearing_code" translate="yes">Cod de ștergere</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Cod ramură</label>
+        <label for="branch_code" translate="yes">Codul filialei</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -171,15 +171,15 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Cod bancar</label>
+        <label for="bank_code" translate="yes">cod bancar</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Cod ramură</label>
+        <label for="branch_code" translate="yes">Codul filialei</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Număr circuit</label>
+        <label for="routing_number" translate="yes">Număr de rutare</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Număr circuit</label>
+        <label for="routing_number" translate="yes">Număr de rutare</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -233,15 +233,15 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Cod bancar</label>
+        <label for="bank_code" translate="yes">cod bancar</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Cod ramură</label>
+        <label for="branch_code" translate="yes">Codul filialei</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,16 +259,16 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Număr circuit</label>
+        <label for="routing_number" translate="yes">Număr de rutare</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Număr cont</label>
+        <label for="account_number" translate="yes">Numar de cont</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Salvarea informațiilor de plată</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Salvați informațiile de plată</button>
     </div>
   </form>
   <template id="country-option">
@@ -288,12 +288,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Eroare! O eroare a avut loc în actualizarea informațiilor de plată
+      Eroare! A apărut o eroare la actualizarea informațiilor de plată
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Eroare! Țara bancară nevalidă sau lipsă
+      Eroare! Țara băncii nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-currency">
@@ -318,17 +318,17 @@
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Eroare! Număr de cod bancar nevalid sau lipsă
+      Eroare! Număr Cod bancar nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Eroare! Cod de sortare nevalid sau lipsă
+      Eroare! Cod de sortare nevalid sau lipsit
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Eroare! Număr de instituție nevalid sau lipsă
+      Eroare! Numărul instituției nu este valabil sau lipsește
     </div>
   </template>
   <template id="invalid-routing_number">
@@ -338,17 +338,17 @@
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Eroare! Număr de cod de compensare nevalid sau lipsă
+      Eroare! Numărul codului de compensare nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Eroare! Număr de cod de sucursală nevalid sau lipsă
+      Eroare! Număr de cod sucursal nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Eroare! Nume nevalid sau lipsă al titularului de cont
+      Eroare! Nume titular titular nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-iban">

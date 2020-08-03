@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">రిజిస్ట్రేషన్ సృష్టించు</title>
+  <title translate="yes">నమోదు సృష్టించండి</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">రిజిస్ట్రేషన్ సృష్టించు</h1>
-  <p translate="yes">పూర్తి చేయబడ్డ రిజిస్ట్రేషన్ Stripe Connect ద్వారా రెవిన్యూ చెల్లింపులను అందుకునేందుకు మిమ్మల్ని అనుమతిస్తుంది.</p>
+  <h1 translate="yes">నమోదు సృష్టించండి</h1>
+  <p translate="yes">పూర్తయిన రిజిస్ట్రేషన్ Stripe Connect ద్వారా ఆదాయ చెల్లింపులను స్వీకరించడానికి మిమ్మల్ని అనుమతిస్తుంది.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,15 +21,15 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">నివాస దేశం/ విలీనం</label>
+      <label for="country" translate="yes">నివాసం / విలీనం చేసిన దేశం</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          దేశం ఎంచుకోండి
+          దేశాన్ని ఎంచుకోండి
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">రిజిస్ట్రేషన్ ప్రారంభించండి</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">నమోదు ప్రారంభించండి</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      తప్పు! రిజిస్ట్రేషన్ సృష్టించడంలో దోషం ఏర్పడింది
+      లోపం! నమోదును సృష్టించడంలో లోపం సంభవించింది
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లని లేదా తప్పిపోయిన దేశం
+      లోపం! చెల్లని లేదా తప్పిపోయిన దేశం
     </div>
   </template>
 </body>

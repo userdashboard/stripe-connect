@@ -12,17 +12,17 @@
   <h1 translate="yes">Stripe ಖಾತೆಗಳು</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">ಇದುವರೆಗೂ ಯಾವುದೇ Stripe ಖಾತೆಗಳನ್ನು ರಚಿಸಿಲ್ಲ.</p>
+    <p translate="yes">ಯಾವುದೇ Stripe ಖಾತೆಗಳನ್ನು ಇನ್ನೂ ರಚಿಸಲಾಗಿಲ್ಲ.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">ಪ್ರಕಾರ</th>
+        <th translate="yes">ಮಾದರಿ</th>
         <th translate="yes">ಹೆಸರು</th>
         <th translate="yes">ಸ್ಥಿತಿ</th>
         <th translate="yes">ರಚಿಸಲಾಗಿದೆ</th>
-        <th translate="yes">Submitted by sy</th>
+        <th translate="yes">ಸಲ್ಲಿಸಲಾಗಿದೆ</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">ಇನ್ನೂ ಒದಗಿಸಿಲ್ಲ</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,22 +48,22 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">ಖಾತೆಗೆ ಹಣ ಸಂದಾಯವಾಗಿದೆ.</p>
+    <p translate="yes">X ಖಾತೆಗೆ ಹಣವನ್ನು ಪಾವತಿಸಲಾಗುತ್ತದೆ</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">ಹಣ ಪಡೆಯಲು ಬ್ಯಾಂಕಿಂಗ್ ವಿವರಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
+    <p translate="yes">ಹಣವನ್ನು ಸ್ವೀಕರಿಸಲು ಬ್ಯಾಂಕಿಂಗ್ ವಿವರಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಕೆಯಾಗಿಲ್ಲ.</p>
+    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">ಈ ಕುರಿತು ನೋಂದಣಿ ಯನ್ನು ಸಲ್ಲಿಸಲಾಗಿದೆ. ${account.dateFormatted}.</p>
+    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಸಲಾಗಿದೆ ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಿಲ್ಲ</span>
+    <span translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ</span>
   </template>
   <template id="verified">
-    <span translate="yes">ನೋಂದಣಿ ಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ</span>
+    <span translate="yes">ನೋಂದಣಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ</span>
   </template>
   <template id="verified">
     <span translate="yes">Stripe ನಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ</span>
@@ -72,7 +72,7 @@
     <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">ಸಲ್ಲಿಕೆ ಬಾಕಿ</span>
+    <span translate="yes">ಸಲ್ಲಿಕೆ ಬಾಕಿ ಇದೆ</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
@@ -93,10 +93,10 @@
     <span translate="yes">ಹೆಚ್ಚಿನ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe ಪರಿಶೀಲನೆ</span>
+    <span translate="yes">Stripe ಅವರಿಂದ ಪರಿಶೀಲನೆಯಲ್ಲಿದೆ</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe ಪರಿಶೀಲನೆ</span>
+    <span translate="yes">Stripe ಅವರಿಂದ ಪರಿಶೀಲನೆಯಲ್ಲಿದೆ</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Stripe ನಿಂದ ನಿಷ್ಕ್ರಿಯಗೊಳಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

@@ -2,21 +2,21 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Silmek ${stripeAccount.id}</title>
+  <title translate="yes">Sil ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Silmek ${stripeAccount.id}</h1>
+  <h1 translate="yes">Sil ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Adı</th>
-        <th translate="yes">Durum</th>
+        <th translate="yes">ad</th>
+        <th translate="yes">durum</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -31,7 +31,7 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Silmek</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sil</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -40,7 +40,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hata! Stripe hesabı silme hatası
+      Hata! Stripe hesabı silinirken bir hata oluştu
     </div>
   </template>
   <template id="not-submitted">
@@ -50,16 +50,16 @@
     <span translate="yes">Kayıt kabul edildi</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe tarafından devre dışı bırakılmış</span>
+    <span translate="yes">Stripe tarafından devre dışı bırakıldı</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Ek bilgi gerektirir</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Bekleyen gönderim</span>
+    <span translate="yes">Gönderilmeyi bekliyor</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Bekleyen gönderim</span>
+    <span translate="yes">Gönderilmeyi bekliyor</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -74,19 +74,19 @@
     <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Daha fazla bilgi gereklidir</span>
+    <span translate="yes">Daha fazla bilgi gerekli</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+    <span translate="yes">Stripe tarafından inceleniyor</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+    <span translate="yes">Stripe tarafından inceleniyor</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe tarafından devre dışı bırakılmış, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe tarafından devre dışı bırakıldı, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Silin</span>
+    <span translate="yes">silindi</span>
   </template>
 </body>
 </html>

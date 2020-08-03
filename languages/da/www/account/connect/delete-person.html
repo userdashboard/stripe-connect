@@ -2,18 +2,18 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Slette ${person.id}</title>
+  <title translate="yes">Slet ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Slette ${person.id}</h1>
-  <p translate="yes">Ejeroplysningerne slettes med det samme og kan ikke gendannes.</p>
+  <h1 translate="yes">Slet ${person.id}</h1>
+  <p translate="yes">Ejerinformationen vil blive slettet med det samme og kan ikke gendannes.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Slette</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Slet</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -22,7 +22,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fejl! Der opstod en fejl under sletning af virksomhedens ejer
+      Fejl! Der opstod en fejl ved sletning af virksomhedsejeren
     </div>
   </template>
 </body>

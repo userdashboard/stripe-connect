@@ -28,7 +28,7 @@
 </head>
 <body>
   <h1 translate="yes">Informações de pagamento para ${stripeAccount.id}</h1>
-  <p translate="yes">Atualize a conta bancária que receberá os seus pagamentos de receitas.</p>
+  <p translate="yes">Atualize a conta bancária que receberá seus pagamentos de receita.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
@@ -52,7 +52,7 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Moeda de conta</label>
+          <label for="currency" translate="yes">Moeda da conta</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
               Selecione
@@ -133,7 +133,7 @@
       <h2 translate="yes">Formato alternativo</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Código de classificação</label>
+          <label for="sort_code" translate="yes">Código ortográfico</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -153,7 +153,7 @@
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Código de filial</label>
+        <label for="branch_code" translate="yes">Código da Agência</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -175,7 +175,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Código de filial</label>
+        <label for="branch_code" translate="yes">Código da Agência</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Número de encaminhamento</label>
+        <label for="routing_number" translate="yes">Número de roteamento</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Número de encaminhamento</label>
+        <label for="routing_number" translate="yes">Número de roteamento</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -237,7 +237,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Código de filial</label>
+        <label for="branch_code" translate="yes">Código da Agência</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Número de encaminhamento</label>
+        <label for="routing_number" translate="yes">Número de roteamento</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Guardar informações de pagamento</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Salvar informações de pagamento</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Que sucesso! A informação de pagamento foi atualizada
+      Sucesso! As informações de pagamento foram atualizadas
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Um erro ocorreu na atualização das informações de pagamento
+      Erro! Ocorreu um erro ao atualizar as informações de pagamento
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Um erro! País inválido ou desaparecido do banco
+      Erro! País do banco inválido ou ausente
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Um erro! Moeda de conta inválida ou em falta
+      Erro! Moeda da conta inválida ou ausente
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Um erro! Tipo de conta inválida ou em falta
+      Erro! Tipo de conta inválido ou ausente
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Um erro! Número de conta inválido ou em falta
+      Erro! Número de conta inválido ou ausente
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Um erro! Número BSB inválido ou em falta
+      Erro! Número BSB inválido ou ausente
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Um erro! Número de Código Bancário inválido ou em falta
+      Erro! Número de código bancário inválido ou ausente
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Um erro! Código de classificação inválido ou em falta
+      Erro! Código de classificação inválido ou ausente
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Um erro! Número inválido ou desaparecido da Instituição
+      Erro! Número da instituição inválido ou ausente
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Um erro! Número de trânsito inválido ou em falta
+      Erro! Número de trânsito inválido ou ausente
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Um erro! Número de Código de Compensação inválido ou em falta
+      Erro! Número de código de compensação inválido ou ausente
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Um erro! Número de Código de Filial inválido ou em falta
+      Erro! Número de código de filial inválido ou ausente
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Um erro! Nome de titular de conta inválido ou em falta
+      Erro! Nome do titular da conta inválido ou ausente
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Um erro! Número IBAN inválido ou em falta
+      Erro! Número IBAN inválido ou ausente
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Um erro! Número de trânsito inválido ou em falta
+      Erro! Número de trânsito inválido ou ausente
     </div>
   </template>
 </body>

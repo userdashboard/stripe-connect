@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Izbrisati ${stripeAccount.id}</h1>
-  <p translate="yes">račun Stripe odmah će se izbrisati i ne može se vratiti.</p>
+  <p translate="yes">Račun Stripe bit će odmah izbrisan i nije ga moguće vratiti.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Izbrisati</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspjeh! Stripe račun je izbrisan
+      Uspjeh! Račun Stripe je izbrisan
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom brisanja računa Stripe
+      Greška! Došlo je do pogreške prilikom brisanja računa Stripe
     </div>
   </template>
 </body>

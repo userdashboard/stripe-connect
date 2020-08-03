@@ -11,7 +11,7 @@
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
     <h1 translate="yes">Vytvořit novou osobu</h1>
-    <p translate="yes">Představenstvo, vlastníci a zástupci musí být průběžně aktualizováni, jakmile se vaše informace změní.</p>
+    <p translate="yes">Představenstvo, vlastníci a zástupci musí být průběžně informováni o změnách svých informací.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Vztah ke společnosti</h2>
@@ -22,15 +22,15 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Název úlohy, role nebo vztahu</label>
+        <label for="relationship_title" translate="yes">Název práce, role nebo vztahu</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Procento vlastněné (pokud existuje)</label>
+        <label for="relationship_percent_ownership" translate="yes">Procentní podíl (pokud existuje)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizovat registraci</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizujte registraci</button>
       </div>
     </div>
   </form>
@@ -41,32 +41,32 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Chyba! Při vytváření registrace došlo k chybě.
+      Chyba! Při vytváření registrace došlo k chybě
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Váš Stripe účet nevyžaduje informace o skutečném vlastníkovi
+      Váš účet Stripe nevyžaduje užitečné informace o vlastníkovi
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Váš Stripe účet nevyžaduje informace o řediteli společnosti
+      Váš účet Stripe nevyžaduje informace o řediteli společnosti
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Zástupci společnosti musí být vedoucí pracovníci
+      Zástupci společnosti musí být jednateli
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Zástupce, ředitel nebo vlastník musí být vybráni
+      Musí být vybrán buď zástupce, ředitel nebo vlastník
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Chyba! Neplatné nebo chybějící procento vlastnictví (0, pokud žádné)
+      Chyba! Neplatné nebo chybějící procento vlastnictví (0, pokud neexistuje)
     </div>
   </template>
   <template id="invalid-relationship_title">

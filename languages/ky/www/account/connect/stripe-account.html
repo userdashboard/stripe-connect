@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">көрүнүш ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">көрүнүш ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th>ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Түрү</th>
+        <td id="business" translated="yes">Company registration</td>
+        <td id="individual" translated="yes">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">ысым</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">мамлекет</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">абал</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">Жөнөтүүчү:</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2" translate="yes">Азырынча тапшырыла элек</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">Катталуу маалыматы</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+      <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+    </p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">Компаниянын өкүлү</h2>
+    <p translate="yes">Эсептик жазуунун бузулушуна жол бербөө үчүн, көрсөтүлгөн адам компанияны таштап кетсе же мындан ары чыкпаса, жаңы өкүлчүлүк маалыматын тапшырыңыз.</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">ысым</th>
+          <th translate="yes">Керектүү маалымат</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+    </p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Башка пайдалуу ээлер жөнүндө маалымат</h2>
+    <p translate="yes">Сиз компаниянын олуттуу (25+) пайызына ээ болгон же компанияны каржылай турган же операцияларды жүргүзгөн адам үчүн документтерди беришиңиз керек.</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">ысым</th>
+          <th translate="yes">талап кылат</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Компаниянын директорлору жөнүндө маалымат</h2>
+    <p translate="yes">Компанияңыздын башкаруу кеңешинин жана / же регламенттин сакталышына жооптуу адамдардын аты-жөнүн көрсөтүңүз.</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">ысым</th>
+          <th translate="yes">талап кылат</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">Төлөм жөнүндө маалымат</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options">
+      <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+      <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
+    </p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">Тапшырууну тапшыруу</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Маалымат кошуу</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">Каражаттар эсепке төлөнөт ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">Каражаттарды алуу үчүн банк реквизиттери берилиши керек.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">Каттоо тапшырылган жок.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">Каттоо тапшырылды ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">Каттоо маалыматы берилген жок.</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">Каттоо маалыматы берилди.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Азырынча тапшырыла элек</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Каттоо кабыл алынды</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Кошумча маалымат талап кылынат</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Тапшыруу күтүлүүдө</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe тарабынан четке кагылган, караңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe тарабынан четке кагылган, караңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe тарабынан четке кагылган, караңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe тарабынан четке кагылган, караңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe тарабынан каралууда</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe тарабынан каралууда</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe тарабынан четке кагылган, караңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Кошумча маалымат талап кылынат</span>
+  </template>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Lähetä omistajat ${stripeAccount.id}</title>
+  <title translate="yes">Lähetä omistajat verkkotunnukselle ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,17 +11,17 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Lähetä omistajat ${stripeAccount.id}</h1>
-  <p translate="yes">Kun olet lisännyt kaikki muut omistajat, jos sellaisia on, lähetä ne tarkistettavaksi.</p>
+  <h1 translate="yes">Lähetä omistajat verkkotunnukselle ${stripeAccount.id}</h1>
+  <p translate="yes">Kun olet lisännyt kaikki muut omistajat, jos niitä on, lähetä ne tarkistettavaksi.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Tosiasialliset omistajat ja edunsaajat</h2>
+    <h2 translate="yes">Edunsaajat</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nimi</th>
-          <th translate="yes">Edellyttää</th>
+          <th translate="yes">vaatii</th>
         </tr>
       </thead>
     </table>
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Tietojen lisääminen</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Lisää tietoja</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Virhe! On omistajia vielä tarvitsevat tietoa.
+      Virhe! Jotkut omistajat vaativat edelleen tietoja.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Menestys! Yhtiön omistajat on toimitettu
+      Menestys! Yrityksen omistajat on lähetetty
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Virhe! Virhe lähetettäessä omistajia
+      Virhe! Omistajan lähettämisessä tapahtui virhe
     </div>
   </template>
 </body>

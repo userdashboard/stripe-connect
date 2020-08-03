@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">इसके लिए निदेशक प्रस्तुत करें ${stripeAccount.id}</title>
+  <title translate="yes">के लिए निदेशक प्रस्तुत करें ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,17 +11,17 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">इसके लिए निदेशक प्रस्तुत करें ${stripeAccount.id}</h1>
-  <p translate="yes">जब आपने कंपनी के निदेशकों को जोड़ना समाप्त कर दिया है, यदि कोई हो, तो उन्हें समीक्षा के लिए सबमिट करें।</p>
+  <h1 translate="yes">के लिए निदेशक प्रस्तुत करें ${stripeAccount.id}</h1>
+  <p translate="yes">जब आप कंपनी के निदेशकों को जोड़ना समाप्त कर लें, यदि कोई हो, तो उन्हें समीक्षा के लिए प्रस्तुत करें।</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">कंपनी निदेशक</h2>
+    <h2 translate="yes">कंपनी के निदेशक</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">नाम</th>
-          <th translate="yes">आवश्यक</th>
+          <th translate="yes">आवश्यक है</th>
         </tr>
       </thead>
     </table>
@@ -45,7 +45,7 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      त्रुटि! वहां निर्देशकों अभी भी जानकारी की आवश्यकता है
+      त्रुटि! अभी भी निर्देशकों को जानकारी की आवश्यकता है
     </div>
   </template>
   <template id="success">
@@ -55,7 +55,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! निदेशकों को सबमिट करने में हुई गड़बड़ी
+      त्रुटि! निदेशकों को सबमिट करने में त्रुटि हुई
     </div>
   </template>
 </body>

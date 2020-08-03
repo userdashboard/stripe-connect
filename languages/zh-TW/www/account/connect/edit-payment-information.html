@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">付款資訊 ${stripeAccount.id}</title>
+  <title translate="yes">的付款信息 ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,12 +27,12 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">付款資訊 ${stripeAccount.id}</h1>
-  <p translate="yes">更新將收到收入支出的銀行帳戶。</p>
+  <h1 translate="yes">的付款信息 ${stripeAccount.id}</h1>
+  <p translate="yes">更新將接收您的收入支出的銀行帳戶。</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">銀行國家</label>
+      <label for="country" translate="yes">銀行所在國家</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
           選擇
@@ -41,7 +41,7 @@
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">帳號類型</label>
+      <label translate="yes">帳戶類型</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,7 +52,7 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">帳號貨幣</label>
+          <label for="currency" translate="yes">賬戶幣種</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
               選擇
@@ -62,16 +62,16 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">帳號持有人姓名</label>
+      <label for="account-holder-name" translate="yes">賬戶持有人名稱</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">Bsb 號碼</label>
+        <label for="bsb_number" translate="yes">BSB編號</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">過境號碼</label>
+        <label for="transit_number" translate="yes">公交號碼</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -93,7 +93,7 @@
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -133,12 +133,12 @@
       <h2 translate="yes">替代格式</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">對代碼進行排序</label>
+          <label for="sort_code" translate="yes">拼寫代碼</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">帳號</label>
+          <label for="account_number" translate="yes">賬號</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -149,15 +149,15 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">清除程式碼</label>
+        <label for="clearing_code" translate="yes">清算碼</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">分支代碼</label>
+        <label for="branch_code" translate="yes">分行代碼</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -175,11 +175,11 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">分支代碼</label>
+        <label for="branch_code" translate="yes">分行代碼</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">路由編號</label>
+        <label for="routing_number" translate="yes">路由號碼</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">路由編號</label>
+        <label for="routing_number" translate="yes">路由號碼</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -237,11 +237,11 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">分支代碼</label>
+        <label for="branch_code" translate="yes">分行代碼</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,16 +259,16 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">路由編號</label>
+        <label for="routing_number" translate="yes">路由號碼</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">帳號</label>
+        <label for="account_number" translate="yes">賬號</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">儲存付款資訊</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">保存付款信息</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      成功!付款資訊已更新
+      成功！付款信息已更新
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      錯誤!更新付款資訊時發生錯誤
+      錯誤！更新付款信息時發生錯誤
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      錯誤!銀行/地區無效或缺失
+      錯誤！銀行的國家無效或缺失
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      錯誤!帳號貨幣不合法的錯誤
+      錯誤！帳戶幣種無效或丟失
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      錯誤!帳號類型無效或遺失
+      錯誤！帳戶類型無效或丟失
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      錯誤!帳號不合法或遺失
+      錯誤！帳號無效或缺失
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      錯誤!不合法或遺失的 BSB 編號
+      錯誤！無效或缺少的BSB號
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      錯誤!銀行代碼代碼無效或缺失
+      錯誤！銀行代碼號無效或缺失
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      錯誤!不合法或缺少排序碼
+      錯誤！無效或缺少排序代碼
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      錯誤!不合法或遺失的機構代碼
+      錯誤！機構編號無效或缺失
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      錯誤!不合法或遺失的過境號碼
+      錯誤！公交號碼無效或丟失
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      錯誤!不合法或遺失的簽碼號
+      錯誤！無效或缺少清除代碼號
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      錯誤!不合法或缺少的分支代碼
+      錯誤！無效或缺少分行代碼號
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      錯誤!帳號持有人姓名無效或遺失
+      錯誤！無效或缺少帳戶持有人姓名
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      錯誤!不合法或缺少 IBAN 號碼
+      錯誤！無效或缺少IBAN編號
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      錯誤!不合法或遺失的過境號碼
+      錯誤！公交號碼無效或丟失
     </div>
   </template>
 </body>

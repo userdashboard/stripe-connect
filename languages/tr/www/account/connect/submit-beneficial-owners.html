@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Sahiplerini gönder ${stripeAccount.id}</title>
+  <title translate="yes">İçin sahiplerini gönder ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Sahiplerini gönder ${stripeAccount.id}</h1>
-  <p translate="yes">Varsa diğer tüm sahiplerini eklemeyi bitirdiğinizde, bunları incelenmek üzere gönderin.</p>
+  <h1 translate="yes">İçin sahiplerini gönder ${stripeAccount.id}</h1>
+  <p translate="yes">Varsa, diğer tüm sahiplerini eklemeyi bitirdiğinizde bunları incelemeye gönderin.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Faydalı sahipleri</h2>
+    <h2 translate="yes">İntifa hakkı sahibi</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Adı</th>
-          <th translate="yes">Gerektirir</th>
+          <th translate="yes">ad</th>
+          <th translate="yes">gerektirir</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sahiplerini gönder</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sahipleri gönder</button>
     </div>
   </form>
   <template id="person-row">
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Bilgi ekleme</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Bilgi ekle</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Hata! Hala bilgi gerektiren sahipleri vardır.
+      Hata! Hala bilgi isteyen sahipler var.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Başarı! Şirket sahipleri teslim edildi
+      Başarı! Şirketin sahipleri gönderildi
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hata! Sahiplerine gönderme hatası oluştu
+      Hata! Sahipler gönderilirken bir hata oluştu
     </div>
   </template>
 </body>

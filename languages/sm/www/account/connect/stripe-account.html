@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vaaiga ${stripeAccount.id}</title>
+  <title translate="yes">Vaʻai ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Vaaiga ${stripeAccount.id}</h1>
+  <h1 translate="yes">Vaʻai ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -28,7 +28,7 @@
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Atunuu</th>
+        <th translate="yes">Atunuʻu</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
@@ -36,14 +36,14 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Auina atu</th>
+        <th translate="yes">Faasisina</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">E leʻi auina mai</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Faamatalaga o le lesitalaga</h2>
+    <h2 translate="yes">Faamauina faamatalaga</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Sui o le kamupani</h2>
-    <p translate="yes">Ina ia aloese mai faalavelave o le faitotoa e auina atu ai faamatalaga fou o sui pe afai e tuua e le tagata ua patino pe ua le toe suitulaga i le kamupani.</p>
+    <h2 translate="yes">Kamupani sui</h2>
+    <p translate="yes">Ina ia aloese mai tala faʻasoasoa lafoa faʻamatalaga sui fou pe a fai o le tagata faapitoa tuumuli pe le toe avea ma sui le kamupani.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Igoa</th>
-          <th translate="yes">Faamatalaga manaomia</th>
+          <th translate="yes">Faʻamatalaga manaʻomia</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">O isi faamatalaga faamanuiaina</h2>
-    <p translate="yes">E tatau ona e tuuina atu faamaumauga mo soo se tasi lava taliaina se vaega tele (25 +) pasene o le kamupani pe vaaia le kamupani, tupe po o le faagaoioiga.</p>
+    <h2 translate="yes">Isi faʻamanuiaga e ona faʻamatalaga</h2>
+    <p translate="yes">E tatau ona e aumaia ni faʻamatalaga mo se isi tagata e i ai se tele (25+) pasene o le kamupani pe e te vaʻaia le kamupani, tupe poʻo gaioiga.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Igoa</th>
-          <th translate="yes">E manaomia ai</th>
+          <th translate="yes">Manaomia</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Faamatalaga o faatonu o vaega</h2>
-    <p translate="yes">E tatau ona e tuuina atu ni igoa atoa o le laupapa o le taitaiina o lau kamupani ma/po o tagata e nafa ma le faatumauina o atonu e usitaia.</p>
+    <h2 translate="yes">Faʻatonu kamupani faʻamatalaga</h2>
+    <p translate="yes">E tatau ona e aumaia igoa atoa o lau kamupani pule faatonu ma / poo tagata e nafa ma le tausisia o tulafono faatonutonu.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Igoa</th>
-          <th translate="yes">E manaomia ai</th>
+          <th translate="yes">Manaomia</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Faamatalaga o tupe totogi</h2>
+    <h2 translate="yes">Totogi faamatalaga</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Auina atu le lesitala</h2>
+    <h2 translate="yes">Tuuina le lesitala</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,67 +120,67 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Faaopoopo ia faamatalaga</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Faaopopo faamatalaga</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Ua totogi tupe e teugatupe ai ${bank_account.bank_name}.</p>
+    <p translate="yes">E totogi tupe i teugatupe ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">E tatau ona saunia ia auiliiliga o teugatupe e maua ai tupe.</p>
+    <p translate="yes">Faletupe faamatalaga e tatau ona saunia e maua ai tupe.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">E le i auina atu le lesitala.</p>
+    <p translate="yes">E leʻi aumaia le faʻamaumauga.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Na auina atu le lesitala i le ${account.dateFormatted}.</p>
+    <p translate="yes">O le resitalaina na lafoina i luga ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">E lei tuuina atu i ai faamatalaga o le lesitalaga.</p>
+    <p translate="yes">E leʻi aumaia ni faʻamatalaga.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Ua saunia faamatalaga o le lesitalaga.</p>
+    <p translate="yes">O le faamauina faamatalaga ua uma ona saunia.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">E lei auina atu</span>
+    <span translate="yes">E leʻi auina mai</span>
   </template>
   <template id="verified">
-    <span translate="yes">Ua taliaina le lesitala</span>
+    <span translate="yes">Ua taliaina le resitalaina</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Manaomia ni faamatalaga faaopoopo</span>
+    <span translate="yes">Manaʻomia nisi faʻamatalaga</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Auina atu o loo faatalitali</span>
+    <span translate="yes">O loʻo faʻatalosagaina le faʻatonuga</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">I lalo o le iloiloga a Stripe</span>
+    <span translate="yes">Ua uma ona iloiloina e Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">I lalo o le iloiloga a Stripe</span>
+    <span translate="yes">Ua uma ona iloiloina e Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Manaomia ni faamatalaga faaopoopo</span>
+    <span translate="yes">Manaʻomia nisi faʻamatalaga</span>
   </template>
 </body>
 </html>

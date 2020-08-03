@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Personau am ${stripeAccount.id}</title>
+  <title translate="yes">Personau ar gyfer ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -12,7 +12,7 @@
   <h1 translate="yes">Personau</h1>
   <div id="representative-container">
     <h2 translate="yes">Cynrychiolydd y cwmni</h2>
-    <p translate="yes">Os yw statws y person enwebedig yn newid rhaid i chi greu cynrychiolydd newydd.</p>
+    <p translate="yes">Os yw statws yr unigolyn enwebedig yn newid rhaid i chi greu cynrychiolydd newydd.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Creu cynrychiolydd newydd</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -26,7 +26,7 @@
   </div>
   <div id="owners-container">
     <h2 translate="yes">Perchnogion buddiol</h2>
-    <p translate="yes">Mae'n rhaid i chi ddarparu dogfennau i unrhyw un arall sy'n berchen ar (25 +) y cant o'r cwmni neu sy'n gyfrifol am y cwmni, ei gyllid neu ei weithrediadau.</p>
+    <p translate="yes">Rhaid i chi ddarparu dogfennaeth i unrhyw un arall sy'n berchen ar ganran sylweddol (25+) o'r cwmni neu sy'n gyfrifol am y cwmni, ei gyllid neu ei weithrediadau.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Ychwanegu perchennog</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -40,7 +40,7 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">Cyfarwyddwyr cwmni</h2>
-    <p translate="yes">Rhaid i chi ddarparu dogfennaeth ar gyfer Bwrdd y Cyfarwyddwyr.</p>
+    <p translate="yes">Rhaid i chi ddarparu dogfennaeth ar gyfer y bwrdd cyfarwyddwyr.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Ychwanegu perchennog</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>

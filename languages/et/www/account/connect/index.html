@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe Connect kontod</title>
+  <title translate="yes">Stripe Connect kontosid</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,29 +10,29 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe Connect kontod</h1>
-  <p><span translate="yes">Hakka hankijaks, kinnitades oma isiklikku isikut ja ettevõtte teavet</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe Connect kontosid</h1>
+  <p><span translate="yes">Saage müüjaks, kontrollides oma isikut ja ettevõtte teavet</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Individuaalsed nõuded</h2>
         <ol>
-          <li translate="yes">Kinnitatud isikuandmed</li>
-          <li translate="yes">Toetatud riigi elanik</li>
+          <li translate="yes">Kinnitatud isiklik teave</li>
+          <li translate="yes">Toetatava riigi elanik</li>
           <li translate="yes">Pangakonto toetatud riigis</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Alusta individuaalset registreerimist</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Alustage individuaalset registreerimist</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Ärinõuded</h2>
         <ol>
-          <li translate="yes">Kinnitatud isikuandmed</li>
+          <li translate="yes">Kinnitatud isiklik teave</li>
           <li translate="yes">Toetatud riigis registreeritud ettevõte</li>
           <li translate="yes">Pangakonto toetatud riigis</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Ettevõtte registreerimise alustamine</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Alustage ettevõtte registreerimist</a>
       </div>
     </div>
   </div>
@@ -79,56 +79,56 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Ei ole veel esitatud</span>
+    <span translate="yes">Pole veel esitatud</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registreerimine on aktsepteeritud</span>
+    <span translate="yes">Registreerimine on vastu võetud</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe keelanud</span>
+    <span translate="yes">Keelatud Stripe poolt</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Nõuab uuesti esitamist koos lisateabega</span>
+    <span translate="yes">Nõuab uuesti lisateabe esitamist</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">Esitamise ootel</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Puuetega Stripe, vt levinumad põhjused</span>
+      <span translate="yes">Keelatud Stripe poolt, vaadake tavalisemaid põhjuseid</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Puuetega Stripe, vt levinumad põhjused</span>
+      <span translate="yes">Keelatud Stripe poolt, vaadake tavalisemaid põhjuseid</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Puuetega Stripe, vt levinumad põhjused</span>
+      <span translate="yes">Keelatud Stripe poolt, vaadake tavalisemaid põhjuseid</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Puuetega Stripe, vt levinumad põhjused</span>
+      <span translate="yes">Keelatud Stripe poolt, vaadake tavalisemaid põhjuseid</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Rohkem teavet on vaja</span>
+    <span translate="yes">Vaja on lisateavet</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe poolt läbi vaadatud</span>
+    <span translate="yes">Ülevaataja Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe poolt läbi vaadatud</span>
+    <span translate="yes">Ülevaataja Stripe</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Puuetega Stripe, vt levinumad põhjused</span>
+      <span translate="yes">Keelatud Stripe poolt, vaadake tavalisemaid põhjuseid</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>

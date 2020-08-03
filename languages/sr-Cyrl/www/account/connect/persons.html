@@ -2,18 +2,18 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Лица за ${stripeAccount.id}</title>
+  <title translate="yes">Особе за ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Особа</h1>
+  <h1 translate="yes">Особе</h1>
   <div id="representative-container">
     <h2 translate="yes">Представник компаније</h2>
-    <p translate="yes">Ако се статус номинованих особа промени, морате креирати новог представника.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Креирај новог представника</a></p>
+    <p translate="yes">Ако се статус номиноване особе промени, морате креирати новог представника.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Креирајте новог представника</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -25,8 +25,8 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Корисни власници</h2>
-    <p translate="yes">Морате обезбедити документацију за све друге који имају значајну (25 +) проценат компаније или задужен за предузеће, финансије или операције.</p>
+    <h2 translate="yes">Погодни власници</h2>
+    <p translate="yes">Морате доставити документацију за било кога другог који поседује знатан (25+) процената компаније или је задужен за компанију, њене финансије или пословање.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Додај власника</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -39,8 +39,8 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Директори компанија</h2>
-    <p translate="yes">Морате обезбедити документацију за Управни одбор.</p>
+    <h2 translate="yes">Директори предузећа</h2>
+    <p translate="yes">Морате да доставите документацију за управни одбор.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Додај власника</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Додавање информација</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Додајте информације</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

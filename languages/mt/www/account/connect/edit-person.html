@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
-    <title translate="yes">Teditja ${person.id}</title>
+    <title translate="yes">Editja ${person.id}</title>
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -18,7 +18,7 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Editja l-persuna</h1>
+    <h1 translate="yes">Edit persuna</h1>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Relazzjoni mal-kumpanija</h2>
@@ -29,11 +29,11 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Titlu tax-xogħol, tar-rwol jew tar-relazzjoni</label>
+        <label for="relationship_title" translate="yes">Xogħol, rwol jew relazzjoni</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Perċentwali proprjetà (jekk ikun hemm)</label>
+        <label for="relationship_percent_ownership" translate="yes">Perċentwali ta 'proprjetà (jekk hemm)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <h2 translate="yes">Informazzjoni personali</h2>
@@ -42,7 +42,7 @@
           <div class="pure-u-12-24">
             <div id="first_name-container" class="pure-control-group">
               <a id="first_name-anchor"></a>
-              <label for="first_name" translate="yes">L-ewwel isem</label>
+              <label for="first_name" translate="yes">Isem</label>
              <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
             </div>
           </div>
@@ -50,7 +50,7 @@
           <div class="pure-u-11-24">
             <div id="last_name-container" class="pure-control-group">
               <a id="last_name-anchor"></a>
-              <label for="last_name" translate="yes">Isem</label>
+              <label for="last_name" translate="yes">Kunjom</label>
               <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">Indirizz elettroniku</label>
+              <label for="email" translate="yes">Indirizz tal-Email</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -67,19 +67,19 @@
           <div class="pure-u-11-24">
             <div id="phone-container" class="pure-control-group">
               <a id="phone-anchor"></a>
-              <label for="phone" translate="yes">Telefown</label>
+              <label for="phone" translate="yes">Telefon</label>
               <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100">
             </div>
           </div>
         </div>
       </div>
       <div id="kana-information-container">
-        <h2 translate="yes">Kana Informazzjoni personali</h2>
+        <h2 translate="yes">Kana Informazzjoni Personali</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kana-container" class="pure-control-group">
               <a id="first_name_kana-anchor"></a>
-              <label for="first_name_kana" translate="yes">L-ewwel isem</label>
+              <label for="first_name_kana" translate="yes">Isem</label>
               <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
             </div>
           </div>
@@ -87,19 +87,19 @@
           <div class="pure-u-11-24">
             <div id="last_name_kana-container" class="pure-control-group">
               <a id="last_name_kana-anchor"></a>
-              <label for="last_name_kana" translate="yes">Isem</label>
+              <label for="last_name_kana" translate="yes">Kunjom</label>
               <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
             </div>
           </div>
         </div>
       </div>
       <div id="kanji-information-container">
-        <h2 translate="yes">Kanji Informazzjoni personali</h2>
+        <h2 translate="yes">Informazzjoni Personali Kanji</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kanji-container" class="pure-control-group">
               <a id="first_name_kanji-anchor"></a>
-              <label for="first_name_kanji" translate="yes">L-ewwel isem</label>
+              <label for="first_name_kanji" translate="yes">Isem</label>
               <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -107,7 +107,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kanji-container" class="pure-control-group">
               <a id="last_name_kanji-anchor"></a>
-              <label for="last_name_kanji" translate="yes">Isem</label>
+              <label for="last_name_kanji" translate="yes">Kunjom</label>
               <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -117,44 +117,44 @@
         <a id="dob_day-anchor"></a>
         <a id="dob_month-anchor"></a>
         <a id="dob_year-anchor"></a>
-        <label for="dob_day" translate="yes">id-data tat-twelid</label>
+        <label for="dob_day" translate="yes">Data tat-twelid</label>
         <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
         <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
         <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
       </div>
       <div id="gender-container" class="pure-control-group">
         <a id="gender-anchor"></a>
-        <label for="female" translate="yes">Sess</label>
+        <label for="female" translate="yes">Ġeneru</label>
         <div class="pure-checkbox">
          <label><input id="female" name="gender" type="radio" value="female"> Female</label>
          <label><input id="male" name="gender" type="radio" value="male"> Male</label>
         </div>
       </div>
       <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4" translate="yes">SSN aħħar 4 ċifri</label>
+        <label for="ssn_last_4" translate="yes">SSN aħħar 4 figuri</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
         <h2 translate="yes">Identifikazzjoni personali</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Numru tal-passaport jew tal-ID</label>
+        <label for="id_number" translate="yes">Passaport jew numru tal-ID</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Skennjar/ritratt ta' quddiem</label>
+        <label for="verification_document_front" translate="yes">Skennjar / ritratt quddiem</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Skennjatura/ritratt ta' wara</label>
+        <label for="verification_document_back" translate="yes">Skennja / ritratt lura</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
         <h2 translate="yes">Prova tal-indirizz</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Skennjar/ritratt ta' quddiem</label>
+        <label for="verification_additional_document_front" translate="yes">Skennjar / ritratt quddiem</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Skennjatura/ritratt ta' wara</label>
+        <label for="verification_additional_document_back" translate="yes">Skennja / ritratt lura</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -200,7 +200,7 @@
               <label for="address_country" translate="yes">Pajjiż</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
-                  Agħżel il-pajjiż
+                  Agħżel pajjiż
                 </option>
               </select>
             </div>
@@ -213,7 +213,7 @@
         </div>
       </div>
       <div id="kana-address-container">
-        <h2 translate="yes">Indirizz personali kana</h2>
+        <h2 translate="yes">Indirizz personali ta 'Kana</h2>
         <div id="address_kana_line1-container" class="pure-control-group">
           <a id="address_kana_line1-anchor"></a>
           <label for="address_kana_line1" translate="yes">Linja 1</label>
@@ -231,17 +231,17 @@
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Stat membru</label>
+          <label for="address_kana_state" translate="yes">Stat</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
           <a id="address_kana_postal_code-anchor"></a>
-          <label for="address_kana_postal_code" translate="yes">Kodiċi postali</label>
+          <label for="address_kana_postal_code" translate="yes">kodiċi postali</label>
           <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">Indirizz personali ta' Kanji</h2>
+        <h2 translate="yes">Indirizz personali ta 'Kanji</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
           <label for="address_kanji_line1" translate="yes">Linja 1</label>
@@ -259,12 +259,12 @@
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Stat membru</label>
+          <label for="address_kanji_state" translate="yes">Stat</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
           <a id="address_kanji_postal_code-anchor"></a>
-          <label for="address_kanji_postal_code" translate="yes">Kodiċi postali</label>
+          <label for="address_kanji_postal_code" translate="yes">kodiċi postali</label>
           <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
         </div>
       </div>
@@ -275,7 +275,7 @@
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Żball! Sar żball fis-sottomissjoni tal-formola
+      Żball! Sar żball meta tissottometti l-formola
     </div>
   </template>
   <template id="country-option">
@@ -290,17 +290,17 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Żball! Sar żball waqt l-użu tal-informazzjoni
+      Żball! Sar żball fl-aġġornament tal-informazzjoni
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Żball! Sar żball fit-tlugħ ta' ritratt jew skennjatura
+      Żball! Sar żball meta tella 'ritratt jew skanjar
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Żball! Numru tal-ID personali invalidu jew nieqes
+      Żball! Numru tal-ID personali mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-gender">
@@ -310,7 +310,7 @@
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Żball! L-aħħar 4 ċifri invalidi jew nieqsa tan-Numru tas-Sigurtà Soċjali
+      Żball! L-aħħar 4 numri mhux validi jew neqsin tan-Numru tas-Sigurtà Soċjali
     </div>
   </template>
   <template id="invalid-dob_day">
@@ -330,32 +330,32 @@
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Żball! Isem invalidu jew nieqes
+      Żball! Kunjom invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Żball! Isem Kana invalidu jew nieqes
+      Żball! L-isem Kana mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Żball! Isem Kanjifirst invalidu jew nieqes
+      Żball! Kanjifirst isem invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Żball! Isem l-aħħar invalidu jew nieqes
+      Żball! Kunjom mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Żball! Isem l-aħħar Kana invalidu jew nieqes
+      Żball! Kunjom Kana mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Żball! Isem l-aħħar invalidu jew nieqes
+      Żball! Kunjom mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-email">
@@ -365,42 +365,42 @@
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Żball! Numru tat-telefown invalidu jew nieqes
+      Żball! Numru tat-telefon invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Żball! Sjieda fil-mija invalida jew nieqsa
+      Żball! Propjetà mhux valida fil-mija jew nieqsa
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Żball! Skennjar jew ritratt ta' quddiem tad-dokument invalidu jew nieqes
+      Żball! Dokument ta 'skanjar jew ritratt ta' quddiem invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Żball! Skennjar jew ritratt ta' wara tad-dokument invalidu jew nieqes
+      Żball! Dokument ta 'skanjar jew ritratt mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Żball! Skan jew ritratt ta' quddiem tad-dokument addizzjonali invalidu jew nieqes
+      Żball! Dokument addizzjonali mhux validu jew nieqes ta ’skenn ta’ quddiem jew ritratt
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Żball! Skennjar jew ritratt ta' dokument addizzjonali invalidu jew nieqes
+      Żball! Dokument addizzjonali mhux validu jew nieqes skennjat lura jew ritratt
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Żball! Pajjiż tal-indirizz personali invalidu jew nieqes
+      Żball! Pajjiż ta 'l-indirizz personali invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Żball! Belt tal-indirizz personali invalida jew nieqsa
+      Żball! Indirizz tal-belt invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-address_state">
@@ -410,62 +410,62 @@
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Żball! Linja tal-indirizz personali invalida jew nieqsa 1
+      Żball! Linja 1 tal-indirizz personali nieqsa jew nieqsa
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Żball! Kodiċi postali personali invalidu jew nieqes
+      Żball! Kodiċi postali personali nieqes jew nieqes
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Żball! Belt tal-indirizz personali ta'Kana invalida jew nieqsa
+      Żball! L-indirizz personali Kana invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Żball! Stat ta' indirizz personali ta' Kana invalidu jew nieqes
+      Żball! L-istat tal-indirizz personali Kana mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Żball! Belt tal-indirizz personali ta' Kana invalida jew nieqsa
+      Żball! L-indirizz personali tal-Kana invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Żball! Linja 1 tal-indirizz personali invalida jew nieqsa tal-Kana
+      Żball! Linja 1 tal-indirizz personali Kana invalida jew nieqsa
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Żball! Kodiċi postali tal-indirizz personali ta' Kana invalidu jew nieqes
+      Żball! Kodiċi postali tal-indirizz personali Kana invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Żball! Belt tal-indirizz personali ta' Kanji invalida jew nieqsa
+      Żball! L-indirizz personali Kanji invalidu jew nieqes
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Żball! Stat ta' indirizz personali invalidu jew nieqes ta' Kanji
+      Żball! L-istat tal-indirizz personali Kanji mhux validu jew nieqes
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Żball! Belt tal-indirizz personali ta' Kanji invalida jew nieqsa
+      Żball! Belt tal-indirizz personali Kanji invalida jew nieqsa
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Żball! Linja ta' indirizz personali 1 invalida jew nieqsa kanji
+      Żball! Linja 1 tal-indirizz personali Kanji invalida jew nieqsa
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Żball! Kodiċi postali ta' indirizz personali invalidu jew nieqes ta' Kanji
+      Żball! Kodiċi postali tal-indirizz personali Kanji invalidu jew nieqes
     </div>
   </template>
 </body>

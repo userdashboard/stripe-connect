@@ -28,14 +28,14 @@
 </head>
 <body>
   <h1 translate="yes">Maksājuma informācija par ${stripeAccount.id}</h1>
-  <p translate="yes">Atjauniniet bankas kontu, kas saņems jūsu ieņēmumu izmaksas.</p>
+  <p translate="yes">Atjauniniet bankas kontu, kas saņems ieņēmumus.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">Bankas valsts</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Atlasiet
+          Izvēlieties
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
@@ -55,7 +55,7 @@
           <label for="currency" translate="yes">Konta valūta</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Atlasiet
+              Izvēlieties
             </option>
           </select>
         </div>
@@ -133,7 +133,7 @@
       <h2 translate="yes">Alternatīvs formāts</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Kārtošanas kods</label>
+          <label for="sort_code" translate="yes">Pareizrakstības kods</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Reģistrācijas numurs</label>
+        <label for="routing_number" translate="yes">Maršruta numurs</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Reģistrācijas numurs</label>
+        <label for="routing_number" translate="yes">Maršruta numurs</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Reģistrācijas numurs</label>
+        <label for="routing_number" translate="yes">Maršruta numurs</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Saglabāt maksājuma informāciju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Saglabājiet maksājuma informāciju</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,17 +283,17 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Panākumus! Maksājuma informācija ir atjaunināta
+      Panākumi! Maksājuma informācija ir atjaunināta
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kļūda! Radās kļūda , atjauninot maksājuma informāciju
+      Kļūda! Atjauninot maksājuma informāciju, radās kļūda
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Kļūda! Nederīga bankas valsts vai tās trūkst
+      Kļūda! Nederīga vai trūkstoša bankas valsts
     </div>
   </template>
   <template id="invalid-currency">
@@ -308,57 +308,57 @@
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs vai nav norādīts konta numurs
+      Kļūda! Nederīgs konta numurs vai tā nav
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs BSB numurs vai tā trūkst
+      Kļūda! Nederīgs vai trūkstošs BSB numurs
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs bankas koda numurs vai tā trūkst
+      Kļūda! Nederīgs bankas kods vai tā nav
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs kārtošanas kods vai tā trūkst
+      Kļūda! Nederīgs vai trūkst kārtošanas koda
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs iestādes numurs vai tā trūkst
+      Kļūda! Iestādes numurs nav derīgs vai tā nav
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs tranzīta numurs vai tā trūkst
+      Kļūda! Nederīgs vai trūkstošs tranzīta numurs
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs klīringa koda numurs vai tā trūkst
+      Kļūda! Nederīgs vai trūkstošs klīringa koda numurs
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs vai tā trūkst filiāles koda numurs
+      Kļūda! Nederīgs vai trūkstošs filiāles koda numurs
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs konta turētāja nosaukums vai tā trūkst
+      Kļūda! Nederīgs vai trūkstošs konta īpašnieka vārds
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs IBAN numurs vai tā trūkst
+      Kļūda! Nederīgs IBAN numurs vai tā nav
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Kļūda! Nederīgs tranzīta numurs vai tā trūkst
+      Kļūda! Nederīgs vai trūkstošs tranzīta numurs
     </div>
   </template>
 </body>

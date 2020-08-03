@@ -2,34 +2,34 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Fatu le lesitala</title>
+  <title translate="yes">Fatu faamauina</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Fatu le lesitala</h1>
-  <p translate="yes">O se lesitalaga ua faamaeaina ua mafai ai ona e maua payouts tupe e ala atu i Stripe Connect.</p>
+  <h1 translate="yes">Fatu faamauina</h1>
+  <p translate="yes">A maeʻa le resitalaina faʻatagaina oe e maua tupe maua tupe totogi e ala Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Ituaiga faitotoa</label>
+      <label for="individual" translate="yes">Teugatupe ituaiga</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Atunuu na nofo ai/incorporation</label>
+      <label for="country" translate="yes">Atunuu aumau / faʻatasia</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Filifili le atunuu
+          Filifili atunuu
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Amata le lesitalaga</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Amata lesitala</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Mea sese! Na i ai se mea sese i le fatuina o le lesitalaga
+      Sese! Na iai se mea sese na tupu ile faia ole lesitala
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Mea sese! Atunuu e le taulia pe misi
+      Sese! Leai poʻo se atunuʻu ua leiloa
     </div>
   </template>
 </body>

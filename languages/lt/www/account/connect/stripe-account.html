@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Rodyti ${stripeAccount.id}</title>
+  <title translate="yes">Vaizdas ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Rodyti ${stripeAccount.id}</h1>
+  <h1 translate="yes">Vaizdas ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -22,23 +22,23 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">vardas, pavadinimas</th>
+        <th translate="yes">vardas</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Šalies</th>
+        <th translate="yes">Šalis</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Būsena</th>
+        <th translate="yes">Statusas</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
         <th translate="yes">Pateikta</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Dar nepateikta</td>
       </tr>
     </tbody>
   </table>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Įmonės atstovas</h2>
-    <p translate="yes">Norėdami išvengti paskyros sutrikdymo, pateikite naują atstovinę informaciją, jei nurodytas asmuo išvyksta iš įmonės arba jos nebereiškia.</p>
+    <p translate="yes">Jei nenorite sutrukdyti sąskaitos, pateikite naują reprezentacinę informaciją, jei nurodytas asmuo išeina iš įmonės arba daugiau jos neatstovauja.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
-          <th translate="yes">Reikalinga informacija</th>
+          <th translate="yes">vardas</th>
+          <th translate="yes">Būtina informacija</th>
         </tr>
       </thead>
     </table>
@@ -67,13 +67,13 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Kita informacija apie tikruosius savininkus</h2>
-    <p translate="yes">Turite pateikti dokumentus visiems kitiems, kuriems priklauso didelis (25+) procentas įmonės arba kuris yra atsakingas už įmonę, finansus ar operacijas.</p>
+    <h2 translate="yes">Kita tikroji savininkų informacija</h2>
+    <p translate="yes">Jūs turite pateikti dokumentus tiems, kam priklauso nemažas (25 ir daugiau) procentų įmonės turtas arba kurie yra atsakingi už įmonę, finansus ar operacijas.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
+          <th translate="yes">vardas</th>
           <th translate="yes">Reikalauja</th>
         </tr>
       </thead>
@@ -84,13 +84,13 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informacija apie įmonės direktorius</h2>
-    <p translate="yes">Turite pateikti visus savo įmonės valdybos ir (arba) asmenų, atsakingų už teisės aktų laikymosi palaikymą, pavadinimus.</p>
+    <h2 translate="yes">Įmonės direktorių informacija</h2>
+    <p translate="yes">Turite nurodyti savo įmonės valdybos ir (arba) asmenų, atsakingų už normų laikymąsi, vardus ir pavardes.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
+          <th translate="yes">vardas</th>
           <th translate="yes">Reikalauja</th>
         </tr>
       </thead>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Pateikti registraciją</h2>
+    <h2 translate="yes">Pateikite registraciją</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,16 +120,16 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Pridėti informaciją</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Pridėti informacijos</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Lėšos pervedamos į sąskaitą ${bank_account.bank_name}.</p>
+    <p translate="yes">Lėšos yra pervedamos į sąskaitą ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Norint gauti lėšas, turi būti pateikti banko duomenys.</p>
+    <p translate="yes">Norint gauti lėšų, reikia pateikti banko duomenis.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">Registracija nepateikta.</p>
@@ -141,13 +141,13 @@
     <p translate="yes">Registracijos informacija nepateikta.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Registracijos informacija pateikta.</p>
+    <p translate="yes">Registracijos informacija buvo pateikta.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Dar nepateikta</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registracija priimta</span>
+    <span translate="yes">Registracija buvo priimta</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Reikia papildomos informacijos</span>
@@ -156,28 +156,28 @@
     <span translate="yes">Laukiama pateikimo</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Atmetė Stripe, žr.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Atmetė Stripe, žr</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Atmetė Stripe, žr.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Atmetė Stripe, žr</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Atmetė Stripe, žr.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Atmetė Stripe, žr</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Atmetė Stripe, žr.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Atmetė Stripe, žr</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Peržiūri Stripe</span>
+    <span translate="yes">Peržiūrima Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Peržiūri Stripe</span>
+    <span translate="yes">Peržiūrima Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Atmetė Stripe, žr.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Atmetė Stripe, žr</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Reikia papildomos informacijos</span>

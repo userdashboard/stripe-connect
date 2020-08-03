@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">檢視 ${payout.id}</title>
+  <title translate="yes">視圖 ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">檢視 ${payout.id}</h1>
+  <h1 translate="yes">視圖 ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -28,7 +28,7 @@
         </td>
       </tr>
       <tr>
-        <th translate="yes">地位</th>
+        <th translate="yes">狀態</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">建立</th>
+        <th translate="yes">已建立</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">未找到銀行帳戶</span>
+    <span translate="yes">找不到銀行帳戶</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">無效貨幣</span>
+    <span translate="yes">無效的貨幣</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">不合法帳號</span>
+    <span translate="yes">無效的帳號</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">資金不足</span>
+    <span translate="yes">不充足的資金</span>
   </template>
   <template id="declined">
     <span translate="yes">銀行拒絕轉帳</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">無銀行帳戶轉帳</span>
+    <span translate="yes">沒有銀行帳戶借記</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">無法處理</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">銀行擁有權已變更</span>
+    <span translate="yes">銀行所有權已更改</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">銀行帳戶受限</span>
+    <span translate="yes">銀行帳戶受限制</span>
   </template>
   <template id="account_frozen">
     <span translate="yes">銀行帳戶被凍結</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">銀行帳號已關閉</span>
+    <span translate="yes">銀行帳戶已關閉</span>
   </template>
 </body>
 </html>

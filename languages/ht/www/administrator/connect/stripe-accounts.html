@@ -12,17 +12,17 @@
   <h1 translate="yes">Kont Stripe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Pa gen kont Stripe yo te kreye anko.</p>
+    <p translate="yes">Pa gen okenn kont Stripe te kreye ankò.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Tip</th>
-        <th translate="yes">fe-apel</th>
-        <th translate="yes">Estati</th>
+        <th translate="yes">Kalite</th>
+        <th translate="yes">Non</th>
+        <th translate="yes">Ki dènye nouvèl</th>
         <th translate="yes">Kreye</th>
-        <th translate="yes">Soumet</th>
+        <th translate="yes">Soumèt</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Pa ankò bay</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,34 +48,34 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Lajan yo peye nan kont x</p>
+    <p translate="yes">Fon yo peye nan kont x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Banke detay dwe bay pou resevwa lajan.</p>
+    <p translate="yes">Detay bankè yo dwe bay yo resevwa lajan.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Enskripsyon an pa te soumet.</p>
+    <p translate="yes">Enskripsyon an pa te soumèt.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Enskripsyon an te soumet sou ${account.dateFormatted}.</p>
+    <p translate="yes">Enskripsyon an te soumèt sou ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Pa soumet ko ou</span>
+    <span translate="yes">Pa soumèt ankò</span>
   </template>
   <template id="verified">
     <span translate="yes">Enskripsyon te aksepte</span>
   </template>
   <template id="verified">
-    <span translate="yes">Enfim pa Stripe</span>
+    <span translate="yes">Andikape pa Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Mande plis enfomasyon</span>
+    <span translate="yes">Mande pou plis enfòmasyon</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Annatant soumet</span>
+    <span translate="yes">Annatandan soumèt</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Mande plis enfomasyon</span>
+    <span translate="yes">Mande pou plis enfòmasyon</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Rejte pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -90,7 +90,7 @@
     <span><span translate="yes">Rejte pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Gen plis enfomasyon ki nesese</span>
+    <span translate="yes">Plis enfòmasyon nesesè</span>
   </template>
   <template id="listed">
     <span translate="yes">Anba revizyon pa Stripe</span>
@@ -99,7 +99,7 @@
     <span translate="yes">Anba revizyon pa Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Enfim pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Andikape pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

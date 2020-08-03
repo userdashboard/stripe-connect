@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Crearea unei persoane noi pentru ${stripeAccount.id}</title>
+  <title translate="yes">Creați o persoană nouă pentru ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Crearea unei persoane noi</h1>
-    <p translate="yes">Consiliul de administrație, proprietarii și reprezentantul trebuie să fie la curent pe măsură ce informațiile dumneavoastră se modifică.</p>
+    <h1 translate="yes">Creați o persoană nouă</h1>
+    <p translate="yes">Consiliul de administrație, proprietarii și reprezentantul trebuie să fie la curent cu informațiile pe care le schimbați.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Relația cu compania</h2>
@@ -22,7 +22,7 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Titlu lucrare, rol sau relație</label>
+        <label for="relationship_title" translate="yes">Titlul postului, rolului sau relației</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -41,17 +41,17 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Eroare! Eroare la crearea înregistrării
+      Eroare! A apărut o eroare la crearea înregistrării
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Contul Stripe nu necesită informații despre beneficiarul real
+      Contul dvs. Stripe nu necesită informații benefice pentru proprietar
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Contul Stripe nu necesită informații despre directorul companiei
+      Contul dvs. Stripe nu necesită informații despre directorul companiei
     </div>
   </template>
   <template id="invalid-executive">
@@ -61,12 +61,12 @@
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Fie reprezentant, director sau proprietar trebuie să fie selectate
+      Fiecare reprezentant, director sau proprietar trebuie să fie selectat
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Eroare! Proprietate procentuală nevalidă sau lipsă (0 dacă nu există)
+      Eroare! Procent proprietate nevalidă sau lipsă (0 dacă nu există)
     </div>
   </template>
   <template id="invalid-relationship_title">

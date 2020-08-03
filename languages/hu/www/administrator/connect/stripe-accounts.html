@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe számlák</title>
+  <title translate="yes">Stripe fiókok</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe számlák</h1>
+  <h1 translate="yes">Stripe fiókok</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Még nem jött létre Stripe fiók.</p>
+    <p translate="yes">Még nem hoztak létre Stripe fiókot.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Típus</th>
-        <th translate="yes">név</th>
+        <th translate="yes">típus</th>
+        <th translate="yes">Név</th>
         <th translate="yes">Állapot</th>
-        <th translate="yes">Létrehozott</th>
-        <th translate="yes">Elküldve</th>
+        <th translate="yes">Alkotó</th>
+        <th translate="yes">benyújtott</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Még nem nyújtották be</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -51,55 +51,55 @@
     <p translate="yes">A pénzeszközöket az x számlára fizetik</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">A banki adatokat meg kell adni a pénzfogadáshoz.</p>
+    <p translate="yes">A pénzeszközök fogadásához banki adatokat kell megadni.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">A regisztráció nem lett elküldve.</p>
+    <p translate="yes">A regisztrációt nem nyújtották be.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">A regisztrációt a ${account.dateFormatted}.</p>
+    <p translate="yes">A regisztrációt ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Még nincs benyújtva</span>
+    <span translate="yes">Még nem nyújtották be</span>
   </template>
   <template id="verified">
-    <span translate="yes">A regisztráció elfogadva</span>
+    <span translate="yes">A regisztrációt elfogadták</span>
   </template>
   <template id="verified">
-    <span translate="yes">Letiltva Stripe</span>
+    <span translate="yes">Letiltva: Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">További információkat igényel</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Benyújtásra vár</span>
+    <span translate="yes">A benyújtás függőben van</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">További információkat igényel</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">További információra van szükség</span>
+    <span translate="yes">További információkra van szükség</span>
   </template>
   <template id="listed">
-    <span translate="yes">A Stripe által végzett felülvizsgálat alatt</span>
+    <span translate="yes">Felülvizsgálat alatt: Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">A Stripe által végzett felülvizsgálat alatt</span>
+    <span translate="yes">Felülvizsgálat alatt: Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Letiltva Stripe, lásd:</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe által letiltva, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

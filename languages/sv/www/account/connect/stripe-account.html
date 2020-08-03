@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Visa ${stripeAccount.id}</title>
+  <title translate="yes">Se ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Visa ${stripeAccount.id}</h1>
+  <h1 translate="yes">Se ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -22,7 +22,7 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Namn</th>
+        <th translate="yes">namn</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Inskickat</th>
+        <th translate="yes">Lämnats</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Inte skickat ännu</td>
       </tr>
     </tbody>
   </table>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Företagets representant</h2>
-    <p translate="yes">För att undvika kontoavbrott skicka ny representativ information om den angivna personen lämnar eller inte längre representerar företaget.</p>
+    <h2 translate="yes">Företagsrepresentant</h2>
+    <p translate="yes">För att undvika störningar i kontot, skicka in ny representativ information om den angivna personen lämnar eller inte längre representerar företaget.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
-          <th translate="yes">Nödvändig information</th>
+          <th translate="yes">namn</th>
+          <th translate="yes">Obligatorisk information</th>
         </tr>
       </thead>
     </table>
@@ -67,13 +67,13 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Annan information om verkliga huvudmän</h2>
-    <p translate="yes">Du måste tillhandahålla dokumentation för alla andra som äger en betydande (25 +) procent av företaget eller som ansvarar för företaget, ekonomi eller verksamhet.</p>
+    <h2 translate="yes">Annan fördelaktig ägarinformation</h2>
+    <p translate="yes">Du måste tillhandahålla dokumentation för alla andra som äger en betydande (25+) procent av företaget eller som ansvarar för företaget, ekonomi eller verksamhet.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
           <th translate="yes">Kräver</th>
         </tr>
       </thead>
@@ -84,13 +84,13 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Information om företagsledare</h2>
-    <p translate="yes">Du måste ange fullständiga namn på ditt företags styrelse och/eller personer som ansvarar för att upprätthålla regelefterlevnad.</p>
+    <h2 translate="yes">Företagets styrelseledamöter</h2>
+    <p translate="yes">Du måste ange fullständiga namn på ditt företags styrelse och / eller personer som är ansvariga för att upprätthålla reglerna.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
           <th translate="yes">Kräver</th>
         </tr>
       </thead>
@@ -126,10 +126,10 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Medel ställs till svars ${bank_account.bank_name}.</p>
+    <p translate="yes">Medel betalas till konto ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Bankuppgifter måste tillhandahållas för att ta emot medel.</p>
+    <p translate="yes">Bankuppgifter måste tillhandahållas för att få pengar.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">Registreringen har inte skickats in.</p>
@@ -138,34 +138,34 @@
     <p translate="yes">Registreringen lämnades in den ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Registreringsinformationen har inte lämnats.</p>
+    <p translate="yes">Registreringsinformationen har inte tillhandahållits.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Registreringsinformationen har lämnats.</p>
+    <p translate="yes">Registreringsinformationen har tillhandahållits.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Inte inlämnad ännu</span>
+    <span translate="yes">Inte skickat ännu</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registreringen har accepterats</span>
+    <span translate="yes">Registrering har accepterats</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Kräver ytterligare information</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Väntande inlämning</span>
+    <span translate="yes">Väntar på inlämning</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
@@ -177,7 +177,7 @@
     <span translate="yes">Under granskning av Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Kräver ytterligare information</span>

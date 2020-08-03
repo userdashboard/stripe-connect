@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1 translate="yes">Enviar ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proceso de verificación mediante la presentación de su registro completado.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proceso de verificación enviando su registro completo.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Propietarios beneficiosos</h2>
+    <h2 translate="yes">Propietarios beneficiarios</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Directores de empresa</h2>
+    <h2 translate="yes">Directores de la empresa</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Presentar el registro</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Enviar registro</button>
     </div>
   </form>
   <template id="owner-row">
@@ -95,32 +95,32 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      ¡Error! Debe presentar los directores de la empresa
+      ¡Error! Debe presentar los directores de la compañía.
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      ¡Error! Debe presentar a los propietarios beneficiosos de la empresa
+      ¡Error! Debe enviar a los beneficiarios reales de la empresa.
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      ¡Error! Debe presentar la información del representante de la empresa
+      ¡Error! Debe enviar la información del representante de la empresa.
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      ¡Error! El registro tiene información de pago incompleta
+      ¡Error! El registro tiene información de pago incompleta.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      ¡Éxito! El registro se ha presentado
+      ¡Éxito! El registro ha sido enviado
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      ¡Error! Se ha producido un error al enviar el registro
+      ¡Error! Se produjo un error al enviar el registro.
     </div>
   </template>
 </body>

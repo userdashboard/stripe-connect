@@ -9,44 +9,44 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Osob</h1>
+  <h1 translate="yes">Osoby</h1>
   <div id="representative-container">
-    <h2 translate="yes">Zástupce společnosti</h2>
-    <p translate="yes">Pokud se stav nominované osoby změní, musíte vytvořit nového zástupce.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Vytvořit nového zástupce</a></p>
+    <h2 translate="yes">Zástupce firmy</h2>
+    <p translate="yes">Pokud se status nominované osoby změní, musíte vytvořit nového zástupce.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Vytvořte nového zástupce</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Jméno</th>
+          <th translate="yes">název</th>
           <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Skuteční vlastníci</h2>
-    <p translate="yes">Musíte poskytnout dokumentaci pro každého, kdo vlastní podstatné (25 +) procent společnosti nebo má na starosti společnost, její finance nebo operace.</p>
+    <h2 translate="yes">Prospěšní vlastníci</h2>
+    <p translate="yes">Musíte poskytnout dokumentaci pro kohokoli jiného, kdo vlastní podstatné (25+) procento společnosti nebo odpovědný za společnost, její finance nebo provoz.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Přidat vlastníka</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Jméno</th>
+          <th translate="yes">název</th>
           <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Ředitelé společností</h2>
-    <p translate="yes">Musíte poskytnout dokumentaci pro představenstvo.</p>
+    <h2 translate="yes">Ředitelé společnosti</h2>
+    <p translate="yes">Musíte předložit dokumentaci představenstvu.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Přidat vlastníka</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Jméno</th>
+          <th translate="yes">název</th>
           <th translate="yes">Vyžaduje</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Přidat informace</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Přidejte informace</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

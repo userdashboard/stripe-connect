@@ -11,55 +11,55 @@
 </head>
 <body>
   <h1 translate="yes">Akaunti za Stripe Connect</h1>
-  <p><span translate="yes">Kuwa muuzaji kwa kuthibitisha utambulisho wako binafsi na taarifa ya kampuni kwa njia ya</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Kuwa muuzaji kwa kuthibitisha kitambulisho chako cha kibinafsi na habari ya kampuni kupitia</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Mahitaji ya mtu binafsi</h2>
         <ol>
-          <li translate="yes">Imethibitishwa taarifa ya kibinafsi</li>
-          <li translate="yes">Mkazi wa nchi inayotegemezwa</li>
-          <li translate="yes">Akaunti ya benki katika nchi inayotegemezwa</li>
+          <li translate="yes">Maelezo ya kibinafsi yaliyothibitishwa</li>
+          <li translate="yes">Mkazi wa nchi inayoungwa mkono</li>
+          <li translate="yes">Akaunti ya benki katika nchi inayoungwa mkono</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Anza usajili binafsi</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Anza usajili wa mtu binafsi</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Mahitaji ya biashara</h2>
         <ol>
-          <li translate="yes">Imethibitishwa taarifa ya kibinafsi</li>
-          <li translate="yes">Biashara iliyosajiliwa katika nchi inayotegemezwa</li>
-          <li translate="yes">Akaunti ya benki katika nchi inayotegemezwa</li>
+          <li translate="yes">Maelezo ya kibinafsi yaliyothibitishwa</li>
+          <li translate="yes">Biashara iliyosajiliwa katika nchi inayoungwa mkono</li>
+          <li translate="yes">Akaunti ya benki katika nchi inayoungwa mkono</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Anza usajili wa kampuni</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Anzisha usajili wa kampuni</a>
       </div>
     </div>
   </div>
   <div id="individual-container">
-    <h2 translate="yes">Usajili binafsi</h2>
+    <h2 translate="yes">Usajili wa mtu binafsi</h2>
     <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Jina</th>
           <th translate="yes">Hali</th>
-          <th translate="yes">Aliumba</th>
-          <th translate="yes">Kuwasilishwa</th>
+          <th translate="yes">Imeundwa</th>
+          <th translate="yes">Imewasilishwa</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="company-container">
-    <h2 translate="yes">Usajili wa kampuni</h2>
+    <h2 translate="yes">Usajili wa Kampuni</h2>
     <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Jina</th>
           <th translate="yes">Hali</th>
-          <th translate="yes">Aliumba</th>
-          <th translate="yes">Kuwasilishwa</th>
+          <th translate="yes">Imeundwa</th>
+          <th translate="yes">Imewasilishwa</th>
         </tr>
       </thead>
     </table>
@@ -69,71 +69,71 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Bado haijatolewa</td>
+      <td id="blank-name-${account.id}" translate="yes">Haijatolewa bado</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">La</td>
+      <td id="not-submitted-${account.id}" translate="yes">Hapana</td>
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Haijatowasilishwa bado</span>
+    <span translate="yes">Haijawasilishwa</span>
   </template>
   <template id="verified">
     <span translate="yes">Usajili umekubaliwa</span>
   </template>
   <template id="verified">
-    <span translate="yes">Imezuiwa na Stripe</span>
+    <span translate="yes">Imlemazwa na Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Inahitaji resubmitting na maelezo ya ziada</span>
+    <span translate="yes">Inahitaji kusambaza tena na habari ya ziada</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Inasubiri kuwasilisha</span>
+    <span translate="yes">Inasubiri uwasilishaji</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Imezuiwa na Stripe, angalia sababu za kawaida</span>
+      <span translate="yes">Walemavu wa Stripe, ona sababu za kawaida</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Imezuiwa na Stripe, angalia sababu za kawaida</span>
+      <span translate="yes">Walemavu wa Stripe, ona sababu za kawaida</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Imezuiwa na Stripe, angalia sababu za kawaida</span>
+      <span translate="yes">Walemavu wa Stripe, ona sababu za kawaida</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Imezuiwa na Stripe, angalia sababu za kawaida</span>
+      <span translate="yes">Walemavu wa Stripe, ona sababu za kawaida</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Taarifa zaidi inahitajika</span>
+    <span translate="yes">Habari zaidi inahitajika</span>
   </template>
   <template id="listed">
-    <span translate="yes">Chini ya ukaguzi na Stripe</span>
+    <span translate="yes">Inakaguliwa na Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Chini ya ukaguzi na Stripe</span>
+    <span translate="yes">Inakaguliwa na Stripe</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Imezuiwa na Stripe, angalia sababu za kawaida</span>
+      <span translate="yes">Walemavu wa Stripe, ona sababu za kawaida</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Inahitaji taarifa ya ziada</span>
+    <span translate="yes">Inahitaji habari zaidi</span>
   </template>
 </body>
 </html>

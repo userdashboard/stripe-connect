@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vise ${stripeAccount.id}</title>
+  <title translate="yes">Utsikt ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Vise ${stripeAccount.id}</h1>
+  <h1 translate="yes">Utsikt ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -22,7 +22,7 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">navn</th>
+        <th translate="yes">Navn</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Sendt inn</th>
+        <th translate="yes">sendt inn</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Ikke sendt inn ennå</td>
       </tr>
     </tbody>
   </table>
@@ -51,13 +51,13 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Representant for selskapet</h2>
-    <p translate="yes">For å unngå kontoavbrudd sende inn ny representativ informasjon hvis den angitte personen forlater eller ikke lenger representerer selskapet.</p>
+    <h2 translate="yes">Bedriftsrepresentant</h2>
+    <p translate="yes">For å unngå kontoforstyrrelser, send inn ny representativ informasjon hvis den spesifiserte personen forlater eller ikke lenger representerer selskapet.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">navn</th>
+          <th translate="yes">Navn</th>
           <th translate="yes">Nødvendig informasjon</th>
         </tr>
       </thead>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Andre reelle eiere informasjon</h2>
-    <p translate="yes">Du må gi dokumentasjon for alle andre som eier en betydelig (25+) prosent av selskapet eller ansvarlig for selskapet, økonomi eller drift.</p>
+    <h2 translate="yes">Annen nyttig informasjon om eiere</h2>
+    <p translate="yes">Du må gi dokumentasjon for alle andre som eier en betydelig (25+) prosent av selskapet eller har ansvaret for selskapet, økonomien eller driften.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">navn</th>
-          <th translate="yes">Krever</th>
+          <th translate="yes">Navn</th>
+          <th translate="yes">krever</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informasjon om selskapets styremedlemmer</h2>
-    <p translate="yes">Du må oppgi fullt navn på selskapets styrende styre og/eller personer som er ansvarlige for å opprettholde overholdelse av forskrifter.</p>
+    <h2 translate="yes">Informasjon om selskapets direktører</h2>
+    <p translate="yes">Du må oppgi fullstendige navn på selskapets styre og / eller personer som er ansvarlige for å opprettholde forskriftsoverholdelse.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">navn</th>
-          <th translate="yes">Krever</th>
+          <th translate="yes">Navn</th>
+          <th translate="yes">krever</th>
         </tr>
       </thead>
     </table>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Send inn registrering</h2>
+    <h2 translate="yes">Send inn påmelding</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,7 +120,7 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Legge til informasjon</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Legg til informasjon</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
@@ -132,16 +132,16 @@
     <p translate="yes">Bankopplysninger må gis for å motta midler.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Registreringen er ikke sendt inn.</p>
+    <p translate="yes">Registreringen er ikke sendt.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Registreringen ble sendt inn på ${account.dateFormatted}.</p>
+    <p translate="yes">Registreringen ble sendt inn den ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Registreringsinformasjonen er ikke oppgitt.</p>
+    <p translate="yes">Registreringsinformasjonen er ikke gitt.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Registreringsinformasjonen er oppgitt.</p>
+    <p translate="yes">Registreringsinformasjonen er gitt.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Ikke sendt inn ennå</span>
@@ -153,7 +153,7 @@
     <span translate="yes">Krever tilleggsinformasjon</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Ventende innsending</span>
+    <span translate="yes">Venter på innsending</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under gjennomgang av Stripe</span>
+    <span translate="yes">Under vurdering av Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under gjennomgang av Stripe</span>
+    <span translate="yes">Under vurdering av Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

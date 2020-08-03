@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Katso ${stripeAccount.id}</title>
+  <title translate="yes">näkymä ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Katso ${stripeAccount.id}</h1>
+  <h1 translate="yes">näkymä ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Lähetetty</th>
+        <th translate="yes">toimitettu</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Ei vielä lähetetty</td>
       </tr>
     </tbody>
   </table>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Yrityksen edustaja</h2>
-    <p translate="yes">Tilihäiriöiden välttämiseksi toimita uusia edustavia tietoja, jos määritetty henkilö lähtee tai ei enää edusta yritystä.</p>
+    <p translate="yes">Tilin häiriöiden välttämiseksi lähetä uudet edustavat tiedot, jos määritetty henkilö poistuu tai ei enää edusta yritystä.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nimi</th>
-          <th translate="yes">Tarvittavat tiedot</th>
+          <th translate="yes">Vaadittu tieto</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Muut tosiasiallisia omistajia ja edunsaajia koskevat tiedot</h2>
-    <p translate="yes">Sinun on toimitettava asiakirjat kaikille muille, jotka omistavat huomattavan (25+) prosenttia yrityksestä tai vastaavat yrityksestä, taloudesta tai toiminnasta.</p>
+    <h2 translate="yes">Muita tosiasiallisia omistajia koskevia tietoja</h2>
+    <p translate="yes">Sinun on toimitettava asiakirjat kenelle tahansa muulle, joka omistaa merkittävän (yli 25) prosenttia yrityksestä tai vastaa yrityksestä, taloudesta tai toiminnasta.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nimi</th>
-          <th translate="yes">Edellyttää</th>
+          <th translate="yes">vaatii</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Yhtiön johtajien tiedot</h2>
-    <p translate="yes">Sinun on annettava täydelliset nimet yrityksesi hallitukselle ja/tai henkilöille, jotka vastaavat säännösten noudattamisen ylläpitämisestä.</p>
+    <h2 translate="yes">Yrityksen johtajatiedot</h2>
+    <p translate="yes">Sinun on ilmoitettava yrityksen hallintoneuvoston ja / tai lakien noudattamisen ylläpidosta vastaavien henkilöiden täydet nimet.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nimi</th>
-          <th translate="yes">Edellyttää</th>
+          <th translate="yes">vaatii</th>
         </tr>
       </thead>
     </table>
@@ -120,7 +120,7 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Tietojen lisääminen</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Lisää tietoja</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
@@ -129,22 +129,22 @@
     <p translate="yes">Varat maksetaan tilille ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Varojen vastaanottamista varten on annettava pankkitiedot.</p>
+    <p translate="yes">Pankkitiedot on annettava varojen vastaanottamista varten.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Rekisteröintiä ei ole lähetetty.</p>
+    <p translate="yes">Rekisteröintiä ei ole toimitettu.</p>
   </template>
   <template id="submitted-information">
     <p translate="yes">Rekisteröinti toimitettiin ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Rekisteröintitietoja ei ole annettu.</p>
+    <p translate="yes">Rekisteröintitietoja ei ole toimitettu.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Rekisteröintitiedot on annettu.</p>
+    <p translate="yes">Rekisteröintitiedot on toimitettu.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Ei lähetetty vielä</span>
+    <span translate="yes">Ei vielä lähetetty</span>
   </template>
   <template id="verified">
     <span translate="yes">Rekisteröinti on hyväksytty</span>
@@ -153,31 +153,31 @@
     <span translate="yes">Vaatii lisätietoja</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Odottaa toimittamista</span>
+    <span translate="yes">Odottaa lähettämistä</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe hylkäämiä, ks.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hylännyt Stripe, katso</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe hylkäämiä, ks.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hylännyt Stripe, katso</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe hylkäämiä, ks.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hylännyt Stripe, katso</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe hylkäämiä, ks.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hylännyt Stripe, katso</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Arvostelun alainen Stripe</span>
+    <span translate="yes">Arvostelussa Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Arvostelun alainen Stripe</span>
+    <span translate="yes">Arvostelussa Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe hylkäämiä, ks.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hylännyt Stripe, katso</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Vaatii lisätietoja</span>

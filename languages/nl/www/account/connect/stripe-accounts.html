@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe rekeningen</title>
+  <title translate="yes">Stripe-accounts</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,28 +10,28 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe rekeningen</h1>
-  <p><span translate="yes">Word leverancier door uw persoonlijke identiteit en bedrijfsgegevens te verifiëren via</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe-accounts</h1>
+  <p><span translate="yes">Word leverancier door uw persoonlijke identiteit en bedrijfsgegevens te verifiëren</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Er zijn nog geen Stripe accounts gemaakt.</p>
+    <p translate="yes">Er zijn nog geen Stripe-accounts aangemaakt.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Individuele eisen</h2>
+        <h2 translate="yes">Individuele wensen</h2>
         <ol>
-          <li translate="yes">Geverifieerde persoonlijke gegevens</li>
-          <li translate="yes">Ingezetene van een ondersteund land</li>
+          <li translate="yes">Geverifieerde persoonlijke informatie</li>
+          <li translate="yes">Inwoner van een ondersteund land</li>
           <li translate="yes">Bankrekening in een ondersteund land</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Individuele registratie starten</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Start individuele registratie</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Bedrijfsvereisten</h2>
+        <h2 translate="yes">Zakelijke vereisten</h2>
         <ol>
-          <li translate="yes">Geverifieerde persoonlijke gegevens</li>
+          <li translate="yes">Geverifieerde persoonlijke informatie</li>
           <li translate="yes">Bedrijf geregistreerd in een ondersteund land</li>
           <li translate="yes">Bankrekening in een ondersteund land</li>
         </ol>
@@ -41,13 +41,13 @@
   </div>
   <div id="registrations-container">
     <div id="individual-container">
-      <h2 translate="yes">Individuele registratie</h2>
+      <h2 translate="yes">Individuele inschrijving</h2>
       <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
             <th translate="yes">Naam</th>
-            <th translate="yes">Status</th>
+            <th translate="yes">Toestand</th>
             <th translate="yes">Gemaakt</th>
             <th translate="yes">Ingediend</th>
           </tr>
@@ -61,7 +61,7 @@
           <tr>
             <th>ID</th>
             <th translate="yes">Bedrijfsnaam</th>
-            <th translate="yes">Status</th>
+            <th translate="yes">Toestand</th>
             <th translate="yes">Gemaakt</th>
             <th translate="yes">Ingediend</th>
           </tr>
@@ -84,7 +84,7 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nog niet ingediend</span>
+    <span translate="yes">nog niet ingediend</span>
   </template>
   <template id="verified">
     <span translate="yes">Registratie is geaccepteerd</span>
@@ -96,7 +96,7 @@
     <span translate="yes">Vereist aanvullende informatie</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">In behandeling zijnde indiening</span>
+    <span translate="yes">In afwachting van indiening</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Afgewezen door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -114,10 +114,10 @@
     <span translate="yes">Meer informatie is vereist</span>
   </template>
   <template id="listed">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Uitgeschakeld door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

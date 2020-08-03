@@ -12,16 +12,16 @@
 </head>
 <body>
   <h1 translate="yes">Pošaljite vlasnike za ${stripeAccount.id}</h1>
-  <p translate="yes">Kada završite s dodavanjem svih drugih vlasnika, ako ih ima, pošaljite ih na pregled.</p>
+  <p translate="yes">Kada završite s dodavanjem svih ostalih vlasnika, ako ih ima, pošaljite ih na pregled.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Stvarni vlasnici</h2>
+    <h2 translate="yes">Beneficirani vlasnici</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ime</th>
-          <th translate="yes">Zahtijeva</th>
+          <th translate="yes">zahtijeva</th>
         </tr>
       </thead>
     </table>
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Dodavanje informacija</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Dodajte podatke</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Pogreška! Vlasnici još uvijek zahtijevaju informacije.
+      Greška! Postoje vlasnici koji još uvijek zahtijevaju podatke.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspjeh! Vlasnici tvrtke su podneseni
+      Uspjeh! Podneseni su vlasnici tvrtke
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom slanja vlasnika
+      Greška! Došlo je do pogreške prilikom slanja vlasnika
     </div>
   </template>
 </body>

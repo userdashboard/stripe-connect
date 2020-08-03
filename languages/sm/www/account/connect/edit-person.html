@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
-    <title translate="yes">Faasao ${person.id}</title>
+    <title translate="yes">Faʻatonutonu ${person.id}</title>
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -18,10 +18,10 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Faasao le tagata</h1>
+    <h1 translate="yes">Faʻatonutonu le tagata</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Sootaga i le kamupani</h2>
+      <h2 translate="yes">Mafutaga ma kamupani</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,14 +29,14 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Iopu, matafaioi po o le autu o le sootaga</label>
+        <label for="relationship_title" translate="yes">Iopu, matafaioi poʻo le faʻailoga igoa</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Pasene e anaina (pe afai e i ai)</label>
+        <label for="relationship_percent_ownership" translate="yes">Pasene o lo oi ai (pe a iai)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Faamatalaga patino</h2>
+      <h2 translate="yes">Faamatalaga o le tagata lava ia</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
@@ -50,7 +50,7 @@
           <div class="pure-u-11-24">
             <div id="last_name-container" class="pure-control-group">
               <a id="last_name-anchor"></a>
-              <label for="last_name" translate="yes">Faaiu</label>
+              <label for="last_name" translate="yes">Igoa mulimuli</label>
               <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">Tuatusi imeli</label>
+              <label for="email" translate="yes">Imeli tuatusi</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -87,7 +87,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kana-container" class="pure-control-group">
               <a id="last_name_kana-anchor"></a>
-              <label for="last_name_kana" translate="yes">Faaiu</label>
+              <label for="last_name_kana" translate="yes">Igoa mulimuli</label>
               <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
             </div>
           </div>
@@ -107,7 +107,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kanji-container" class="pure-control-group">
               <a id="last_name_kanji-anchor"></a>
-              <label for="last_name_kanji" translate="yes">Faaiu</label>
+              <label for="last_name_kanji" translate="yes">Igoa mulimuli</label>
               <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -124,37 +124,37 @@
       </div>
       <div id="gender-container" class="pure-control-group">
         <a id="gender-anchor"></a>
-        <label for="female" translate="yes">Itupa</label>
+        <label for="female" translate="yes">Ituaiga</label>
         <div class="pure-checkbox">
          <label><input id="female" name="gender" type="radio" value="female"> Female</label>
          <label><input id="male" name="gender" type="radio" value="male"> Male</label>
         </div>
       </div>
       <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4" translate="yes">SSN 4 tausaga fuainumera</label>
+        <label for="ssn_last_4" translate="yes">SSN mulimuli 4 numera</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
-        <h2 translate="yes">Faamaoniga patino</h2>
+        <h2 translate="yes">Faʻailoaina o le tagata lava ia</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Tusifolau po o le numera o le ID</label>
+        <label for="id_number" translate="yes">Tusifolau poʻo le numera ID</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Tagai vave/ata</label>
+        <label for="verification_document_front" translate="yes">Mataitu luma / ata</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Faata tua/ata</label>
+        <label for="verification_document_back" translate="yes">Toe suʻe / ata</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
-        <h2 translate="yes">Faamaoniga o le tuatusi</h2>
+        <h2 translate="yes">Faamaoniga o tuatusi</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Tagai vave/ata</label>
+        <label for="verification_additional_document_front" translate="yes">Mataitu luma / ata</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Faata tua/ata</label>
+        <label for="verification_additional_document_back" translate="yes">Toe suʻe / ata</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -178,7 +178,7 @@
           <div class="pure-g">
             <div id="address_state-container" class="pure-u-16-24">
               <a id="address_state-anchor"></a>
-              <label for="address_state" translate="yes">Setete po o le Itumalo</label>
+              <label for="address_state" translate="yes">Atunuu poʻo le itumalo</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
                   Filifili
@@ -197,10 +197,10 @@
           <div class="pure-g">
             <div class="pure-u-16-24">
               <a id="address_country-anchor"></a>
-              <label for="address_country" translate="yes">Atunuu</label>
+              <label for="address_country" translate="yes">Atunuʻu</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
-                  Filifili le atunuu
+                  Filifili atunuu
                 </option>
               </select>
             </div>
@@ -213,7 +213,7 @@
         </div>
       </div>
       <div id="kana-address-container">
-        <h2 translate="yes">Kana le tuatusi patino</h2>
+        <h2 translate="yes">Kana tuatusi patino</h2>
         <div id="address_kana_line1-container" class="pure-control-group">
           <a id="address_kana_line1-anchor"></a>
           <label for="address_kana_line1" translate="yes">Laina 1</label>
@@ -231,17 +231,17 @@
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Tulaga</label>
+          <label for="address_kana_state" translate="yes">Malo</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
           <a id="address_kana_postal_code-anchor"></a>
-          <label for="address_kana_postal_code" translate="yes">Numera faailo o le meli</label>
+          <label for="address_kana_postal_code" translate="yes">pusameli kode</label>
           <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">Kanji le tuatusi patino</h2>
+        <h2 translate="yes">Kanji tuatusi patino</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
           <label for="address_kanji_line1" translate="yes">Laina 1</label>
@@ -259,23 +259,23 @@
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Tulaga</label>
+          <label for="address_kanji_state" translate="yes">Malo</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
           <a id="address_kanji_postal_code-anchor"></a>
-          <label for="address_kanji_postal_code" translate="yes">Numera faailo o le meli</label>
+          <label for="address_kanji_postal_code" translate="yes">pusameli kode</label>
           <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Faafou le lesitalaga</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Faafou le faamauina</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Mea sese! Na i ai se mea sese i le auina atu o le fomu
+      Sese! O se mea sese na tupu ile lafoina o le fomu
     </div>
   </template>
   <template id="country-option">
@@ -290,182 +290,182 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Mea sese! Na i ai se mea sese i le udpating o faamatalaga
+      Sese! Na iai se mea sese na tupu i le faʻafouina o le faʻamatalaga
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Mea sese! Na i ai se mea sese i le utaina o se ata po o se faata
+      Sese! O se mea na tupu na aʻafia ai le lafoina o se ata pe matamata
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le numera o le ID patino
+      Sese! E le saʻo pe leai se numera ID ole tagata lava ia
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Mea sese! E le taulia pe misi le itupa
+      Sese! Faʻaoga leiloa pe leai se itupa
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia po o le misi ia fuainumera mulimuli e 4 o le numera o le puipuiga lautele
+      Sese! E le saʻo pe leai se 4 numera o numera o le Saogalemu
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Mea sese! E le taulia pe misi le aso na fanau ai
+      Sese! Le saʻo pe leiloa le aso ole fanau
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Mea sese! E le taulia pe misi le aso na fanau ai
+      Sese! Le saʻo pe leiloa le aso ole fanau
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Mea sese! E le taulia pe misi le aso na fanau ai
+      Sese! Le saʻo pe leiloa le aso ole fanau
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le igoa muamua
+      Sese! Lē igoa pe le maua le igoa muamua
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le igoa muamua Kana
+      Sese! Lē igoa pe le maua Kana igoa muamua
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le igoa Kanjifirst
+      Sese! E le o iai le igoa Kanjifirst
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le faaiu
+      Sese! Le faʻaigoaina pe ua le maua le igoa mulimuli
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi Kana faaiu
+      Sese! E le faʻamaonia pe leai foi le igoa mulimuli o Kana
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le faaiu
+      Sese! Le faʻaigoaina pe ua le maua le igoa mulimuli
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Mea sese! Imeli e le taulia pe misi
+      Sese! Leaga pe leai se imeli
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Mea sese! E le taulia pe misi le numera o le telefoni
+      Sese! Leai pe leai se numera telefoni
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi pasene e anaina
+      Sese! E le taliaina pe leai foi se pasene
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le tusiga i luma po o le atapue
+      Sese! Le aoga pe leiloa pepa luma scan po o le ata
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia po o le misi foi o pepa o faamatalaga po o le ata
+      Sese! Le aoga pe leiloa le pepa toe faitau ata poo le ata
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi ni pepa faaopoopo i luma po o le atapue
+      Sese! Le aoga pe leai foi se isi faʻapipiʻi muamua suʻe ata poʻo se ata
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi ni pepa o faamatalaga faaopoopo e toe tagai i tua po o le ata
+      Sese! Le aoga pe leai foi se isi faʻapipiʻi toe suʻe i tua poʻo se ata
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le atunuu o le tuatusi patino
+      Sese! Faʻaletonu pe leai se tuatusi tuatusi atunuʻu
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia pe misi le aai o le tuatusi patino
+      Sese! Faʻaletonu pe leai se tuatusi tuatusi aai
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Mea sese! E le taulia pe misi le tulaga o le tuatusi patino
+      Sese! Faʻaletonu pe leai se tuatusi tuatusi tulaga
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi le laina 1 o le tuatusi patino
+      Sese! Faʻaletonu pe leai se tuatusi tuatusi laina 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia po o le misi le numera o le meli patino
+      Sese! Faʻaletonu pe leai se tuatusi falemeli o le tagata lava ia
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi o Kana i le aai patino
+      Sese! Leai pe leʻo le Kana tuatusi o le taulaga
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi Kana o le tuatusi patino
+      Sese! Faʻaletonu pe leai se Kana tuatusi tulaga
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi o Kana i le taulaga faaletagata lava ia
+      Sese! Faʻaleaogaina pe leai foi le Kana tuatusi o le taulaga
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia po o le misi Kana tuatusi patino 1
+      Sese! Leai pe leiloa Kana tuatusi laina laina 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi le numera o le Kana meli o le tuatusi patino
+      Sese! Faʻaletonu pe leai se tuatusi tuatusi o Kana i le tuatusi numera
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi o Kanji i le aai patino
+      Sese! E le faʻamatalaina pe leai foi se Kanji tuatusi o le taulaga
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi Kanji o le tuatusi patino
+      Sese! E le taliaina pe leai foi se Kanji tuatusi tulaga o le setete
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi o Kanji i le taulaga faaletagata lava ia
+      Sese! E leiloa pe leai se Kanji tuatusi taulaga
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Mea sese! Le taulia po o le misi Kanji tuatusi patino 1
+      Sese! Faʻa le saʻo pe leai se Kanji tuatusi laina tasi 1
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Mea sese! Le aoga po o le misi le numera o le Kanji meli o le tuatusi patino
+      Sese! E le saʻo pe leai se tuatusi tuatusi o Kanji i le tuatusi numera
     </div>
   </template>
 </body>

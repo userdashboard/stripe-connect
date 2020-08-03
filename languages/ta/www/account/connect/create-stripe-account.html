@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">பதிவு உருவாக்கு</title>
+  <title translate="yes">பதிவை உருவாக்கவும்</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">பதிவு உருவாக்கு</h1>
-  <p translate="yes">ஒரு முடிக்கப்பட்ட பதிவு நீங்கள் Stripe Connect மூலம் வருவாய் payouts பெற அனுமதிக்கிறது.</p>
+  <h1 translate="yes">பதிவை உருவாக்கவும்</h1>
+  <p translate="yes">பூர்த்தி செய்யப்பட்ட பதிவு Stripe Connect மூலம் வருவாய் செலுத்துதல்களைப் பெற உங்களை அனுமதிக்கிறது.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,15 +21,15 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">வதியும் நாடு / கூட்டிணைப்பு</label>
+      <label for="country" translate="yes">வசிக்கும் நாடு / இணைக்கப்பட்ட நாடு</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          நாட்டைத் தேர்ந்தெடுக்கவும்
+          நாட்டினை தேர்வுசெய்
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">பதிவை த் தொடங்கு</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">பதிவு செய்யத் தொடங்குங்கள்</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      தவறு! பதிவை உருவாக்கும்போது பிழை ஏற்பட்டது
+      பிழை! பதிவை உருவாக்குவதில் பிழை ஏற்பட்டது
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      தவறு! செல்லாத அல்லது காணாமல் போன நாடு
+      பிழை! தவறான அல்லது காணாமல் போன நாடு
     </div>
   </template>
 </body>

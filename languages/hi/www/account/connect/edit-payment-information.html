@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">भुगतान की जानकारी के लिए ${stripeAccount.id}</title>
+  <title translate="yes">के लिए भुगतान जानकारी ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,21 +27,21 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">भुगतान की जानकारी के लिए ${stripeAccount.id}</h1>
-  <p translate="yes">बैंक खाते को अपडेट करें जो आपके राजस्व भुगतान प्राप्त करेगा।</p>
+  <h1 translate="yes">के लिए भुगतान जानकारी ${stripeAccount.id}</h1>
+  <p translate="yes">उस बैंक खाते को अपडेट करें जो आपके राजस्व भुगतान को प्राप्त करेगा।</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">बैंक का देश</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          चुनें
+          चुनते हैं
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">खाता प्रकार</label>
+      <label translate="yes">खाते का प्रकार</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,17 +52,17 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">खाता मुद्रा</label>
+          <label for="currency" translate="yes">खाते का पैसा</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              चुनें
+              चुनते हैं
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">खाताधारक का नाम</label>
+      <label for="account-holder-name" translate="yes">खाता धारक का नाम</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -133,7 +133,7 @@
       <h2 translate="yes">वैकल्पिक प्रारूप</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">कोड सॉर्ट करें</label>
+          <label for="sort_code" translate="yes">वर्तनी कोड</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">कोड समाशोधन</label>
+        <label for="clearing_code" translate="yes">समाशोधन कोड</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">शाखा कोड</label>
+        <label for="branch_code" translate="yes">शाखा क्र्मांक</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -175,7 +175,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">शाखा कोड</label>
+        <label for="branch_code" translate="yes">शाखा क्र्मांक</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">रूटिंग नंबर</label>
+        <label for="routing_number" translate="yes">राउटिंग नम्बर</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">रूटिंग नंबर</label>
+        <label for="routing_number" translate="yes">राउटिंग नम्बर</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -237,7 +237,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">शाखा कोड</label>
+        <label for="branch_code" translate="yes">शाखा क्र्मांक</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">रूटिंग नंबर</label>
+        <label for="routing_number" translate="yes">राउटिंग नम्बर</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">भुगतान की जानकारी सहेजें</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">भुगतान जानकारी सहेजें</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,22 +283,22 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      सफलता! भुगतान की जानकारी अपडेट कर दी गई है
+      सफलता! भुगतान जानकारी अपडेट कर दी गई है
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! भुगतान की जानकारी अपडेट करने में गड़बड़ी
+      त्रुटि! भुगतान जानकारी को अपडेट करने में त्रुटि हुई
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      त्रुटि! बैंक का अमान्य या लापता देश
+      त्रुटि! बैंक का अमान्य या गुम देश
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      त्रुटि! खाते की अमान्य या गायब मुद्रा
+      त्रुटि! खाते की अमान्य या अनुपलब्ध मुद्रा
     </div>
   </template>
   <template id="invalid-account_holder_type">
@@ -308,57 +308,57 @@
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या गुम खाता नंबर
+      त्रुटि! अमान्य या गुम खाता संख्या
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या गायब बीएसबी नंबर
+      त्रुटि! अमान्य या अनुपलब्ध BSB नंबर
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता बैंक कोड नंबर
+      त्रुटि! अमान्य या गुम बैंक कोड संख्या
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या गुम हो जाता है सॉर्ट कोड
+      त्रुटि! अमान्य या अनुपलब्ध सॉर्ट कोड
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता संस्थान संख्या
+      त्रुटि! अमान्य या अनुपलब्ध संस्थान संख्या
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता ट्रांजिट नंबर
+      त्रुटि! अमान्य या अनुपलब्ध ट्रांज़िट नंबर
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या गुम हो गया क्लियरिंग कोड नंबर
+      त्रुटि! अमान्य या अनुपलब्ध क्लियरिंग कोड संख्या
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या गुम शाखा कोड नंबर
+      त्रुटि! अमान्य या अनुपस्थित शाखा कोड संख्या
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता खाताधारक का नाम
+      त्रुटि! अमान्य या गुम खाता धारक का नाम
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता IBAN नंबर
+      त्रुटि! अमान्य या अनुपस्थित IBAN नंबर
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता ट्रांजिट नंबर
+      त्रुटि! अमान्य या अनुपलब्ध पारगमन संख्या
     </div>
   </template>
 </body>

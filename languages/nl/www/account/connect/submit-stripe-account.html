@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Opslaan ${stripeAccount.id}</title>
+  <title translate="yes">Verzenden ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Opslaan ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verificatieproces door uw ingevulde registratie in te dienen.</p>
+  <h1 translate="yes">Verzenden ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verificatieproces door uw voltooide registratie in te dienen.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Uiteindelijk begunstigden</h2>
+    <h2 translate="yes">Begunstigde eigenaren</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Bedrijfsleiders</h2>
+    <h2 translate="yes">Bedrijfsdirecteuren</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -90,32 +90,32 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      De registratie heeft onvolledige registratie-informatie
+      De registratie bevat onvolledige registratie-informatie
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fout! U moet de bestuurders van het bedrijf indienen
+      Fout! U moet de directeuren van het bedrijf indienen
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fout! U moet de uiteindelijke eigenaren van het bedrijf indienen
+      Fout! U moet de uiteindelijke begunstigden van het bedrijf indienen
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Fout! U moet de gegevens van de bedrijfsvertegenwoordiger
+      Fout! U moet de informatie van de bedrijfsvertegenwoordiger opgeven
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Fout! De registratie heeft onvolledige betalingsgegevens
+      Fout! De registratie bevat onvolledige betalingsgegevens
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Succes! De inschrijving is ingediend
+      Succes! De registratie is ingediend
     </div>
   </template>
   <template id="unknown-error">

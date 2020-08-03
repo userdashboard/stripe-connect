@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">전망 ${payout.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">전망 ${payout.id}</h1>
+  <div id="message-container"></div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <tbody id="${payout.id}">
+      <tr>
+        <th>ID</th>
+        <td>${payout.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">양</th>
+        <td>${payout.amountFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Stripe 계정</th>
+        <td>
+          <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+        </td>
+      </tr>
+      <tr>
+        <th translate="yes">상태</th>
+        <td id="status-${payout.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">기술</th>
+        <td>${payout.description}</td>
+      </tr>
+      <tr>
+        <th translate="yes">만들어진</th>
+        <td>${payout.createdFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">은행 계좌를 찾을 수 없습니다</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">잘못된 통화</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">잘못된 계좌 번호</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">부족한 자금</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">은행 송금 거부</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">은행 계좌 자동 이체 없음</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">처리 할 수 없습니다</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">은행 소유권이 변경됨</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">은행 계좌 제한</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">은행 계좌 동결</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">은행 계좌 폐쇄</span>
+  </template>
+</body>
+</html>

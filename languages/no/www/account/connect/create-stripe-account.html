@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Opprett registrering</h1>
-  <p translate="yes">En fullført registrering lar deg motta inntektsutbetalinger gjennom Stripe Connect.</p>
+  <p translate="yes">En fullført registrering lar deg motta inntektsutbetalinger via Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Bosteds-/inkorporeringsland</label>
+      <label for="country" translate="yes">Oppholdsland / hjemsted</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Velg land
@@ -39,7 +39,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Feil! Det oppstod en feil under oppretting av registreringen
+      Feil! Det oppstod en feil ved oppretting av registreringen
     </div>
   </template>
   <template id="invalid-country">

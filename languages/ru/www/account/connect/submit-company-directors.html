@@ -12,16 +12,16 @@
 </head>
 <body>
   <h1 translate="yes">Отправить директоров для ${stripeAccount.id}</h1>
-  <p translate="yes">Когда вы закончите добавлять директоров компании, если таковые имеются, представить их на рассмотрение.</p>
+  <p translate="yes">Когда вы закончите добавлять директоров компании, отправьте их на рассмотрение.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Директора компаний</h2>
+    <h2 translate="yes">Директора компании</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Имя</th>
-          <th translate="yes">Требует</th>
+          <th translate="yes">название</th>
+          <th translate="yes">требует</th>
         </tr>
       </thead>
     </table>
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}" translate="yes">Добавление информации</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}" translate="yes">Добавить информацию</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Ошибка! Есть директора по-прежнему требуется информация
+      Ошибка! Есть директора, которые по-прежнему нуждаются в информации
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Директора компании были представлены
+      Успех! Директора компании представлены
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ошибка! Произошла ошибка представления директоров
+      Ошибка! Произошла ошибка при отправке директоров
     </div>
   </template>
 </body>

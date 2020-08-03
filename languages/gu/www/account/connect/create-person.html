@@ -11,7 +11,7 @@
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
     <h1 translate="yes">નવી વ્યક્તિ બનાવો</h1>
-    <p translate="yes">તમારી માહિતી માં ફેરફાર થતાં બોર્ડ ઓફ ડિરેક્ટર્સ, માલિકો અને પ્રતિનિધિને અપડેટ રાખવા જોઈએ.</p>
+    <p translate="yes">ડિરેક્ટર મંડળ, માલિકો અને પ્રતિનિધિ તમારી માહિતી બદલાતા હોવાથી અપ-ટૂ-ડેટ હોવા આવશ્યક છે.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">કંપની સાથે સંબંધ</h2>
@@ -22,56 +22,56 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">નોકરી, ભૂમિકા અથવા સંબંધનું શીર્ષક</label>
+        <label for="relationship_title" translate="yes">નોકરી, ભૂમિકા અથવા સંબંધ શીર્ષક</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">ટકાવારી માલિકીની છે (જો કોઈ હોય તો)</label>
+        <label for="relationship_percent_ownership" translate="yes">ટકા માલિકીની (જો કોઈ હોય તો)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">નોંધણી સુધારો</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">અપડેટ નોંધણી</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      સફળતા! રજિસ્ટ્રેશન અપડેટ કરવામાં આવ્યું છે
+      સફળતા! નોંધણી સુધારી દેવામાં આવી છે
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      ભૂલ! રજિસ્ટ્રેશન બનાવી રહ્યા હોય ત્યારે ભૂલ ઉદ્ભવી
+      ભૂલ! નોંધણી બનાવવામાં ભૂલ આવી
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      તમારા Stripe એકાઉન્ટને લાભદાયક માલિક માહિતીની જરૂર નથી
+      તમારા Stripe એકાઉન્ટને લાભકારક માલિકની માહિતીની જરૂર નથી
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      તમારા Stripe એકાઉન્ટને કંપની ડિરેક્ટર માહિતીની જરૂર નથી
+      તમારા Stripe એકાઉન્ટને કંપની ડિરેક્ટરની માહિતીની જરૂર નથી
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      કંપનીના પ્રતિનિધિઓ એક્ઝિક્યુટિવ હોવા જોઈએ
+      કંપનીના પ્રતિનિધિઓ એક્ઝિક્યુટિવ હોવા આવશ્યક છે
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      ક્યાં તો પ્રતિનિધિ, નિર્દેશક અથવા માલિકની પસંદગી થવી જ જોઇએ
+      ક્યાં પ્રતિનિધિ, નિર્દેશક અથવા માલિકની પસંદગી કરવી આવશ્યક છે
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      ભૂલ! અયોગ્ય અથવા ગુમ થયેલ ટકાવારી માલિકી (0 જો નહિં)
+      ભૂલ! અમાન્ય અથવા ગુમ થયેલ ટકા માલિકી (જો કોઈ નહીં હોય તો)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      ભૂલ! અયોગ્ય અથવા ગુમ થયેલ સંબંધ શીર્ષક
+      ભૂલ! અમાન્ય અથવા ગુમ થયેલ સંબંધનું શીર્ષક
     </div>
   </template>
 </body>

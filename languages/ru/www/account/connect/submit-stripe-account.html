@@ -12,26 +12,26 @@
 </head>
 <body>
   <h1 translate="yes">Отправить ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> процесс проверки путем отправки заполненной регистрации.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> процесс проверки, отправив заполненную регистрацию.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Бенефициары владельцев</h2>
+    <h2 translate="yes">Бенефициарные владельцы</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Имя</th>
+          <th translate="yes">название</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Директора компаний</h2>
+    <h2 translate="yes">Директора компании</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Имя</th>
+          <th translate="yes">название</th>
         </tr>
       </thead>
     </table>
@@ -105,22 +105,22 @@
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Ошибка! Вы должны представить информацию представителя компании
+      Ошибка! Вы должны предоставить информацию представителя компании
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Ошибка! Регистрация имеет неполную платежную информацию
+      Ошибка! Регистрация имеет неполную информацию об оплате
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Регистрация была подана
+      Успех! Регистрация была представлена
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ошибка! Произошла ошибка при подаче регистрации
+      Ошибка! Произошла ошибка при регистрации
     </div>
   </template>
 </body>

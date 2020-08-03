@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Senden ${stripeAccount.id}</title>
+  <title translate="yes">einreichen ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Senden ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> Überprüfungsprozess durch Einreichen Ihrer ausgefüllten Registrierung.</p>
+  <h1 translate="yes">einreichen ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> Überprüfungsprozess durch Absenden Ihrer vollständigen Registrierung.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Günstige Eigentümer</h2>
+    <h2 translate="yes">Wirtschaftliche Eigentümer</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namen</th>
+          <th translate="yes">Name</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Geschäftsführer</h2>
+    <h2 translate="yes">Unternehmensleiter</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namen</th>
+          <th translate="yes">Name</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Anmeldung einreichen</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Registrierung einreichen</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,27 +90,27 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Die Registrierung verfügt über unvollständige Registrierungsinformationen
+      Die Registrierung enthält unvollständige Registrierungsinformationen
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fehler! Sie müssen die Geschäftsführer des Unternehmens einreichen
+      Error! Sie müssen die Direktoren des Unternehmens einreichen
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fehler! Sie müssen die wirtschaftlichen Eigentümer des Unternehmens einreichen
+      Error! Sie müssen die wirtschaftlichen Eigentümer des Unternehmens einreichen
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Fehler! Sie müssen die Informationen des Unternehmensvertreters einreichen
+      Error! Sie müssen die Informationen des Unternehmensvertreters einreichen
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Fehler! Die Registrierung verfügt über unvollständige Zahlungsinformationen
+      Error! Die Registrierung enthält unvollständige Zahlungsinformationen
     </div>
   </template>
   <template id="success">
@@ -120,7 +120,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fehler! Beim Senden der Registrierung ist ein Fehler aufgetreten.
+      Error! Beim Senden der Registrierung ist ein Fehler aufgetreten
     </div>
   </template>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Igazgatók beküldése ${stripeAccount.id}</title>
+  <title translate="yes">Nyújtsa be a ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Igazgatók beküldése ${stripeAccount.id}</h1>
-  <p translate="yes">Ha befejezte a vállalat igazgatóinak hozzáadását, ha vannak ilyenek, küldje el őket ellenőrzésre.</p>
+  <h1 translate="yes">Nyújtsa be a ${stripeAccount.id}</h1>
+  <p translate="yes">Ha befejezte a cég igazgatóinak felvételét (ha van ilyen), nyújtsa be őket áttekintésre.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Vállalati igazgatók</h2>
+    <h2 translate="yes">Cégvezetők</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">név</th>
-          <th translate="yes">Megköveteli</th>
+          <th translate="yes">Név</th>
+          <th translate="yes">Igényel</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Igazgatók beküldése</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Nyújtsa be az igazgatókat</button>
     </div>
   </form>
   <template id="person-row">
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}" translate="yes">Adatok hozzáadása</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-company-directors%3Fstripeid=${person.account}" translate="yes">Adjon hozzá információkat</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Hiba! Vannak igazgatók, akiknek még mindig van rá szüksége
+      Hiba! Vannak olyan rendezők, akik továbbra is információt igényelnek
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Siker! A vállalat igazgatóit benyújtották
+      Siker! A társaság igazgatóit benyújtották
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hiba! Hiba történt az igazgatók beküldésekor
+      Hiba! Hiba történt az igazgatók benyújtásakor
     </div>
   </template>
 </body>

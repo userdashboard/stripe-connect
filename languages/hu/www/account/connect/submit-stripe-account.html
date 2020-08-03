@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Benyújtja ${stripeAccount.id}</title>
+  <title translate="yes">Beküldés ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Benyújtja ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> a befejezett regisztráció benyújtásával.</p>
+  <h1 translate="yes">Beküldés ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> ellenőrzési folyamat a kitöltött regisztráció benyújtásával.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Tényleges tulajdonosok</h2>
+    <h2 translate="yes">Kedvezményezett tulajdonosok</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">név</th>
+          <th translate="yes">Név</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Vállalati igazgatók</h2>
+    <h2 translate="yes">Cégvezetők</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">név</th>
+          <th translate="yes">Név</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Regisztráció elküldése</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Regisztráció benyújtása</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      A regisztráció hiányos regisztrációs adatokkal rendelkezik
+      A regisztráció hiányos regisztrációs információval rendelkezik
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Hiba! Be kell nyújtania a vállalat igazgatóit
+      Hiba! Nyújtsa be a cég igazgatóit
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Hiba! Be kell nyújtania a vállalat tényleges tulajdonosait
+      Hiba! Be kell nyújtania a társaság tényleges tulajdonosát
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Hiba! Meg kell küldenie a vállalat képviselőjének adatait
+      Hiba! Be kell nyújtania a cég képviselőjének adatait
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Hiba! A regisztráció hiányos fizetési adatokkal rendelkezik
+      Hiba! A regisztráció hiányos fizetési információkat tartalmaz
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Siker! A regisztrációt benyújtották
+      Siker! A regisztráció benyújtva
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hiba! Hiba történt a regisztráció elküldésekor
+      Hiba! Hiba történt a regisztráció benyújtásakor
     </div>
   </template>
 </body>

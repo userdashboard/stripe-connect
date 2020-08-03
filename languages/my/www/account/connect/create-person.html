@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">လူသစ်ကိုဖန်တီးပါ ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">လူသစ်ကိုဖန်တီးပါ</h1>
+    <p translate="yes">သင်၏သတင်းအချက်အလက်ပြောင်းလဲလာသည်နှင့်အမျှဒါရိုက်တာဘုတ်အဖွဲ့၊ ပိုင်ရှင်များနှင့်ကိုယ်စားလှယ်များသည်နောက်ဆုံးပေါ်ခေတ်မီအောင်ထိန်းသိမ်းထားရမည်။</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">ကုမ္ပဏီနှင့်ဆက်ဆံရေး</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">အလုပ်, အခန်းကဏ္ or သို့မဟုတ်ဆက်ဆံရေးခေါင်းစဉ်</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">ပိုင်ဆိုင်သည့်ရာခိုင်နှုန်း (ရှိလျှင်)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">မှတ်ပုံတင်ကို update လုပ်ပါ</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      အောင်မြင်ပြီ အဆိုပါမှတ်ပုံတင် updated ဖြစ်ပါတယ်
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      အမှား! မှတ်ပုံတင်ခြင်းလုပ်ခြင်းအမှားတစ်ခုဖြစ်ပွားခဲ့သည်
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      သင်၏ Stripe အကောင့်သည်အကျိုးရှိသောပိုင်ရှင်သတင်းအချက်အလက်မလိုအပ်ပါ
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      သင်၏ Stripe အကောင့်သည်ကုမ္ပဏီညွှန်ကြားရေးမှူးအချက်အလက်များမလိုအပ်ပါ
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      ကုမ္ပဏီကိုယ်စားလှယ်များသည်အမှုဆောင်များဖြစ်ရမည်
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      ကိုယ်စားလှယ်, ဒါရိုက်တာသို့မဟုတ်ပိုင်ရှင်တစ်ခုခုကိုရွေးချယ်ရမည်ဖြစ်သည်
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      အမှား! မမှန်ကန်သောသို့မဟုတ်ပျောက်ဆုံးသောရာခိုင်နှုန်းပိုင်ဆိုင်မှု (၀ မရှိပါက 0)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      အမှား! မမှန်ကန်သောသို့မဟုတ်ပျောက်ဆုံးနေသောဆက်ဆံရေးခေါင်းစဉ်
+    </div>
+  </template>
+</body>
+</html>

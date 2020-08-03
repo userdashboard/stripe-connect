@@ -2,26 +2,26 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Создание регистрации</title>
+  <title translate="yes">Создать регистрацию</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Создание регистрации</h1>
-  <p translate="yes">Завершенная регистрация позволяет получать доходные выплаты через Stripe Connect.</p>
+  <h1 translate="yes">Создать регистрацию</h1>
+  <p translate="yes">Завершенная регистрация позволяет получать выплаты дохода через Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Тип учетной записи</label>
+      <label for="individual" translate="yes">Тип аккаунта</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Страна проживания / регистрация</label>
+      <label for="country" translate="yes">Страна проживания / регистрации</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Выберите страну
@@ -29,7 +29,7 @@
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Начало регистрации</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Начать регистрацию</button>
     </div>
   </form>
   <template id="country-option">
@@ -44,7 +44,7 @@
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая страна
+      Ошибка! Неверная или отсутствующая страна
     </div>
   </template>
 </body>

@@ -13,16 +13,16 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Raó de rebuig</label>
+      <label for="reason" translate="yes">Motiu del rebuig</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          Seleccioneu la raó
+          Selecciona el motiu
         </option>
         <option value="fraud" translate="yes">
           Frau
         </option>
         <option value="terms_of_service" translate="yes">
-          Termes d'infracció del servei
+          Condicions de violació del servei
         </option>
         <option value="other" translate="yes">
           Altres
@@ -32,21 +32,21 @@
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Èxit! El compte Stripe ha estat rebutjat
+      Èxit! El compte Stripe s'ha rebutjat
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Error! El compte ha de tenir un saldo/bin/sh abans de rebutjar
+      Error! El compte ha de tenir un saldo / bin / sh abans de rebutjar
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Error! Un ocurred d'error que rebutja el compte de Stripe
+      Error! S'ha produït un error en expulsar el compte Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">No presentat encara</span>
+    <span translate="yes">No enviat encara</span>
   </template>
   <template id="verified">
     <span translate="yes">S'ha acceptat la inscripció</span>
@@ -61,7 +61,7 @@
     <span translate="yes">Requereix informació addicional</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pendent d'enviament</span>
+    <span translate="yes">Pendent de la tramesa</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Rebutjat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -76,13 +76,13 @@
     <span><span translate="yes">Rebutjat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Es requereix més informació</span>
+    <span translate="yes">Es necessita més informació</span>
   </template>
   <template id="listed">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Desactivat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

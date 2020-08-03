@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Odoslať majiteľa pre ${stripeAccount.id}</title>
+  <title translate="yes">Vložte vlastníkov na ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,17 +11,17 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Odoslať majiteľa pre ${stripeAccount.id}</h1>
-  <p translate="yes">Po dokončení pridávania všetkých ostatných vlastníkov, ak existujú, odošlite ich na recenziu.</p>
+  <h1 translate="yes">Vložte vlastníkov na ${stripeAccount.id}</h1>
+  <p translate="yes">Po dokončení pridávania všetkých ostatných vlastníkov ich odošlite na kontrolu.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Koneční vlastníci</h2>
+    <h2 translate="yes">Priazniví vlastníci</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">meno</th>
-          <th translate="yes">Vyžaduje</th>
+          <th translate="yes">názov</th>
+          <th translate="yes">vyžaduje</th>
         </tr>
       </thead>
     </table>
@@ -38,19 +38,19 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Pridať informácie</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Pridajte informácie</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Chyba! Existujú majitelia stále vyžadujú informácie.
+      Chyba! Stále existujú vlastníci, ktorí požadujú informácie.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Úspech! Vlastníci spoločnosti boli predložené
+      Úspech! Majitelia spoločnosti boli prihlásení
     </div>
   </template>
   <template id="unknown-error">

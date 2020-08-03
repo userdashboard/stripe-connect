@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Dileu ${stripeAccount.id}</h1>
-  <p translate="yes">Caiff y cyfrif Stripe ei ddileu ar unwaith ac ni ellir ei adfer.</p>
+  <p translate="yes">Bydd y cyfrif Stripe yn cael ei ddileu ar unwaith ac ni ellir ei adfer.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Dileu</button>
@@ -22,7 +22,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Gwall! Gwall ocurred ddileu'r cyfrif Stripe
+      Gwall! Digwyddodd gwall wrth ddileu'r cyfrif Stripe
     </div>
   </template>
 </body>

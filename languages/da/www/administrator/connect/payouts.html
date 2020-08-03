@@ -12,7 +12,7 @@
   <h1 translate="yes">Udbetalinger</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Der er endnu ikke foretaget udbetalinger.</p>
+    <p translate="yes">Der er ikke sket nogen udbetalinger endnu.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -20,9 +20,9 @@
         <th>ID</th>
         <th translate="yes">Beløb</th>
         <th translate="yes">Stripe-konto</th>
-        <th translate="yes">Status</th>
+        <th translate="yes">status</th>
         <th translate="yes">Beskrivelse</th>
-        <th translate="yes">Lavet</th>
+        <th translate="yes">lavet</th>
       </tr>
     </thead>
   </table>
@@ -50,7 +50,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Der blev ikke fundet en bankkonto</span>
+    <span translate="yes">Der blev ikke fundet nogen bankkonto</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Ugyldig valuta</span>
@@ -62,25 +62,25 @@
     <span translate="yes">Ugyldigt kontonummer</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Utilstrækkelige midler</span>
+    <span translate="yes">Ikke nok penge</span>
   </template>
   <template id="declined">
     <span translate="yes">Bank afviste overførsel</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Ingen debitering af bankkonto</span>
+    <span translate="yes">Ingen bankkontodebitering</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">Kunne ikke behandle</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Bankejerskab ændret</span>
+    <span translate="yes">Bank ejerskab ændret</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Spærret bankkonto</span>
+    <span translate="yes">Bankkonto begrænset</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Indefrosset bankkonto</span>
+    <span translate="yes">Bankkonto frosset</span>
   </template>
   <template id="account_closed">
     <span translate="yes">Bankkonto lukket</span>

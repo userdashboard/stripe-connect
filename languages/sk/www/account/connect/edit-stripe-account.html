@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Upraviť ${stripeAccount.id}</title>
+  <title translate="yes">editovať ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,11 +17,11 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Upraviť ${stripeAccount.id}</h1>
+    <h1 translate="yes">editovať ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">Adresa URL webovej lokality</label>
+        <label for="business_profile_url" translate="yes">URL webových stránok</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
@@ -32,7 +32,7 @@
         <label for="business_profile_mcc" translate="yes">Kód kategórie obchodníka</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
-            Vyberte kód pre vašu firmu
+            Vyberte kód svojej firmy
           </option>
         </select>
       </div>
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Názov firmy</label>
+            <label for="name" translate="yes">Obchodné meno</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Daňové identifikačné číslo</label>
+            <label for="tax_id" translate="yes">DIČ</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
             <a id="name_kana-anchor"></a>
-            <label for="name_kana" translate="yes">Názov obchodnej činnosti Kana</label>
+            <label for="name_kana" translate="yes">Obchodné meno spoločnosti Kana</label>
             <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">Názov firmy Kanji</label>
+            <label for="name_kanji" translate="yes">Obchodné meno Kanji</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">Adresa URL webovej lokality</label>
+            <label for="business_profile_url" translate="yes">URL webových stránok</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -92,14 +92,14 @@
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
         <h2 translate="yes">Založenie spoločnosti</h2>
-        <label for="verification_document_front" translate="yes">Predná kontrola/fotografia</label>
+        <label for="verification_document_front" translate="yes">Predné skenovanie / fotografia</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Späť skenovanie / foto</label>
+        <label for="verification_document_back" translate="yes">Zadné skenovanie / fotografia</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Osobné údaje</h2>
+      <h2 translate="yes">Osobné informácie</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
@@ -116,7 +116,7 @@
         </div>
       </div>
       <div id="email-container" class="pure-control-group">
-        <label for="email" translate="yes">E-mailová adresa</label>
+        <label for="email" translate="yes">Emailová adresa</label>
         <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
@@ -125,7 +125,7 @@
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">Kana osobné údaje</h2>
+      <h2 translate="yes">Osobné informácie spoločnosti Kana</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
@@ -143,7 +143,7 @@
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Kanji osobné údaje</h2>
+      <h2 translate="yes">Osobné údaje Kanji</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
@@ -161,7 +161,7 @@
       </div>
     </div>
     <div id="dob-container" class="pure-control-group">
-      <label for="dob_day" translate="yes">dátum narodenia</label>
+      <label for="dob_day" translate="yes">Dátum narodenia</label>
       <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
       <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
       <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
@@ -171,36 +171,36 @@
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Pohlavie</label>
+      <label for="gender" translate="yes">rod</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Ženské</span></label>
-        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Mužskej</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Žena</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Muž</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
       <h2 translate="yes">Osobná identifikácia</h2>
-      <label for="id_number" translate="yes">Číslo pasu alebo preukazu totožnosti</label>
+      <label for="id_number" translate="yes">Pas alebo identifikačné číslo</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Predná kontrola/fotografia</label>
+      <label for="verification_document_front" translate="yes">Predné skenovanie / fotografia</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Späť skenovanie / foto</label>
+      <label for="verification_document_back" translate="yes">Zadné skenovanie / fotografia</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Doklad o adrese</h2>
+      <h2 translate="yes">Dôkaz adresy</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Predná kontrola/fotografia</label>
+      <label for="verification_additional_document_front" translate="yes">Predné skenovanie / fotografia</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Späť skenovanie / foto</label>
+      <label for="verification_additional_document_back" translate="yes">Zadné skenovanie / fotografia</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
-      <h2 translate="yes">Adresu</h2>
+      <h2 translate="yes">adresa</h2>
       <div id="address_line1-container" class="pure-control-group">
         <label for="address_line1" translate="yes">Riadok 1</label>
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
@@ -210,7 +210,7 @@
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">City</label>
+        <label for="address_city" translate="yes">veľkomesto</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -219,7 +219,7 @@
             <label for="address_state" translate="yes">Štát alebo provincia</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Vyberte stav
+                Vyberte štát
               </option>
             </select>
           </div>
@@ -240,7 +240,7 @@
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">City</label>
+        <label for="address_kana_city" translate="yes">veľkomesto</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
@@ -248,22 +248,22 @@
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">Štátu</label>
+        <label for="address_kana_state" translate="yes">Štát</label>
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Psč</label>
+        <label for="address_kana_postal_code" translate="yes">Poštové smerovacie číslo</label>
         <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="kanji-address-container">
-      <h2 translate="yes">Adresa Kanji</h2>
+      <h2 translate="yes">Kanji adresa</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
         <label for="address_kanji_line1" translate="yes">Riadok 1</label>
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">City</label>
+        <label for="address_kanji_city" translate="yes">veľkomesto</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
@@ -271,16 +271,16 @@
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">Štátu</label>
+        <label for="address_kanji_state" translate="yes">Štát</label>
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Psč</label>
+        <label for="address_kanji_postal_code" translate="yes">Poštové smerovacie číslo</label>
         <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizácia konta Stripe</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizujte účet Stripe</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -291,8 +291,8 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">Úspech! Konto Stripe bol aktualizovaný</span>
-      <a href="/account/connect" translate="yes">Návrat na konto</a>
+      <span translate="yes">Úspech! Účet Stripe bol aktualizovaný</span>
+      <a href="/account/connect" translate="yes">Návrat na účet</a>
     </div>
   </template>
   <template id="unknown-error">
@@ -302,7 +302,7 @@
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Chyba! Pri odovzdávaní obrázkov dokumentu sa vyskytla chyba
+      Chyba! Pri nahrávaní obrázkov dokumentu sa vyskytla chyba
     </div>
   </template>
   <template id="invalid-token">
@@ -312,12 +312,12 @@
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Chyba! Neplatná alebo chýbajúca adresa URL firmy
+      Chyba! Neplatná alebo chýbajúca webová adresa firmy
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci kód kategórie obchodného obchodníka
+      Chyba! Neplatný alebo chýbajúci kód kategórie obchodníka
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
@@ -327,22 +327,22 @@
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Chyba! Neplatná alebo chýbajúca predná kontrola dokumentu alebo fotografia
+      Chyba! Neplatné alebo chýbajúce predné skenovanie alebo fotografia dokumentu
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci dokument späť skenovanie alebo foto
+      Chyba! Neplatné alebo chýbajúce spätné skenovanie alebo fotografia dokumentu
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Chyba! Neplatná alebo chýbajúca ďalšia predná kontrola alebo fotografia dokumentu
+      Chyba! Neplatné alebo chýbajúce predné skenovanie alebo fotografia predného dokumentu
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýba ďalší dokument späť skenovanie alebo fotografie
+      Chyba! Neplatné alebo chýbajúce ďalšie skenovanie alebo fotografia zadného dokumentu
     </div>
   </template>
   <template id="invalid-id_number">
@@ -352,22 +352,22 @@
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci názov firmy
+      Chyba! Neplatné alebo chýbajúce obchodné meno
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci názov firmy kana
+      Chyba! Neplatné alebo chýbajúce obchodné meno Kana
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci názov firmy kanji
+      Chyba! Neplatné alebo chýbajúce obchodné meno kanji
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Chyba! Neplatná alebo chýbajúca identifikácia živnostensti
+      Chyba! Neplatné alebo chýbajúce identifikačné číslo firmy
     </div>
   </template>
   <template id="invalid-phone">
@@ -382,7 +382,7 @@
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce posledné 4 číslice čísla sociálneho poistenia
+      Chyba! Posledné 4 číslice čísla sociálneho zabezpečenia sú neplatné alebo chýbajú
     </div>
   </template>
   <template id="invalid-dob_day">
@@ -437,7 +437,7 @@
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce mesto osobnej adresy
+      Chyba! Mesto je neplatné alebo chýba
     </div>
   </template>
   <template id="invalid-address_state">
@@ -447,12 +447,12 @@
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci riadok osobnej adresy 1
+      Chyba! Neplatný alebo chýbajúci riadok s osobnou adresou 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce osobné PSČ
+      Chyba! Neplatný alebo chýbajúci osobný poštový kód
     </div>
   </template>
   <template id="invalid-address_kana_city">
@@ -462,22 +462,22 @@
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci stav osobnej adresy Kana
+      Chyba! Neplatný alebo chýbajúci štátny údaj o adrese Kana
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce mesto osobnej adresy Kana
+      Chyba! Neplatné alebo chýbajúce mesto s osobnou adresou v Kane
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci riadok osobnej adresy Kana 1
+      Chyba! Neplatný alebo chýbajúci riadok 1 osobnej adresy spoločnosti Kana
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce kana osobné adresy PSČ
+      Chyba! Poštové smerovacie číslo osobnej adresy spoločnosti Kana je neplatné alebo chýba
     </div>
   </template>
   <template id="invalid-address_kanji_city">
@@ -497,12 +497,12 @@
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Chyba! Neplatný alebo chýbajúci riadok osobnej adresy Kanji 1
+      Chyba! Neplatný alebo chýbajúci riadok 1 osobnej adresy Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Chyba! Neplatné alebo chýbajúce Kanji osobné adresy PSČ
+      Chyba! Neplatné alebo chýbajúce poštové smerovacie číslo Kanji
     </div>
   </template>
 </body>

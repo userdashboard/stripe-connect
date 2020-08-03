@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Dzēst ${stripeAccount.id}</h1>
-  <p translate="yes">Konts Stripe nekavējoties tiks dzēsts, un to nevar atkopt.</p>
+  <p translate="yes">Stripe konts tiks nekavējoties izdzēsts, un to nevar atgūt.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Dzēst</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Panākumus! Stripe konts ir izdzēsts
+      Panākumi! Stripe konts ir izdzēsts
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kļūda! Radās kļūda , dzēšot Stripe kontu
+      Kļūda! Dzēšot Stripe kontu, radās kļūda
     </div>
   </template>
 </body>

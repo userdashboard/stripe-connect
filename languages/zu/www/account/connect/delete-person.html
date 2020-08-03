@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-person.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Susa ${person.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Susa ${person.id}</h1>
+  <p translate="yes">Imininingwane yomnikazi izosuswa ngokushesha futhi ingatholakali.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Susa</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Impumelelo! Umnikazi wenkampani ususiwe
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Iphutha! Kuvele iphutha kusula umnikazi wenkampani
+    </div>
+  </template>
+</body>
+</html>

@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Usunąć ${person.id}</h1>
-  <p translate="yes">Informacje o właścicielu zostaną natychmiast usunięte i nie można ich odzyskać.</p>
+  <p translate="yes">Informacje o właścicielu zostaną natychmiast usunięte i nie będzie można ich odzyskać.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Usunąć</button>
@@ -22,7 +22,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Błąd! Wystąpił błąd usunięcia właściciela firmy
+      Błąd! Wystąpił błąd podczas usuwania właściciela firmy
     </div>
   </template>
 </body>

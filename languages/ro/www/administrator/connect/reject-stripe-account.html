@@ -13,16 +13,16 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Motivul respingerii</label>
+      <label for="reason" translate="yes">Motiv de respingere</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          Selectare motiv
+          Selectați motivul
         </option>
         <option value="fraud" translate="yes">
           Fraudă
         </option>
         <option value="terms_of_service" translate="yes">
-          Încălcarea condițiilor de utilizare a serviciului
+          Condiții de încălcare a serviciului
         </option>
         <option value="other" translate="yes">
           Alte
@@ -37,16 +37,16 @@
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Eroare! Contul trebuie să aibă un sold /bin/sh înainte de a respinge
+      Eroare! Contul trebuie să aibă un sold / bin / sh înainte de a respinge
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Eroare! Eroare la respingerea contului Stripe
+      Eroare! A apărut o eroare la evacuarea contului Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nu s-a prezentat încă</span>
+    <span translate="yes">Nu a fost încă trimis</span>
   </template>
   <template id="verified">
     <span translate="yes">Înregistrarea a fost acceptată</span>
@@ -64,28 +64,28 @@
     <span translate="yes">În așteptarea depunerii</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Mai multe informații sunt necesare</span>
   </template>
   <template id="listed">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Dezactivat de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Dezactivat de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

@@ -17,18 +17,18 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Vrsta</th>
+        <th translate="yes">Vtipkajte</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">ime</th>
+        <th translate="yes">Ime</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Državi</th>
+        <th translate="yes">Država</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
@@ -36,14 +36,14 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Predloženi</th>
+        <th translate="yes">Oddano</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Še ni predloženo</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Informacije o registraciji</h2>
+    <h2 translate="yes">Podatki o registraciji</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,13 +51,13 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Predstavnik podjetja</h2>
-    <p translate="yes">Da se izognete motnjam pri računu, predložite nove reprezentativne informacije, če navedena oseba zapusti ali ne predstavlja več podjetja.</p>
+    <h2 translate="yes">Zastopnik podjetja</h2>
+    <p translate="yes">Če se želite izogniti motnjam v računu, pošljite nove zastopniške podatke, če navedena oseba zapusti podjetje ali ga ne zastopa več.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
           <th translate="yes">Zahtevane informacije</th>
         </tr>
       </thead>
@@ -67,13 +67,13 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Informacije o drugih dejanskih lastnikih</h2>
-    <p translate="yes">Predložiti morate dokumentacijo za kogar koli drugega, ki ima v lasti znaten (25 +) odstotek družbe ali zadolžen za podjetje, finance ali operacije.</p>
+    <h2 translate="yes">Druge koristne informacije o lastnikih</h2>
+    <p translate="yes">Predložiti morate dokumentacijo za vse druge, ki imajo v lasti znaten (25+) odstotkov družbe ali ki skrbijo za podjetje, finance ali poslovanje.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
           <th translate="yes">Zahteva</th>
         </tr>
       </thead>
@@ -84,13 +84,13 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informacije o direktorjih podjetja</h2>
-    <p translate="yes">Zagotoviti morate polna imena upravnega odbora podjetja in/ali ljudi, odgovornih za vzdrževanje regulativne skladnosti.</p>
+    <h2 translate="yes">Podatki direktorjev podjetij</h2>
+    <p translate="yes">Navesti morate popolna imena upravnega odbora vašega podjetja in / ali ljudi, odgovornih za vzdrževanje skladnosti s predpisi.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
           <th translate="yes">Zahteva</th>
         </tr>
       </thead>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Pošlji registracijo</h2>
+    <h2 translate="yes">Oddaj registracijo</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,28 +120,28 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Dodajanje informacij</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Dodajte podatke</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Skladi so plačani za račun ${bank_account.bank_name}.</p>
+    <p translate="yes">Sredstva se nakažejo na račun ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Bančne podatke je treba zagotoviti za prejemanje sredstev.</p>
+    <p translate="yes">Za prejemanje sredstev morate zagotoviti bančne podatke.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">Registracija ni bila predložena.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Registracija je bila predložena na ${account.dateFormatted}.</p>
+    <p translate="yes">Registracija je bila poslana dne ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Podatki o registraciji niso bili predloženi.</p>
+    <p translate="yes">Podatki o registraciji niso bili navedeni.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Predložene so bile informacije o registraciji.</p>
+    <p translate="yes">Podani so podatki o registraciji.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Še ni predloženo</span>
@@ -153,7 +153,7 @@
     <span translate="yes">Zahteva dodatne informacije</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čakajoča predložitev</span>
+    <span translate="yes">Pred oddajo</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Zavrnil Stripe, glej</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Pod pregledom, ki ga Stripe</span>
+    <span translate="yes">V pregledu Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Pod pregledom, ki ga Stripe</span>
+    <span translate="yes">V pregledu Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Zavrnil Stripe, glej</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

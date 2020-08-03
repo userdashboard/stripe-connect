@@ -10,26 +10,26 @@
 </head>
 <body>
   <h1 translate="yes">Waihanga rēhitatanga</h1>
-  <p translate="yes">Kua oti i a koe te rēhitatanga o te moni puta payouts i te Stripe Connect.</p>
+  <p translate="yes">Ko te rehitatanga kua oti ke koe te whiwhi moni whiwhi na Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Momo pūkete</label>
+      <label for="individual" translate="yes">Momo putea</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Whenua o residence/kaporeihana</label>
+      <label for="country" translate="yes">Whenua noho / kaporeihana</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Tīpako whenua
+          Whiriwhiria te whenua
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tīmata i te rēhitatanga</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tīmata rehitatanga</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hē! Kua puta mai tētahi hapa i te waihangatanga o te rēhitatanga
+      He hapa! Kua puta he hapa mo te hanga i te rehitatanga
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Hē! Whenua muhu, ngaro rānei
+      He hapa! Whenua ngaro, ngaro ranei
     </div>
   </template>
 </body>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Rad eting ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Rad eting ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Rad etish sababi</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Sababni tanlang
+        </option>
+        <option value="fraud" translate="yes">
+          Firibgarlik
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Xizmatni buzish shartlari
+        </option>
+        <option value="other" translate="yes">
+          Boshqalar
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Rad eting</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Muvaffaqiyat! Stripe hisobi rad qilindi
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Xato! Rad etishdan oldin hisobingizda bin / sh balansi bo'lishi kerak
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Xato! Stripe hisobini yechishda xatolik yuz berdi
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Hali topshirilmagan</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Ro'yxatdan o'tish qabul qilindi</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Stripe tomonidan o'chirilgan</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Qo'shimcha ma'lumotlarni talab qiladi</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Qo'shimcha ma'lumotlarni talab qiladi</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Taqdim etish kutilmoqda</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe tomonidan rad etilgan, qarang</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe tomonidan rad etilgan, qarang</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe tomonidan rad etilgan, qarang</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe tomonidan rad etilgan, qarang</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Qo'shimcha ma'lumot talab qilinadi</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe tomonidan ko'rib chiqilmoqda</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe tomonidan ko'rib chiqilmoqda</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe tomonidan o'chirilgan, qarang</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

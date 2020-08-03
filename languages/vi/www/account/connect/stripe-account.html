@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Xem ${stripeAccount.id}</title>
+  <title translate="yes">Lượt xem ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Xem ${stripeAccount.id}</h1>
+  <h1 translate="yes">Lượt xem ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,7 +17,7 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Loại</th>
+        <th translate="yes">Kiểu</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Tình trạng</th>
+        <th translate="yes">Trạng thái</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
         <th translate="yes">Gửi</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Không nộp chưa</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Thông tin đăng ký</h2>
+    <h2 translate="yes">Thông tin đăng kí</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,7 +52,7 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Đại diện công ty</h2>
-    <p translate="yes">Để tránh gián đoạn tài khoản, hãy gửi thông tin đại diện mới nếu người được chỉ định rời đi hoặc không đại diện cho công ty nữa.</p>
+    <p translate="yes">Để tránh gián đoạn tài khoản, hãy gửi thông tin đại diện mới nếu người được chỉ định rời khỏi hoặc không còn đại diện cho công ty.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -68,7 +68,7 @@
   </div>
   <div id="owners-container">
     <h2 translate="yes">Thông tin chủ sở hữu có lợi khác</h2>
-    <p translate="yes">Bạn phải cung cấp tài liệu cho bất cứ ai khác sở hữu một (25 +) phần trăm đáng kể của công ty hoặc phụ trách công ty, tài chính hoặc hoạt động.</p>
+    <p translate="yes">Bạn phải cung cấp tài liệu cho bất kỳ ai khác sở hữu một phần trăm đáng kể (25+) công ty hoặc phụ trách công ty, tài chính hoặc hoạt động.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -85,7 +85,7 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">Thông tin giám đốc công ty</h2>
-    <p translate="yes">Bạn phải cung cấp đầy đủ tên của Hội đồng quản trị của công ty và/hoặc người chịu trách nhiệm duy trì tuân thủ quy định.</p>
+    <p translate="yes">Bạn phải cung cấp tên đầy đủ của hội đồng quản trị của công ty bạn và / hoặc những người chịu trách nhiệm duy trì sự tuân thủ quy định.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Tiền được thanh toán vào tài khoản ${bank_account.bank_name}.</p>
+    <p translate="yes">Tiền được trả vào tài khoản ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Chi tiết ngân hàng phải được cung cấp để nhận tiền.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Việc đăng ký chưa được gửi.</p>
+    <p translate="yes">Việc đăng ký chưa được nộp.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Việc đăng ký đã được gửi vào ${account.dateFormatted}.</p>
+    <p translate="yes">Đăng ký đã được gửi vào ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">Thông tin đăng ký chưa được cung cấp.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Thông tin đăng ký đã được cung cấp.</p>
+    <p translate="yes">Các thông tin đăng ký đã được cung cấp.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Chưa nộp</span>
+    <span translate="yes">Không nộp chưa</span>
   </template>
   <template id="verified">
     <span translate="yes">Đăng ký đã được chấp nhận</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Yêu cầu thông tin bổ sung</span>
+    <span translate="yes">Yêu cầu thêm thông tin</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">Đang chờ nộp</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Bị từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Bị từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Bị từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Bị từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Xem xét bởi Stripe</span>
+    <span translate="yes">Đang xem xét bởi Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Xem xét bởi Stripe</span>
+    <span translate="yes">Đang xem xét bởi Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Bị từ chối bởi Stripe, xem</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Yêu cầu thông tin bổ sung</span>
+    <span translate="yes">Yêu cầu thêm thông tin</span>
   </template>
 </body>
 </html>

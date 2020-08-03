@@ -12,17 +12,17 @@
   <h1 translate="yes">Pagaments</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">No s'han produït pagaments encara.</p>
+    <p translate="yes">Encara no s'ha produït cap pagament.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Quantitat</th>
+        <th translate="yes">Import</th>
         <th translate="yes">Compte Stripe</th>
         <th translate="yes">Estat</th>
         <th translate="yes">Descripció</th>
-        <th translate="yes">Creada</th>
+        <th translate="yes">Creat</th>
       </tr>
     </thead>
   </table>
@@ -50,7 +50,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">No es troba cap compte bancari</span>
+    <span translate="yes">No s'ha trobat cap compte bancari</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Moneda no vàlida</span>
@@ -59,19 +59,19 @@
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Número de compte no vàlid</span>
+    <span translate="yes">El número de compte no és vàlid</span>
   </template>
   <template id="insufficient_funds">
     <span translate="yes">Fons insuficients</span>
   </template>
   <template id="declined">
-    <span translate="yes">Banc de transferència rebutjada</span>
+    <span translate="yes">La transferència bancària ha rebutjat</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Cap compte bancari</span>
+    <span translate="yes">Sense dèbit de compte bancari</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">No ha pogut processar</span>
+    <span translate="yes">No s'ha pogut processar</span>
   </template>
   <template id="bank_ownership_changed">
     <span translate="yes">La propietat bancària ha canviat</span>

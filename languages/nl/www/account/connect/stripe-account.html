@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Bekijken ${stripeAccount.id}</title>
+  <title translate="yes">Visie ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Bekijken ${stripeAccount.id}</h1>
+  <h1 translate="yes">Visie ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Status</th>
+        <th translate="yes">Toestand</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
         <th translate="yes">Ingediend</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">nog niet ingediend</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Registratiegegevens</h2>
+    <h2 translate="yes">Registratie informatie</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Bedrijfsvertegenwoordiger</h2>
-    <p translate="yes">Om onderbreking van het account te voorkomen, dient u nieuwe representatieve informatie in als de opgegeven persoon het bedrijf verlaat of niet meer vertegenwoordigt.</p>
+    <p translate="yes">Om verstoring van het account te voorkomen, dient u nieuwe representatieve informatie in als de opgegeven persoon het bedrijf verlaat of niet langer vertegenwoordigt.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Naam</th>
-          <th translate="yes">Vereiste informatie</th>
+          <th translate="yes">Benodigde informatie</th>
         </tr>
       </thead>
     </table>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Andere nuttige eigenaren informatie</h2>
-    <p translate="yes">U moet documentatie verstrekken voor iedereen die een aanzienlijk (25+) percentage van het bedrijf bezit of verantwoordelijk is voor het bedrijf, de financiën of de activiteiten.</p>
+    <h2 translate="yes">Andere informatie over uiteindelijke begunstigden</h2>
+    <p translate="yes">U moet documentatie verstrekken voor iedereen die een aanzienlijk (25+) procent van het bedrijf bezit of verantwoordelijk is voor het bedrijf, de financiën of de activiteiten.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informatie van bedrijfsleiders</h2>
-    <p translate="yes">U moet volledige namen opgeven van de raad van bestuur van uw bedrijf en/of personen die verantwoordelijk zijn voor het handhaven van de naleving van de regelgeving.</p>
+    <h2 translate="yes">Informatie over bedrijfsleiders</h2>
+    <p translate="yes">U moet de volledige namen opgeven van de raad van bestuur van uw bedrijf en / of de mensen die verantwoordelijk zijn voor het naleven van de regelgeving.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Betalingsgegevens</h2>
+    <h2 translate="yes">Betalingsinformatie</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -126,25 +126,25 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Fondsen worden betaald op rekening ${bank_account.bank_name}.</p>
+    <p translate="yes">Geld wordt op rekening gestort ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Bankgegevens moeten worden verstrekt om geld te ontvangen.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">De inschrijving is niet ingediend.</p>
+    <p translate="yes">De registratie is niet ingediend.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">De inschrijving is ingediend op ${account.dateFormatted}.</p>
+    <p translate="yes">De registratie is ingediend op ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">De registratiegegevens zijn niet verstrekt.</p>
+    <p translate="yes">De registratie-informatie is niet verstrekt.</p>
   </template>
   <template id="completed-registration">
     <p translate="yes">De registratie-informatie is verstrekt.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nog niet ingediend</span>
+    <span translate="yes">nog niet ingediend</span>
   </template>
   <template id="verified">
     <span translate="yes">Registratie is geaccepteerd</span>
@@ -153,7 +153,7 @@
     <span translate="yes">Vereist aanvullende informatie</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">In behandeling zijnde indiening</span>
+    <span translate="yes">In afwachting van indiening</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Afgewezen door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Afgewezen door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

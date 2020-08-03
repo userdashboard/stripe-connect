@@ -11,7 +11,7 @@
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
     <h1 translate="yes">Buat orang baru</h1>
-    <p translate="yes">Dewan Direksi, pemilik dan perwakilan harus tetap up-to-date sebagai perubahan informasi Anda.</p>
+    <p translate="yes">Dewan direksi, pemilik dan perwakilan harus selalu mendapat informasi terbaru saat informasi Anda berubah.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Hubungan dengan perusahaan</h2>
@@ -22,26 +22,26 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Jabatan, peran atau hubungan</label>
+        <label for="relationship_title" translate="yes">Judul pekerjaan, peran atau hubungan</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Persen dimiliki (jika ada)</label>
+        <label for="relationship_percent_ownership" translate="yes">Persen yang dimiliki (jika ada)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Memperbarui pendaftaran</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Perbarui pendaftaran</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Sukses! Pendaftaran telah diperbarui
+      Keberhasilan! Registrasi telah diperbarui
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kesalahan! Terjadi galat membuat pendaftaran
+      Kesalahan! Terjadi kesalahan saat membuat pendaftaran
     </div>
   </template>
   <template id="invalid-owner">
@@ -51,17 +51,17 @@
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Akun Stripe Anda tidak memerlukan informasi Direktur perusahaan
+      Akun Stripe Anda tidak memerlukan informasi direktur perusahaan
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Perwakilan perusahaan harus menjadi Eksekutif
+      Perwakilan perusahaan harus menjadi eksekutif
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Baik perwakilan, Direktur atau pemilik harus dipilih
+      Baik perwakilan, direktur atau pemilik harus dipilih
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
@@ -71,7 +71,7 @@
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Kesalahan! Judul hubungan tidak valid atau hilang
+      Kesalahan! Judul hubungan salah atau tidak ada
     </div>
   </template>
 </body>

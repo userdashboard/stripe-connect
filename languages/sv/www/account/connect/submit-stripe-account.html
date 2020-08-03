@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Skicka ${stripeAccount.id}</title>
+  <title translate="yes">Skicka in ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Skicka ${stripeAccount.id}</h1>
+  <h1 translate="yes">Skicka in ${stripeAccount.id}</h1>
   <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verifieringsprocessen genom att skicka in din slutförda registrering.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Förmånstagare</h2>
+    <h2 translate="yes">Gynnsamma ägare</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Företagsledare</h2>
+    <h2 translate="yes">Företagets ledare</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
         </tr>
       </thead>
     </table>
@@ -95,17 +95,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fel! Du måste lämna in bolagets styrelseledamöter
+      Fel! Du måste lämna in företagets styrelseledamöter
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fel! Du måste lämna in företagets verkliga ägare
+      Fel! Du måste lämna in företagets fördelaktiga ägare
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Fel! Du måste lämna in företagets representants information
+      Fel! Du måste lämna in företagsrepresentantens information
     </div>
   </template>
   <template id="invalid-payment-details">

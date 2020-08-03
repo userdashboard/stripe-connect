@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Issottometti lis-sidien ${stripeAccount.id}</title>
+  <title translate="yes">Issottometti sidien għal ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Issottometti lis-sidien ${stripeAccount.id}</h1>
-  <p translate="yes">Meta tkun lestejt iżżid is-sidien l-oħra kollha, jekk ikun hemm, issottomettihom għal reviżjoni.</p>
+  <h1 translate="yes">Issottometti sidien għal ${stripeAccount.id}</h1>
+  <p translate="yes">Meta tkun lestejt iżżid is-sidien l-oħra kollha, jekk hemm, ibgħathom għal reviżjoni.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Sidien benefiċjarji</h2>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Issottometti s-s</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Is-sidien jissottomettu</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,7 +45,7 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Żball! Għad hemm sidien li għadhom jeħtieġu informazzjoni.
+      Żball! Hemm sidien li għadhom jeħtieġu informazzjoni.
     </div>
   </template>
   <template id="success">
@@ -55,7 +55,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Żball! Sar żball fis-sottomissjoni tas-sidien
+      Żball! Sar żball meta ppreżentaw is-sidien
     </div>
   </template>
 </body>

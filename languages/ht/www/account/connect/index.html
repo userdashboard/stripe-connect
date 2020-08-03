@@ -11,55 +11,55 @@
 </head>
 <body>
   <h1 translate="yes">Stripe Connect kont</h1>
-  <p><span translate="yes">Vin yon machann pa verifye idantite pesonel ou ak enfomasyon konpayi ou nan</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Vin yon vandè pa verifye idantite pèsonèl ou ak enfòmasyon konpayi nan</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Kondisyon endividyel</h2>
+        <h2 translate="yes">Kondisyon endividyèl yo</h2>
         <ol>
-          <li translate="yes">Verifye enfomasyon pesonel</li>
-          <li translate="yes">Rezidan yon peyi ki sipote</li>
-          <li translate="yes">Kont labank nan yon peyi ki sipote</li>
+          <li translate="yes">Verifye enfòmasyon pèsonèl</li>
+          <li translate="yes">Rezidan nan yon peyi sipòte</li>
+          <li translate="yes">Kont labank nan yon peyi sipòte</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Komanse enskripsyon endividyel</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Kòmanse enskripsyon endividyèl</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Kondisyon biznis</h2>
         <ol>
-          <li translate="yes">Verifye enfomasyon pesonel</li>
-          <li translate="yes">Biznis anrejistre nan yon peyi ki sipote</li>
-          <li translate="yes">Kont labank nan yon peyi ki sipote</li>
+          <li translate="yes">Verifye enfòmasyon pèsonèl</li>
+          <li translate="yes">Biznis ki anrejistre nan yon peyi ki sipòte</li>
+          <li translate="yes">Kont labank nan yon peyi sipòte</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Komanse enskripsyon konpayi</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Kòmanse enskripsyon konpayi an</a>
       </div>
     </div>
   </div>
   <div id="individual-container">
-    <h2 translate="yes">Enskripsyon endividyel</h2>
+    <h2 translate="yes">Anrejistreman endividyèl</h2>
     <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">fe-apel</th>
-          <th translate="yes">Estati</th>
+          <th translate="yes">Non</th>
+          <th translate="yes">Ki dènye nouvèl</th>
           <th translate="yes">Kreye</th>
-          <th translate="yes">Soumet</th>
+          <th translate="yes">Soumèt</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="company-container">
-    <h2 translate="yes">Konpayi anrejistreman</h2>
+    <h2 translate="yes">Anrejistreman konpayi an</h2>
     <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">fe-apel</th>
-          <th translate="yes">Estati</th>
+          <th translate="yes">Non</th>
+          <th translate="yes">Ki dènye nouvèl</th>
           <th translate="yes">Kreye</th>
-          <th translate="yes">Soumet</th>
+          <th translate="yes">Soumèt</th>
         </tr>
       </thead>
     </table>
@@ -69,7 +69,7 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Pa anko bay</td>
+      <td id="blank-name-${account.id}" translate="yes">Pa ankò bay</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
@@ -79,46 +79,46 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Pa soumet ko ou</span>
+    <span translate="yes">Pa soumèt ankò</span>
   </template>
   <template id="verified">
     <span translate="yes">Enskripsyon te aksepte</span>
   </template>
   <template id="verified">
-    <span translate="yes">Enfim pa Stripe</span>
+    <span translate="yes">Andikape pa Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Mande pou ou soumet ak enfomasyon adisyonel</span>
+    <span translate="yes">Mande pouw remèt li ak lòt enfòmasyon</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Annatant soumet</span>
+    <span translate="yes">Annatandan soumèt</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Andikape pa Stripe, gade rezon komen</span>
+      <span translate="yes">Andikape pa Stripe, wè rezon komen</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Andikape pa Stripe, gade rezon komen</span>
+      <span translate="yes">Andikape pa Stripe, wè rezon komen</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Andikape pa Stripe, gade rezon komen</span>
+      <span translate="yes">Andikape pa Stripe, wè rezon komen</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Andikape pa Stripe, gade rezon komen</span>
+      <span translate="yes">Andikape pa Stripe, wè rezon komen</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Gen plis enfomasyon ki nesese</span>
+    <span translate="yes">Plis enfòmasyon nesesè</span>
   </template>
   <template id="listed">
     <span translate="yes">Anba revizyon pa Stripe</span>
@@ -128,12 +128,12 @@
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Andikape pa Stripe, gade rezon komen</span>
+      <span translate="yes">Andikape pa Stripe, wè rezon komen</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Mande plis enfomasyon</span>
+    <span translate="yes">Mande pou plis enfòmasyon</span>
   </template>
 </body>
 </html>

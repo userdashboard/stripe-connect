@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Submeter proprietários para ${stripeAccount.id}</title>
+  <title translate="yes">Enviar proprietários para ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Submeter proprietários para ${stripeAccount.id}</h1>
-  <p translate="yes">Quando terminar de adicionar todos os outros proprietários, se houver, submetê-los para revisão.</p>
+  <h1 translate="yes">Enviar proprietários para ${stripeAccount.id}</h1>
+  <p translate="yes">Quando você terminar de adicionar todos os outros proprietários, se houver, envie-os para revisão.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Proprietários benéficos</h2>
+    <h2 translate="yes">Proprietários beneficiários</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Submeter proprietários</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Enviar proprietários</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Um erro! Ainda há proprietários que requerem informações.
+      Erro! Ainda existem proprietários que precisam de informações.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Que sucesso! Os proprietários da empresa foram submetidos
+      Sucesso! Os proprietários da empresa foram submetidos
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro ao submeter os proprietários
+      Erro! Ocorreu um erro ao enviar os proprietários
     </div>
   </template>
 </body>

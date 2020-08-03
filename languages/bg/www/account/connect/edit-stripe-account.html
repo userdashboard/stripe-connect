@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Редактиране ${stripeAccount.id}</title>
+  <title translate="yes">редактиране ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,11 +17,11 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Редактиране ${stripeAccount.id}</h1>
+    <h1 translate="yes">редактиране ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">URL адрес на уебсайта</label>
+        <label for="business_profile_url" translate="yes">Интернет адрес</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
@@ -32,7 +32,7 @@
         <label for="business_profile_mcc" translate="yes">Код на категорията на търговеца</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
-            Изберете кода за бизнеса си
+            Изберете кода за вашия бизнес
           </option>
         </select>
       </div>
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Име на фирма</label>
+            <label for="name" translate="yes">Име на фирмата</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
             <a id="name_kana-anchor"></a>
-            <label for="name_kana" translate="yes">Име на фирма кана</label>
+            <label for="name_kana" translate="yes">Име на фирма Kana</label>
             <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">Име на фирмата на канджи</label>
+            <label for="name_kanji" translate="yes">Канджи бизнес име</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">URL адрес на уебсайта</label>
+            <label for="business_profile_url" translate="yes">Интернет адрес</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -91,26 +91,26 @@
       <div id="company-verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <h2 translate="yes">Учредяване на дружеството</h2>
-        <label for="verification_document_front" translate="yes">Предно сканиране/снимка</label>
+        <h2 translate="yes">Дружество на компанията</h2>
+        <label for="verification_document_front" translate="yes">Предно сканиране / снимка</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Сканиране назад/снимка</label>
+        <label for="verification_document_back" translate="yes">Обратно сканиране / снимка</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Лични данни</h2>
+      <h2 translate="yes">Лична информация</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
-            <label for="first_name" translate="yes">Собствено име</label>
+            <label for="first_name" translate="yes">Първо име</label>
             <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name-container" class="pure-control-group">
-            <label for="last_name" translate="yes">Фамилно име</label>
+            <label for="last_name" translate="yes">Фамилия</label>
             <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
           </div>
         </div>
@@ -125,36 +125,36 @@
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">Лична информация от Кана</h2>
+      <h2 translate="yes">Лична информация на Кана</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
-            <label for="first_name_kana" translate="yes">Собствено име</label>
+            <label for="first_name_kana" translate="yes">Първо име</label>
             <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kana-container" class="pure-control-group">
-            <label for="last_name_kana" translate="yes">Фамилно име</label>
+            <label for="last_name_kana" translate="yes">Фамилия</label>
             <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
           </div>
         </div>
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Лична информация за канджи</h2>
+      <h2 translate="yes">Лична информация на Kanji</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
-            <label for="first_name_kanji" translate="yes">Собствено име</label>
+            <label for="first_name_kanji" translate="yes">Първо име</label>
             <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kanji-container" class="pure-control-group">
-            <label for="last_name_kanji" translate="yes">Фамилно име</label>
+            <label for="last_name_kanji" translate="yes">Фамилия</label>
             <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -171,52 +171,52 @@
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Пол</label>
+      <label for="gender" translate="yes">пол</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Женски</span></label>
-        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Мъжки</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Женски пол</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Мъжки пол</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
       <h2 translate="yes">Лична идентификация</h2>
-      <label for="id_number" translate="yes">Паспорт или номер на лична карта</label>
+      <label for="id_number" translate="yes">Паспорт или идентификационен номер</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Предно сканиране/снимка</label>
+      <label for="verification_document_front" translate="yes">Предно сканиране / снимка</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Сканиране назад/снимка</label>
+      <label for="verification_document_back" translate="yes">Обратно сканиране / снимка</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
       <h2 translate="yes">Доказателство за адрес</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Предно сканиране/снимка</label>
+      <label for="verification_additional_document_front" translate="yes">Предно сканиране / снимка</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Сканиране назад/снимка</label>
+      <label for="verification_additional_document_back" translate="yes">Обратно сканиране / снимка</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
-      <h2 translate="yes">Адрес</h2>
+      <h2 translate="yes">адрес</h2>
       <div id="address_line1-container" class="pure-control-group">
-        <label for="address_line1" translate="yes">На първа линия</label>
+        <label for="address_line1" translate="yes">Ред 1</label>
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
-        <label for="address_line2" translate="yes">На 2-ри, на 20-</label>
+        <label for="address_line2" translate="yes">Ред 2</label>
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">Град</label>
+        <label for="address_city" translate="yes">град</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <div class="pure-g">
           <div id="address_state-container" class="pure-u-17-24">
-            <label for="address_state" translate="yes">Държава или провинция</label>
+            <label for="address_state" translate="yes">Щат или Провинция</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
                 Изберете състояние
@@ -234,21 +234,21 @@
       </div>
     </div>
     <div id="kana-address-container">
-      <h2 translate="yes">Адрес на кана</h2>
+      <h2 translate="yes">Адрес на Кана</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
-        <label for="address_kana_line1" translate="yes">На първа линия</label>
+        <label for="address_kana_line1" translate="yes">Ред 1</label>
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">Град</label>
+        <label for="address_kana_city" translate="yes">град</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
-        <label for="address_kana_town" translate="yes">Град</label>
+        <label for="address_kana_town" translate="yes">град</label>
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">Членка</label>
+        <label for="address_kana_state" translate="yes">състояние</label>
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
@@ -257,21 +257,21 @@
       </div>
     </div>
     <div id="kanji-address-container">
-      <h2 translate="yes">Адрес на канджи</h2>
+      <h2 translate="yes">Kanji адрес</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
-        <label for="address_kanji_line1" translate="yes">На първа линия</label>
+        <label for="address_kanji_line1" translate="yes">Ред 1</label>
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">Град</label>
+        <label for="address_kanji_city" translate="yes">град</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
-        <label for="address_kanji_town" translate="yes">Град</label>
+        <label for="address_kanji_town" translate="yes">град</label>
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">Членка</label>
+        <label for="address_kanji_state" translate="yes">състояние</label>
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
@@ -280,7 +280,7 @@
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Актуализиране на профила Stripe</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Актуализирайте акаунта на Stripe</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -291,83 +291,83 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">Успех! Акаунтът Stripe е актуализиран</span>
-      <a href="/account/connect" translate="yes">Връщане в акаунта</a>
+      <span translate="yes">Успех! Профилът Stripe е актуализиран</span>
+      <a href="/account/connect" translate="yes">Върнете се в акаунта</a>
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Грешка! Неизвестна грешка
+      Грешка! Възникна неизвестна грешка
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Грешка! Възникна грешка при качване на изображения на документи
+      Грешка! Възникна грешка при качването на изображения на документи
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Грешка! Възникна грешка при подаване на формуляра
+      Грешка! Възникна грешка при изпращането на формуляра
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ адрес на бизнес
+      Грешка! Невалиден или липсващ бизнес адрес
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ бизнес код на категорията на търговеца
+      Грешка! Невалиден или липсващ код на категорията на търговеца
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсващо описание на продукт
+      Грешка! Невалидно или липсващо описание на бизнес продукта
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ документ за сканиране или снимка
+      Грешка! Невалидно или липсващо предно сканиране или снимка на документа
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсва документ обратно сканиране или снимка
+      Грешка! Невалидно или липсващо сканиране или снимка на документа назад
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Грешка! Невалидни или липсващи допълнителни сканирания или снимки на допълнителен документ
+      Грешка! Невалидно или липсващо допълнително сканиране или снимка отпред
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ допълнителен документ обратно сканиране или снимка
+      Грешка! Невалидно или липсващо допълнително сканиране или снимка на обратно документи
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ персонален идентификационен номер
+      Грешка! Невалиден или липсващ личен идентификационен номер
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсващо име на бизнес
+      Грешка! Невалидно или липсващо име на фирма
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсващо име на бизнеса на kana
+      Грешка! Невалидно или липсващо име на фирмата в кана
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсващо име на канджи бизнес
+      Грешка! Невалидно или липсващо име на канджи
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ идентификационен номер на бизнес данък
+      Грешка! Невалиден или липсващ идентификационен номер за бизнес данък
     </div>
   </template>
   <template id="invalid-phone">
@@ -382,7 +382,7 @@
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Грешка! Невалидни или липсващи последните 4 цифри на социално-осигурителен номер
+      Грешка! Невалидни или липсващи последните 4 цифри от социалния осигурителен номер
     </div>
   </template>
   <template id="invalid-dob_day">
@@ -402,17 +402,17 @@
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсващо собствено име
+      Грешка! Невалидно или липсващо име
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсва собствено име на Кана
+      Грешка! Невалидно или липсващо първо име на Кана
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсва собствено име на Канджи
+      Грешка! Невалидно или липсващо име на Kanji
     </div>
   </template>
   <template id="invalid-last_name">
@@ -422,12 +422,12 @@
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Грешка! Невалидна или липсваща фамилия на Kana
+      Грешка! Невалидно или липсващо фамилно име на Кана
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсва фамилно име на Канджи
+      Грешка! Невалидно или липсващо фамилно име на Kanji
     </div>
   </template>
   <template id="invalid-email">
@@ -437,72 +437,72 @@
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ личен адрес на града
+      Грешка! Невалиден или липсващ личен адрес град
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсващо състояние на личния адрес
+      Грешка! Невалидно или липсващо състояние на личен адрес
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ ред за личен адрес 1
+      Грешка! Невалиден или липсващ ред 1 на личен адрес
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ пощенски код
+      Грешка! Невалиден или липсващ личен пощенски код
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ град на личен адрес на Кана
+      Грешка! Невалиден или липсващ личен адрес на град Кана
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсване на състояние на личен адрес на Kana
+      Грешка! Невалидно или липсващо състояние на личен адрес на Kana
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ канален личен адрес град
+      Грешка! Невалиден или липсващ град с личен адрес на Кана
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ канал за личен адрес ред 1
+      Грешка! Невалиден или липсващ ред за личен адрес на Kana 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсва Kana личен пощенски код
+      Грешка! Невалиден или липсващ пощенски код на личен адрес на Kana
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ град на канджи с личен адрес
+      Грешка! Невалиден или липсващ личен адрес на Канджи
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Грешка! Невалидно или липсва състояние на личен адрес на Канджи
+      Грешка! Невалидно или липсващо състояние на личен адрес на Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ канджи личен адрес град
+      Грешка! Невалиден или липсващ личен адрес на град Канджи
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ ред за личен адрес на Канджи 1
+      Грешка! Невалиден или липсващ ред 1 на личен адрес на Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Грешка! Невалиден или липсващ пощенски код на канджи
+      Грешка! Невалиден или липсващ пощенски код за личен адрес на Kanji
     </div>
   </template>
 </body>

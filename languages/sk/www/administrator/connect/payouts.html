@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Výplaty</title>
+  <title translate="yes">platby</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Výplaty</h1>
+  <h1 translate="yes">platby</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
     <p translate="yes">Zatiaľ nedošlo k žiadnym výplatám.</p>
@@ -18,11 +18,11 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Čiastka</th>
-        <th translate="yes">Stripe účet</th>
-        <th translate="yes">Stav</th>
-        <th translate="yes">Popis / kontrol</th>
-        <th translate="yes">Vytvorený</th>
+        <th translate="yes">čiastka</th>
+        <th translate="yes">Účet Stripe</th>
+        <th translate="yes">Postavenie</th>
+        <th translate="yes">popis</th>
+        <th translate="yes">Vytvorené</th>
       </tr>
     </thead>
   </table>
@@ -50,7 +50,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Nenašli sa žiadne bankové konto</span>
+    <span translate="yes">Nenašiel sa žiadny bankový účet</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Neplatná mena</span>
@@ -62,28 +62,28 @@
     <span translate="yes">Neplatné číslo účtu</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Nedostatočné finančné prostriedky</span>
+    <span translate="yes">Nedostatok prostriedkov</span>
   </template>
   <template id="declined">
-    <span translate="yes">Bankový pokles prevodu</span>
+    <span translate="yes">Banka odmietla prevod</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Žiadne debetné platby na bankový účet</span>
+    <span translate="yes">Žiadny debet z bankového účtu</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">Nepodarilo sa spracovať</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Bankové vlastníctvo sa zmenilo</span>
+    <span translate="yes">Vlastníctvo banky sa zmenilo</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Obmedzený bankový účet</span>
+    <span translate="yes">Bankový účet je obmedzený</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Zmrazený bankový účet</span>
+    <span translate="yes">Bankový účet je zmrazený</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Bankový účet bol zrušený</span>
+    <span translate="yes">Bankový účet je zatvorený</span>
   </template>
 </body>
 </html>

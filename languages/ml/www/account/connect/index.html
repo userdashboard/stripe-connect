@@ -11,26 +11,26 @@
 </head>
 <body>
   <h1 translate="yes">Stripe Connect അക്കൗണ്ടുകൾ</h1>
-  <p><span translate="yes">നിങ്ങളുടെ വ്യക്തിഗത ഐഡന്റിറ്റിയും കമ്പനി വിവരങ്ങളും പരിശോധിച്ചുറപ്പിക്കുക വഴി ഒരു വെണ്ടർ ആകുക</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">നിങ്ങളുടെ വ്യക്തിഗത ഐഡന്റിറ്റിയും കമ്പനി വിവരങ്ങളും പരിശോധിച്ചുകൊണ്ട് ഒരു വെണ്ടർ ആകുക</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">വ്യക്തിഗത ആവശ്യകതകൾ</h2>
         <ol>
-          <li translate="yes">പരിശോധിച്ചുറപ്പിച്ച വ്യക്തിഗത വിവരങ്ങൾ</li>
-          <li translate="yes">പിന്തുണയുള്ള ഒരു രാജ്യത്തിന്റെ റെസിഡന്റ്</li>
-          <li translate="yes">പിന്തുണയുള്ള രാജ്യത്തെ ബാങ്ക് അക്കൗണ്ട്</li>
+          <li translate="yes">വ്യക്തിഗത വിവരങ്ങൾ പരിശോധിച്ചു</li>
+          <li translate="yes">പിന്തുണയ്u200cക്കുന്ന രാജ്യത്ത് താമസിക്കുന്നയാൾ</li>
+          <li translate="yes">പിന്തുണയ്u200cക്കുന്ന രാജ്യത്ത് ബാങ്ക് അക്കൗണ്ട്</li>
         </ol>
         <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">വ്യക്തിഗത രജിസ്ട്രേഷൻ ആരംഭിക്കുക</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">ബിസിനസ് ആവശ്യങ്ങൾ</h2>
+        <h2 translate="yes">ബിസിനസ്സ് ആവശ്യകതകൾ</h2>
         <ol>
-          <li translate="yes">പരിശോധിച്ചുറപ്പിച്ച വ്യക്തിഗത വിവരങ്ങൾ</li>
-          <li translate="yes">പിന്തുണയുള്ള രാജ്യത്ത് രജിസ്റ്റർ ചെയ്ത ബിസിനസ്സ്</li>
-          <li translate="yes">പിന്തുണയുള്ള രാജ്യത്തെ ബാങ്ക് അക്കൗണ്ട്</li>
+          <li translate="yes">വ്യക്തിഗത വിവരങ്ങൾ പരിശോധിച്ചു</li>
+          <li translate="yes">പിന്തുണയ്u200cക്കുന്ന രാജ്യത്ത് ബിസിനസ്സ് രജിസ്റ്റർ ചെയ്u200cതു</li>
+          <li translate="yes">പിന്തുണയ്u200cക്കുന്ന രാജ്യത്ത് ബാങ്ക് അക്കൗണ്ട്</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">കമ്പനി രജിസ്ട്രേഷൻ ആരംഭിക്കുക</a>
       </div>
@@ -42,10 +42,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">നില</th>
-          <th translate="yes">സൃഷ്ടിക്കപ്പെട്ടത്</th>
-          <th translate="yes">സമര് പ്പിച്ച</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">പദവി</th>
+          <th translate="yes">സൃഷ്ടിച്ചു</th>
+          <th translate="yes">സമർപ്പിച്ചു</th>
         </tr>
       </thead>
     </table>
@@ -56,10 +56,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">നില</th>
-          <th translate="yes">സൃഷ്ടിക്കപ്പെട്ടത്</th>
-          <th translate="yes">സമര് പ്പിച്ച</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">പദവി</th>
+          <th translate="yes">സൃഷ്ടിച്ചു</th>
+          <th translate="yes">സമർപ്പിച്ചു</th>
         </tr>
       </thead>
     </table>
@@ -75,7 +75,7 @@
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">അല്ല</td>
+      <td id="not-submitted-${account.id}" translate="yes">ഇല്ല</td>
     </tr>
   </template>
   <template id="not-submitted">
@@ -85,35 +85,35 @@
     <span translate="yes">രജിസ്ട്രേഷൻ സ്വീകരിച്ചു</span>
   </template>
   <template id="verified">
-    <span translate="yes">Disabled by Stripe</span>
+    <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">അധിക വിവരങ്ങൾ ക്കൊപ്പം വീണ്ടും സമർപ്പിക്കേണ്ടതുണ്ട്</span>
+    <span translate="yes">അധിക വിവരങ്ങൾ ഉപയോഗിച്ച് വീണ്ടും സമർപ്പിക്കൽ ആവശ്യമാണ്</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">സമർപ്പിക്കൽ ബാക്കി</span>
+    <span translate="yes">സമർപ്പിക്കൽ തീർപ്പുകൽപ്പിച്ചിട്ടില്ല</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
+      <span translate="yes">Stripe അപ്രാപ്u200cതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
+      <span translate="yes">Stripe അപ്രാപ്u200cതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
+      <span translate="yes">Stripe അപ്രാപ്u200cതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
+      <span translate="yes">Stripe അപ്രാപ്u200cതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
@@ -121,19 +121,19 @@
     <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Stripe അവലോകനത്തിലാണ്</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Stripe അവലോകനത്തിലാണ്</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Stripe പ്രവർത്തനരഹിതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
+      <span translate="yes">Stripe അപ്രാപ്u200cതമാക്കി, പൊതുവായ കാരണങ്ങൾ കാണുക</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+    <span translate="yes">അധിക വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
 </body>
 </html>

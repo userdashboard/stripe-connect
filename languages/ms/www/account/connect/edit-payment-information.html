@@ -28,11 +28,11 @@
 </head>
 <body>
   <h1 translate="yes">Maklumat pembayaran untuk ${stripeAccount.id}</h1>
-  <p translate="yes">Kemas kini akaun bank yang akan menerima bayaran pendapatan anda.</p>
+  <p translate="yes">Kemas kini akaun bank yang akan menerima pembayaran hasil anda.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">Negara Bank</label>
+      <label for="country" translate="yes">Negara bank</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
           Pilih
@@ -41,7 +41,7 @@
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Jenis akaun</label>
+      <label translate="yes">Jenis Akaun</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,7 +52,7 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Mata Wang akaun</label>
+          <label for="currency" translate="yes">Mata wang akaun</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
               Pilih
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Nama pemegang akaun</label>
+      <label for="account-holder-name" translate="yes">Nama Pemilik Akaun</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -133,7 +133,7 @@
       <h2 translate="yes">Format alternatif</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Kod Isih</label>
+          <label for="sort_code" translate="yes">Kod ejaan</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Kod penjelasan</label>
+        <label for="clearing_code" translate="yes">Mengosongkan kod</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Kod cawangan</label>
+        <label for="branch_code" translate="yes">Kod Cawangan</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,11 +171,11 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Kod Bank</label>
+        <label for="bank_code" translate="yes">kod bank</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Kod cawangan</label>
+        <label for="branch_code" translate="yes">Kod Cawangan</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,11 +233,11 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Kod Bank</label>
+        <label for="bank_code" translate="yes">kod bank</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Kod cawangan</label>
+        <label for="branch_code" translate="yes">Kod Cawangan</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -283,22 +283,22 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Kejayaan! Maklumat pembayaran telah dikemaskini
+      Berjaya! Maklumat pembayaran telah dikemas kini
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ralat! Ocurred ralat mengemas kini maklumat pembayaran
+      Ralat! Berlaku ralat semasa mengemas kini maklumat pembayaran
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Ralat! Negara tidak sah atau hilang Bank
+      Ralat! Negara bank tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Ralat! Mata Wang akaun tidak sah atau hilang
+      Ralat! Mata wang akaun tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-account_holder_type">
@@ -318,32 +318,32 @@
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Ralat! Nombor kod Bank tidak sah atau hilang
+      Ralat! Nombor Kod Bank tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Ralat! Kod Isih tidak sah atau hilang
+      Ralat! Kod Susunan tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Ralat! Nombor institusi tidak sah atau hilang
+      Ralat! Nombor Institusi tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Ralat! Nombor transit tidak sah atau hilang
+      Ralat! Nombor Transit tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Ralat! Nombor kod penjelasan tidak sah atau hilang
+      Ralat! Nombor Kod Penjelasan tidak sah atau hilang
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Ralat! Nombor kod cawangan tidak sah atau hilang
+      Ralat! Nombor Kod Cawangan tidak sah atau tidak ada
     </div>
   </template>
   <template id="invalid-account_holder_name">

@@ -17,18 +17,18 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Cineál@ item: inlist</th>
+        <th translate="yes">Cineál</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Ainm@ item: inlist</th>
+        <th translate="yes">Ainm</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">TírCountry name (optional</th>
+        <th translate="yes">Tír</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
@@ -38,12 +38,12 @@
       <tr>
         <th translate="yes">Curtha isteach</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Níor cuireadh isteach fós</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Eolas clárúcháin</h2>
+    <h2 translate="yes">Faisnéis chlárúcháin</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,12 +52,12 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Ionadaí na cuideachta</h2>
-    <p translate="yes">Chun cur isteach ar an gcuntas a sheachaint, cuir isteach faisnéis ionadaíoch nua má fhágann nó mura ndéanann an duine sonraithe ionadaíocht ar an gcuideachta a thuilleadh.</p>
+    <p translate="yes">Chun cur isteach ar chuntais a sheachaint cuir isteach faisnéis ionadaíoch nua má fhágann an duine sonraithe nó mura ndéanann sé ionadaíocht thar ceann na cuideachta a thuilleadh.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Ainm@ item: inlist</th>
+          <th translate="yes">Ainm</th>
           <th translate="yes">Faisnéis riachtanach</th>
         </tr>
       </thead>
@@ -67,13 +67,13 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Faisnéis d'úinéirí tairbhiúla eile</h2>
-    <p translate="yes">Ní mór duit doiciméid a sholáthar do dhuine ar bith eile a bhfuil céatadán suntasach (25+) den chuideachta acu nó atá i gceannas ar an gcuideachta, ar airgeadas nó ar oibríochtaí.</p>
+    <h2 translate="yes">Faisnéis úinéirí tairbhiúla eile</h2>
+    <p translate="yes">Caithfidh tú cáipéisíocht a sholáthar d’aon duine eile ar leis céatadán substaintiúil (25+) den chuideachta nó atá i gceannas ar an gcuideachta, airgeadas nó oibríochtaí.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Ainm@ item: inlist</th>
+          <th translate="yes">Ainm</th>
           <th translate="yes">Éilíonn</th>
         </tr>
       </thead>
@@ -84,13 +84,13 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Eolas faoi stiúrthóirí cuideachta</h2>
-    <p translate="yes">Ní mór duit ainmneacha iomlána bhord rialaithe do chuideachta agus/nó daoine atá freagrach as comhlíonadh rialála a chothabháil a chur ar fáil.</p>
+    <h2 translate="yes">Faisnéis faoi stiúrthóirí cuideachta</h2>
+    <p translate="yes">Caithfidh tú ainmneacha iomlána bhord rialaithe do chuideachta agus / nó na ndaoine atá freagrach as comhlíonadh rialála a choinneáil.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Ainm@ item: inlist</th>
+          <th translate="yes">Ainm</th>
           <th translate="yes">Éilíonn</th>
         </tr>
       </thead>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Cuir clárúchán isteach</h2>
+    <h2 translate="yes">Cuir isteach clárú</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,16 +126,16 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Íoctar cistí leis an gcuntas ${bank_account.bank_name}.</p>
+    <p translate="yes">Íoctar cistí le cuntas ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Ní mór sonraí baincéireachta a sholáthar chun cistí a fháil.</p>
+    <p translate="yes">Caithfear sonraí baincéireachta a sholáthar chun cistí a fháil.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Níor cuireadh an clárúchán isteach.</p>
+    <p translate="yes">Níor cuireadh an clárú isteach.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Cuireadh an clárúchán isteach ar ${account.dateFormatted}.</p>
+    <p translate="yes">Cuireadh an clárú isteach ar ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">Níor soláthraíodh an fhaisnéis chlárúcháin.</p>
@@ -144,16 +144,16 @@
     <p translate="yes">Tá an fhaisnéis chlárúcháin curtha ar fáil.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Gan a bheith curtha isteach go fóill</span>
+    <span translate="yes">Níor cuireadh isteach fós</span>
   </template>
   <template id="verified">
     <span translate="yes">Glacadh le clárú</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Teastaíonn faisnéis bhreise uait</span>
+    <span translate="yes">Teastaíonn faisnéis bhreise</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Go dtí go dtí go ndéanfar aighneacht</span>
+    <span translate="yes">Ar feitheamh aighneacht</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Diúltaithe ag Stripe, féach</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -180,7 +180,7 @@
     <span><span translate="yes">Diúltaithe ag Stripe, féach</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Teastaíonn faisnéis bhreise uait</span>
+    <span translate="yes">Teastaíonn faisnéis bhreise</span>
   </template>
 </body>
 </html>

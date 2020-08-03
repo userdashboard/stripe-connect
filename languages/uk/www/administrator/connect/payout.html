@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Переглянути ${payout.id}</title>
+  <title translate="yes">Вид ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Переглянути ${payout.id}</h1>
+  <h1 translate="yes">Вид ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -22,7 +22,7 @@
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Stripe обліковий запис</th>
+        <th translate="yes">Рахунок Stripe</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
@@ -36,7 +36,7 @@
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Створений</th>
+        <th translate="yes">Створено</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,31 +45,31 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Банківський рахунок не знайдено</span>
+    <span translate="yes">Не знайдено банківського рахунку</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Неприпустима грошова одиниця</span>
+    <span translate="yes">Недійсна валюта</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Неприпустимий номер рахунку</span>
+    <span translate="yes">Недійсний номер рахунку</span>
   </template>
   <template id="insufficient_funds">
     <span translate="yes">Недостатньо коштів</span>
   </template>
   <template id="declined">
-    <span translate="yes">Банк відхилив переказ</span>
+    <span translate="yes">Банк відмовився від переказу</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Немає дебету банківського рахунку</span>
+    <span translate="yes">Без дебету з банківського рахунку</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">Не вдалося обробити</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Змінився власності банку</span>
+    <span translate="yes">Змінено право власності банку</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Банківський рахунок обмежений</span>
@@ -78,7 +78,7 @@
     <span translate="yes">Банківський рахунок заморожений</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Банківський рахунок закрито</span>
+    <span translate="yes">Банківський рахунок закритий</span>
   </template>
 </body>
 </html>

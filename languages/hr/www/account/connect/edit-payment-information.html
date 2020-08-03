@@ -28,14 +28,14 @@
 </head>
 <body>
   <h1 translate="yes">Podaci o plaćanju za ${stripeAccount.id}</h1>
-  <p translate="yes">Ažurirajte bankovni račun koji će primiti isplate prihoda.</p>
+  <p translate="yes">Ažurirajte bankovni račun koji će primati isplatu prihoda.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">Zemlja banke</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Odaberite
+          Odaberi
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
@@ -55,14 +55,14 @@
           <label for="currency" translate="yes">Valuta računa</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Odaberite
+              Odaberi
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Naziv vlasnika računa</label>
+      <label for="account-holder-name" translate="yes">Ime vlasnika računa</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -130,10 +130,10 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">Alternativni oblik</h2>
+      <h2 translate="yes">Alternativni format</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Šifra sortiranja</label>
+          <label for="sort_code" translate="yes">Pravopisni kod</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,7 +149,7 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Kôd za poravnanje</label>
+        <label for="clearing_code" translate="yes">Brisanje koda</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,7 +171,7 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Bankovni broj</label>
+        <label for="bank_code" translate="yes">bankovni kod</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Broj proizvodnog postupka</label>
+        <label for="routing_number" translate="yes">Routing number</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Broj proizvodnog postupka</label>
+        <label for="routing_number" translate="yes">Routing number</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,7 +233,7 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Bankovni broj</label>
+        <label for="bank_code" translate="yes">bankovni kod</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Broj proizvodnog postupka</label>
+        <label for="routing_number" translate="yes">Routing number</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Spremanje podataka o plaćanju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Spremite podatke o plaćanju</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspjeh! Informacije o plaćanju ažurirane su
+      Uspjeh! Podaci o plaćanju su ažurirani
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom ažuriranja informacija o plaćanju
+      Greška! Došlo je do pogreške prilikom ažuriranja podataka o plaćanju
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Pogreška! Zemlja banke koja nije valjana ili nedostaje
+      Greška! Nevažeća ili nestala zemlja banke
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Pogreška! Valuta računa nije valjana ili nedostaje
+      Greška! Nevažeća ili nedostajuća valuta računa
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Pogreška! Vrsta računa nije valjana ili nedostaje
+      Greška! Nevažeća ili nedostajuća vrsta računa
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Pogreška! Broj računa koji nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući broj računa
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Pogreška! BSB broj nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući BSB broj
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Pogreška! Broj bankovnog koda nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući broj bankovnog koda
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Pogreška! Kôd za sortiranje nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući kod sortiranja
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Pogreška! Broj ustanove nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući broj institucije
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Pogreška! Tranzitni broj nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući broj prijevoza
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Pogreška! Broj šifre čišćenja nije valjan ili nedostaje ga
+      Greška! Nevažeći ili nedostajući broj kliringa za brisanje
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Pogreška! Broj šifre podružnice nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući broj podružnice
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Pogreška! Naziv vlasnika računa koji nije valjan ili nedostaje
+      Greška! Nevažeće ili nedostaje ime vlasnika računa
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Pogreška! IBAN broj nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući IBAN broj
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Pogreška! Tranzitni broj nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući tranzitni broj
     </div>
   </template>
 </body>

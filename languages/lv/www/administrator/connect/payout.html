@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Skatīt ${payout.id}</title>
+  <title translate="yes">Skats ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Skatīt ${payout.id}</h1>
+  <h1 translate="yes">Skats ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -28,7 +28,7 @@
         </td>
       </tr>
       <tr>
-        <th translate="yes">Statusu</th>
+        <th translate="yes">Statuss</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
@@ -45,7 +45,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Nav atrasts bankas konts</span>
+    <span translate="yes">Neviens bankas konts nav atrasts</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Nederīga valūta</span>
@@ -57,28 +57,28 @@
     <span translate="yes">Nederīgs konta numurs</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Nepietiekami līdzekļi</span>
+    <span translate="yes">Nepietiek līdzekļu</span>
   </template>
   <template id="declined">
-    <span translate="yes">Bankas noraidītais pārskaitījums</span>
+    <span translate="yes">Banka noraidīja pārskaitījumu</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Nav bankas konta debeta</span>
+    <span translate="yes">Nav debeta konta no bankas konta</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">Nevarēja apstrādāt</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Mainīti bankas īpašumtiesības</span>
+    <span translate="yes">Mainītas bankas īpašumtiesības</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Bankas konts ierobežots</span>
+    <span translate="yes">Bankas konts ir ierobežots</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Bankas konts iesaldēts</span>
+    <span translate="yes">Bankas konts ir iesaldēts</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Slēgts bankas konts</span>
+    <span translate="yes">Bankas konts ir slēgts</span>
   </template>
 </body>
 </html>

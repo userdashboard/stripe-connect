@@ -11,7 +11,7 @@
 </head>
 <body>
   <h1 translate="yes">Conturi Stripe</h1>
-  <p><span translate="yes">Deveniți furnizor prin verificarea identității personale și a informațiilor companiei prin</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Deveniți un furnizor verificând identitatea personală și informațiile companiei prin intermediul</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
     <p translate="yes">Nu s-au creat încă conturi Stripe.</p>
   </div>
@@ -21,10 +21,10 @@
         <h2 translate="yes">Cerințe individuale</h2>
         <ol>
           <li translate="yes">Informații personale verificate</li>
-          <li translate="yes">Rezident al unei țări sprijinite</li>
-          <li translate="yes">Cont bancar într-o țară acceptată</li>
+          <li translate="yes">Locuitor al unei țări susținute</li>
+          <li translate="yes">Cont bancar într-o țară suportată</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Începerea înregistrării individuale</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Începeți înregistrarea individuală</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
@@ -32,10 +32,10 @@
         <h2 translate="yes">Cerințe de afaceri</h2>
         <ol>
           <li translate="yes">Informații personale verificate</li>
-          <li translate="yes">Firmă înregistrată într-o țară sprijinită</li>
-          <li translate="yes">Cont bancar într-o țară acceptată</li>
+          <li translate="yes">Afaceri înregistrate într-o țară susținută</li>
+          <li translate="yes">Cont bancar într-o țară suportată</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Începerea înregistrării companiei</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Începeți înregistrarea companiei</a>
       </div>
     </div>
   </div>
@@ -46,24 +46,24 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Numele</th>
-            <th translate="yes">Starea</th>
-            <th translate="yes">Creat</th>
-            <th translate="yes">Prezentate</th>
+            <th translate="yes">Nume</th>
+            <th translate="yes">stare</th>
+            <th translate="yes">Creată</th>
+            <th translate="yes">Înscris</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h2 translate="yes">Înregistrările companiei</h2>
+      <h2 translate="yes">Înregistrări ale companiei</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Nume firmă</th>
-            <th translate="yes">Starea</th>
-            <th translate="yes">Creat</th>
-            <th translate="yes">Prezentate</th>
+            <th translate="yes">Nume de afaceri</th>
+            <th translate="yes">stare</th>
+            <th translate="yes">Creată</th>
+            <th translate="yes">Înscris</th>
           </tr>
         </thead>
       </table>
@@ -84,7 +84,7 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nu s-a prezentat încă</span>
+    <span translate="yes">Nu a fost încă trimis</span>
   </template>
   <template id="verified">
     <span translate="yes">Înregistrarea a fost acceptată</span>
@@ -99,28 +99,28 @@
     <span translate="yes">În așteptarea depunerii</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Mai multe informații sunt necesare</span>
   </template>
   <template id="listed">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Dezactivat de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Dezactivat de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Necesită informații suplimentare</span>

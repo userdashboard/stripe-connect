@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Futa ${stripeAccount.id}</h1>
-  <p translate="yes">Akaunti ya Stripe itafutwa mara moja na haiwezi kurejeshwa.</p>
+  <p translate="yes">Akaunti ya Stripe itafutwa mara moja na haiwezi kupatikana.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Futa</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Mafanikio! Akaunti ya Stripe imefutwa
+      Kufanikiwa! Akaunti ya Stripe imefutwa
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kosa! Kosa la ulitolekea kufuta akaunti ya Stripe
+      Kosa! Kosa limetokea wakati wa kufuta akaunti ya Stripe
     </div>
   </template>
 </body>

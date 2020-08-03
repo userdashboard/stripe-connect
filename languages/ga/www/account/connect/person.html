@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Duine@ item: in ${person.id}</title>
+  <title translate="yes">Duine ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Duine@ item: in ${person.id}</h1>
-  <p translate="yes">D'fhéadfadh faisnéis bhreise a bheith curtha isteach nach bhfuil ar taispeáint.</p>
+  <h1 translate="yes">Duine ${person.id}</h1>
+  <p translate="yes">B’fhéidir gur cuireadh faisnéis bhreise isteach nach dtaispeántar.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Ról@ item: inlist</th>
+        <th translate="yes">Ról</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -28,7 +28,7 @@
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Ainm@ item: inlist</th>
+        <th translate="yes">Ainm</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

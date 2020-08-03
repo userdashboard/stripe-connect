@@ -2,23 +2,23 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Connect Administration</title>
+  <title translate="yes">Connect stjórnun</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Connect Administration</h1>
+  <h1 translate="yes">Connect stjórnun</h1>
   <div id="registrations-container">
     <h2 translate="yes">Nýlegar skráningar</h2>
     <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Heiti</th>
-          <th translate="yes">Stöðu</th>
-          <th translate="yes">Stofnuð</th>
+          <th translate="yes">Nafn</th>
+          <th translate="yes">Staða</th>
+          <th translate="yes">Búið til</th>
         </tr>
       </thead>
     </table>
@@ -35,46 +35,46 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Ekki skilað inn enn</span>
+    <span translate="yes">Ekki lagt fram ennþá</span>
   </template>
   <template id="verified">
-    <span translate="yes">Skráning hefur verið samþykkt</span>
+    <span translate="yes">Samþykkt hefur verið skráning</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Krefst frekari upplýsinga</span>
+    <span translate="yes">Krefst viðbótarupplýsinga</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Krefst frekari upplýsinga</span>
+    <span translate="yes">Krefst viðbótarupplýsinga</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Uppgjöf í bið</span>
+    <span translate="yes">Bíður framlagningar</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms_of_service">
-    <span translate="yes">Hafnað vegna skilmála um þjónustubrot</span>
+    <span translate="yes">Hafnað vegna skilmála um brot á þjónustu</span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Hafnað af Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.pending_verification">
-    <span translate="yes">Staðfesting í undirbúningi</span>
+    <span translate="yes">Bíður staðfestingar</span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Frekari upplýsinga er krafist</span>
+    <span translate="yes">Nánari upplýsingar eru nauðsynlegar</span>
   </template>
   <template id="listed">
-    <span translate="yes">Undir yfirfara eftir Stripe</span>
+    <span translate="yes">Í skoðun Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Undir yfirfara eftir Stripe</span>
+    <span translate="yes">Í skoðun Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Óvirk með Stripe, sjá</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Óvirkt af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

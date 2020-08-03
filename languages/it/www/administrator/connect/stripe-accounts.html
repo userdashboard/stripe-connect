@@ -12,17 +12,17 @@
   <h1 translate="yes">Account Stripe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Non sono ancora stati creati account Stripe.</p>
+    <p translate="yes">Nessun account Stripe è stato ancora creato.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">digitare</th>
+        <th translate="yes">genere</th>
         <th translate="yes">Nome</th>
         <th translate="yes">Stato</th>
         <th translate="yes">Creato</th>
-        <th translate="yes">Presentato</th>
+        <th translate="yes">Inserito</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Non ancora fornito</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,16 +48,16 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">I fondi sono pagati sul conto x</p>
+    <p translate="yes">I fondi vengono pagati sul conto x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">I dati bancari devono essere forniti per ricevere fondi.</p>
+    <p translate="yes">I dettagli bancari devono essere forniti per ricevere fondi.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">La registrazione non è stata inviata.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">La registrazione è stata presentata il ${account.dateFormatted}.</p>
+    <p translate="yes">La registrazione è stata inviata il ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Non ancora inviato</span>
@@ -66,16 +66,16 @@
     <span translate="yes">La registrazione è stata accettata</span>
   </template>
   <template id="verified">
-    <span translate="yes">Disabilitato per Stripe</span>
+    <span translate="yes">Disabilitato da Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Richiede informazioni aggiuntive</span>
+    <span translate="yes">Richiede ulteriori informazioni</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Invio in sospeso</span>
+    <span translate="yes">In attesa di invio</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Richiede informazioni aggiuntive</span>
+    <span translate="yes">Richiede ulteriori informazioni</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Rifiutato da Stripe, vedi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -93,10 +93,10 @@
     <span translate="yes">Sono necessarie ulteriori informazioni</span>
   </template>
   <template id="listed">
-    <span translate="yes">In fase di revisione da parte Stripe</span>
+    <span translate="yes">In corso di revisione da parte di Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">In fase di revisione da parte Stripe</span>
+    <span translate="yes">In corso di revisione da parte di Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Disabilitato da Stripe, vedi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

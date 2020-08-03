@@ -12,7 +12,7 @@
   <h1 translate="yes">Stripe konti</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Der er endnu ikke oprettet Stripe konti.</p>
+    <p translate="yes">Der er ikke oprettet nogen Stripe konti endnu.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -20,9 +20,9 @@
         <th>ID</th>
         <th translate="yes">Type</th>
         <th translate="yes">Navn</th>
-        <th translate="yes">Status</th>
-        <th translate="yes">Lavet</th>
-        <th translate="yes">Forelagt</th>
+        <th translate="yes">status</th>
+        <th translate="yes">lavet</th>
+        <th translate="yes">indsendt</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Endnu ikke leveret</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -57,7 +57,7 @@
     <p translate="yes">Registreringen er ikke indsendt.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Registreringen blev indgivet den ${account.dateFormatted}.</p>
+    <p translate="yes">Registreringen blev indsendt den ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Ikke indsendt endnu</span>
@@ -90,13 +90,13 @@
     <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Der kræves flere oplysninger</span>
+    <span translate="yes">Mere information er påkrævet</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Deaktiveret af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Lihat ${stripeAccount.id}</title>
+  <title translate="yes">Pandangan ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Lihat ${stripeAccount.id}</h1>
+  <h1 translate="yes">Pandangan ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Dikemukakan</th>
+        <th translate="yes">Dihantar</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Belum dihantar</td>
       </tr>
     </tbody>
   </table>
@@ -51,8 +51,8 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Wakil Syarikat</h2>
-    <p translate="yes">Untuk mengelakkan gangguan akaun menghantar maklumat wakil baru jika orang yang ditentukan meninggalkan atau tidak lagi mewakili Syarikat.</p>
+    <h2 translate="yes">Wakil syarikat</h2>
+    <p translate="yes">Untuk mengelakkan gangguan akaun, hantarkan maklumat perwakilan baru sekiranya orang yang ditentukan meninggalkan atau tidak lagi mewakili syarikat.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Maklumat Pemilik bermanfaat lain</h2>
-    <p translate="yes">Anda mesti menyediakan dokumentasi untuk orang lain yang memiliki ketara (25 +) peratus daripada Syarikat atau yang bertanggungjawab terhadap Syarikat, kewangan atau operasi.</p>
+    <h2 translate="yes">Maklumat pemilik berfaedah lain</h2>
+    <p translate="yes">Anda mesti menyediakan dokumentasi untuk orang lain yang memiliki (25+) peratus syarikat atau yang bertanggungjawab atas syarikat, kewangan atau operasi.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Maklumat Pengarah Syarikat</h2>
-    <p translate="yes">Anda mesti menyediakan nama penuh Lembaga Tadbir dan/atau orang yang bertanggungjawab untuk mengekalkan pematuhan peraturan.</p>
+    <h2 translate="yes">Maklumat pengarah syarikat</h2>
+    <p translate="yes">Anda mesti memberikan nama penuh lembaga pengurus syarikat anda dan / atau orang yang bertanggungjawab menjaga pematuhan peraturan.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Maklumat pembayaran</h2>
+    <h2 translate="yes">Maklumat Pembayaran</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -120,31 +120,31 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Menambah maklumat</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Tambahkan maklumat</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Dana dibayar kepada akaun ${bank_account.bank_name}.</p>
+    <p translate="yes">Dana dibayar ke akaun ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Maklumat perbankan perlu disediakan untuk menerima dana.</p>
+    <p translate="yes">Maklumat perbankan mesti diberikan untuk menerima dana.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Pendaftaran tidak diserahkan.</p>
+    <p translate="yes">Pendaftaran belum dihantar.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Pendaftaran telah dikemukakan pada ${account.dateFormatted}.</p>
+    <p translate="yes">Pendaftaran dihantar pada ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Maklumat pendaftaran tidak disediakan.</p>
+    <p translate="yes">Maklumat pendaftaran belum diberikan.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Maklumat pendaftaran telah disediakan.</p>
+    <p translate="yes">Maklumat pendaftaran telah diberikan.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Belum hantar</span>
+    <span translate="yes">Belum dihantar</span>
   </template>
   <template id="verified">
     <span translate="yes">Pendaftaran telah diterima</span>
@@ -153,7 +153,7 @@
     <span translate="yes">Memerlukan maklumat tambahan</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Penghantaran belum selesai</span>
+    <span translate="yes">Penyerahan belum selesai</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Ditolak oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Di bawah kajian oleh Stripe</span>
+    <span translate="yes">Sedang dikaji oleh Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Di bawah kajian oleh Stripe</span>
+    <span translate="yes">Sedang dikaji oleh Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Ditolak oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

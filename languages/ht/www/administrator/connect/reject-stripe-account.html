@@ -13,55 +13,55 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Rezon reje</label>
+      <label for="reason" translate="yes">Rezon ki fè rejè a</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
           Chwazi rezon
         </option>
         <option value="fraud" translate="yes">
-          Fwod
+          Fwòd
         </option>
         <option value="terms_of_service" translate="yes">
-          Tem vyolasyon sevis
+          Regleman pou vyolasyon sèvis la
         </option>
         <option value="other" translate="yes">
-          Lot
+          Lòt
         </option>
       </select>
     </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Rejte</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Sikse! Kont lan Stripe te rejte
+      Siksè! Kont Stripe a te rejte
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Ere! Kont lan dwe gen yon balans/bin/sh anvan rejte
+      Erè! Kont la dwe gen yon balans / bin / sh anvan rejte
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ere! Yon ere owoulo nan wouj rejte kont lan Stripe
+      Erè! Yon erè te fèt ejecting kont lan Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Pa soumet ko ou</span>
+    <span translate="yes">Pa soumèt ankò</span>
   </template>
   <template id="verified">
     <span translate="yes">Enskripsyon te aksepte</span>
   </template>
   <template id="verified">
-    <span translate="yes">Enfim pa Stripe</span>
+    <span translate="yes">Andikape pa Stripe</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Mande plis enfomasyon</span>
+    <span translate="yes">Mande pou plis enfòmasyon</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Mande plis enfomasyon</span>
+    <span translate="yes">Mande pou plis enfòmasyon</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Annatant soumet</span>
+    <span translate="yes">Annatandan soumèt</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Rejte pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -76,7 +76,7 @@
     <span><span translate="yes">Rejte pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Gen plis enfomasyon ki nesese</span>
+    <span translate="yes">Plis enfòmasyon nesesè</span>
   </template>
   <template id="listed">
     <span translate="yes">Anba revizyon pa Stripe</span>
@@ -85,7 +85,7 @@
     <span translate="yes">Anba revizyon pa Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Enfim pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Andikape pa Stripe, gade</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

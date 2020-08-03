@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Mwoneko ${payout.id}</title>
+  <title translate="yes">Tazama ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Mwoneko ${payout.id}</h1>
+  <h1 translate="yes">Tazama ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -22,7 +22,7 @@
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Stripe akaunti</th>
+        <th translate="yes">Akaunti ya Stripe</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
@@ -36,7 +36,7 @@
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Aliumba</th>
+        <th translate="yes">Imeundwa</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -48,34 +48,34 @@
     <span translate="yes">Hakuna akaunti ya benki iliyopatikana</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Sarafu batili</span>
+    <span translate="yes">Pesa batili</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Namba batili ya akaunti</span>
+    <span translate="yes">Nambari batili ya akaunti</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Fedha za kutosha</span>
+    <span translate="yes">Hela hazitoshi</span>
   </template>
   <template id="declined">
-    <span translate="yes">Benki imekataa kuhamisha</span>
+    <span translate="yes">Benki ilikataa kuhamisha</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Hakuna madai ya akaunti ya benki</span>
+    <span translate="yes">Hakuna deni la akaunti ya benki</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">Haikuweza kuchakata</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Umiliki wa benki ulibadilika</span>
+    <span translate="yes">Umiliki wa benki iliyopita</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Akaunti ya benki imezuiliwa</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Akaunti ya benki waliohifadhiwa</span>
+    <span translate="yes">Akaunti ya benki imehifadhiwa</span>
   </template>
   <template id="account_closed">
     <span translate="yes">Akaunti ya benki imefungwa</span>

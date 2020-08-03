@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Άτομο ${person.id}</title>
+  <title translate="yes">Πρόσωπο ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Άτομο ${person.id}</h1>
+  <h1 translate="yes">Πρόσωπο ${person.id}</h1>
   <p translate="yes">Ενδέχεται να έχουν υποβληθεί πρόσθετες πληροφορίες που δεν εμφανίζονται.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Ρόλο</th>
+        <th translate="yes">Ρόλος</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -28,7 +28,7 @@
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">Όνομα</th>
+        <th translate="yes">Ονομα</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Tagata ${person.id}</h1>
-  <p translate="yes">Atonu na auina mai faamatalaga faaopoopo e le o faaalia.</p>
+  <p translate="yes">Atonu na tuuina mai nisi faamatalaga e le o faaali mai.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -24,7 +24,7 @@
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Sootaga</th>
+        <th translate="yes">Mafutaga</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
@@ -32,7 +32,7 @@
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Faamatalaga manaomia</th>
+        <th translate="yes">Faʻamatalaga manaʻomia</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

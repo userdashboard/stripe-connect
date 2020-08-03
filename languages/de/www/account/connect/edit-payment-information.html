@@ -28,20 +28,20 @@
 </head>
 <body>
   <h1 translate="yes">Zahlungsinformationen für ${stripeAccount.id}</h1>
-  <p translate="yes">Aktualisieren Sie das Bankkonto, das Ihre Umsatzausschüttungen erhält.</p>
+  <p translate="yes">Aktualisieren Sie das Bankkonto, auf dem Ihre Einnahmen ausgezahlt werden.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">Land der Bank</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Auswählen
+          Wählen
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Kontotyp</label>
+      <label translate="yes">Konto Typ</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -55,14 +55,14 @@
           <label for="currency" translate="yes">Kontowährung</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Auswählen
+              Wählen
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Name des Kontoinhabers</label>
+      <label for="account-holder-name" translate="yes">Der Name des Kontoinhabers</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -133,7 +133,7 @@
       <h2 translate="yes">Alternatives Format</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Sortiercode</label>
+          <label for="sort_code" translate="yes">Rechtschreibcode</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Clearingcode</label>
+        <label for="clearing_code" translate="yes">Freischalt-Code</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Zweigcode</label>
+        <label for="branch_code" translate="yes">Branchencode</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -175,7 +175,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Zweigcode</label>
+        <label for="branch_code" translate="yes">Branchencode</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routingnummer</label>
+        <label for="routing_number" translate="yes">Routing-Nummer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routingnummer</label>
+        <label for="routing_number" translate="yes">Routing-Nummer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -237,7 +237,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Zweigcode</label>
+        <label for="branch_code" translate="yes">Branchencode</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routingnummer</label>
+        <label for="routing_number" translate="yes">Routing-Nummer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -288,77 +288,77 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fehler! Es wurde ein Fehler beim Aktualisieren der Zahlungsinformationen verursacht.
+      Error! Beim Aktualisieren der Zahlungsinformationen ist ein Fehler aufgetreten
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Fehler! Ungültiges oder fehlendes Land der Bank
+      Error! Ungültiges oder fehlendes Bankland
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Währung des Kontos
+      Error! Ungültige oder fehlende Kontowährung
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Fehler! Ungültiger oder fehlender Kontotyp
+      Error! Ungültiger oder fehlender Kontotyp
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Kontonummer
+      Error! Ungültige oder fehlende Kontonummer
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende BSB-Nummer
+      Error! Ungültige oder fehlende BSB-Nummer
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Bankleitzahl
+      Error! Ungültige oder fehlende Bankleitzahl
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Fehler! Ungültiger oder fehlender Sortiercode
+      Error! Ungültiger oder fehlender Sortiercode
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Institutionsnummer
+      Error! Ungültige oder fehlende Institutionsnummer
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Transitnummer
+      Error! Ungültige oder fehlende Transitnummer
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Clearingcodenummer
+      Error! Ungültige oder fehlende Clearing-Code-Nummer
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Zweigcodenummer
+      Error! Ungültige oder fehlende Filialcode-Nummer
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Fehler! Ungültiger oder fehlender Name des Kontoinhabers
+      Error! Ungültiger oder fehlender Name des Kontoinhabers
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende IBAN-Nummer
+      Error! Ungültige oder fehlende IBAN-Nummer
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Fehler! Ungültige oder fehlende Transitnummer
+      Error! Ungültige oder fehlende Transitnummer
     </div>
   </template>
 </body>

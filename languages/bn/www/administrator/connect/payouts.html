@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">payouts</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">payouts</h1>
+  <div id="message-container"></div>
+  <div id="no-payouts">
+    <p translate="yes">এখনও কোনও অর্থ প্রদানের ঘটনা ঘটেনি।</p>
+  </div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th translate="yes">পরিমাণ</th>
+        <th translate="yes">Stripe অ্যাকাউন্ট</th>
+        <th translate="yes">অবস্থা</th>
+        <th translate="yes">বিবরণ</th>
+        <th translate="yes">নির্মিত</th>
+      </tr>
+    </thead>
+  </table>
+  <ul id="page-links" class="pagination"></ul>
+  <template id="page-link">
+    <li>
+      <a href="/administrator/connect/payouts?offset=${page.offset}" id="page-link-${page.pageNumber}">${page.pageNumber}</a>
+    </li>
+  </template>
+  <template id="payout-row">
+    <tr id="${payout.id}">
+      <td>
+        <a href="/administrator/connect/payout?payoutid=${payout.id}">${payout.id}</a>
+      </td>
+      <td>${payout.amountFormatted}</td>
+      <td>
+        <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+      </td>
+      <td id="status-${payout.id}"></td>
+      <td>${payout.description}</td>
+      <td>${payout.createdFormatted}</td>
+    </tr>
+  </template>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">কোনও ব্যাংক অ্যাকাউন্ট পাওয়া যায় নি</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">অবৈধ মুদ্রা</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">অবৈধ অ্যাকাউন্ট নম্বর</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">অপর্যাপ্ত তহবিল</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">ব্যাংক স্থানান্তর অস্বীকার করেছে</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">কোনও ব্যাংক অ্যাকাউন্ট ডেবিট নেই</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">প্রক্রিয়া করা যায়নি</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">ব্যাংকের মালিকানা বদলেছে</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">ব্যাঙ্ক অ্যাকাউন্ট সীমাবদ্ধ</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">ব্যাঙ্ক অ্যাকাউন্ট হিমশীতল</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">ব্যাংক অ্যাকাউন্ট বন্ধ</span>
+  </template>
+</body>
+</html>

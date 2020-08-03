@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Nieuwe persoon maken voor ${stripeAccount.id}</title>
+  <title translate="yes">Maak een nieuwe persoon aan voor ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,11 +10,11 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Nieuwe persoon maken</h1>
-    <p translate="yes">De raad van bestuur, de eigenaars en de vertegenwoordiger moeten up-to-date worden gehouden als uw informatie verandert.</p>
+    <h1 translate="yes">Maak een nieuwe persoon aan</h1>
+    <p translate="yes">De raad van bestuur, eigenaren en vertegenwoordiger moeten up-to-date worden gehouden als uw informatie verandert.</p>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Relatie tot bedrijf</h2>
+      <h2 translate="yes">Relatie met bedrijf</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
         <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
@@ -22,11 +22,11 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Functie,rol of relatietitel</label>
+        <label for="relationship_title" translate="yes">Functie, functie of relatietitel</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Percentage in handen (indien aanwezig)</label>
+        <label for="relationship_percent_ownership" translate="yes">Percentage eigendom (indien aanwezig)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
@@ -46,27 +46,27 @@
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Uw Stripe account vereist geen nuttige eigenaargegevens
+      Uw Stripe-account vereist geen informatie over de uiteindelijke begunstigde
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Uw Stripe account vereist geen gegevens van bedrijfsdirecteur
+      Uw Stripe-account heeft geen bedrijfsdirecteurinformatie nodig
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Vertegenwoordigers van het bedrijf moeten leidinggevenden zijn
+      Bedrijfsvertegenwoordigers moeten leidinggevenden zijn
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Vertegenwoordiger, directeur of eigenaar moet worden geselecteerd
+      Er moet een vertegenwoordiger, directeur of eigenaar worden geselecteerd
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Fout! Ongeldig of ontbrekend percentage eigendom (0 als geen)
+      Fout! Ongeldig of ontbrekend eigendomspercentage (0 indien geen)
     </div>
   </template>
   <template id="invalid-relationship_title">

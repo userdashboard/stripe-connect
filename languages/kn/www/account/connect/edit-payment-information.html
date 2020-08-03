@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">ಇದಕ್ಕಾಗಿ ಪಾವತಿ ಮಾಹಿತಿ ${stripeAccount.id}</title>
+  <title translate="yes">ಪಾವತಿ ಮಾಹಿತಿ ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,21 +27,21 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">ಇದಕ್ಕಾಗಿ ಪಾವತಿ ಮಾಹಿತಿ ${stripeAccount.id}</h1>
+  <h1 translate="yes">ಪಾವತಿ ಮಾಹಿತಿ ${stripeAccount.id}</h1>
   <p translate="yes">ನಿಮ್ಮ ಆದಾಯ ಪಾವತಿಗಳನ್ನು ಸ್ವೀಕರಿಸುವ ಬ್ಯಾಂಕ್ ಖಾತೆಯನ್ನು ನವೀಕರಿಸಿ.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">ಬ್ಯಾಂಕ್ ನ ದೇಶ</label>
+      <label for="country" translate="yes">ಬ್ಯಾಂಕಿನ ದೇಶ</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          ಆಯ್ಕೆಮಾಡಿ
+          ಆಯ್ಕೆ ಮಾಡಿ
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">ಖಾತೆ ಪ್ರಕಾರ</label>
+      <label translate="yes">ಖಾತೆಯ ಪ್ರಕಾರ</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,22 +52,22 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">ಖಾತೆ ಯ ಕರೆನ್ಸಿ</label>
+          <label for="currency" translate="yes">ಖಾತೆ ಕರೆನ್ಸಿ</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              ಆಯ್ಕೆಮಾಡಿ
+              ಆಯ್ಕೆ ಮಾಡಿ
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">ಖಾತೆದಾರನ ಹೆಸರು</label>
+      <label for="account-holder-name" translate="yes">ಖಾತೆದಾರರ ಹೆಸರು</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">ಬಿಎಸ್ ಬಿ ಸಂಖ್ಯೆ</label>
+        <label for="bsb_number" translate="yes">ಬಿಎಸ್ಬಿ ಸಂಖ್ಯೆ</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">ಸಾಗಣೆ ಸಂಖ್ಯೆ</label>
+        <label for="transit_number" translate="yes">ಸಾರಿಗೆ ಸಂಖ್ಯೆ</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -133,7 +133,7 @@
       <h2 translate="yes">ಪರ್ಯಾಯ ಸ್ವರೂಪ</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">ಕೋಡ್ ವಿಂಗಡಿಸು</label>
+          <label for="sort_code" translate="yes">ಕಾಗುಣಿತ ಕೋಡ್</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,7 +149,7 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">ಕೋಡ್ ತೆರವುಮಾಡುತ್ತಿದೆ</label>
+        <label for="clearing_code" translate="yes">ಕೋಡ್ ಅನ್ನು ತೆರವುಗೊಳಿಸಲಾಗುತ್ತಿದೆ</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,7 +171,7 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">ಬ್ಯಾಂಕ್ ಕೋಡ್</label>
+        <label for="bank_code" translate="yes">ಬ್ಯಾಂಕ್ ಸಂಕೇತ</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,7 +233,7 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">ಬ್ಯಾಂಕ್ ಕೋಡ್</label>
+        <label for="bank_code" translate="yes">ಬ್ಯಾಂಕ್ ಸಂಕೇತ</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಉಳಿಸು</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಉಳಿಸಿ</button>
     </div>
   </form>
   <template id="country-option">
@@ -288,77 +288,77 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ನವೀಕರಿಸುವಲ್ಲಿ ದೋಷ
+      ದೋಷ! ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ನವೀಕರಿಸುವಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಬ್ಯಾಂಕ್ ನ ಕಾಣೆಯಾದ ದೇಶ
+      ದೋಷ! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ಬ್ಯಾಂಕ್
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಖಾತೆಯ ಕರೆನ್ಸಿ
+      ದೋಷ! ಖಾತೆಯ ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ಖಾತೆ
+      ದೋಷ! ಖಾತೆಯ ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ಖಾತೆ ಸಂಖ್ಯೆ
+      ದೋಷ! ಖಾತೆ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ BSB ಸಂಖ್ಯೆ
+      ದೋಷ! ಬಿಎಸ್ಬಿ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ಬ್ಯಾಂಕ್ ಕೋಡ್ ಸಂಖ್ಯೆ
+      ದೋಷ! ಬ್ಯಾಂಕ್ ಕೋಡ್ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ಸಾರ್ಟ್ ಕೋಡ್
+      ದೋಷ! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ ವಿಂಗಡಣೆ ಕೋಡ್
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ಸಂಸ್ಥೆ ಸಂಖ್ಯೆ
+      ದೋಷ! ಸಂಸ್ಥೆಯ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ಟ್ರಾನ್ಸಿಟ್ ಸಂಖ್ಯೆ
+      ದೋಷ! ಸಾರಿಗೆ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ತೆರವು ಕೋಡ್ ಸಂಖ್ಯೆ
+      ದೋಷ! ಕೋಡ್ ಸಂಖ್ಯೆಯನ್ನು ತೆರವುಗೊಳಿಸುವುದು ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ಶಾಖೆ ಕೋಡ್ ಸಂಖ್ಯೆ
+      ದೋಷ! ಶಾಖೆ ಕೋಡ್ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ಖಾತೆಹೋಲ್ಡರ್ ಹೆಸರು
+      ದೋಷ! ಖಾತೆದಾರರ ಹೆಸರು ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ IBAN ಸಂಖ್ಯೆ
+      ದೋಷ! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ಐಬಿಎನ್ ಸಂಖ್ಯೆ
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾಗಿರುವ ಸಾರಿಗೆ ಸಂಖ್ಯೆ
+      ದೋಷ! ಸಾರಿಗೆ ಸಂಖ್ಯೆ ಅಮಾನ್ಯವಾಗಿದೆ ಅಥವಾ ಕಾಣೆಯಾಗಿದೆ
     </div>
   </template>
 </body>

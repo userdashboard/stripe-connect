@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Indsende ${stripeAccount.id}</title>
+  <title translate="yes">Indsend ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Indsende ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> bekræftelsesprocessen ved at indsende din fuldførte registrering.</p>
+  <h1 translate="yes">Indsend ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> bekræftelsesproces ved at indsende din afsluttede registrering.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Reelle ejere</h2>
+    <h2 translate="yes">Gunstige ejere</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Virksomhedens direktører</h2>
+    <h2 translate="yes">Virksomheds direktører</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Send registrering</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Indsend registrering</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,22 +90,22 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Registreringen indeholder ufuldstændige registreringsoplysninger
+      Registreringen har ufuldstændige registreringsoplysninger
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fejl! Du skal indsende selskabets direktører
+      Fejl! Du skal indsende virksomhedens direktører
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fejl! Du skal indsende virksomhedens reelle ejere
+      Fejl! Du skal indsende virksomhedens gavnlige ejere
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Fejl! Du skal indsende firmarepræsentantens oplysninger
+      Fejl! Du skal indsende virksomhedsrepræsentantens oplysninger
     </div>
   </template>
   <template id="invalid-payment-details">
@@ -115,12 +115,12 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Succes! Registreringen er blevet indsendt
+      Succes! Registreringen er indsendt
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fejl! Der opstod en fejl under afsendelse af registreringen
+      Fejl! Der opstod en fejl ved indsendelse af registreringen
     </div>
   </template>
 </body>

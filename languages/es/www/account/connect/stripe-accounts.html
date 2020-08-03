@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe cuentas</title>
+  <title translate="yes">Cuentas Stripe</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,10 +10,10 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe cuentas</h1>
-  <p><span translate="yes">Conviértase en un proveedor verificando su identidad personal y la información de la empresa a través de</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Cuentas Stripe</h1>
+  <p><span translate="yes">Conviértase en proveedor verificando su identidad personal y la información de la empresa a través de</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Aún no se ha creado ninguna cuenta Stripe.</p>
+    <p translate="yes">Aún no se han creado cuentas Stripe.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
@@ -22,20 +22,20 @@
         <ol>
           <li translate="yes">Información personal verificada</li>
           <li translate="yes">Residente de un país apoyado</li>
-          <li translate="yes">Cuenta bancaria en un país apoyado</li>
+          <li translate="yes">Cuenta bancaria en un país admitido</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Iniciar el registro individual</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Iniciar registro individual</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Requisitos empresariales</h2>
+        <h2 translate="yes">Requisitos comerciales</h2>
         <ol>
           <li translate="yes">Información personal verificada</li>
-          <li translate="yes">Empresa registrada en un país apoyado</li>
-          <li translate="yes">Cuenta bancaria en un país apoyado</li>
+          <li translate="yes">Empresa registrada en un país admitido</li>
+          <li translate="yes">Cuenta bancaria en un país admitido</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Iniciar el registro de la empresa</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Iniciar registro de empresa</a>
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@
             <th translate="yes">Nombre</th>
             <th translate="yes">Estado</th>
             <th translate="yes">Creado</th>
-            <th translate="yes">Presentado</th>
+            <th translate="yes">Presentada</th>
           </tr>
         </thead>
       </table>
@@ -60,10 +60,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Nombre de la empresa</th>
+            <th translate="yes">Nombre del Negocio</th>
             <th translate="yes">Estado</th>
             <th translate="yes">Creado</th>
-            <th translate="yes">Presentado</th>
+            <th translate="yes">Presentada</th>
           </tr>
         </thead>
       </table>
@@ -84,13 +84,13 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Aún no se ha presentado</span>
+    <span translate="yes">no presentado aún</span>
   </template>
   <template id="verified">
-    <span translate="yes">Se ha aceptado el registro</span>
+    <span translate="yes">El registro ha sido aceptado</span>
   </template>
   <template id="verified">
-    <span translate="yes">Deshabilitado por Stripe</span>
+    <span translate="yes">Inhabilitado por Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Requiere información adicional</span>
@@ -99,19 +99,19 @@
     <span translate="yes">Pendiente de envío</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Se requiere más información</span>
+    <span translate="yes">Se requiere más información.</span>
   </template>
   <template id="listed">
     <span translate="yes">En revisión por Stripe</span>
@@ -120,7 +120,7 @@
     <span translate="yes">En revisión por Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Discapacitado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Inhabilitado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Requiere información adicional</span>

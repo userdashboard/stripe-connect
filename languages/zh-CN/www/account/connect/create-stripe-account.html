@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">创建注册</h1>
-  <p translate="yes">已完成的注册允许您通过一个Stripe Connect。</p>
+  <p translate="yes">完成注册后，您可以通过Stripe Connect接收收入付款。</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,10 +21,10 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">居住国/公司</label>
+      <label for="country" translate="yes">居住国/法团</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          选择国家/地区
+          选择国家
         </option>
       </select>
     </div>
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      错误！创建注册时出错
+      错误！创建注册时发生错误
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      错误！无效或缺失的国家/地区
+      错误！无效或遗失的国家
     </div>
   </template>
 </body>

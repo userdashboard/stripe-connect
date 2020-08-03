@@ -2,20 +2,20 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Διαγράψετε ${stripeAccount.id}</title>
+  <title translate="yes">Διαγράφω ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Διαγράψετε ${stripeAccount.id}</h1>
+  <h1 translate="yes">Διαγράφω ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Όνομα</th>
+        <th translate="yes">Ονομα</th>
         <th translate="yes">Κατάσταση</th>
       </tr>
     </thead>
@@ -31,7 +31,7 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Διαγράψετε</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Διαγράφω</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -40,38 +40,38 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Παρουσιάστηκε σφάλμα κατά τη διαγραφή του λογαριασμού Stripe
+      Λάθος! Παρουσιάστηκε σφάλμα κατά τη διαγραφή του λογαριασμού Stripe
     </div>
   </template>
   <template id="not-submitted">
     <span translate="yes">Δεν έχει υποβληθεί ακόμα</span>
   </template>
   <template id="verified">
-    <span translate="yes">Η εγγραφή έγινε δεκτή</span>
+    <span translate="yes">Η εγγραφή έγινε αποδεκτή</span>
   </template>
   <template id="verified">
-    <span translate="yes">Άτομα με ειδικές ανάγκες κατά Stripe</span>
+    <span translate="yes">Απενεργοποιήθηκε από Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Απαιτεί πρόσθετες πληροφορίες</span>
+    <span translate="yes">Απαιτεί επιπλέον πληροφορίες</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Εκκρεμείς παρατηρήσεις</span>
+    <span translate="yes">Εκκρεμεί υποβολή</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Εκκρεμείς παρατηρήσεις</span>
+    <span translate="yes">Εκκρεμεί υποβολή</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Απαιτούνται περισσότερες πληροφορίες</span>
@@ -83,10 +83,10 @@
     <span translate="yes">Υπό εξέταση από Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Άτομα με ειδικές ανάγκες κατά Stripe, ανατρέξτε στο θέμα</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απενεργοποιήθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Διαγραφεί</span>
+    <span translate="yes">Διαγράφηκε</span>
   </template>
 </body>
 </html>

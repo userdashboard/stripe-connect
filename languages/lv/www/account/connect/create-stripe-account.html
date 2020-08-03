@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Izveidot reģistrāciju</h1>
-  <p translate="yes">Pabeigta reģistrācija ļauj jums saņemt ieņēmumu izmaksas, izmantojot Stripe Connect.</p>
+  <p translate="yes">Pabeigta reģistrācija ļauj saņemt ieņēmumu izmaksas caur Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,15 +21,15 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Dzīvesvietas valsts / inkorporācija</label>
+      <label for="country" translate="yes">Rezidences / reģistrācijas valsts</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Atlasīt valsti
+          Izvēlies valsti
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sākt reģistrāciju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sāciet reģistrāciju</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kļūda! Veidojot reģistrāciju , radās kļūda
+      Kļūda! Veidojot reģistrāciju, radās kļūda
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Kļūda! Nederīga valsts vai tās trūkst
+      Kļūda! Nederīga valsts vai tās nav
     </div>
   </template>
 </body>

@@ -2,21 +2,21 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Şterge ${stripeAccount.id}</title>
+  <title translate="yes">Șterge ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Şterge ${stripeAccount.id}</h1>
+  <h1 translate="yes">Șterge ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Numele</th>
-        <th translate="yes">Starea</th>
+        <th translate="yes">Nume</th>
+        <th translate="yes">stare</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -31,7 +31,7 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Şterge</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Șterge</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -40,11 +40,11 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Eroare! Eroare la ștergerea contului Stripe
+      Eroare! A apărut o eroare la ștergerea contului Stripe
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nu s-a prezentat încă</span>
+    <span translate="yes">Nu a fost încă trimis</span>
   </template>
   <template id="verified">
     <span translate="yes">Înregistrarea a fost acceptată</span>
@@ -62,31 +62,31 @@
     <span translate="yes">În așteptarea depunerii</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Mai multe informații sunt necesare</span>
   </template>
   <template id="listed">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Dezactivat de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Dezactivat de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Şterse</span>
+    <span translate="yes">şters</span>
   </template>
 </body>
 </html>

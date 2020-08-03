@@ -19,10 +19,10 @@
       <tr>
         <th>ID</th>
         <th translate="yes">Type</th>
-        <th translate="yes">navn</th>
+        <th translate="yes">Navn</th>
         <th translate="yes">Status</th>
-        <th translate="yes">Opprettet</th>
-        <th translate="yes">Sendt inn</th>
+        <th translate="yes">laget</th>
+        <th translate="yes">sendt inn</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Foreløpig ikke gitt</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,16 +48,16 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Midler utbetales til konto x</p>
+    <p translate="yes">Midlene utbetales til konto x</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Bankopplysninger må gis for å motta midler.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Registreringen er ikke sendt inn.</p>
+    <p translate="yes">Registreringen er ikke sendt.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Registreringen ble sendt inn på ${account.dateFormatted}.</p>
+    <p translate="yes">Registreringen ble sendt inn den ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Ikke sendt inn ennå</span>
@@ -72,7 +72,7 @@
     <span translate="yes">Krever tilleggsinformasjon</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Ventende innsending</span>
+    <span translate="yes">Venter på innsending</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Krever tilleggsinformasjon</span>
@@ -93,10 +93,10 @@
     <span translate="yes">Mer informasjon er nødvendig</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under gjennomgang av Stripe</span>
+    <span translate="yes">Under vurdering av Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under gjennomgang av Stripe</span>
+    <span translate="yes">Under vurdering av Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Deaktivert av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

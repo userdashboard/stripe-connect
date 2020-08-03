@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Osoba ${person.id}</title>
+  <title translate="yes">človek ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Osoba ${person.id}</h1>
-  <p translate="yes">Ďalšie informácie môžu byť odoslané, ktoré nie sú zobrazené.</p>
+  <h1 translate="yes">človek ${person.id}</h1>
+  <p translate="yes">Možno boli predložené ďalšie informácie, ktoré sa nezobrazujú.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,17 +18,17 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Úlohu</th>
+        <th translate="yes">úloha</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Vzťah</th>
+        <th translate="yes">súvislosť</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
-        <th translate="yes">meno</th>
+        <th translate="yes">názov</th>
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">

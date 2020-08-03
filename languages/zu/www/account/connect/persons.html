@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Abantu ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Abantu</h1>
+  <div id="representative-container">
+    <h2 translate="yes">Ummeli wenkampani</h2>
+    <p translate="yes">Uma isimo somuntu ophakanyisiwe sishintsha kufanele udale ozimele.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Dala ozimele omusha</a></p>
+    <table id="representatives-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Igama</th>
+          <th translate="yes">Kuyadingeka</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Abanikazi abazuzayo</h2>
+    <p translate="yes">Kufanele uhlinzeke ngemibhalo kunoma ngubani omunye onamaphesenti amakhulu (25+) enkampani noma ophethe inkampani, imali noma ukusebenza kwayo.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Faka umnikazi</a></p>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Igama</th>
+          <th translate="yes">Kuyadingeka</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Abaqondisi benkampani</h2>
+    <p translate="yes">Kufanele unikeze imibhalo yebhodi yabaqondisi.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Faka umnikazi</a></p>
+    <table id="directors-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">Igama</th>
+          <th translate="yes">Kuyadingeka</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="person-row">
+    <table>
+      <tr id="${person.id}">
+        <td>
+          <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+        </td>
+        <td>${person.first_name} ${person.last_name}</td>
+        <td id="requires-information-${person.id}">
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Faka imininingwane</a>
+        </td>
+        <td id="requires-no-information-${person.id}">-</td>
+      </tr>
+    </table>
+  </template>
+</body>
+</html>

@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Payouts</title>
+  <title translate="yes">Taliadau</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Payouts</h1>
+  <h1 translate="yes">Taliadau</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Does dim payouts wedi digwydd eto.</p>
+    <p translate="yes">Nid oes unrhyw daliadau wedi digwydd eto.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
         <th translate="yes">Swm</th>
-        <th translate="yes">Stripe cyfrif</th>
+        <th translate="yes">Cyfrif Stripe</th>
         <th translate="yes">Statws</th>
         <th translate="yes">Disgrifiad</th>
-        <th translate="yes">Creu</th>
+        <th translate="yes">Wedi'i greu</th>
       </tr>
     </thead>
   </table>
@@ -50,7 +50,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Heb ganfod cyfrif banc</span>
+    <span translate="yes">Ni ddarganfuwyd cyfrif banc</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Arian cyfred annilys</span>
@@ -62,28 +62,28 @@
     <span translate="yes">Rhif cyfrif annilys</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Digon o arian</span>
+    <span translate="yes">Arian annigonol</span>
   </template>
   <template id="declined">
-    <span translate="yes">Trosglwyddiad banc wedi'i wrthod</span>
+    <span translate="yes">Gwrthododd y banc drosglwyddo</span>
   </template>
   <template id="debit_not_authorized">
     <span translate="yes">Dim debyd cyfrif banc</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Methwyd prosesu</span>
+    <span translate="yes">Methu prosesu</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Wedi newid perchnogaeth banc</span>
+    <span translate="yes">Newidiodd perchnogaeth banc</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Cyfyngu'r cyfrif banc</span>
+    <span translate="yes">Cyfrif banc wedi'i gyfyngu</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Rhewedig cyfrif banc</span>
+    <span translate="yes">Cyfrif banc wedi'i rewi</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Wedi cau'r cyfrif banc</span>
+    <span translate="yes">Cyfrif banc ar gau</span>
   </template>
 </body>
 </html>

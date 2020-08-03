@@ -2,34 +2,34 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">登録の作成</title>
+  <title translate="yes">登録を作成</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">登録の作成</h1>
+  <h1 translate="yes">登録を作成</h1>
   <p translate="yes">登録が完了すると、Stripe Connectを通じて収益の支払いを受け取ることができます。</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">勘定タイプ</label>
+      <label for="individual" translate="yes">口座の種類</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">居住国/設立</label>
+      <label for="country" translate="yes">居住国/法人</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          国の選択
+          国を選択
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">登録を開始する</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">登録を開始</button>
     </div>
   </form>
   <template id="country-option">
@@ -44,7 +44,7 @@
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      エラー！無効な国または見つからない国
+      エラー！無効または存在しない国
     </div>
   </template>
 </body>

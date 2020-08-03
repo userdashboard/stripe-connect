@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Διαγράψετε ${person.id}</title>
+  <title translate="yes">Διαγράφω ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Διαγράψετε ${person.id}</h1>
-  <p translate="yes">Οι πληροφορίες κατόχου θα διαγραφούν αμέσως και δεν είναι δυνατή η ανάκτησή τους.</p>
+  <h1 translate="yes">Διαγράφω ${person.id}</h1>
+  <p translate="yes">Οι πληροφορίες κατόχου θα διαγραφούν αμέσως και δεν μπορούν να ανακτηθούν.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Διαγράψετε</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Διαγράφω</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Επιτυχία! Ο ιδιοκτήτης της εταιρείας έχει διαγραφεί
+      Επιτυχία! Ο κάτοχος της εταιρείας διαγράφηκε
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Ένα σφάλμα που εντοπίστηκε κατά τη διαγραφή του κατόχου της εταιρείας
+      Λάθος! Παρουσιάστηκε σφάλμα κατά τη διαγραφή του κατόχου της εταιρείας
     </div>
   </template>
 </body>

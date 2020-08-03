@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Editare ${stripeAccount.id}</title>
+  <title translate="yes">Editați | × ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,11 +17,11 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Editare ${stripeAccount.id}</h1>
+    <h1 translate="yes">Editați | × ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">URL site-ul web</label>
+        <label for="business_profile_url" translate="yes">Website URL</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
@@ -29,7 +29,7 @@
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">Cod categorie comerciant</label>
+        <label for="business_profile_mcc" translate="yes">Codul categoriei de comercianți</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
             Selectați codul pentru afacerea dvs.
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Nume firmă</label>
+            <label for="name" translate="yes">Nume de afaceri</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Număr ID taxă</label>
+            <label for="tax_id" translate="yes">Număr de identificare fiscală</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -66,7 +66,7 @@
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">Numele firmei Kanji</label>
+            <label for="name_kanji" translate="yes">Numele afacerii Kanji</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">URL site-ul web</label>
+            <label for="business_profile_url" translate="yes">Website URL</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="pure-u-11-24">
           <div id="phone-container" class="pure-control-group">
             <a id="phone-anchor"></a>
-            <label for="phone" translate="yes">Număr de telefon</label>
+            <label for="phone" translate="yes">Numar de telefon</label>
             <input required="required" id="phone" name="phone" type="text" maxlength="50">
           </div>
         </div>
@@ -91,126 +91,126 @@
       <div id="company-verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <h2 translate="yes">Constituirea companiei</h2>
-        <label for="verification_document_front" translate="yes">Scanare frontală/fotografie</label>
+        <h2 translate="yes">Incorporarea companiei</h2>
+        <label for="verification_document_front" translate="yes">Scanare / fotografie frontală</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Scanare/fotografie înapoi</label>
+        <label for="verification_document_back" translate="yes">Scanare / fotografie înapoi</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Informații personale</h2>
+      <h2 translate="yes">Informatii personale</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
-            <label for="first_name" translate="yes">Prenume</label>
+            <label for="first_name" translate="yes">Nume</label>
             <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name-container" class="pure-control-group">
-            <label for="last_name" translate="yes">Nume de familie</label>
+            <label for="last_name" translate="yes">Numele de familie</label>
             <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
           </div>
         </div>
       </div>
       <div id="email-container" class="pure-control-group">
-        <label for="email" translate="yes">Adresă de e-mail</label>
+        <label for="email" translate="yes">Adresa de email</label>
         <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
-        <label for="phone" translate="yes">Număr de telefon</label>
+        <label for="phone" translate="yes">Numar de telefon</label>
         <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100">
       </div>
     </div>
     <div id="kana-personal-information-container">
-      <h2 translate="yes">Kana informații personale</h2>
+      <h2 translate="yes">Informații personale Kana</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
-            <label for="first_name_kana" translate="yes">Prenume</label>
+            <label for="first_name_kana" translate="yes">Nume</label>
             <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kana-container" class="pure-control-group">
-            <label for="last_name_kana" translate="yes">Nume de familie</label>
+            <label for="last_name_kana" translate="yes">Numele de familie</label>
             <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
           </div>
         </div>
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Kanji informații personale</h2>
+      <h2 translate="yes">Informații personale Kanji</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
-            <label for="first_name_kanji" translate="yes">Prenume</label>
+            <label for="first_name_kanji" translate="yes">Nume</label>
             <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-2-24"></div>
         <div class="pure-u-11-24">
           <div id="last_name_kanji-container" class="pure-control-group">
-            <label for="last_name_kanji" translate="yes">Nume de familie</label>
+            <label for="last_name_kanji" translate="yes">Numele de familie</label>
             <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
           </div>
         </div>
       </div>
     </div>
     <div id="dob-container" class="pure-control-group">
-      <label for="dob_day" translate="yes">Data nașterii</label>
+      <label for="dob_day" translate="yes">Data de nastere</label>
       <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
       <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
       <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
     </div>
     <div id="ssn_last_4-container" class="pure-control-group">
-      <label for="ssn_last_4" translate="yes">SSN ultimele 4 cifre</label>
+      <label for="ssn_last_4" translate="yes">SSN durează 4 cifre</label>
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
       <label for="gender" translate="yes">Gen</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Sex feminin</span></label>
-        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Sex masculin</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Femeie</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Masculin</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
-      <h2 translate="yes">Identificarea personală</h2>
-      <label for="id_number" translate="yes">Numărul pașaportului sau al actului de identitate</label>
+      <h2 translate="yes">Identificare personala</h2>
+      <label for="id_number" translate="yes">Pasaport sau număr de identificare</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Scanare frontală/fotografie</label>
+      <label for="verification_document_front" translate="yes">Scanare / fotografie frontală</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Scanare/fotografie înapoi</label>
+      <label for="verification_document_back" translate="yes">Scanare / fotografie înapoi</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
       <h2 translate="yes">Dovada adresei</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Scanare frontală/fotografie</label>
+      <label for="verification_additional_document_front" translate="yes">Scanare / fotografie frontală</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Scanare/fotografie înapoi</label>
+      <label for="verification_additional_document_back" translate="yes">Scanare / fotografie înapoi</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
-      <h2 translate="yes">Adresa</h2>
+      <h2 translate="yes">Abordare</h2>
       <div id="address_line1-container" class="pure-control-group">
         <label for="address_line1" translate="yes">Linia 1</label>
         <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
-        <label for="address_line2" translate="yes">Linia 2</label>
+        <label for="address_line2" translate="yes">Randul 2</label>
         <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
-        <label for="address_city" translate="yes">City</label>
+        <label for="address_city" translate="yes">Oraș</label>
         <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -219,7 +219,7 @@
             <label for="address_state" translate="yes">Stat sau provincie</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Selectare stare
+                Selectează statul
               </option>
             </select>
           </div>
@@ -240,11 +240,11 @@
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
-        <label for="address_kana_city" translate="yes">City</label>
+        <label for="address_kana_city" translate="yes">Oraș</label>
         <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
-        <label for="address_kana_town" translate="yes">Oraşul</label>
+        <label for="address_kana_town" translate="yes">Oraș</label>
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
@@ -252,7 +252,7 @@
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Cod poștal</label>
+        <label for="address_kana_postal_code" translate="yes">Cod postal</label>
         <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
@@ -263,11 +263,11 @@
         <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
-        <label for="address_kanji_city" translate="yes">City</label>
+        <label for="address_kanji_city" translate="yes">Oraș</label>
         <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
-        <label for="address_kanji_town" translate="yes">Oraşul</label>
+        <label for="address_kanji_town" translate="yes">Oraș</label>
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
@@ -275,12 +275,12 @@
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Cod poștal</label>
+        <label for="address_kanji_postal_code" translate="yes">Cod postal</label>
         <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Actualizare cont Stripe</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Actualizați contul Stripe</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -292,57 +292,57 @@
   <template id="success">
     <div class="success message">
       <span translate="yes">Succes! Contul Stripe a fost actualizat</span>
-      <a href="/account/connect" translate="yes">Revenire la cont</a>
+      <a href="/account/connect" translate="yes">Reveniți la cont</a>
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Eroare! Eroare necunoscută
+      Eroare! O eroare necunoscută s-a întamplat
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Eroare! Eroare la încărcarea imaginilor documentului
+      Eroare! A apărut o eroare la încărcarea imaginilor documentului
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Eroare! Eroare la remiterea formularului
+      Eroare! A apărut o eroare la trimiterea formularului
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Eroare! URL de firmă nevalid sau lipsă
+      Eroare! Adresa URL de afaceri nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Eroare! Cod categorie comerciant firmă nevalid sau lipsă
+      Eroare! Cod de categorie comerciant nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      Eroare! Descriere a produsului de afaceri nevalidă sau lipsă
+      Eroare! Descrierea produsului de afaceri nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Eroare! Scanare sau fotografie frontală a documentului nevalidă sau lipsă
+      Eroare! Scanarea sau fotografia anterioară a documentului este nevalidă sau lipsește
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Eroare! Scanare sau fotografie de document nevalidă sau lipsă
+      Eroare! Scanare sau fotografie necorespunzătoare sau lipsă din document
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Eroare! Scanare sau fotografie suplimentară a documentului nevalidă sau lipsă
+      Eroare! Scanarea sau fotografia anterioară a documentului suplimentar nevalide sau lipsă
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Eroare! Scanare sau fotografie de document suplimentar nevalidă sau lipsă
+      Eroare! Scanare sau fotografie înapoi pentru documente suplimentare nevalide sau lipsă
     </div>
   </template>
   <template id="invalid-id_number">
@@ -352,22 +352,22 @@
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Eroare! Nume de firmă nevalid sau lipsă
+      Eroare! Nume de companie nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Eroare! Nume de firmă kana nevalid sau lipsă
+      Eroare! Nume de companie kana nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Eroare! Nume de firmă kanji nevalid sau lipsă
+      Eroare! Nume de afaceri kanji nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Eroare! ID-ul de taxă de afaceri nevalid sau lipsă
+      Eroare! ID-ul fiscal nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-phone">
@@ -377,27 +377,27 @@
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Eroare! Sex nevalid sau lipsă
+      Eroare! Gen nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Eroare! Nu sunt valide sau lipsesc ultimele 4 cifre ale numărului de securitate socială
+      Eroare! Ultimele 4 cifre ale numărului de securitate socială sunt nevalide sau lipsă
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Eroare! Data nașterii nu este validă sau lipsește
+      Eroare! Data nașterii nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Eroare! Data nașterii nu este validă sau lipsește
+      Eroare! Data nașterii nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Eroare! Data nașterii nu este validă sau lipsește
+      Eroare! Data nașterii nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-first_name">
@@ -407,47 +407,47 @@
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Eroare! Nume prenume Kana nevalid sau lipsă
+      Eroare! Prenume Kana nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Eroare! Prenume Kanji nevalid sau lipsă
+      Eroare! Prenume Kanji nevalid sau lipsit
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Eroare! Nume de familie nevalid sau lipsă
+      Eroare! Prenume nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Eroare! Nume de familie Kana nevalid sau lipsă
+      Eroare! Prenumele Kana nu este valabil sau lipsește
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Eroare! Nume de familie Kanji nevalid sau lipsă
+      Eroare! Numele Kanji nu este valabil sau lipsește
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Eroare! E-mail nevalid sau lipsă
+      Eroare! Adresa de e-mail nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Eroare! Localitate adresă personală nevalidă sau lipsă
+      Eroare! Oraș de adresă personală nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Eroare! Stare adresă personală nevalidă sau lipsă
+      Eroare! Stare de adresă personală nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Eroare! Linie adresă personală nevalidă sau lipsă 1
+      Eroare! Linia 1 de adresă personală nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-address_postal_code">
@@ -457,47 +457,47 @@
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Eroare! Oraș de adrese personale Kana nevalid sau lipsă
+      Eroare! Oraș de adresă personală nevalid sau lipsă Kana
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Eroare! Stare adresă personală Kana nevalidă sau lipsă
+      Eroare! Stare de adresă personală nevalidă sau lipsă Kana
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Eroare! Oraș de adrese personale Kana nevalid sau lipsă
+      Eroare! Orașul de adresă personală nevalid sau care lipsește Kana
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Eroare! Linia de adresă personală Kana nevalidă sau lipsă 1
+      Eroare! Linia 1 de adresă personală Kana nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Eroare! Cod poștal kana nevalid sau lipsă
+      Eroare! Cod poștal al adresei personale Kana nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Eroare! Oraș de adrese personale Kanji nevalid sau lipsă
+      Eroare! Oraș de adresă personală Kanji nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Eroare! Stare adresă personală Kanji nevalidă sau lipsă
+      Eroare! Stare de adresă personală Kanji nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Eroare! Localitatea de adrese personale Kanji nevalidă sau lipsă
+      Eroare! Orașul adresei personale Kanji este nevalid sau lipsă
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Eroare! Linie de adresă personală Kanji nevalidă sau lipsă 1
+      Eroare! Linia 1 de adresă personală Kanji nevalidă sau lipsă
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">

@@ -28,11 +28,11 @@
 </head>
 <body>
   <h1 translate="yes">Betalingsinligting vir ${stripeAccount.id}</h1>
-  <p translate="yes">Die bankrekening bywerk wat jou inkomsteuitbetalings sal ontvang.</p>
+  <p translate="yes">Dateer die bankrekening op wat u uitbetalings sal ontvang.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">Land van bank</label>
+      <label for="country" translate="yes">Land van die bank</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
           Kies
@@ -41,7 +41,7 @@
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Rekeningtipe</label>
+      <label translate="yes">Soort Rekening</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Rekeninghouer se naam</label>
+      <label for="account-holder-name" translate="yes">Naam van rekeninghouer</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -71,7 +71,7 @@
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,15 +85,15 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Transito-nommer</label>
+        <label for="transit_number" translate="yes">Transito nommer</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="institution_number" translate="yes">Instelling nommer</label>
+        <label for="institution_number" translate="yes">Instellingsnommer</label>
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -133,12 +133,12 @@
       <h2 translate="yes">Alternatiewe formaat</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Sorteer kode</label>
+          <label for="sort_code" translate="yes">Spelkode</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">Rekeningnommer</label>
+          <label for="account_number" translate="yes">Rekening nommer</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -149,7 +149,7 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Skoonmaak kode</label>
+        <label for="clearing_code" translate="yes">Wis kode</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -157,7 +157,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -171,7 +171,7 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Bank kode</label>
+        <label for="bank_code" translate="yes">Bankkode</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -179,7 +179,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routing nommer</label>
+        <label for="routing_number" translate="yes">Roeterings nommer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routing nommer</label>
+        <label for="routing_number" translate="yes">Roeterings nommer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -233,7 +233,7 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Bank kode</label>
+        <label for="bank_code" translate="yes">Bankkode</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -241,7 +241,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,11 +259,11 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routing nommer</label>
+        <label for="routing_number" translate="yes">Roeterings nommer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rekeningnommer</label>
+        <label for="account_number" translate="yes">Rekening nommer</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -283,22 +283,22 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Sukses! Die betalingsinligting is bygewerk
+      Sukses! Die betalingsinligting is opgedateer
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! 'N Fout het voorgekom toe die betalinginligting bygewerk is
+      Fout! Kon nie die betalinginligting opdateer nie
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende land van bank
+      Fout! Ongeldige of ontbrekende land van die bank
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende geldeenheidrekening
+      Fout! Ongeldige of ontbrekende geldeenheid van die rekening
     </div>
   </template>
   <template id="invalid-account_holder_type">
@@ -313,52 +313,52 @@
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende BSB nommer
+      Fout! Ongeldige of ontbrekende BSB-nommer
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Bankkode nommer
+      Fout! Ongeldige of ontbrekende bankkode nommer
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende sorteer kode
+      Fout! Ongeldige of ontbrekende sorteerkode
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende instansie nommer
+      Fout! Ongeldige of ontbrekende instellingsnommer
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende transito-nommer
+      Fout! Ongeldige of ontbrekende transito nommer
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende skoonmaak kode nommer
+      Fout! Ongeldige of ontbrekende nommer vir die skoonmaak van kode
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Takkodenommer
+      Fout! Ongeldige of ontbrekende takkennommer
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende rekeninghouer naam
+      Fout! Ongeldige of ontbrekende naam van die rekeninghouer
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende IBAN nommer
+      Fout! Ongeldige of ontbrekende IBAN-nommer
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende transito-nommer
+      Fout! Ongeldige of ontbrekende transito nommer
     </div>
   </template>
 </body>

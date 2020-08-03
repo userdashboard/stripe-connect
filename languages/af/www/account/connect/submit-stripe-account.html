@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Dien in ${stripeAccount.id}</title>
+  <title translate="yes">Indien ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Dien in ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verifikasieproses deur u voltooide registrasie in te dien.</p>
+  <h1 translate="yes">Indien ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verifiëringsproses deur u voltooide registrasie in te dien.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Voordelige eienaars</h2>
@@ -20,7 +20,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Naam</th>
+          <th translate="yes">naam</th>
         </tr>
       </thead>
     </table>
@@ -31,7 +31,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Naam</th>
+          <th translate="yes">naam</th>
         </tr>
       </thead>
     </table>
@@ -95,17 +95,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fout! U moet die maatskappy se direkteure
+      Fout! U moet die direkteure van die maatskappy indien
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fout! Jy moet die maatskappy se voordelige eienaars
+      Fout! U moet die voordelige eienaars van die onderneming indien
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Fout! Jy moet die maatskappyverteenwoordiger se inligting
+      Fout! U moet die maatskappyverteenwoordiger se inligting indien
     </div>
   </template>
   <template id="invalid-payment-details">
@@ -120,7 +120,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! 'N Fout het voorgekom met die indiening van die registrasie
+      Fout! Kon nie die registrasie indien nie
     </div>
   </template>
 </body>

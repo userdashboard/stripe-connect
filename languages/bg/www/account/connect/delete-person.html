@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Изтриете ${person.id}</title>
+  <title translate="yes">Изтрий ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Изтриете ${person.id}</h1>
+  <h1 translate="yes">Изтрий ${person.id}</h1>
   <p translate="yes">Информацията за собственика ще бъде изтрита незабавно и не може да бъде възстановена.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Изтриете</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Изтрий</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Собственикът на фирмата е изтрит
+      Успех! Собственикът на компанията е изтрит
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Грешка! Възникна грешка при изтриване на собственика на фирмата
+      Грешка! Възникна грешка при изтриването на собственика на компанията
     </div>
   </template>
 </body>

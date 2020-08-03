@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Soumet ${stripeAccount.id}</title>
+  <title translate="yes">Soumèt ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Soumet ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> pwosesis Verifikasyon pa soumet enskripsyon ranpli ou.</p>
+  <h1 translate="yes">Soumèt ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> pwosesis verifikasyon lè ou soumèt enskripsyon ou ranpli a.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Pwopriyete ki benefik</h2>
+    <h2 translate="yes">Pwopriyetè benefisye yo</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">fe-apel</th>
+          <th translate="yes">Non</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Direkte konpayi yo</h2>
+    <h2 translate="yes">Direktè konpayi an</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">fe-apel</th>
+          <th translate="yes">Non</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Soumet enskripsyon</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Soumèt enskripsyon an</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Enskripsyon an gen enfomasyon enskripsyon enkonple
+      Enskripsyon an gen enfòmasyon enskripsyon enkonplè
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Ere! Ou dwe soumet direkte konpayi an
+      Erè! Ou dwe soumèt direktè konpayi an
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Ere! Ou dwe soumet pwopriyete benefisye konpayi an
+      Erè! Ou dwe soumèt pwopriyetè benefisye konpayi an
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Ere! Se pou ou soumet enfomasyon sou konpayi an
+      Erè! Ou dwe soumèt enfòmasyon reprezantan konpayi an
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Ere! Enskripsyon an gen enfomasyon peman enkonple
+      Erè! Enskripsyon an gen enfòmasyon peman enkonplè
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Sikse! Enskripsyon an te soumet
+      Siksè! Enskripsyon an te soumèt
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ere! Yon ere ki te fet soumet enskripsyon an
+      Erè! Yon erè ki te fèt soumèt enskripsyon an
     </div>
   </template>
 </body>

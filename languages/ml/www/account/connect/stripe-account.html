@@ -22,7 +22,7 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">പേരു്</th>
+        <th translate="yes">പേര്</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -32,13 +32,13 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">നില</th>
+        <th translate="yes">പദവി</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">സമര് പ്പിച്ച</th>
+        <th translate="yes">സമർപ്പിച്ചു</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">ഇതുവരെ സമർപ്പിച്ചിട്ടില്ല</td>
       </tr>
     </tbody>
   </table>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">കമ്പനി പ്രതിനിധി</h2>
-    <p translate="yes">അക്കൗണ്ട് തടസം ഒഴിവാക്കാൻ നിർദ്ദിഷ്ട വ്യക്തി കമ്പനി വിട്ടോ അല്ലെങ്കിൽ ഇനി പ്രതിനിധിആക്കുകയോ ചെയ്യുന്ന പക്ഷം പുതിയ പ്രതിനിധി വിവരങ്ങൾ സമർപ്പിക്കുക.</p>
+    <p translate="yes">അക്കൗണ്ട് തകരാറ് ഒഴിവാക്കാൻ, നിർദ്ദിഷ്ട വ്യക്തി ഉപേക്ഷിക്കുകയോ കമ്പനിയെ പ്രതിനിധീകരിക്കുകയോ ചെയ്യുന്നില്ലെങ്കിൽ പുതിയ പ്രതിനിധി വിവരങ്ങൾ സമർപ്പിക്കുക.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യമായ വിവരങ്ങൾ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമായ വിവരങ്ങള്</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">മറ്റ് പ്രയോജനമുള്ള ഉടമകളുടെ വിവരങ്ങൾ</h2>
-    <p translate="yes">കമ്പനിയുടെ ഗണ്യമായ (25+) ശതമാനം അല്ലെങ്കിൽ കമ്പനിയുടെ യോ ധനകാര്യത്തിന്റെയോ പ്രവർത്തനങ്ങളുടെയോ ചുമതലവഹിക്കുന്ന മറ്റാർക്കെങ്കിലും നിങ്ങൾ ഡോക്യുമെന്റേഷൻ നൽകണം.</p>
+    <h2 translate="yes">മറ്റ് പ്രയോജനകരമായ ഉടമകളുടെ വിവരങ്ങൾ</h2>
+    <p translate="yes">കമ്പനിയുടെ ഗണ്യമായ (25+) ശതമാനം ഉടമസ്ഥതയിലുള്ള അല്ലെങ്കിൽ കമ്പനിയുടെ ചുമതലയുള്ള, ധനകാര്യങ്ങൾ അല്ലെങ്കിൽ പ്രവർത്തനങ്ങൾക്കായി മറ്റാർക്കെങ്കിലും നിങ്ങൾ ഡോക്യുമെന്റേഷൻ നൽകണം.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമാണ്</th>
         </tr>
       </thead>
     </table>
@@ -85,13 +85,13 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">കമ്പനി ഡയറക്ടർമാരുടെ വിവരങ്ങൾ</h2>
-    <p translate="yes">നിങ്ങളുടെ കമ്പനിയുടെ ഭരണസമിതിയുടെ ഒപ്പം/അല്ലെങ്കിൽ റെഗുലേറ്ററി അനുവർത്തനം പരിപാലിക്കുന്നതിന് ഉത്തരവാദിത്തമുള്ള ആളുകളുടെ മുഴുവൻ പേരുകളും നിങ്ങൾ നൽകണം.</p>
+    <p translate="yes">നിങ്ങളുടെ കമ്പനിയുടെ ഗവേണിംഗ് ബോർഡിന്റെയും / അല്ലെങ്കിൽ റെഗുലേറ്ററി പാലിക്കൽ പരിപാലിക്കുന്നതിനുള്ള ഉത്തരവാദിത്തമുള്ള ആളുകളുടെയും മുഴുവൻ പേരുകളും നിങ്ങൾ നൽകണം.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമാണ്</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">പേയ് മെന്റ് വിവരങ്ങൾ</h2>
+    <h2 translate="yes">പേയ്u200cമെന്റ് വിവരങ്ങൾ</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -126,16 +126,16 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">അക്കൗണ്ടിലേക്ക് പണം അടയ്ക്കപ്പെടുന്നു ${bank_account.bank_name}.</p>
+    <p translate="yes">അക്കൗണ്ടിലേക്ക് ഫണ്ടുകൾ അടയ്ക്കുന്നു ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">പണം സ്വീകരിക്കുന്നതിന് ബാങ്കിംഗ് വിശദാംശങ്ങൾ നൽകണം.</p>
+    <p translate="yes">ഫണ്ട് ലഭിക്കുന്നതിന് ബാങ്കിംഗ് വിശദാംശങ്ങൾ നൽകണം.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിച്ചിട്ടില്ല.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">രജിസ് ട്രേഷന് ഓണ് ചെയ്തു ${account.dateFormatted}.</p>
+    <p translate="yes">രജിസ്ട്രേഷൻ സമർപ്പിച്ചു ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">രജിസ്ട്രേഷൻ വിവരങ്ങൾ നൽകിയിട്ടില്ല.</p>
@@ -150,37 +150,37 @@
     <span translate="yes">രജിസ്ട്രേഷൻ സ്വീകരിച്ചു</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+    <span translate="yes">അധിക വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">സമർപ്പിക്കൽ ബാക്കി</span>
+    <span translate="yes">സമർപ്പിക്കൽ തീർപ്പുകൽപ്പിച്ചിട്ടില്ല</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Stripe അവലോകനത്തിലാണ്</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under review by Stripe</span>
+    <span translate="yes">Stripe അവലോകനത്തിലാണ്</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe തിരസ്കരിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe നിരസിച്ചു, കാണുക</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">കൂടുതൽ വിവരങ്ങൾ ആവശ്യമാണ്</span>
+    <span translate="yes">അധിക വിവരങ്ങൾ ആവശ്യമാണ്</span>
   </template>
 </body>
 </html>

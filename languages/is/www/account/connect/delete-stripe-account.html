@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Eyða ${stripeAccount.id}</h1>
-  <p translate="yes">Stripe lykli verður eytt strax og ekki er hægt að endurheimta hann.</p>
+  <p translate="yes">Stripe reikningnum verður eytt strax og ekki er hægt að endurheimta það.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Eyða</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Árangri! Búið er að eyða Stripe reikningnum
+      Árangur! Stripe reikningnum hefur verið eytt
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Villa! Villa við eyðingu á Stripe lykli
+      Villa! Villa kom upp við að eyða Stripe reikningi
     </div>
   </template>
 </body>

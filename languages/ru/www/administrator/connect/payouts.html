@@ -12,17 +12,17 @@
   <h1 translate="yes">Выплаты</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Выплат пока не произошло.</p>
+    <p translate="yes">Выплаты еще не произошли.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Сумма</th>
-        <th translate="yes">Stripe счет</th>
-        <th translate="yes">Статус</th>
+        <th translate="yes">Количество</th>
+        <th translate="yes">Stripe аккаунт</th>
+        <th translate="yes">Положение дел</th>
         <th translate="yes">Описание</th>
-        <th translate="yes">Создан</th>
+        <th translate="yes">созданный</th>
       </tr>
     </thead>
   </table>
@@ -53,28 +53,28 @@
     <span translate="yes">Банковский счет не найден</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Недействительная валюта</span>
+    <span translate="yes">Неверная валюта</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Недействительный номер счета</span>
+    <span translate="yes">Неверный номер счета</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Недостаточные средства</span>
+    <span translate="yes">Недостаточно средств</span>
   </template>
   <template id="declined">
-    <span translate="yes">Банк отказался от перевода</span>
+    <span translate="yes">Банк отклонил перевод</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Нет дебетовых банковских счетов</span>
+    <span translate="yes">Нет банковского счета</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Не уму отсутствуют</span>
+    <span translate="yes">Не удалось обработать</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Сменилось право собственности на банк</span>
+    <span translate="yes">Право собственности на банк изменилось</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Банковский счет ограничен</span>

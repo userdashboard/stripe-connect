@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Görüntüle ${stripeAccount.id}</title>
+  <title translate="yes">Görünüm ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Görüntüle ${stripeAccount.id}</h1>
+  <h1 translate="yes">Görünüm ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,33 +17,33 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Türü</th>
+        <th translate="yes">tip</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Adı</th>
+        <th translate="yes">ad</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Ülke</th>
+        <th translate="yes">ülke</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Durum</th>
+        <th translate="yes">durum</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Gönderilmektedir</th>
+        <th translate="yes">Gönderilen</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Henüz gönderilmedi</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Kayıt bilgileri</h2>
+    <h2 translate="yes">Kayıt Bilgileri</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Şirket temsilcisi</h2>
-    <p translate="yes">Belirtilen kişi şirketten ayrılırsa veya artık şirketi temsil etmese, hesap kesintisini önlemek için yeni temsilci bilgileri gönderin.</p>
+    <p translate="yes">Hesabın bozulmasını önlemek için, belirtilen kişi şirketi terk ederse veya artık temsil etmiyorsa yeni temsilci bilgileri gönderin.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Adı</th>
-          <th translate="yes">Gerekli bilgiler</th>
+          <th translate="yes">ad</th>
+          <th translate="yes">Gerekli Bilgi</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Diğer faydalı sahipbilgileri</h2>
-    <p translate="yes">Şirketin önemli bir yüzdesi (25+) olan veya şirket, finans veya operasyonlardan sorumlu olan herkes için belge sağlamanız gerekir.</p>
+    <h2 translate="yes">Diğer hak sahipleri bilgileri</h2>
+    <p translate="yes">Şirketin önemli bir yüzdesine (25+) sahip olan veya şirketten, finanstan veya operasyonlardan sorumlu olan herkes için belge sağlamalısınız.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Adı</th>
-          <th translate="yes">Gerektirir</th>
+          <th translate="yes">ad</th>
+          <th translate="yes">gerektirir</th>
         </tr>
       </thead>
     </table>
@@ -85,13 +85,13 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">Şirket müdürleri bilgileri</h2>
-    <p translate="yes">Şirketinizin yönetim kurulunun ve/veya mevzuata uygunluğun korunmasından sorumlu kişilerin tam adlarını sağlamalısınız.</p>
+    <p translate="yes">Şirketinizin yönetim kurulunun ve / veya mevzuata uygunluğu sağlamaktan sorumlu kişilerin tam adlarını vermelisiniz.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Adı</th>
-          <th translate="yes">Gerektirir</th>
+          <th translate="yes">ad</th>
+          <th translate="yes">gerektirir</th>
         </tr>
       </thead>
     </table>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Kayıt gönder</h2>
+    <h2 translate="yes">Kaydı gönder</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,7 +120,7 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Bilgi ekleme</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Bilgi ekle</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
@@ -129,19 +129,19 @@
     <p translate="yes">Fonlar hesaba ödenir ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Fon almak için bankacılık bilgileri sağlanmalıdır.</p>
+    <p translate="yes">Fon alabilmek için banka bilgileri verilmelidir.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">Kayıt gönderilmedi.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Kayıt tarihinde sunuldu ${account.dateFormatted}.</p>
+    <p translate="yes">Kayıt tarihi ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Kayıt bilgileri sağlanmadı.</p>
+    <p translate="yes">Kayıt bilgisi verilmemiştir.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Kayıt bilgileri sağlanmıştır.</p>
+    <p translate="yes">Kayıt bilgileri verilmiştir.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Henüz gönderilmedi</span>
@@ -153,7 +153,7 @@
     <span translate="yes">Ek bilgi gerektirir</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Bekleyen gönderim</span>
+    <span translate="yes">Gönderilmeyi bekliyor</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+    <span translate="yes">Stripe tarafından inceleniyor</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe tarafından gözden geçiriliyor</span>
+    <span translate="yes">Stripe tarafından inceleniyor</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Stripe tarafından reddedildi, bkz.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

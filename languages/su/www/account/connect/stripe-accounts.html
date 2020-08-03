@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Akun Stripe</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Akun Stripe</h1>
+  <p><span translate="yes">Janten ngajual ku verifikasi idéntitas pribadi sareng inpormasi perusahaan ngalangkungan</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <div id="no-stripe-accounts">
+    <p translate="yes">Teu aya akun Stripe anu parantos didamel.</p>
+  </div>
+  <div class="pure-g requirements-wrapper">
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">Syarat individu</h2>
+        <ol>
+          <li translate="yes">Inpormasi pribadi anu diverifikasi</li>
+          <li translate="yes">Warga nagara anu didukung</li>
+          <li translate="yes">Rekening bank di nagara anu didukung</li>
+        </ol>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Mimitian pendaptaran individu</a>
+      </div>
+    </div>
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">Syarat bisnis</h2>
+        <ol>
+          <li translate="yes">Inpormasi pribadi anu diverifikasi</li>
+          <li translate="yes">Usaha kadaptar di nagara anu dirojong</li>
+          <li translate="yes">Rekening bank di nagara anu didukung</li>
+        </ol>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Mimitian pendaptaran perusahaan</a>
+      </div>
+    </div>
+  </div>
+  <div id="registrations-container">
+    <div id="individual-container">
+      <h2 translate="yes">Pendaptaran pribadi</h2>
+      <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th translate="yes">Ngaran</th>
+            <th translate="yes">Status</th>
+            <th translate="yes">Kacipta</th>
+            <th translate="yes">Dikintun</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+    <div id="company-container">
+      <h2 translate="yes">Pendaptaran perusahaan</h2>
+      <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th translate="yes">Ngaran Bisnis</th>
+            <th translate="yes">Status</th>
+            <th translate="yes">Kacipta</th>
+            <th translate="yes">Dikintun</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="blank-name-${account.id}">Not yet provided</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
+      <td id="business-name-${account.id}">${account.company.name || ""}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td id="submitted-${account.id}">${account.submittedFormatted}</td>
+      <td id="not-submitted-${account.id}">No</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Henteu dikintunkeun</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Pendaptaran parantos ditampi</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Pareuman ku Stripe</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Meryogikeun inpormasi tambahan</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Ditantosan kaluman</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Ditolak ku Stripe, tingali</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Ditolak ku Stripe, tingali</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Ditolak ku Stripe, tingali</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Ditolak ku Stripe, tingali</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Inpo leuwih seueur anu diperyogikeun</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Diulas ku Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Diulas ku Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Pareuman ku Stripe, tingali</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Meryogikeun inpormasi tambahan</span>
+  </template>
+</body>
+</html>

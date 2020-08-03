@@ -2,21 +2,21 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">தீங்கான ${stripeAccount.id}</title>
+  <title translate="yes">அழி ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">தீங்கான ${stripeAccount.id}</h1>
+  <h1 translate="yes">அழி ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
         <th translate="yes">பெயர்</th>
-        <th translate="yes">சமுதாயப் படிநிலை</th>
+        <th translate="yes">நிலை</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -31,7 +31,7 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">தீங்கான</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">அழி</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -40,20 +40,20 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      தவறு! Stripe கணக்கை நீக்குவதில் பிழை
+      பிழை! Stripe கணக்கை நீக்குவதில் பிழை ஏற்பட்டது
     </div>
   </template>
   <template id="not-submitted">
     <span translate="yes">இன்னும் சமர்ப்பிக்கப்படவில்லை</span>
   </template>
   <template id="verified">
-    <span translate="yes">பதிவு ஏற்றுக்கொள்ளப்பட்டது</span>
+    <span translate="yes">பதிவு ஏற்றுக்கொள்ளப்பட்டுள்ளது</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe மூலம் முடக்கப்பட்டது</span>
+    <span translate="yes">Stripe ஆல் முடக்கப்பட்டது</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
+    <span translate="yes">கூடுதல் தகவல் தேவை</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">சமர்ப்பிப்பு நிலுவையில் உள்ளது</span>
@@ -62,31 +62,31 @@
     <span translate="yes">சமர்ப்பிப்பு நிலுவையில் உள்ளது</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">மேலும் தகவல் தேவை</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe மதிப்பாய்வு கீழ்</span>
+    <span translate="yes">Stripe ஆல் மதிப்பாய்வு செய்யப்படுகிறது</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe மதிப்பாய்வு கீழ்</span>
+    <span translate="yes">Stripe ஆல் மதிப்பாய்வு செய்யப்படுகிறது</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe முடக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் முடக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">நீக்கப்பட்ட</span>
+    <span translate="yes">நீக்கப்பட்டது</span>
   </template>
 </body>
 </html>

@@ -13,7 +13,7 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Motivo rifiuto</label>
+      <label for="reason" translate="yes">Motivo del rifiuto</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
           Seleziona motivo
@@ -37,12 +37,12 @@
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Errore! Il conto deve avere un saldo /bin/sh prima di rifiutare
+      Errore! L'account deve avere un saldo / bin / sh prima di rifiutare
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Errore! Si è verificato un errore durante il rifiuto dell'account Stripe
+      Errore! Si è verificato un errore durante l'espulsione dell'account Stripe
     </div>
   </template>
   <template id="not-submitted">
@@ -52,16 +52,16 @@
     <span translate="yes">La registrazione è stata accettata</span>
   </template>
   <template id="verified">
-    <span translate="yes">Disabilitato per Stripe</span>
+    <span translate="yes">Disabilitato da Stripe</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Richiede informazioni aggiuntive</span>
+    <span translate="yes">Richiede ulteriori informazioni</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Richiede informazioni aggiuntive</span>
+    <span translate="yes">Richiede ulteriori informazioni</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Invio in sospeso</span>
+    <span translate="yes">In attesa di invio</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Rifiutato da Stripe, vedi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -79,10 +79,10 @@
     <span translate="yes">Sono necessarie ulteriori informazioni</span>
   </template>
   <template id="listed">
-    <span translate="yes">In fase di revisione da parte Stripe</span>
+    <span translate="yes">In corso di revisione da parte di Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">In fase di revisione da parte Stripe</span>
+    <span translate="yes">In corso di revisione da parte di Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Disabilitato da Stripe, vedi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

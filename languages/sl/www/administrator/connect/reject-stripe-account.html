@@ -2,33 +2,33 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Zavrne ${stripeAccount.id}</title>
+  <title translate="yes">Zavrni ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Zavrne ${stripeAccount.id}</h1>
+  <h1 translate="yes">Zavrni ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
       <label for="reason" translate="yes">Razlog zavrnitve</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          Izberi razlog
+          Izberite razlog
         </option>
         <option value="fraud" translate="yes">
-          Goljufije
+          goljufije
         </option>
         <option value="terms_of_service" translate="yes">
-          Pogoji kršitve storitve
+          Kršitev pogojev storitve
         </option>
         <option value="other" translate="yes">
-          Drugih
+          Drugo
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Zavrne</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Zavrni</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -37,12 +37,12 @@
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Napaka! Račun mora imeti ravnovesje/bin/sh, preden zavrne
+      Napaka! Pred zavrnitvijo mora imeti račun / bin / sh stanje
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Napaka! Zmota med pridobivanjem napake zavrniti Stripe račun
+      Napaka! Pri odstranjevanju računa Stripe je prišlo do napake
     </div>
   </template>
   <template id="not-submitted">
@@ -52,7 +52,7 @@
     <span translate="yes">Registracija je bila sprejeta</span>
   </template>
   <template id="verified">
-    <span translate="yes">Onemogočil Stripe</span>
+    <span translate="yes">Onemogočeno s strani Stripe</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Zahteva dodatne informacije</span>
@@ -61,7 +61,7 @@
     <span translate="yes">Zahteva dodatne informacije</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čakajoča predložitev</span>
+    <span translate="yes">Pred oddajo</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Zavrnil Stripe, glej</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -79,13 +79,13 @@
     <span translate="yes">Več informacij je potrebnih</span>
   </template>
   <template id="listed">
-    <span translate="yes">Pod pregledom, ki ga Stripe</span>
+    <span translate="yes">V pregledu Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Pod pregledom, ki ga Stripe</span>
+    <span translate="yes">V pregledu Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Onemogočil Stripe, glejte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Onemogočeno s strani Stripe, glej</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

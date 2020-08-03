@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Mostra ${stripeAccount.id}</title>
+  <title translate="yes">Veure ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Mostra ${stripeAccount.id}</h1>
+  <h1 translate="yes">Veure ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Presentat</th>
+        <th translate="yes">Enviat</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">No enviat encara</td>
       </tr>
     </tbody>
   </table>
@@ -52,7 +52,7 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Representant de l'empresa</h2>
-    <p translate="yes">Per evitar la interrupció del compte envieu informació representativa nova si la persona especificada deixa o ja no representa l'empresa.</p>
+    <p translate="yes">Per evitar la interrupció del compte, envieu informació nova representativa si la persona especificada abandona o deixa de representar l'empresa.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Altres propietaris beneficiosos informació</h2>
-    <p translate="yes">Vostè ha d'aportar documentació per a qualsevol persona propietària d'un substancial (25 +) per cent de l'empresa o a càrrec de l'empresa, finances o operacions.</p>
+    <h2 translate="yes">Informació de propietaris benèfics</h2>
+    <p translate="yes">Heu d’aportar documentació a qualsevol que tingui un substancial (25+) per cent de l’empresa o a càrrec de l’empresa, les finances o les operacions.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informació consellers de la societat</h2>
-    <p translate="yes">Heu de proporcionar els noms complets de la Junta de govern de la vostra empresa i/o responsables de mantenir el compliment normatiu.</p>
+    <h2 translate="yes">Informació de consellers de l'empresa</h2>
+    <p translate="yes">Heu d’indicar noms complets del consell d’administració de la vostra empresa i / o persones responsables de mantenir el compliment normatiu.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Informació de pagament</h2>
+    <h2 translate="yes">Informació sobre el pagament</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Presentar inscripció</h2>
+    <h2 translate="yes">Envieu el registre</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,31 +120,31 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Afegir informació</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Afegiu informació</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Els fons s'abonen a compte ${bank_account.bank_name}.</p>
+    <p translate="yes">Els fons es paguen a compte ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Les dades bancàries s'han de proporcionar per rebre fons.</p>
+    <p translate="yes">Per rebre fons, s'han de proporcionar les dades bancàries.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">No s'ha presentat el registre.</p>
+    <p translate="yes">El registre no s’ha presentat.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">El registre es va presentar ${account.dateFormatted}.</p>
+    <p translate="yes">El registre es va presentar el ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">La informació de registre no s'ha proporcionat.</p>
+    <p translate="yes">No s’ha proporcionat la informació de registre.</p>
   </template>
   <template id="completed-registration">
     <p translate="yes">S'ha proporcionat la informació de registre.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">No presentat encara</span>
+    <span translate="yes">No enviat encara</span>
   </template>
   <template id="verified">
     <span translate="yes">S'ha acceptat la inscripció</span>
@@ -153,7 +153,7 @@
     <span translate="yes">Requereix informació addicional</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pendent d'enviament</span>
+    <span translate="yes">Pendent de la tramesa</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Rebutjat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Rebutjat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

@@ -22,7 +22,7 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">名字</th>
+        <th translate="yes">名称</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -32,13 +32,13 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">地位</th>
+        <th translate="yes">状态</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">提交</th>
+        <th translate="yes">已提交</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">尚未提交</td>
       </tr>
     </tbody>
   </table>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">公司代表</h2>
-    <p translate="yes">为了避免帐户中断，如果指定人员离开或不再代表公司，请提交新的代表信息。</p>
+    <p translate="yes">为避免帐户中断，如果指定人员离开或不再代表公司，请提交新的代表信息。</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">名字</th>
-          <th translate="yes">所需信息</th>
+          <th translate="yes">名称</th>
+          <th translate="yes">要求（提供）的信息</th>
         </tr>
       </thead>
     </table>
@@ -67,13 +67,13 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">其他受益所有人信息</h2>
-    <p translate="yes">您必须为拥有公司大量（25%以上）%或负责公司、财务或运营的任何其他人提供文件。</p>
+    <h2 translate="yes">其他实益拥有人信息</h2>
+    <p translate="yes">您必须为拥有公司实质（25 +）％或负责公司，财务或运营的任何其他人提供文件。</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">名字</th>
+          <th translate="yes">名称</th>
           <th translate="yes">需要</th>
         </tr>
       </thead>
@@ -85,12 +85,12 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">公司董事信息</h2>
-    <p translate="yes">您必须提供公司董事会和/或负责维护法规遵从的人的全名。</p>
+    <p translate="yes">您必须提供公司董事会和/或负责维持合规性的人员的全名。</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">名字</th>
+          <th translate="yes">名称</th>
           <th translate="yes">需要</th>
         </tr>
       </thead>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">付款信息</h2>
+    <h2 translate="yes">支付信息</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -126,16 +126,16 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">资金支付给账户 ${bank_account.bank_name}.</p>
+    <p translate="yes">资金已支付到帐户 ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">必须提供银行详细信息才能收到资金。</p>
+    <p translate="yes">必须提供银行详细信息以接收资金。</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">尚未提交注册。</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">注册提交于 ${account.dateFormatted}.</p>
+    <p translate="yes">注册已于提交 ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">尚未提供注册信息。</p>
@@ -147,7 +147,7 @@
     <span translate="yes">尚未提交</span>
   </template>
   <template id="verified">
-    <span translate="yes">已接受注册</span>
+    <span translate="yes">注册已被接受</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">需要其他信息</span>
@@ -156,28 +156,28 @@
     <span translate="yes">待提交</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">被Stripe，请参阅</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe拒绝，请参见</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">被Stripe，请参阅</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe拒绝，请参见</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">被Stripe，请参阅</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe拒绝，请参见</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">被Stripe，请参阅</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe拒绝，请参见</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">正在由Stripe</span>
+    <span translate="yes">由Stripe审核中</span>
   </template>
   <template id="under-review">
-    <span translate="yes">正在由Stripe</span>
+    <span translate="yes">由Stripe审核中</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">被Stripe，请参阅</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">被Stripe拒绝，请参见</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">需要其他信息</span>

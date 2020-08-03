@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1 translate="yes">Enviar ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> processo de verificação submetendo o seu registo completo.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> processo de verificação enviando seu registro concluído.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Proprietários benéficos</h2>
+    <h2 translate="yes">Proprietários beneficiários</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Diretores de empresa</h2>
+    <h2 translate="yes">Diretores da empresa</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Submeter inscrição</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Enviar registro</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      O registo tem informações incompletas de registo
+      O registro possui informações incompletas de registro
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Um erro! Deve submeter os administradores da empresa
+      Erro! Você deve enviar os diretores da empresa
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Um erro! Deve submeter os beneficiários efetivos da empresa
+      Erro! Você deve enviar os proprietários beneficiários da empresa
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Um erro! Deve submeter as informações do representante da empresa
+      Erro! Você deve enviar as informações do representante da empresa
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Um erro! O registo tem informações de pagamento incompletas
+      Erro! O registro possui informações de pagamento incompletas
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Que sucesso! O registo foi submetido
+      Sucesso! O registro foi enviado
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro ao submeter o registo
+      Erro! Ocorreu um erro ao enviar o registro
     </div>
   </template>
 </body>

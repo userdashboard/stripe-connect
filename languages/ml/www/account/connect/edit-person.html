@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
-    <title translate="yes">à ́à μà ${person.id}</title>
+    <title translate="yes">എഡിറ്റുചെയ്യുക ${person.id}</title>
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -18,7 +18,7 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">വ്യക്തി[തിരുത്തുക] .</h1>
+    <h1 translate="yes">വ്യക്തിയെ എഡിറ്റുചെയ്യുക</h1>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">കമ്പനിയുമായുള്ള ബന്ധം</h2>
@@ -29,20 +29,20 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">ജോലി, പങ്ക് അല്ലെങ്കിൽ റിലേഷൻഷിപ്പ് തലക്കെട്ട്</label>
+        <label for="relationship_title" translate="yes">ജോലി, റോൾ അല്ലെങ്കിൽ ബന്ധത്തിന്റെ ശീർഷകം</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">ശതമാനം ഉടമസ്ഥത (എന്തെങ്കിലും ഉണ്ടെങ്കിൽ)</label>
+        <label for="relationship_percent_ownership" translate="yes">ശതമാനം ഉടമസ്ഥതയിലുള്ളത് (എന്തെങ്കിലും ഉണ്ടെങ്കിൽ)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">സ്വകാര്യ വിവരങ്ങൾ</h2>
+      <h2 translate="yes">സ്വകാര്യ വിവരം</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name-container" class="pure-control-group">
               <a id="first_name-anchor"></a>
-              <label for="first_name" translate="yes">ആദ്യനാമം</label>
+              <label for="first_name" translate="yes">പേരിന്റെ ആദ്യഭാഗം</label>
              <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
             </div>
           </div>
@@ -50,7 +50,7 @@
           <div class="pure-u-11-24">
             <div id="last_name-container" class="pure-control-group">
               <a id="last_name-anchor"></a>
-              <label for="last_name" translate="yes">പേരിന്റെ അവസാനപേര്</label>
+              <label for="last_name" translate="yes">പേരിന്റെ അവസാന ഭാഗം</label>
               <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">ഇമെയിൽ വിലാസം</label>
+              <label for="email" translate="yes">ഈ - മെയില് വിലാസം</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -74,12 +74,12 @@
         </div>
       </div>
       <div id="kana-information-container">
-        <h2 translate="yes">കനാ വ്യക്തിഗത വിവരങ്ങൾ</h2>
+        <h2 translate="yes">കാന വ്യക്തിഗത വിവരങ്ങൾ</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kana-container" class="pure-control-group">
               <a id="first_name_kana-anchor"></a>
-              <label for="first_name_kana" translate="yes">ആദ്യനാമം</label>
+              <label for="first_name_kana" translate="yes">പേരിന്റെ ആദ്യഭാഗം</label>
               <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
             </div>
           </div>
@@ -87,7 +87,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kana-container" class="pure-control-group">
               <a id="last_name_kana-anchor"></a>
-              <label for="last_name_kana" translate="yes">പേരിന്റെ അവസാനപേര്</label>
+              <label for="last_name_kana" translate="yes">പേരിന്റെ അവസാന ഭാഗം</label>
               <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
             </div>
           </div>
@@ -99,7 +99,7 @@
           <div class="pure-u-12-24">
             <div id="first_name_kanji-container" class="pure-control-group">
               <a id="first_name_kanji-anchor"></a>
-              <label for="first_name_kanji" translate="yes">ആദ്യനാമം</label>
+              <label for="first_name_kanji" translate="yes">പേരിന്റെ ആദ്യഭാഗം</label>
               <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -107,7 +107,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kanji-container" class="pure-control-group">
               <a id="last_name_kanji-anchor"></a>
-              <label for="last_name_kanji" translate="yes">പേരിന്റെ അവസാനപേര്</label>
+              <label for="last_name_kanji" translate="yes">പേരിന്റെ അവസാന ഭാഗം</label>
               <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -117,7 +117,7 @@
         <a id="dob_day-anchor"></a>
         <a id="dob_month-anchor"></a>
         <a id="dob_year-anchor"></a>
-        <label for="dob_day" translate="yes">ജനന തിയതി</label>
+        <label for="dob_day" translate="yes">ജന്മദിനം</label>
         <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
         <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
         <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
@@ -135,26 +135,26 @@
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
-        <h2 translate="yes">വ്യക്തിഗത തിരിച്ചറിയൽ</h2>
+        <h2 translate="yes">വൈയക്തിക തിരിച്ചറിയൽ</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">പാസ്പോർട്ട് അല്ലെങ്കിൽ ഐഡി നമ്പർ</label>
+        <label for="id_number" translate="yes">പാസ്u200cപോർട്ട് അല്ലെങ്കിൽ ഐഡി നമ്പർ</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">ഫ്രണ്ട് സ്കാൻ/ഫോട്ടോ</label>
+        <label for="verification_document_front" translate="yes">ഫ്രണ്ട് സ്കാൻ / ഫോട്ടോ</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">ബാക്ക് സ്കാൻ/ഫോട്ടോ</label>
+        <label for="verification_document_back" translate="yes">ബാക്ക് സ്കാൻ / ഫോട്ടോ</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
-        <h2 translate="yes">വിലാസം തെളിയിക്കുന്ന തെളിവ്</h2>
+        <h2 translate="yes">വിലാസത്തിന്റെ തെളിവ്</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">ഫ്രണ്ട് സ്കാൻ/ഫോട്ടോ</label>
+        <label for="verification_additional_document_front" translate="yes">ഫ്രണ്ട് സ്കാൻ / ഫോട്ടോ</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">ബാക്ക് സ്കാൻ/ഫോട്ടോ</label>
+        <label for="verification_additional_document_back" translate="yes">ബാക്ക് സ്കാൻ / ഫോട്ടോ</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -171,17 +171,17 @@
         </div>
         <div id="address_city-container" class="pure-control-group">
           <a id="address_city-anchor"></a>
-          <label for="address_city" translate="yes">സിറ്റി</label>
+          <label for="address_city" translate="yes">നഗരം</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
             <div id="address_state-container" class="pure-u-16-24">
               <a id="address_state-anchor"></a>
-              <label for="address_state" translate="yes">സംസ്ഥാനം അല്ലെങ്കിൽ പ്രവിശ്യ</label>
+              <label for="address_state" translate="yes">സംസ്ഥാന അല്ലെങ്കിൽ പ്രവിശ്യ</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
-                  തെരഞ്ഞെടുക്കുക
+                  തിരഞ്ഞെടുക്കുക
                 </option>
               </select>
             </div>
@@ -213,19 +213,19 @@
         </div>
       </div>
       <div id="kana-address-container">
-        <h2 translate="yes">കനാ വ്യക്തിപരമായ വിലാസം</h2>
+        <h2 translate="yes">കാനയുടെ സ്വകാര്യ വിലാസം</h2>
         <div id="address_kana_line1-container" class="pure-control-group">
           <a id="address_kana_line1-anchor"></a>
           <label for="address_kana_line1" translate="yes">വരി 1</label>
           <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
         </div>
         <div id="address_kana_city-container" class="pure-control-group">
-          <label for="address_kana_city" translate="yes">സിറ്റി</label>
+          <label for="address_kana_city" translate="yes">നഗരം</label>
           <a id="address_kana_city-anchor"></a>
           <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
         </div>
         <div id="address_kana_town-container" class="pure-control-group">
-          <label for="address_kana_town" translate="yes">ടൌൺ</label>
+          <label for="address_kana_town" translate="yes">പട്ടണം</label>
           <a id="address_kana_town-anchor"></a>
           <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
         </div>
@@ -236,12 +236,12 @@
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
           <a id="address_kana_postal_code-anchor"></a>
-          <label for="address_kana_postal_code" translate="yes">തപാൽ കോഡ്</label>
+          <label for="address_kana_postal_code" translate="yes">തപാൽ കോഡ്</label>
           <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">കാഞ്ചി യുടെ സ്വകാര്യ വിലാസം</h2>
+        <h2 translate="yes">കാഞ്ചി സ്വകാര്യ വിലാസം</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
           <label for="address_kanji_line1" translate="yes">വരി 1</label>
@@ -249,12 +249,12 @@
         </div>
         <div id="address_kanji_city-container" class="pure-control-group">
           <a id="address_kanji_city-anchor"></a>
-          <label for="address_kanji_city" translate="yes">സിറ്റി</label>
+          <label for="address_kanji_city" translate="yes">നഗരം</label>
           <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
         </div>
         <div id="address_kanji_town-container" class="pure-control-group">
           <a id="address_kanji_town-anchor"></a>
-          <label for="address_kanji_town" translate="yes">ടൌൺ</label>
+          <label for="address_kanji_town" translate="yes">പട്ടണം</label>
           <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
@@ -264,18 +264,18 @@
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
           <a id="address_kanji_postal_code-anchor"></a>
-          <label for="address_kanji_postal_code" translate="yes">തപാൽ കോഡ്</label>
+          <label for="address_kanji_postal_code" translate="yes">തപാൽ കോഡ്</label>
           <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">രജിസ്ട്രേഷൻ പുതുക്കുക</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">രജിസ്ട്രേഷൻ അപ്u200cഡേറ്റുചെയ്യുക</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      തെറ്റ്! ഫോം സമർപ്പിക്കുമ്പോൾ ഒരു പിശക് സംഭവിച്ചു
+      പിശക്! ഫോം സമർപ്പിക്കുന്നതിൽ ഒരു പിശക് സംഭവിച്ചു
     </div>
   </template>
   <template id="country-option">
@@ -290,182 +290,182 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      തെറ്റ്! വിവരം നല് കിക്കൊണ്ട് ഒരു പിശക് സംഭവിച്ചു
+      പിശക്! വിവരങ്ങൾ അപ്u200cഡേറ്റുചെയ്യുന്നതിൽ ഒരു പിശക് സംഭവിച്ചു
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      തെറ്റ്! ഒരു ഫോട്ടോ അല്ലെങ്കിൽ സ്കാൻ അപ് ലോഡ് ചെയ്യുന്നതിൽ ഒരു പിശക് സംഭവിച്ചു
+      പിശക്! ഒരു ഫോട്ടോ അപ്u200cലോഡുചെയ്യുന്നതിനോ സ്u200cകാൻ ചെയ്യുന്നതിനോ ഒരു പിശക് സംഭവിച്ചു
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ വ്യക്തിഗത ID നമ്പർ
+      പിശക്! സ്വകാര്യ ഐഡി നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ലിംഗഭേദം
+      പിശക്! ലിംഗഭേദം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      തെറ്റ്! സോഷ്യൽ സെക്യൂരിറ്റി നമ്പറിന്റെ അവസാന 4 അക്കങ്ങൾ അസാധുവായതോ വിട്ടുപോയതോ
+      പിശക്! സാമൂഹിക സുരക്ഷാ നമ്പറിന്റെ അവസാന 4 അക്കങ്ങൾ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ജനനത്തീയതി
+      പിശക്! ജനനത്തീയതി അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ജനനത്തീയതി
+      പിശക്! ജനനത്തീയതി അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ജനനത്തീയതി
+      പിശക്! ജനനത്തീയതി അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ആദ്യപേര്
+      പിശക്! ആദ്യ നാമം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാന ആദ്യനാമം
+      പിശക്! കാനയുടെ ആദ്യ നാമം അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ കാഞ്ചിആദ്യപേര്
+      പിശക്! കാഞ്ചിഫർസ്റ്റ് പേര് അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ നഷ്ടപ്പെട്ടതോ ആയ അവസാന പേര്
+      പിശക്! അവസാന നാമം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാനയുടെ അവസാന പേര്
+      പിശക്! കാനയുടെ അവസാന നാമം അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ നഷ്ടപ്പെട്ടതോ ആയ അവസാന പേര്
+      പിശക്! അവസാന നാമം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ഇമെയിൽ
+      പിശക്! അസാധുവായ അല്ലെങ്കിൽ നഷ്u200cടമായ ഇമെയിൽ
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ഫോൺ നമ്പർ
+      പിശക്! ഫോൺ നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ശതമാനം ഉടമസ്ഥാവകാശം
+      പിശക്! ശതമാനം ഉടമസ്ഥാവകാശം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ഡോക്യുമെന്റ് ഫ്രണ്ട് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ
+      പിശക്! ഡോക്യുമെന്റ് ഫ്രണ്ട് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ഡോക്യുമെന്റ് ബാക്ക് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ
+      പിശക്! പ്രമാണം ബാക്ക് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ അധിക ഡോക്യുമെന്റ് ഫ്രണ്ട് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ
+      പിശക്! അധിക പ്രമാണം ഫ്രണ്ട് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ അധിക ഡോക്യുമെന്റ് ബാക്ക് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ
+      പിശക്! അധിക പ്രമാണം ബാക്ക് സ്കാൻ അല്ലെങ്കിൽ ഫോട്ടോ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ നഷ്ടപ്പെട്ടതോ ആയ വ്യക്തിഗത വിലാസ രാജ്യം
+      പിശക്! സ്വകാര്യ വിലാസ രാജ്യം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ വ്യക്തിഗത വിലാസം സിറ്റി
+      പിശക്! സ്വകാര്യ വിലാസ നഗരം അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ വ്യക്തിഗത വിലാസ അവസ്ഥ
+      പിശക്! സ്വകാര്യ വിലാസ നില അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ വ്യക്തിഗത വിലാസ ലൈൻ 1
+      പിശക്! വ്യക്തിഗത വിലാസ വരി 1 അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ വ്യക്തിഗത തപാൽ കോഡ്
+      പിശക്! സ്വകാര്യ തപാൽ കോഡ് അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാന വ്യക്തിഗത വിലാസം സിറ്റി
+      പിശക്! കാനയുടെ സ്വകാര്യ വിലാസ നഗരം അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാന വ്യക്തിഗത വിലാസ അവസ്ഥ
+      പിശക്! കാനയുടെ സ്വകാര്യ വിലാസ നില അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാന വ്യക്തിഗത വിലാസം പട്ടണം
+      പിശക്! കാനയുടെ സ്വകാര്യ വിലാസ നഗരം അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാന വ്യക്തിഗത വിലാസ ലൈൻ 1
+      പിശക്! കാനയുടെ സ്വകാര്യ വിലാസ വരി 1 അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാന വ്യക്തിഗത വിലാസം പോസ്റ്റൽ കോഡ്
+      പിശക്! കാനയുടെ സ്വകാര്യ വിലാസ പോസ്റ്റൽ കോഡ് അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാഞ്ചി വ്യക്തിഗത വിലാസം സിറ്റി
+      പിശക്! കാഞ്ചി സ്വകാര്യ വിലാസ നഗരം അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാഞ്ചി വ്യക്തിഗത വിലാസ അവസ്ഥ
+      പിശക്! കാഞ്ചി സ്വകാര്യ വിലാസ നില അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാഞ്ചി വ്യക്തിഗത വിലാസം പട്ടണം
+      പിശക്! കാഞ്ചി സ്വകാര്യ വിലാസ നഗരം അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാഞ്ചി വ്യക്തിഗത വിലാസ ലൈൻ 1
+      പിശക്! കാഞ്ചി സ്വകാര്യ വിലാസ വരി 1 അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ കാണാതായ കാഞ്ചി വ്യക്തിഗത വിലാസം പോസ്റ്റൽ കോഡ്
+      പിശക്! കാഞ്ചി സ്വകാര്യ വിലാസ തപാൽ കോഡ് അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
 </body>

@@ -18,17 +18,17 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Kwota</th>
+        <th translate="yes">Ilość</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Stripe konto</th>
+        <th translate="yes">Konto Stripe</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">Stan</th>
+        <th translate="yes">Status</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Utworzone</th>
+        <th translate="yes">Utworzony</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -57,25 +57,25 @@
     <span translate="yes">Nieprawidłowy numer konta</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Niewystarczające fundusze</span>
+    <span translate="yes">Niewystarczające środki</span>
   </template>
   <template id="declined">
-    <span translate="yes">Bank odrzucony przelew</span>
+    <span translate="yes">Bank odrzucił przelew</span>
   </template>
   <template id="debit_not_authorized">
     <span translate="yes">Brak obciążenia konta bankowego</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Nie można przetworzyć</span>
+    <span translate="yes">Nie udało się przetworzyć</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Zmieniono własność banku</span>
+    <span translate="yes">Właściciel banku zmienił się</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Ograniczone konto bankowe</span>
+    <span translate="yes">Konto bankowe ograniczone</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Zamrożone konto bankowe</span>
+    <span translate="yes">Konto bankowe zostało zamrożone</span>
   </template>
   <template id="account_closed">
     <span translate="yes">Konto bankowe zamknięte</span>

@@ -11,9 +11,9 @@
 <body>
   <h1 translate="yes">人</h1>
   <div id="representative-container">
-    <h2 translate="yes">会社代表</h2>
-    <p translate="yes">指名された人のステータスが変わる場合は、新しい担当者を作成する必要があります。</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">新しい担当者の作成</a></p>
+    <h2 translate="yes">会社の代表者</h2>
+    <p translate="yes">指名された人のステータスが変更された場合は、新しい代理人を作成する必要があります。</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">新しい代表を作成</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -25,9 +25,9 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">有益な所有者</h2>
-    <p translate="yes">会社の相当な割合 (25+) を所有している、または会社、財務、または業務を担当している他の人に対して、ドキュメントを提供する必要があります。</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">所有者の追加</a></p>
+    <h2 translate="yes">受益者</h2>
+    <p translate="yes">会社のかなりの（25+）パーセントを所有している、または会社、その財務または業務を担当している人に、文書を提供する必要があります。</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">所有者を追加</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -39,9 +39,9 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">会社役員</h2>
-    <p translate="yes">取締役会の文書を提出する必要があります。</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">所有者の追加</a></p>
+    <h2 translate="yes">会社の取締役</h2>
+    <p translate="yes">理事会の文書を提出する必要があります。</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">所有者を追加</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">情報の追加</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">情報を追加</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

@@ -22,27 +22,27 @@
         <td id="mcc-description"></td>
       </tr>
       <tr>
-        <th translate="yes">Nazwa</th>
+        <th translate="yes">Imię</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Stan</th>
+        <th translate="yes">Status</th>
         <td id="account-status"></td>
       </tr>
       <tr>
-        <th translate="yes">Utworzone</th>
+        <th translate="yes">Utworzony</th>
         <td>${stripeAccount.createdFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Przekazywane</th>
+        <th translate="yes">Przesłano</th>
         <td>${stripeAccount.metadata.submittedFormatted}</td>
       </tr>
     </tbody>
   </table>
   <template id="not-submitted">
-    <span translate="yes">Nie zostały jeszcze przesłane</span>
+    <span translate="yes">jeszcze nie oddany</span>
   </template>
   <template id="verified">
     <span translate="yes">Rejestracja została zaakceptowana</span>
@@ -57,25 +57,25 @@
     <span translate="yes">Wymaga dodatkowych informacji</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Oczekujące na złożenie wniosku</span>
+    <span translate="yes">Oczekujące na przesłanie</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Wymaga dodatkowych informacji</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odrzucony przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odrzucony przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odrzucony przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Odrzucone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odrzucony przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Więcej informacji jest wymaganych</span>
+    <span translate="yes">Wymagane są dodatkowe informacje</span>
   </template>
   <template id="listed">
     <span translate="yes">W trakcie przeglądu przez Stripe</span>
@@ -84,7 +84,7 @@
     <span translate="yes">W trakcie przeglądu przez Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Wyłączone przez Stripe, zobacz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Wyłączone przez Stripe, patrz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

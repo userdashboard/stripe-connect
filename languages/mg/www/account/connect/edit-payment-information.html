@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Fampahalalana mikasika ny fandoavana ${stripeAccount.id}</title>
+  <title translate="yes">Fampahalalana momba ny fandoavam-bola ho an'ny ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,21 +27,21 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">Fampahalalana mikasika ny fandoavana ${stripeAccount.id}</h1>
-  <p translate="yes">Hanavao ny tantara momba ny banky izay handray ny revenue payouts.</p>
+  <h1 translate="yes">Fampahalalana momba ny fandoavam-bola ho an'ny ${stripeAccount.id}</h1>
+  <p translate="yes">Hanavao ny kaonty banky izay hahazoanao fandoavam-bola.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">Firenena banky</label>
+      <label for="country" translate="yes">Firenena momba ny banky</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Misafidiana
+          Select
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Karazana tantara</label>
+      <label translate="yes">Karazana kaonty</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,26 +52,26 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Tantara vola</label>
+          <label for="currency" translate="yes">Mataam-bola</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Misafidiana
+              Select
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Anaran' ny mpihazona ny tantara</label>
+      <label for="account-holder-name" translate="yes">Anaran'ny tompon'ny kaonty</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">BSB laharana</label>
+        <label for="bsb_number" translate="yes">Laharana BSB</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,15 +85,15 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Transit laharana</label>
+        <label for="transit_number" translate="yes">Isan'ny fitaterana</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="institution_number" translate="yes">Laharan' ny rafitra</label>
+        <label for="institution_number" translate="yes">Laharana famandrihana</label>
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -130,15 +130,15 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">Endrika hafa</h2>
+      <h2 translate="yes">Alternative format</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Karazana mari-pamantarana</label>
+          <label for="sort_code" translate="yes">Code code</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">Laharan' ny tantara</label>
+          <label for="account_number" translate="yes">Nomeraon-kaonty</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -149,15 +149,15 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Mandrindra ny mari-pamantarana</label>
+        <label for="clearing_code" translate="yes">Fanadiovana code</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Mari-pamantarana</label>
+        <label for="branch_code" translate="yes">Paody sampana</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -171,15 +171,15 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Banky</label>
+        <label for="bank_code" translate="yes">Kaody momba ny banky</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Mari-pamantarana</label>
+        <label for="branch_code" translate="yes">Paody sampana</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routing laharana</label>
+        <label for="routing_number" translate="yes">Isa isa</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routing laharana</label>
+        <label for="routing_number" translate="yes">Isa isa</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -233,15 +233,15 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Banky</label>
+        <label for="bank_code" translate="yes">Kaody momba ny banky</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Mari-pamantarana</label>
+        <label for="branch_code" translate="yes">Paody sampana</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,16 +259,16 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Routing laharana</label>
+        <label for="routing_number" translate="yes">Isa isa</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Laharan' ny tantara</label>
+        <label for="account_number" translate="yes">Nomeraon-kaonty</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tehirizo ny fampahalalana mikasika ny fandoavana</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tehirizo ireo fampahalalana momba ny fandoavam-bola</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Fahombiazana! Nohavaozina ny fampahalalana momba ny fandoavana.
+      Fahombiazana! Nohavaozina ny fampahalalana momba ny fandoavana
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fahadisoana! Tsy fetezana ny ocurred eo am-panavaozana ny fampahalalana mikasika ny fandoavana.
+      Error! Nisy hadisoana nitranga tamin'ny fanavaozana ny fampahalalana momba ny fandoavam-bola
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza ao amin' ny banky.
+      Error! Firenena tsy voasa na tsy hita
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na very vola ny tantara.
+      Error! Kaonty tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na inona na inona tantara.
+      Error! Kaonty tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na banga ny laharana.
+      Error! Isan'ny kaonty tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita isa BSB
+      Error! Tsy misy na tsia ny laharana BSB tsy misy diso na tsia
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na aiza na aiza ny laharan' ny laharana Faha-Banky
+      Error! Isan'ny laharana Banky tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na banga ny mari-pamantarana.
+      Error! Kaody tsy misy diso na tsy hita
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny laharana misy ny Fikambanana.
+      Error! Isan'ny Institution tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na banga Transit.
+      Error! Isan'ny Transit tsy misy na tsy hita
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na banga ny laharana Mandrindra.
+      Error! Isa laharana tsy misy na tsy fanadinana
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy ampy ny laharan' ny Sampana
+      Error! Isa laharana Code tsy misy na tsy hita na tsy hita
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana ny anaran' ny mpihazona ny
+      Error! Anaran'ny tompon'ilay kaonty tsy diso na tsy hita
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na tsy hita isa IBAN
+      Error! Isa tsy hita na tsy manana IBAN
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Fahadisoana! Nahitana na very isa transit
+      Error! Isan'ny fitaterana tsy misy na tsy hita
     </div>
   </template>
 </body>

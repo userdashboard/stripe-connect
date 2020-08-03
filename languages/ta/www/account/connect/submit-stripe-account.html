@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">சரணடை ${stripeAccount.id}</title>
+  <title translate="yes">சமர்ப்பிக்கவும் ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">சரணடை ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> உங்கள் பூர்த்தி செய்த பதிவை ச் சமர்ப்பிப்பதன் மூலம் சரிபார்ப்பு செயல்முறை.</p>
+  <h1 translate="yes">சமர்ப்பிக்கவும் ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> உங்கள் பூர்த்தி செய்யப்பட்ட பதிவை சமர்ப்பிப்பதன் மூலம் சரிபார்ப்பு செயல்முறை.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">நன்மை பயக்கும் உரிமையாளர்கள்</h2>
@@ -90,27 +90,27 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      பதிவு முழுமையற்ற பதிவு த் தகவல் உள்ளது
+      பதிவில் முழுமையற்ற பதிவு தகவல்கள் உள்ளன
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      தவறு! நிறுவனத்தின் இயக்குநர்களை நீங்கள் சமர்ப்பிக்க வேண்டும்
+      பிழை! நீங்கள் நிறுவனத்தின் இயக்குநர்களை சமர்ப்பிக்க வேண்டும்
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      தவறு! நிறுவனத்தின் நன்மை பயக்கும் உரிமையாளர்களை நீங்கள் சமர்ப்பிக்க வேண்டும்
+      பிழை! நிறுவனத்தின் நன்மை பயக்கும் உரிமையாளர்களை நீங்கள் சமர்ப்பிக்க வேண்டும்
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      தவறு! நீங்கள் நிறுவன பிரதிநிதியின் தகவலை சமர்ப்பிக்க வேண்டும்
+      பிழை! நிறுவனத்தின் பிரதிநிதியின் தகவலை நீங்கள் சமர்ப்பிக்க வேண்டும்
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      தவறு! பதிவு முழுமையற்ற கட்டணம் தகவல் உள்ளது
+      பிழை! பதிவில் முழுமையற்ற கட்டண தகவல்கள் உள்ளன
     </div>
   </template>
   <template id="success">
@@ -120,7 +120,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      தவறு! பதிவை சமர்ப்பிப்பதில் பிழை ஏற்பட்டது
+      பிழை! பதிவைச் சமர்ப்பிப்பதில் பிழை ஏற்பட்டது
     </div>
   </template>
 </body>

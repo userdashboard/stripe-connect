@@ -12,26 +12,26 @@
 </head>
 <body>
   <h1 translate="yes">Pateikti ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> patvirtinimo procesą, pateikdami užpildytą registraciją.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> patvirtinimo procesą pateikdami užpildytą registraciją.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Tikrieji savininkai</h2>
+    <h2 translate="yes">Naudingi savininkai</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
+          <th translate="yes">vardas</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Įmonių direktoriai</h2>
+    <h2 translate="yes">Įmonės direktoriai</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">vardas, pavadinimas</th>
+          <th translate="yes">vardas</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pateikti registraciją</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pateikite registraciją</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,32 +90,32 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Registracijos registracijos duomenys yra neišsamūs
+      Registracijoje yra neišsami registracijos informacija
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Klaida! Turite pateikti bendrovės direktorius
+      Klaida! Privalote pateikti bendrovės direktorius
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Klaida! Turite pateikti bendrovės tikruosius savininkus
+      Klaida! Jūs turite pateikti įmonės tikruosius savininkus
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Klaida! Turite pateikti bendrovės atstovo informaciją
+      Klaida! Turite pateikti įmonės atstovo informaciją
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Klaida! Registracijos metu yra neišsami mokėjimo informacija
+      Klaida! Registracijoje yra neišsami informacija apie mokėjimą
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Sėkmės! Registracija pateikta
+      Sėkmė! Registracija buvo pateikta
     </div>
   </template>
   <template id="unknown-error">

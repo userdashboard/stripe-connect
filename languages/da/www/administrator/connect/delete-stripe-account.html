@@ -2,21 +2,21 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Slette ${stripeAccount.id}</title>
+  <title translate="yes">Slet ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Slette ${stripeAccount.id}</h1>
+  <h1 translate="yes">Slet ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
         <th translate="yes">Navn</th>
-        <th translate="yes">Status</th>
+        <th translate="yes">status</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -31,16 +31,16 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Slette</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Slet</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Succes! Den Stripe konto er blevet slettet
+      Succes! Stripe-kontoen er blevet slettet
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fejl! Der opstod en fejl under sletning af Stripe-kontoen
+      Fejl! Der opstod en fejl ved sletning af Stripe-kontoen
     </div>
   </template>
   <template id="not-submitted">
@@ -74,13 +74,13 @@
     <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Der kræves flere oplysninger</span>
+    <span translate="yes">Mere information er påkrævet</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Deaktiveret af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

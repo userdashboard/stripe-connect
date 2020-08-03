@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Вид ${stripeAccount.id}</title>
+  <title translate="yes">Посмотреть ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Вид ${stripeAccount.id}</h1>
+  <h1 translate="yes">Посмотреть ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -22,28 +22,28 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Имя</th>
+        <th translate="yes">название</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Страны</th>
+        <th translate="yes">Страна</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Статус</th>
+        <th translate="yes">Положение дел</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Представлены</th>
+        <th translate="yes">Отправлено</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Еще не отправлено</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Информация о регистрации</h2>
+    <h2 translate="yes">Регистрационная информация</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,12 +52,12 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Представитель компании</h2>
-    <p translate="yes">Чтобы избежать сбоя в работе учетной записи, отправьте новую репрезентативную информацию, если указанное лицо покидает компанию или больше не представляет ее.</p>
+    <p translate="yes">Чтобы избежать нарушения работы аккаунта, отправьте новую информацию о представителе, если указанное лицо покидает компанию или больше не представляет ее.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Имя</th>
+          <th translate="yes">название</th>
           <th translate="yes">Необходимая информация</th>
         </tr>
       </thead>
@@ -68,13 +68,13 @@
   </div>
   <div id="owners-container">
     <h2 translate="yes">Другая информация о бенефициарных владельцах</h2>
-    <p translate="yes">Вы должны предоставить документацию для тех, кто владеет значительным (25 евро) процентами компании или отвечает за компанию, финансы или операции.</p>
+    <p translate="yes">Вы должны предоставить документацию кому-либо, кто владеет значительным (25+) процентом компании или отвечает за компанию, финансы или операции.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Имя</th>
-          <th translate="yes">Требует</th>
+          <th translate="yes">название</th>
+          <th translate="yes">требует</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Информация директоров компаний</h2>
-    <p translate="yes">Вы должны предоставить полные имена управляющего совета вашей компании и/или лиц, ответственных за соблюдение нормативных требований.</p>
+    <h2 translate="yes">Информация о директорах компании</h2>
+    <p translate="yes">Вы должны предоставить полные имена членов совета директоров вашей компании и / или лиц, ответственных за соблюдение нормативных требований.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Имя</th>
-          <th translate="yes">Требует</th>
+          <th translate="yes">название</th>
+          <th translate="yes">требует</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Информация о платежах</h2>
+    <h2 translate="yes">Платежная информация</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -120,13 +120,13 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Добавление информации</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Добавить информацию</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Средства выплачиваются на счет ${bank_account.bank_name}.</p>
+    <p translate="yes">Средства зачисляются на счет ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Банковские реквизиты должны быть предоставлены для получения средств.</p>
@@ -135,25 +135,25 @@
     <p translate="yes">Регистрация не была представлена.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Регистрация была подана на ${account.dateFormatted}.</p>
+    <p translate="yes">Регистрация была представлена на ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Регистрационная информация не была предоставлена.</p>
+    <p translate="yes">Информация о регистрации не была предоставлена.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Предоставлена регистрационная информация.</p>
+    <p translate="yes">Информация о регистрации была предоставлена.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Еще не представлено</span>
+    <span translate="yes">Еще не отправлено</span>
   </template>
   <template id="verified">
-    <span translate="yes">Регистрация принята</span>
+    <span translate="yes">Регистрация была принята</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Требуется дополнительная информация</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">До представления</span>
+    <span translate="yes">В ожидании представления</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Отклонено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Под контролем Stripe</span>
+    <span translate="yes">На рассмотрении Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Под контролем Stripe</span>
+    <span translate="yes">На рассмотрении Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Отклонено Stripe, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

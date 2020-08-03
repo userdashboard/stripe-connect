@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Tiro ${stripeAccount.id}</title>
+  <title translate="yes">Tirohia ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Tiro ${stripeAccount.id}</h1>
+  <h1 translate="yes">Tirohia ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Mana</th>
+        <th translate="yes">Te mana</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Tukuna</th>
+        <th translate="yes">Tukua</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Kaore ano kia tukuna</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Mōhiohio rēhitatanga</h2>
+    <h2 translate="yes">Nga korero rehitatanga</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Mangai kamupene</h2>
-    <p translate="yes">Hei karo i te kōwhātanga ka tuku mōhiohio mangai hōu ki te kore te rau e tohua, e kore rānei e tohu i te kamupene.</p>
+    <h2 translate="yes">Te māngai Kamupene</h2>
+    <p translate="yes">Kia kore e raru te kaute ka tuku korero hou mo te wa ka wehe te tangata kua kore ranei e tu hei kanohi mo te kamupene.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ingoa</th>
-          <th translate="yes">Mōhiohio e hiahiatia ana</th>
+          <th translate="yes">Nga korero e hiahiatia ana</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Ētahi atu mōhiohio rangatira whaihua</h2>
-    <p translate="yes">Me tuku koe i ngā tuhinga mō te tangata kē owning he painga (kia oho +) ōrau o te kamupene, i te utu rānei o te kamupene, i te pūtea rānei.</p>
+    <h2 translate="yes">Ko etahi atu korero rangatira rangatira</h2>
+    <p translate="yes">Me whakarato tuhinga koe mo tetahi atu e whiwhi ana i te nui (25+) ōrau o te kamupene, kei a ia ano te kaiwhakahaere o te umanga, putea me nga mahi.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ingoa</th>
-          <th translate="yes">Me whai</th>
+          <th translate="yes">Kei te hiahia</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Mōhiohio directors kamupene</h2>
-    <p translate="yes">Me tuku koe i ngā ingoa katoa o te poari ana o tō kamupene, o te nuinga rānei o te maintaining regulatory tautuku.</p>
+    <h2 translate="yes">Ko nga korero a nga kaiwhakahaere o nga umanga</h2>
+    <p translate="yes">Me whakarato e koe nga ingoa ki tonu i te poari whakahaere a to kamupene me / ranei te hunga e haangai ana ki te pupuri i nga ture whakahaere.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ingoa</th>
-          <th translate="yes">Me whai</th>
+          <th translate="yes">Kei te hiahia</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Mōhiohio utu</h2>
+    <h2 translate="yes">Nga korero utu</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Tuku i te rēhitatanga</h2>
+    <h2 translate="yes">Tukuna rēhitatanga</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,67 +120,67 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Tāpiri mōhiohio</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Whakanohia nga korero</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Kua utua ngā moni ki te pūkete ${bank_account.bank_name}.</p>
+    <p translate="yes">Kua utua nga putea hei kaute ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Me whakarato ngā taipitopito peke ki te whiwhi moni.</p>
+    <p translate="yes">Me whakaratohia nga korero mo te peeke hei whiwhi moni.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Kāore anō kia tukuna te rēhitatanga.</p>
+    <p translate="yes">Kaore ano kia tukuna nga rehitatanga.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">I tukuna te rēhitatanga i te ${account.dateFormatted}.</p>
+    <p translate="yes">I tukuna te rēhitatanga ki runga ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Kāore anō kia tukuna te mōhiohio rēhitatanga.</p>
+    <p translate="yes">Kaore i whakaratohia nga korero mo te rehitatanga.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Kua tukuna te mōhiohio rēhitatanga.</p>
+    <p translate="yes">Kua whakaratohia nga korero rehitatanga.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Kāore anō kia tukuna</span>
+    <span translate="yes">Kaore ano kia tukuna</span>
   </template>
   <template id="verified">
-    <span translate="yes">Kua whakaaetia te rēhitatanga</span>
+    <span translate="yes">Kua whakaaehia te rehitatanga</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Me whiwhi mōhiohio anō</span>
+    <span translate="yes">Kei te hiahia etahi atu korero</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Tukunga tārewa</span>
+    <span translate="yes">Kei te tatari te tuku</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Kua panaia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">I whakaitihia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Kua panaia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">I whakaitihia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Kua panaia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">I whakaitihia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Kua panaia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">I whakaitihia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">I raro i te arotakenga mā Stripe</span>
+    <span translate="yes">I raro i te arotake na Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">I raro i te arotakenga mā Stripe</span>
+    <span translate="yes">I raro i te arotake na Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Kua panaia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">I whakaitihia e Stripe, tirohia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Me whiwhi mōhiohio anō</span>
+    <span translate="yes">Kei te hiahia etahi atu korero</span>
   </template>
 </body>
 </html>

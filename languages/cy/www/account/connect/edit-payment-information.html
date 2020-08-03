@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Gwybodaeth am dalu am ${stripeAccount.id}</title>
+  <title translate="yes">Gwybodaeth talu am ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,8 +27,8 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">Gwybodaeth am dalu am ${stripeAccount.id}</h1>
-  <p translate="yes">Diweddarwch y cyfrif banc a fydd yn derbyn eich payouts refeniw.</p>
+  <h1 translate="yes">Gwybodaeth talu am ${stripeAccount.id}</h1>
+  <p translate="yes">Diweddarwch y cyfrif banc a fydd yn derbyn eich taliadau refeniw.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
@@ -52,7 +52,7 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Cyfrif arian cyfred</label>
+          <label for="currency" translate="yes">Arian cyfred cyfrif</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
               Dewiswch
@@ -71,7 +71,7 @@
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,15 +85,15 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Rhif tramwy</label>
+        <label for="transit_number" translate="yes">Rhif cludo</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="institution_number" translate="yes">Sefydliad Rhif</label>
+        <label for="institution_number" translate="yes">Rhif sefydliad</label>
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -133,12 +133,12 @@
       <h2 translate="yes">Fformat amgen</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Cod didoli</label>
+          <label for="sort_code" translate="yes">Cod sillafu</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">Rhif y cyfrif</label>
+          <label for="account_number" translate="yes">Rhif cyfrif</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -153,11 +153,11 @@
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Cod y Gangen</label>
+        <label for="branch_code" translate="yes">Cod cangen</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -175,11 +175,11 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Cod y Gangen</label>
+        <label for="branch_code" translate="yes">Cod cangen</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Rhif Llwybro</label>
+        <label for="routing_number" translate="yes">Rhif llwybro</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Rhif Llwybro</label>
+        <label for="routing_number" translate="yes">Rhif llwybro</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -237,11 +237,11 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Cod y Gangen</label>
+        <label for="branch_code" translate="yes">Cod cangen</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,16 +259,16 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Rhif Llwybro</label>
+        <label for="routing_number" translate="yes">Rhif llwybro</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Rhif y cyfrif</label>
+        <label for="account_number" translate="yes">Rhif cyfrif</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Cadw gwybodaeth am daliadau</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Arbedwch wybodaeth talu</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,27 +283,27 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Llwyddiant! Mae'r wybodaeth am daliadau wedi'i diweddaru
+      Llwyddiant! Mae'r wybodaeth dalu wedi'i diweddaru
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Gwall! Gwall ocurred diweddaru'r wybodaeth am daliadau
+      Gwall! Digwyddodd gwall wrth ddiweddaru'r wybodaeth dalu
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Gwall! Gwlad annilys neu ar goll o Fanc
+      Gwall! Gwlad banc annilys neu ar goll
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Gwall! Arian cyfred annilys neu ar goll o gyfrif
+      Gwall! Arian cyfred annilys neu ar goll
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Gwall! Math annilys neu ar goll o gyfrif
+      Gwall! Math o gyfrif annilys neu ar goll
     </div>
   </template>
   <template id="invalid-account_number">
@@ -318,27 +318,27 @@
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Gwall! Rhif Cod banc annilys neu ar goll
+      Gwall! Rhif Cod Banc annilys neu ar goll
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Gwall! Cod didoli annilys neu ar goll
+      Gwall! Cod Trefnu annilys neu ar goll
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Gwall! Rhif sefydliad annilys neu ar goll
+      Gwall! Rhif Sefydliad annilys neu ar goll
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Gwall! Rhif tramwy annilys neu ar goll
+      Gwall! Rhif Transit annilys neu ar goll
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Gwall! Rhif Cod clirio annilys neu ar goll
+      Gwall! Rhif Cod Clirio annilys neu ar goll
     </div>
   </template>
   <template id="invalid-branch_code">
@@ -348,7 +348,7 @@
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Gwall! Enw'r deiliad cyfrif annilys neu ar goll
+      Gwall! Enw deiliad cyfrif annilys neu goll
     </div>
   </template>
   <template id="invalid-iban">
@@ -358,7 +358,7 @@
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Gwall! Rhif tramwy annilys neu ar goll
+      Gwall! Rhif cludo annilys neu ar goll
     </div>
   </template>
 </body>

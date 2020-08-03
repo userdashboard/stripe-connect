@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vizualizare ${stripeAccount.id}</title>
+  <title translate="yes">Vedere ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Vizualizare ${stripeAccount.id}</h1>
+  <h1 translate="yes">Vedere ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -22,23 +22,23 @@
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Numele</th>
+        <th translate="yes">Nume</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Ţară</th>
+        <th translate="yes">Țară</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Starea</th>
+        <th translate="yes">stare</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Prezentate</th>
+        <th translate="yes">Înscris</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Nu a fost încă trimis</td>
       </tr>
     </tbody>
   </table>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Reprezentantul companiei</h2>
-    <p translate="yes">Pentru a evita întreruperea contului, trimiteți noi informații reprezentative în cazul în care persoana specificată pleacă sau nu mai reprezintă compania.</p>
+    <h2 translate="yes">Reprezentant al companiei</h2>
+    <p translate="yes">Pentru a evita întreruperea contului, trimiteți noi informații reprezentative dacă persoana specificată pleacă sau nu mai reprezintă compania.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Numele</th>
-          <th translate="yes">Informații necesare</th>
+          <th translate="yes">Nume</th>
+          <th translate="yes">Informatia necesara</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Alte informații privind beneficiarii reali</h2>
-    <p translate="yes">Trebuie să furnizați documentația pentru oricine altcineva care deține un procent substanțial (25+) din companie sau responsabil de companie, finanțe sau operațiuni.</p>
+    <h2 translate="yes">Alte informații benefice pentru proprietari</h2>
+    <p translate="yes">Trebuie să furnizați documentație pentru oricine deține un substanțial (25+) procente din companie sau responsabil pentru companie, finanțe sau operațiuni.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Numele</th>
-          <th translate="yes">Necesită</th>
+          <th translate="yes">Nume</th>
+          <th translate="yes">necesită</th>
         </tr>
       </thead>
     </table>
@@ -85,13 +85,13 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">Informații despre directorii companiei</h2>
-    <p translate="yes">Trebuie să furnizați numele complete ale consiliului de conducere al companiei și/sau ale persoanelor responsabile cu menținerea conformității cu reglementările.</p>
+    <p translate="yes">Trebuie să furnizați numele complete ale consiliului de conducere al companiei și / sau a persoanelor responsabile pentru menținerea conformității cu reglementările.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Numele</th>
-          <th translate="yes">Necesită</th>
+          <th translate="yes">Nume</th>
+          <th translate="yes">necesită</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Informații de plată</h2>
+    <h2 translate="yes">Informatii de plata</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -120,13 +120,13 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Adăugarea informațiilor</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Adăugați informații</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Fondurile sunt plătite în contul ${bank_account.bank_name}.</p>
+    <p translate="yes">Fondurile sunt plătite în cont ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Detaliile bancare trebuie furnizate pentru a primi fonduri.</p>
@@ -135,7 +135,7 @@
     <p translate="yes">Înregistrarea nu a fost depusă.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Înregistrarea a fost depusă la data de ${account.dateFormatted}.</p>
+    <p translate="yes">Înregistrarea a fost depusă la ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">Informațiile de înregistrare nu au fost furnizate.</p>
@@ -144,7 +144,7 @@
     <p translate="yes">Informațiile de înregistrare au fost furnizate.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nu s-a prezentat încă</span>
+    <span translate="yes">Nu a fost încă trimis</span>
   </template>
   <template id="verified">
     <span translate="yes">Înregistrarea a fost acceptată</span>
@@ -156,28 +156,28 @@
     <span translate="yes">În așteptarea depunerii</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">În curs de revizuire de către Stripe</span>
+    <span translate="yes">Se examinează de către Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Respins de Stripe, a se vedea</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Respins de Stripe, vezi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Necesită informații suplimentare</span>

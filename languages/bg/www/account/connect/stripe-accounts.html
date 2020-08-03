@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe сметки</title>
+  <title translate="yes">Stripe акаунти</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe сметки</h1>
-  <p><span translate="yes">Станете доставчик, като проверявате личната си идентичност и фирмената си</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe акаунти</h1>
+  <p><span translate="yes">Станете продавач, като потвърдите вашата лична идентичност и информация за фирмата чрез</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
     <p translate="yes">Все още не са създадени Stripe акаунти.</p>
   </div>
@@ -20,22 +20,22 @@
       <div class="requirements">
         <h2 translate="yes">Индивидуални изисквания</h2>
         <ol>
-          <li translate="yes">Проверени лични данни</li>
-          <li translate="yes">Жител на подкрепяна държава</li>
-          <li translate="yes">Банкова сметка в подкрепяна държава</li>
+          <li translate="yes">Проверена лична информация</li>
+          <li translate="yes">Жител на поддържана държава</li>
+          <li translate="yes">Банкова сметка в поддържана държава</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Започване на индивидуална регистрация</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Започнете индивидуална регистрация</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Изисквания за бизнеса</h2>
+        <h2 translate="yes">Бизнес изисквания</h2>
         <ol>
-          <li translate="yes">Проверени лични данни</li>
-          <li translate="yes">Бизнес регистриран в подкрепяна държава</li>
-          <li translate="yes">Банкова сметка в подкрепяна държава</li>
+          <li translate="yes">Проверена лична информация</li>
+          <li translate="yes">Бизнес, регистриран в поддържана държава</li>
+          <li translate="yes">Банкова сметка в поддържана държава</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Започване на регистрация на фирмата</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Започнете регистрация на фирма</a>
       </div>
     </div>
   </div>
@@ -46,24 +46,24 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Име</th>
-            <th translate="yes">Статут</th>
+            <th translate="yes">име</th>
+            <th translate="yes">Статус</th>
             <th translate="yes">Създаден</th>
-            <th translate="yes">Предоставени</th>
+            <th translate="yes">Изпратен</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h2 translate="yes">Регистрация на дружества</h2>
+      <h2 translate="yes">Регистрации на фирми</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Име на фирма</th>
-            <th translate="yes">Статут</th>
+            <th translate="yes">Име на фирмата</th>
+            <th translate="yes">Статус</th>
             <th translate="yes">Създаден</th>
-            <th translate="yes">Предоставени</th>
+            <th translate="yes">Изпратен</th>
           </tr>
         </thead>
       </table>
@@ -84,43 +84,43 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Все още не е подадено</span>
+    <span translate="yes">Все още не е изпратено</span>
   </template>
   <template id="verified">
-    <span translate="yes">Регистрацията е приета</span>
+    <span translate="yes">Регистрацията беше приета</span>
   </template>
   <template id="verified">
-    <span translate="yes">Забранено от Stripe</span>
+    <span translate="yes">Деактивирано от Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Изисква допълнителна информация</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Чакащи за подаване</span>
+    <span translate="yes">Предстои изпращане</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Повече информация е необходима</span>
+    <span translate="yes">Изисква се повече информация</span>
   </template>
   <template id="listed">
-    <span translate="yes">В процес на преразглеждане от Stripe</span>
+    <span translate="yes">В процес на преглед от Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">В процес на преразглеждане от Stripe</span>
+    <span translate="yes">В процес на преглед от Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Забранено от Stripe, вижте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Деактивирано от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Изисква допълнителна информация</span>

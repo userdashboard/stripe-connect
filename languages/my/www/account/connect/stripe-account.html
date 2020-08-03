@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ကြည့်ရှုပါ ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ကြည့်ရှုပါ ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th>ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">အမျိုးအစား</th>
+        <td id="business" translated="yes">Company registration</td>
+        <td id="individual" translated="yes">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">နာမည်</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">နိုင်ငံ</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">အခြေအနေ</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">တင်သွင်းလိုက်သည်</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2" translate="yes">မတင်ရသေးပါ</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">မှတ်ပုံတင်ခြင်းအချက်အလက်</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+      <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+    </p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">ကုမ္ပဏီကိုယ်စားလှယ်</h2>
+    <p translate="yes">အကောင့်ပြတ်တောက်ခြင်းကိုရှောင်ရှားရန်သတ်မှတ်ထားသောသူသည်ကုမ္ပဏီမှထွက်ခွာသွားလျှင်သို့မဟုတ်ကုမ္ပဏီအားကိုယ်စားမပြုတော့ပါကကိုယ်စားလှယ်သတင်းအချက်အလက်အသစ်ကိုတင်ပြပါ။</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">နာမည်</th>
+          <th translate="yes">လိုအပ်သည့်သတင်းအချက်အလက်</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+    </p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">အခြားအကျိုးခံစားခွင့်ရှိသူများပိုင်သတင်းအချက်အလက်</h2>
+    <p translate="yes">ကုမ္ပဏီ၏ (၂၅+) ရာခိုင်နှုန်းကိုပိုင်ဆိုင်သောမည်သူမဆိုအတွက်သို့မဟုတ်ကုမ္ပဏီ၊ ဘဏ္ancesာရေးနှင့်လုပ်ငန်းလည်ပတ်မှုအတွက်မည်သူမဆိုအတွက်စာရွက်စာတမ်းများကိုသင်ပေးရမည်။</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">နာမည်</th>
+          <th translate="yes">လိုအပ်သည်</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">ကုမ္ပဏီဒါရိုက်တာများအချက်အလက်</h2>
+    <p translate="yes">သင့်ကုမ္ပဏီ၏အုပ်ချုပ်ရေးဘုတ်အဖွဲ့၏အမည်များနှင့် / သို့မဟုတ်စည်းမျဉ်းလိုက်နာမှုကိုထိန်းသိမ်းရန်တာဝန်ရှိသူများကိုဖော်ပြရမည်။</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">နာမည်</th>
+          <th translate="yes">လိုအပ်သည်</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">ငွေပေးချေမှုသတင်းအချက်အလက်</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options">
+      <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+      <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
+    </p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">မှတ်ပုံတင်ပါ</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">အချက်အလက်ထည့်ပါ</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">ရန်ပုံငွေများကိုအကောင့်မှပေးဆောင်ရသည် ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">ရန်ပုံငွေများကိုလက်ခံရရှိရန်ဘဏ်အသေးစိတ်ကိုဖော်ပြရမည်။</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">အဆိုပါမှတ်ပုံတင်တင်သွင်းနိုင်ခြင်းမရှိပါ</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">မှတ်ပုံတင်ခြင်းအပေါ်တင်သွင်းခဲ့သည် ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">အဆိုပါမှတ်ပုံတင်သတင်းအချက်အလက်မပေးပါ။</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">အဆိုပါမှတ်ပုံတင်သတင်းအချက်အလက်ထောက်ပံ့ပေးလျက်ရှိသည်။</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">မတင်ရသေးပါ</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">မှတ်ပုံတင်ခြင်းလက်ခံခဲ့သည်</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">နောက်ထပ်သတင်းအချက်အလက်လိုအပ်သည်</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">တင်သွင်းမှုကိုဆိုင်းငံ့ထားသည်</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe ကငြင်းပယ်သည်ကိုကြည့်ပါ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe ကငြင်းပယ်သည်ကိုကြည့်ပါ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe ကငြင်းပယ်သည်ကိုကြည့်ပါ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe ကငြင်းပယ်သည်ကိုကြည့်ပါ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe ကပြန်လည်သုံးသပ်အောက်မှာ</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe ကပြန်လည်သုံးသပ်အောက်မှာ</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe ကငြင်းပယ်သည်ကိုကြည့်ပါ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">နောက်ထပ်သတင်းအချက်အလက်လိုအပ်သည်</span>
+  </template>
+</body>
+</html>

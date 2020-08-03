@@ -13,19 +13,19 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Dôvod zamietnutia</label>
+      <label for="reason" translate="yes">Dôvod odmietnutia</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          Vybrať dôvod
+          Vyberte dôvod
         </option>
         <option value="fraud" translate="yes">
-          Podvodom
+          podvod
         </option>
         <option value="terms_of_service" translate="yes">
-          Podmienky porušenia podmienok služby
+          Porušenie zmluvných podmienok
         </option>
         <option value="other" translate="yes">
-          Ostatné
+          ostatné
         </option>
       </select>
     </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Odmietnuť</button>
@@ -37,22 +37,22 @@
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Chyba! Konto musí mať saldo /bin/sh pred odmietnutím
+      Chyba! Pred odmietnutím musí mať účet zostatok / bin / sh
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Chyba! Pri zamietnutí konta Stripe sa vyskytla chyba
+      Chyba! Pri vysunutí účtu Stripe sa vyskytla chyba
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Zatiaľ nepredložené</span>
+    <span translate="yes">Zatiaľ neboli odoslané</span>
   </template>
   <template id="verified">
     <span translate="yes">Registrácia bola prijatá</span>
   </template>
   <template id="verified">
-    <span translate="yes">Zdravotne postihnutých Stripe</span>
+    <span translate="yes">Zakázané používateľom Stripe</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Vyžaduje ďalšie informácie</span>
@@ -61,31 +61,31 @@
     <span translate="yes">Vyžaduje ďalšie informácie</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čakajúce na predloženie</span>
+    <span translate="yes">Čaká sa na odoslanie</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Vyžaduje sa viac informácií</span>
+    <span translate="yes">Vyžadujú sa ďalšie informácie</span>
   </template>
   <template id="listed">
-    <span translate="yes">Predmetom preskúmania Stripe</span>
+    <span translate="yes">Prebieha kontrola od Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Predmetom preskúmania Stripe</span>
+    <span translate="yes">Prebieha kontrola od Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Zakázané Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Zakázané používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

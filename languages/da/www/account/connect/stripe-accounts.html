@@ -11,9 +11,9 @@
 </head>
 <body>
   <h1 translate="yes">Stripe konti</h1>
-  <p><span translate="yes">Bliv leverandør ved at bekræfte din personlige identitet og virksomhedsoplysninger via</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Bliv en leverandør ved at verificere din personlige identitet og virksomhedsinformation gennem</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Der er endnu ikke oprettet Stripe konti.</p>
+    <p translate="yes">Der er ikke oprettet nogen Stripe konti endnu.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
@@ -29,10 +29,10 @@
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Forretningsmæssige krav</h2>
+        <h2 translate="yes">Forretningskrav</h2>
         <ol>
           <li translate="yes">Bekræftede personlige oplysninger</li>
-          <li translate="yes">Virksomhed, der er registreret i et understøttet land</li>
+          <li translate="yes">Virksomhed registreret i et støttet land</li>
           <li translate="yes">Bankkonto i et understøttet land</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Start virksomhedsregistrering</a>
@@ -47,9 +47,9 @@
           <tr>
             <th>ID</th>
             <th translate="yes">Navn</th>
-            <th translate="yes">Status</th>
-            <th translate="yes">Lavet</th>
-            <th translate="yes">Forelagt</th>
+            <th translate="yes">status</th>
+            <th translate="yes">lavet</th>
+            <th translate="yes">indsendt</th>
           </tr>
         </thead>
       </table>
@@ -60,10 +60,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Firmanavn</th>
-            <th translate="yes">Status</th>
-            <th translate="yes">Lavet</th>
-            <th translate="yes">Forelagt</th>
+            <th translate="yes">Virksomheds navn</th>
+            <th translate="yes">status</th>
+            <th translate="yes">lavet</th>
+            <th translate="yes">indsendt</th>
           </tr>
         </thead>
       </table>
@@ -111,13 +111,13 @@
     <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Der kræves flere oplysninger</span>
+    <span translate="yes">Mere information er påkrævet</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Deaktiveret af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

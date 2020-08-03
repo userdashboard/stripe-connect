@@ -2,34 +2,34 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Тіркеу жасау</title>
+  <title translate="yes">Тіркеуді жасаңыз</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Тіркеу жасау</h1>
-  <p translate="yes">Аяқталған тіркеу Stripe Connect арқылы кіріс төлемін алуға мүмкіндік береді.</p>
+  <h1 translate="yes">Тіркеуді жасаңыз</h1>
+  <p translate="yes">Аяқталған тіркеу сізге Stripe Connect арқылы төлемдер алуға мүмкіндік береді.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Тіркелгі түрі</label>
+      <label for="individual" translate="yes">Шот түрі</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Резиденттік елі/ инкорпорация</label>
+      <label for="country" translate="yes">Тұрған елі / тіркелген жері</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Елді таңдау
+          Елді таңдаңыз
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Тіркеуден бастау</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Тіркеуді бастаңыз</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,7 +39,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Қате! Тіркеу дің қатесі пайда болды
+      Қате! Тіркеуді құру кезінде қате пайда болды
     </div>
   </template>
   <template id="invalid-country">

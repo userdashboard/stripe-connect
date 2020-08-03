@@ -12,7 +12,7 @@
   <h1 translate="yes">Comptes Stripe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Encara no s'han creat comptes Stripe.</p>
+    <p translate="yes">Encara no s'ha creat cap compte Stripe.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -21,8 +21,8 @@
         <th translate="yes">Tipus</th>
         <th translate="yes">Nom</th>
         <th translate="yes">Estat</th>
-        <th translate="yes">Creada</th>
-        <th translate="yes">Presentat</th>
+        <th translate="yes">Creat</th>
+        <th translate="yes">Enviat</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Encara no es proporciona</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,19 +48,19 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Els fons s'abonen al compte x</p>
+    <p translate="yes">Es paguen fons al compte x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Les dades bancàries s'han de proporcionar per rebre fons.</p>
+    <p translate="yes">Per rebre fons, s'han de proporcionar les dades bancàries.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">No s'ha presentat el registre.</p>
+    <p translate="yes">El registre no s’ha presentat.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">El registre es va presentar ${account.dateFormatted}.</p>
+    <p translate="yes">El registre es va presentar el ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">No presentat encara</span>
+    <span translate="yes">No enviat encara</span>
   </template>
   <template id="verified">
     <span translate="yes">S'ha acceptat la inscripció</span>
@@ -72,7 +72,7 @@
     <span translate="yes">Requereix informació addicional</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pendent d'enviament</span>
+    <span translate="yes">Pendent de la tramesa</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Requereix informació addicional</span>
@@ -90,13 +90,13 @@
     <span><span translate="yes">Rebutjat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Es requereix més informació</span>
+    <span translate="yes">Es necessita més informació</span>
   </template>
   <template id="listed">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">En revisió per Stripe</span>
+    <span translate="yes">S revisat per Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Desactivat per Stripe, vegeu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

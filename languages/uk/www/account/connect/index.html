@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe Connect рахунки</title>
+  <title translate="yes">Рахунки Stripe Connect</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,29 +10,29 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe Connect рахунки</h1>
-  <p><span translate="yes">Стати постачальником, підтвердивши вашу особисту особистість і інформацію про компанію через</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Рахунки Stripe Connect</h1>
+  <p><span translate="yes">Станьте продавцем, підтвердивши свою особисту інформацію та інформацію про компанію</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Індивідуальних вимог</h2>
+        <h2 translate="yes">Індивідуальні вимоги</h2>
         <ol>
           <li translate="yes">Перевірена особиста інформація</li>
-          <li translate="yes">Житель підтримуваної країни</li>
-          <li translate="yes">Банківський рахунок у підтримуваному країні</li>
+          <li translate="yes">Мешканець країни, що підтримується</li>
+          <li translate="yes">Банківський рахунок у підтримуваній країні</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Почати індивідуальну реєстрацію</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Почніть індивідуальну реєстрацію</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Бізнес-вимог</h2>
+        <h2 translate="yes">Вимоги бізнесу</h2>
         <ol>
           <li translate="yes">Перевірена особиста інформація</li>
-          <li translate="yes">Бізнес, зареєстрований в підтримуваному країні</li>
-          <li translate="yes">Банківський рахунок у підтримуваному країні</li>
+          <li translate="yes">Бізнес зареєстрований у підтримуваній країні</li>
+          <li translate="yes">Банківський рахунок у підтримуваній країні</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Почати реєстрацію компанії</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Почніть реєстрацію компанії</a>
       </div>
     </div>
   </div>
@@ -44,8 +44,8 @@
           <th>ID</th>
           <th translate="yes">Ім'я</th>
           <th translate="yes">Статус</th>
-          <th translate="yes">Створений</th>
-          <th translate="yes">Попередній про</th>
+          <th translate="yes">Створено</th>
+          <th translate="yes">Надіслано</th>
         </tr>
       </thead>
     </table>
@@ -58,8 +58,8 @@
           <th>ID</th>
           <th translate="yes">Ім'я</th>
           <th translate="yes">Статус</th>
-          <th translate="yes">Створений</th>
-          <th translate="yes">Попередній про</th>
+          <th translate="yes">Створено</th>
+          <th translate="yes">Надіслано</th>
         </tr>
       </thead>
     </table>
@@ -69,71 +69,71 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Ще не передбачено</td>
+      <td id="blank-name-${account.id}" translate="yes">Ще не надано</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">Ні</td>
+      <td id="not-submitted-${account.id}" translate="yes">Немає</td>
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Ще не надіслано</span>
+    <span translate="yes">Ще не подано</span>
   </template>
   <template id="verified">
-    <span translate="yes">Реєстрація була прийнята</span>
+    <span translate="yes">Реєстрація прийнята</span>
   </template>
   <template id="verified">
-    <span translate="yes">Відключено Stripe</span>
+    <span translate="yes">Відключено користувачем Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Вимагає повторного надсилання з додатковою інформацією</span>
+    <span translate="yes">Потрібна повторна подача додаткової інформації</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Відкладене надсилання</span>
+    <span translate="yes">Очікує подання</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Відключено від Stripe, перегляньте поширені причини</span>
+      <span translate="yes">Вимкнено Stripe, див. Загальні причини</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Відключено від Stripe, перегляньте поширені причини</span>
+      <span translate="yes">Вимкнено Stripe, див. Загальні причини</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Відключено від Stripe, перегляньте поширені причини</span>
+      <span translate="yes">Вимкнено Stripe, див. Загальні причини</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Відключено від Stripe, перегляньте поширені причини</span>
+      <span translate="yes">Вимкнено Stripe, див. Загальні причини</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Потрібна додаткова інформація</span>
+    <span translate="yes">Більше інформації потрібно</span>
   </template>
   <template id="listed">
-    <span translate="yes">У розділі огляд Stripe</span>
+    <span translate="yes">Переглядає Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">У розділі огляд Stripe</span>
+    <span translate="yes">Переглядає Stripe</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Відключено від Stripe, перегляньте поширені причини</span>
+      <span translate="yes">Вимкнено Stripe, див. Загальні причини</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Вимагає додаткової інформації</span>
+    <span translate="yes">Потрібна додаткова інформація</span>
   </template>
 </body>
 </html>

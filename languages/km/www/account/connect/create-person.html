@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">បង្កើតមនុស្សថ្មីសម្រាប់ ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">បង្កើតមនុស្សថ្មី</h1>
+    <p translate="yes">ក្រុមប្រឹក្សានាយកម្ចាស់និងអ្នកតំណាងត្រូវតែរក្សាឱ្យបានទាន់ពេលវេលានៅពេលព័ត៌មានរបស់អ្នកផ្លាស់ប្តូរ។</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">ទំនាក់ទំនងជាមួយក្រុមហ៊ុន</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">មុខតំណែងតួនាទីឬទំនាក់ទំនង</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">ភាគរយជាកម្មសិទ្ធិ (ប្រសិនបើមាន)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ការចុះឈ្មោះធ្វើបច្ចុប្បន្នភាព</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      ជោគជ័យ! ការចុះឈ្មោះត្រូវបានធ្វើបច្ចុប្បន្នភាព
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      កំហុស! មានកំហុសកើតឡើងក្នុងការបង្កើតការចុះឈ្មោះ
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      គណនី Stripe របស់អ្នកមិនត្រូវការព័ត៌មានម្ចាស់មានប្រយោជន៍ទេ
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      គណនី Stripe របស់អ្នកមិនត្រូវការព័ត៌មានពីនាយកក្រុមហ៊ុនទេ
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      តំណាងក្រុមហ៊ុនត្រូវតែជាអ្នកប្រតិបត្តិ
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      អ្នកតំណាងនាយកឬម្ចាស់ត្រូវតែជ្រើសរើស
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      កំហុស! ភាពជាម្ចាស់ភាគរយមិនត្រឹមត្រូវឬបាត់ភាគរយ (០ ប្រសិនបើគ្មាន)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      កំហុស! ចំណងជើងទំនាក់ទំនងមិនត្រឹមត្រូវឬបាត់
+    </div>
+  </template>
+</body>
+</html>

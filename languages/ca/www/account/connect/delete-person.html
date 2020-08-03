@@ -2,18 +2,18 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Suprimir ${person.id}</title>
+  <title translate="yes">Suprimeix ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Suprimir ${person.id}</h1>
-  <p translate="yes">La informació del propietari serà eliminada immediatament i no es podrà recuperar.</p>
+  <h1 translate="yes">Suprimeix ${person.id}</h1>
+  <p translate="yes">La informació del propietari es suprimirà immediatament i no es podrà recuperar.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Suprimir</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Suprimeix</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
@@ -22,7 +22,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Error! Un ocurred d'error que suprimeix el propietari de l'empresa
+      Error! S'ha produït un error en suprimir el propietari de l'empresa
     </div>
   </template>
 </body>

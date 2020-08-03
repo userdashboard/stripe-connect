@@ -2,37 +2,37 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Osoby, za które ${stripeAccount.id}</title>
+  <title translate="yes">Osoby na ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Osób</h1>
+  <h1 translate="yes">Osoby</h1>
   <div id="representative-container">
     <h2 translate="yes">Przedstawiciel firmy</h2>
-    <p translate="yes">Jeśli status nominowanej osoby ulegnie zmianie, musisz utworzyć nowego przedstawiciela.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Tworzenie nowego przedstawiciela</a></p>
+    <p translate="yes">Jeśli status nominowanej osoby ulegnie zmianie, musisz utworzyć nowego pełnomocnika.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Utwórz nowego przedstawiciela</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Nazwa</th>
+          <th translate="yes">Imię</th>
           <th translate="yes">Wymaga</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Właściciele rzeczywistychi</h2>
-    <p translate="yes">Należy dostarczyć dokumentację dla każdego, kto posiada znaczny (25+) procent firmy lub za firmę, jej finanse lub działalność.</p>
+    <h2 translate="yes">Faktyczni właściciele</h2>
+    <p translate="yes">Musisz dostarczyć dokumentację każdemu, kto posiada znaczny (ponad 25) procent udziałów w firmie lub jest odpowiedzialny za firmę, jej finanse lub operacje.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Dodaj właściciela</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Nazwa</th>
+          <th translate="yes">Imię</th>
           <th translate="yes">Wymaga</th>
         </tr>
       </thead>
@@ -40,13 +40,13 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">Dyrektorzy firm</h2>
-    <p translate="yes">Należy dostarczyć dokumentację dla zarządu.</p>
+    <p translate="yes">Musisz dostarczyć dokumentację dla rady dyrektorów.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Dodaj właściciela</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Nazwa</th>
+          <th translate="yes">Imię</th>
           <th translate="yes">Wymaga</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Dodawanie informacji</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Dodaj informacje</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

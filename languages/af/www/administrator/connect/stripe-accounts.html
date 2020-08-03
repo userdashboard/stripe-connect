@@ -12,17 +12,17 @@
   <h1 translate="yes">Stripe rekeninge</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Geen Stripe rekenings is nog geskep nie.</p>
+    <p translate="yes">Geen Stripe-rekeninge is nog geskep nie.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Tik</th>
-        <th translate="yes">Naam</th>
-        <th translate="yes">Status</th>
+        <th translate="yes">tipe</th>
+        <th translate="yes">naam</th>
+        <th translate="yes">status</th>
         <th translate="yes">Geskep</th>
-        <th translate="yes">Ingedien</th>
+        <th translate="yes">voorgelê</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Nog nie voorsien nie</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,10 +48,10 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Fondse word aan rekening betaal x</p>
+    <p translate="yes">Fondse word betaal op rekening x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Bank besonderhede moet verskaf word om fondse te ontvang.</p>
+    <p translate="yes">Bankbesonderhede moet verskaf word om fondse te ontvang.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">Die registrasie is nie ingedien nie.</p>
@@ -66,16 +66,16 @@
     <span translate="yes">Registrasie is aanvaar</span>
   </template>
   <template id="verified">
-    <span translate="yes">Versper deur Stripe</span>
+    <span translate="yes">Uitgeskakel deur Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Vereis bykomende inligting</span>
+    <span translate="yes">Vereis addisionele inligting</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Hangende indiening</span>
+    <span translate="yes">In afwagting van indiening</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Vereis bykomende inligting</span>
+    <span translate="yes">Vereis addisionele inligting</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Verwerp deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -90,16 +90,16 @@
     <span><span translate="yes">Verwerp deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Meer inligting word vereis</span>
+    <span translate="yes">Meer inligting is nodig</span>
   </template>
   <template id="listed">
-    <span translate="yes">Onder oorsig deur Stripe</span>
+    <span translate="yes">Ondersoek deur Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Onder oorsig deur Stripe</span>
+    <span translate="yes">Ondersoek deur Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Versper deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Uitgeskakel deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Töröl ${person.id}</h1>
-  <p translate="yes">A tulajdonos adatai azonnal törlődnek, és nem állíthatók vissza.</p>
+  <p translate="yes">A tulajdonos adatait azonnal töröljük, és nem lehet őket helyreállítani.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Töröl</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Siker! A vállalat tulajdonosa törölve lett
+      Siker! A cég tulajdonosát töröltük
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hiba! Hiba történt a vállalat tulajdonosának törlésekor
+      Hiba! Hiba történt a cég tulajdonosának törlésével
     </div>
   </template>
 </body>

@@ -11,7 +11,7 @@
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
     <h1 translate="yes">Oħloq persuna ġdida</h1>
-    <p translate="yes">Il-bord tad-diretturi, is-sidien u r-rappreżentant għandu jinżamm aġġornat hekk kif tinbidel l-informazzjoni tiegħek.</p>
+    <p translate="yes">Il-bord tad-diretturi, sidien u rappreżentant għandu jinżamm aġġornat hekk kif tinbidel l-informazzjoni tiegħek.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Relazzjoni mal-kumpanija</h2>
@@ -22,11 +22,11 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Titlu tax-xogħol, tar-rwol jew tar-relazzjoni</label>
+        <label for="relationship_title" translate="yes">Xogħol, rwol jew relazzjoni</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Perċentwali proprjetà (jekk ikun hemm)</label>
+        <label for="relationship_percent_ownership" translate="yes">Perċentwali ta 'proprjetà (jekk hemm)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
@@ -41,37 +41,37 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Żball! Sar żball fil-ħolqien tar-reġistrazzjoni
+      Żball! Sejjer żball fil-ħolqien tar-reġistrazzjoni
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Il-kont Stripe tiegħek ma jeħtieġx informazzjoni dwar is-sid benefiċjarju
+      Il-kont Stripe tiegħek ma jeħtieġx informazzjoni ta 'benefiċċju għas-sid
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Il-Stripe tiegħek ma jeħtieġx informazzjoni dwar id-direttur tal-kumpanija
+      Il-kont Stripe tiegħek ma jeħtieġx informazzjoni dwar id-direttur tal-kumpanija
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Ir-rappreżentanti tal-kumpaniji jridu jkunu eżekuttivi
+      Ir-rappreżentanti tal-kumpanija jridu jkunu eżekuttivi
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Ir-rappreżentant, id-direttur jew is-sid għandhom jintgħażlu
+      Jew ir-rappreżentant, id-direttur jew is-sid għandhom jintgħażlu
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Żball! Sjieda perċentwali invalida jew nieqsa (0 jekk xejn)
+      Żball! Proprjetà invalida jew nieqsa fil-mija (0 jekk mhux)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Żball! Titlu tar-relazzjoni invalidu jew nieqes
+      Żball! Titolu tar-relazzjoni invalidu jew nieqes
     </div>
   </template>
 </body>

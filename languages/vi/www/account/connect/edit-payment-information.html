@@ -28,20 +28,20 @@
 </head>
 <body>
   <h1 translate="yes">Thông tin thanh toán cho ${stripeAccount.id}</h1>
-  <p translate="yes">Cập Nhật tài khoản ngân hàng sẽ nhận được khoản thanh toán doanh thu của bạn.</p>
+  <p translate="yes">Cập nhật tài khoản ngân hàng sẽ nhận được khoản thanh toán doanh thu của bạn.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">Quốc gia ngân hàng</label>
+      <label for="country" translate="yes">Nước ngân hàng</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Chọn
+          Lựa chọn
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Loại tài khoản</label>
+      <label translate="yes">Kiểu tài khoản</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,17 +52,17 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Tiền tệ tài khoản</label>
+          <label for="currency" translate="yes">Tài khoản tiền tệ</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Chọn
+              Lựa chọn
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Tên của chủ tài khoản</label>
+      <label for="account-holder-name" translate="yes">Tên Chủ tài khoản của</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Số quá cảnh</label>
+        <label for="transit_number" translate="yes">Mã số chuyển tiếp</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -130,10 +130,10 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">Định dạng khác</h2>
+      <h2 translate="yes">Định dạng thay thế</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Mã sắp xếp</label>
+          <label for="sort_code" translate="yes">Mã chính tả</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,7 +149,7 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Xoá mã</label>
+        <label for="clearing_code" translate="yes">Mã thanh toán bù trừ</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Success! Thông tin thanh toán đã được Cập Nhật
+      Sự thành công! Thông tin thanh toán đã được cập nhật
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Lỗi! Lỗi xảy ra khi cập nhật thông tin thanh toán
+      Lỗi! Đã xảy ra lỗi khi cập nhật thông tin thanh toán
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Lỗi! Quốc gia ngân hàng không hợp lệ hoặc thiếu
+      Lỗi! Quốc gia ngân hàng không hợp lệ hoặc mất tích
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Lỗi! Loại tiền tệ không hợp lệ hoặc thiếu tài khoản
+      Lỗi! Tài khoản không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Lỗi! Loại tài khoản không hợp lệ hoặc thiếu
+      Lỗi! Loại tài khoản không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Lỗi! Số tài khoản không hợp lệ hoặc thiếu
+      Lỗi! Số tài khoản không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Lỗi! Số BSB không hợp lệ hoặc thiếu
+      Lỗi! Số BSB không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Lỗi! Mã số ngân hàng không hợp lệ hoặc thiếu
+      Lỗi! Số mã ngân hàng không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Lỗi! Mã loại không hợp lệ hoặc thiếu
+      Lỗi! Mã sắp xếp không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Lỗi! Số tổ chức không hợp lệ hoặc thiếu
+      Lỗi! Số tổ chức không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Lỗi! Số vận chuyển không hợp lệ hoặc thiếu
+      Lỗi! Số chuyển tuyến không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Lỗi! Không hợp lệ hoặc thiếu xoá mã số
+      Lỗi! Số mã xóa không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Lỗi! Số mã chi nhánh không hợp lệ hoặc thiếu
+      Lỗi! Số mã chi nhánh không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Lỗi! Tên chủ tài khoản không hợp lệ hoặc thiếu
+      Lỗi! Tên chủ tài khoản không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Lỗi! Số IBAN không hợp lệ hoặc thiếu
+      Lỗi! Số IBAN không hợp lệ hoặc bị thiếu
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Lỗi! Số chuyển tuyến không hợp lệ hoặc thiếu
+      Lỗi! Số quá cảnh không hợp lệ hoặc bị thiếu
     </div>
   </template>
 </body>

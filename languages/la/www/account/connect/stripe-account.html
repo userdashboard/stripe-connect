@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">View ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">View ${stripeAccount.id}</h1>
+  <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
+    <tbody id="${stripeAccount.id}">
+      <tr>
+        <th>ID</th>
+        <td>${stripeAccount.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">genus</th>
+        <td id="business" translated="yes">Company registration</td>
+        <td id="individual" translated="yes">Individual registration</td>
+      </tr>
+      <tr>
+        <th translate="yes">nomine</th>
+        <td id="blank-name" translated="yes">Not yet provided</td>
+        <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+        <td id="business-name">${stripeAccount.company.name || ""}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Patriam</th>
+        <td>${stripeAccount.country}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Status</th>
+        <td id="account-status-${stripeAccount.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">summitto</th>
+        <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
+        <td id="not-submitted2" translate="yes">Non tamen summitto</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="registration-container">
+    <h2 translate="yes">adnotatione notitia</h2>
+    <div id="account-status"></div>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
+      <a id="update-registration-link" class="pure-button" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Update registration</a>
+    </p>
+  </div>
+  <div id="representative-container">
+    <h2 translate="yes">turba representative</h2>
+    <p translate="yes">Si certa notitia nova subire perturbatio ratio ne repraesentativum repraesentat personam Folia non modica.</p>
+    <table id="representatives-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">nomine</th>
+          <th translate="yes">Informatio Petita</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="registration-options">
+      <a id="create-company-representative-link" class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true&amp;relationship_executive=true&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Add new representative</a>
+    </p>
+  </div>
+  <div id="owners-container">
+    <h2 translate="yes">Alius utilis notitia owners</h2>
+    <p translate="yes">Vos suggero documenta quis aliud pro summus, habendi a substantial (25+) percent in comitatu vel in crimen societatis, sive res oeconomicas.</p>
+    <table id="owners-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">nomine</th>
+          <th translate="yes">exigit</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="owner-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true&amp;return-url=/account/connect/persons%3Fstripeid=${stripeAccount.id}">Add beneficial owner</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="directors-container">
+    <h2 translate="yes">Directors notitia turma,</h2>
+    <p translate="yes">Providebit vos pleno comitatu scriptor nomina vestra regendi tabula et / vel responsible pro populo maintaining regulatory obsequio.</p>
+    <table id="directors-table" class="pure-table pure-table-striped data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">nomine</th>
+          <th translate="yes">exigit</th>
+        </tr>
+      </thead>
+    </table>
+    <p class="pure-button-group" role="group" id="director-options">
+      <a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true&amp;return-url=/account/connect/personss%3Fstripeid=${stripeAccount.id}">Add company director</a>
+      <a class="pure-button pure-button-primary" href="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Submit completed</a>
+    </p>
+  </div>
+  <div id="payment-container">
+    <h2 translate="yes">Payment Information</h2>
+    <div id="payment-information-status"></div>
+    <p id="payment-options">
+      <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
+      <a id="update-payment" class="pure-button" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Update payment information</a>
+    </p>
+  </div>
+  <div id="submission-container">
+    <h2 translate="yes">submit adnotatione</h2>
+    <div id="submission-status"></div>
+    <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
+  </div>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">addendi notitia</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr>
+  </template>
+  <template id="payment-information">
+    <p translate="yes">Sunt pecunia et solvit rationem ${bank_account.bank_name}.</p>
+  </template>
+  <template id="no-payment-information">
+    <p translate="yes">Details Banking praeberi oportet accipere pecunia.</p>
+  </template>
+  <template id="not-submitted-information">
+    <p translate="yes">In adnotatione non sunt subiecti.</p>
+  </template>
+  <template id="submitted-information">
+    <p translate="yes">Et communicata est in adnotatione ${account.dateFormatted}.</p>
+  </template>
+  <template id="unstarted-registration">
+    <p translate="yes">In adnotatione notitia est provisum non esse.</p>
+  </template>
+  <template id="completed-registration">
+    <p translate="yes">In adnotatione notitia est provisum.</p>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Non tamen summitto</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Registration est accepted</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Exigit informationis</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">eviewray submission</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Reprobari a generatione Stripe vide</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Reprobari a generatione Stripe vide</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Reprobari a generatione Stripe vide</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Reprobari a generatione Stripe vide</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span>More information is required.</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Per recensionem sub Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Per recensionem sub Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Reprobari a generatione Stripe vide</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Exigit informationis</span>
+  </template>
+</body>
+</html>

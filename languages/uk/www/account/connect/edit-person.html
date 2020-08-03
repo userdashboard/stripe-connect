@@ -18,10 +18,10 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Редагувати користувача</h1>
+    <h1 translate="yes">Редагувати особу</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Зв'язок з компанією</h2>
+      <h2 translate="yes">Відносини до компанії</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,14 +29,14 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Посада, роль або назва зв'язку</label>
+        <label for="relationship_title" translate="yes">Робота, роль чи назва відносин</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Відсоток власності (якщо є)</label>
+        <label for="relationship_percent_ownership" translate="yes">Відсотки, що належать (якщо такі є)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Особиста інформація</h2>
+      <h2 translate="yes">Персональна інформація</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
@@ -50,7 +50,7 @@
           <div class="pure-u-11-24">
             <div id="last_name-container" class="pure-control-group">
               <a id="last_name-anchor"></a>
-              <label for="last_name" translate="yes">Прізвищем</label>
+              <label for="last_name" translate="yes">Прізвище</label>
               <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">Адресу електронної пошти</label>
+              <label for="email" translate="yes">Адреса електронної пошти</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div id="kana-information-container">
-        <h2 translate="yes">Кана особиста інформація</h2>
+        <h2 translate="yes">Kana Особисті дані</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kana-container" class="pure-control-group">
@@ -87,14 +87,14 @@
           <div class="pure-u-11-24">
             <div id="last_name_kana-container" class="pure-control-group">
               <a id="last_name_kana-anchor"></a>
-              <label for="last_name_kana" translate="yes">Прізвищем</label>
+              <label for="last_name_kana" translate="yes">Прізвище</label>
               <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
             </div>
           </div>
         </div>
       </div>
       <div id="kanji-information-container">
-        <h2 translate="yes">Кандзі особиста інформація</h2>
+        <h2 translate="yes">Особиста інформація Kanji</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kanji-container" class="pure-control-group">
@@ -107,7 +107,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kanji-container" class="pure-control-group">
               <a id="last_name_kanji-anchor"></a>
-              <label for="last_name_kanji" translate="yes">Прізвищем</label>
+              <label for="last_name_kanji" translate="yes">Прізвище</label>
               <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -124,37 +124,37 @@
       </div>
       <div id="gender-container" class="pure-control-group">
         <a id="gender-anchor"></a>
-        <label for="female" translate="yes">Гендерні</label>
+        <label for="female" translate="yes">Стать</label>
         <div class="pure-checkbox">
          <label><input id="female" name="gender" type="radio" value="female"> Female</label>
          <label><input id="male" name="gender" type="radio" value="male"> Male</label>
         </div>
       </div>
       <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4" translate="yes">SSN останні 4 цифри</label>
+        <label for="ssn_last_4" translate="yes">Останні 4 цифри SSN</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
         <h2 translate="yes">Особиста ідентифікація</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Паспорт або ідентифікаційний номер</label>
+        <label for="id_number" translate="yes">Номер паспорта або посвідчення особи</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Фронтальний скан/фото</label>
+        <label for="verification_document_front" translate="yes">Переднє сканування / фото</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Сканування назад/фото</label>
+        <label for="verification_document_back" translate="yes">Сканування назад / фото</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
-        <h2 translate="yes">Доказ адреси</h2>
+        <h2 translate="yes">Підтвердження адреси</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Фронтальний скан/фото</label>
+        <label for="verification_additional_document_front" translate="yes">Переднє сканування / фото</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Сканування назад/фото</label>
+        <label for="verification_additional_document_back" translate="yes">Сканування назад / фото</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -178,7 +178,7 @@
           <div class="pure-g">
             <div id="address_state-container" class="pure-u-16-24">
               <a id="address_state-anchor"></a>
-              <label for="address_state" translate="yes">Область або Республіка</label>
+              <label for="address_state" translate="yes">Штат або провінція</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
                   Виберіть
@@ -197,7 +197,7 @@
           <div class="pure-g">
             <div class="pure-u-16-24">
               <a id="address_country-anchor"></a>
-              <label for="address_country" translate="yes">Країні</label>
+              <label for="address_country" translate="yes">Країна</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
                   Виберіть країну
@@ -231,7 +231,7 @@
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Держави</label>
+          <label for="address_kana_state" translate="yes">Держава</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
@@ -241,7 +241,7 @@
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">Особиста адреса кандзі</h2>
+        <h2 translate="yes">Особиста адреса Канджі</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
           <label for="address_kanji_line1" translate="yes">Рядок 1</label>
@@ -259,7 +259,7 @@
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Держави</label>
+          <label for="address_kanji_state" translate="yes">Держава</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
@@ -269,13 +269,13 @@
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Реєстрація оновлення</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Оновити реєстрацію</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Помилка! Сталася помилка під час надсилання форми
+      Помилка! Під час надсилання форми сталася помилка
     </div>
   </template>
   <template id="country-option">
@@ -290,182 +290,182 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Помилка! Сталася помилка під час udpating відомостей
+      Помилка! Під час оновлення інформації сталася помилка
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Помилка! Сталася помилка під час завантаження фотографії або сканування
+      Помилка! Під час завантаження фотографії чи сканування сталася помилка
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній Персональний ідентифікаційний номер
+      Помилка! Недійсний або відсутній особистий номер особи
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній стать
+      Помилка! Недійсна або відсутня стать
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимі або відсутні останні 4 цифри номера соціального страхування
+      Помилка! Недійсні або відсутні останні 4 цифри номера соціального страхування
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Помилка! Неприпустима або відсутня дата народження
+      Помилка! Невірна або відсутня дата народження
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Помилка! Неприпустима або відсутня дата народження
+      Помилка! Невірна або відсутня дата народження
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Помилка! Неприпустима або відсутня дата народження
+      Помилка! Невірна або відсутня дата народження
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє ім'я
+      Помилка! Неправильне або відсутнє ім’я
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє ім'я Кана
+      Помилка! Неправильне або відсутнє ім’я Кана
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє ім'я Kanjifirst
+      Помилка! Неправильне або відсутнє ім'я Канджіфріст
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє прізвище
+      Помилка! Неправильне або відсутнє прізвище
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє прізвище Кана
+      Помилка! Неправильне або відсутнє прізвище Кана
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє прізвище
+      Помилка! Неправильне або відсутнє прізвище
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Помилка! Недійсна або відсутня електронна пошта
+      Помилка! Недійсний або відсутній електронний лист
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній номер телефону
+      Помилка! Недійсний або відсутній номер телефону
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній відсоток власності
+      Помилка! Недійсне або відсутнє відсоткове право власності
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє сканування переднього документа або фотографія
+      Помилка! Недійсне або відсутнє фронтальне сканування документа або фотографія
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній документ назад сканування або фото
+      Помилка! Недійсне або відсутнє сканування документа назад або фотографії
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє додаткове сканування перед документом або фотографія
+      Помилка! Недійсне або відсутнє додаткове сканування фронту документа або фотографії
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній додатковий документ назад сканування або фотографію
+      Помилка! Недійсне або відсутнє додаткове сканування документа назад або фотографії
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Помилка! Неправильна або відсутня особиста адреса країни
+      Помилка! Недійсна або відсутня особиста адреса країни
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Помилка! Неправильна або відсутня особиста адреса міста
+      Помилка! Недійсне або відсутнє особисте місто
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній стан особистої адреси
+      Помилка! Недійсне або відсутнє стан особистої адреси
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній рядок особистої адреси 1
+      Помилка! Недійсний або відсутній рядок 1 особистої адреси
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній особистий поштовий індекс
+      Помилка! Недійсний або відсутній особистий поштовий індекс
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Помилка! Неприпустиме або відсутнє особисте адресне місто Кана
+      Помилка! Недійсна або відсутня особиста адреса міста Кана
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній стан особистої адреси Кана
+      Помилка! Недійсне або відсутнє стан особистої адреси Кана
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Помилка! Неправильна або відсутня Кана особисте місто адреса
+      Помилка! Недійсне або відсутнє місто для особистої адреси Кана
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або відсутній рядок особистої адреси Кана 1
+      Помилка! Недійсний або відсутній рядок 1 для особистої адреси Kana
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Помилка! Неприпустима або відсутня поштова адреса Кана поштовий індекс
+      Помилка! Недійсний або відсутній поштовий індекс особистої адреси Kana
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимі або відсутні міста кандзі особисте місто
+      Помилка! Недійсне або відсутнє особисте місто Канджі
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимий або невказаний кандзі стан особистої адреси
+      Помилка! Недійсне або відсутнє стан особистої адреси Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимі або пропущені кандзі місто особистої адреси
+      Помилка! Недійсне або відсутнє місто для особистої адреси Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Помилка! Неприпустима або відсутня кандзі-рядок для особистої адреси 1
+      Помилка! Недійсний або відсутній рядок 1 особистої адреси Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Помилка! Неприпустимі або пропущені ієрогліфи особиста адреса поштовий індекс
+      Помилка! Недійсний або відсутній поштовий індекс особистої адреси Kanji
     </div>
   </template>
 </body>

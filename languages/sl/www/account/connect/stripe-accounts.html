@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Računi Stripe</title>
+  <title translate="yes">Stripe računov</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,10 +10,10 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Računi Stripe</h1>
-  <p><span translate="yes">Postanite prodajalec s preverjanjem vaše osebne identitete in informacij o podjetju prek</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe računov</h1>
+  <p><span translate="yes">Postanite prodajalec s preverjanjem svoje osebne identitete in podatkov podjetja</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Računi Stripe še niso bili ustvarjeni.</p>
+    <p translate="yes">Računov Stripe še ni bilo ustvarjenih.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
@@ -21,7 +21,7 @@
         <h2 translate="yes">Individualne zahteve</h2>
         <ol>
           <li translate="yes">Preverjeni osebni podatki</li>
-          <li translate="yes">Rezident podprte države</li>
+          <li translate="yes">Prebivalec podprte države</li>
           <li translate="yes">Bančni račun v podprti državi</li>
         </ol>
         <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Začnite individualno registracijo</a>
@@ -32,10 +32,10 @@
         <h2 translate="yes">Poslovne zahteve</h2>
         <ol>
           <li translate="yes">Preverjeni osebni podatki</li>
-          <li translate="yes">Podjetje, registrirano v podprti državi</li>
+          <li translate="yes">Podjetje registrirano v podprti državi</li>
           <li translate="yes">Bančni račun v podprti državi</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Začetek registracije podjetja</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Začnite registracijo podjetja</a>
       </div>
     </div>
   </div>
@@ -46,10 +46,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">ime</th>
+            <th translate="yes">Ime</th>
             <th translate="yes">Stanje</th>
-            <th translate="yes">Ustvaril</th>
-            <th translate="yes">Predloženi</th>
+            <th translate="yes">Ustvarjeno</th>
+            <th translate="yes">Oddano</th>
           </tr>
         </thead>
       </table>
@@ -62,8 +62,8 @@
             <th>ID</th>
             <th translate="yes">Ime podjetja</th>
             <th translate="yes">Stanje</th>
-            <th translate="yes">Ustvaril</th>
-            <th translate="yes">Predloženi</th>
+            <th translate="yes">Ustvarjeno</th>
+            <th translate="yes">Oddano</th>
           </tr>
         </thead>
       </table>
@@ -90,13 +90,13 @@
     <span translate="yes">Registracija je bila sprejeta</span>
   </template>
   <template id="verified">
-    <span translate="yes">Onemogočil Stripe</span>
+    <span translate="yes">Onemogočeno s strani Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Zahteva dodatne informacije</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čakajoča predložitev</span>
+    <span translate="yes">Pred oddajo</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Zavrnil Stripe, glej</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -114,13 +114,13 @@
     <span translate="yes">Več informacij je potrebnih</span>
   </template>
   <template id="listed">
-    <span translate="yes">Pod pregledom, ki ga Stripe</span>
+    <span translate="yes">V pregledu Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Pod pregledom, ki ga Stripe</span>
+    <span translate="yes">V pregledu Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Onemogočil Stripe, glejte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Onemogočeno s strani Stripe, glej</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Zahteva dodatne informacije</span>

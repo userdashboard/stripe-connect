@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Kifizetések</title>
+  <title translate="yes">Nyeremények</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Kifizetések</h1>
+  <h1 translate="yes">Nyeremények</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Még nem történt kifizetés.</p>
+    <p translate="yes">Kifizetésekre még nem került sor.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
         <th translate="yes">Összeg</th>
-        <th translate="yes">Stripe számla</th>
+        <th translate="yes">Stripe fiók</th>
         <th translate="yes">Állapot</th>
         <th translate="yes">Leírás</th>
-        <th translate="yes">Létrehozott</th>
+        <th translate="yes">Alkotó</th>
       </tr>
     </thead>
   </table>
@@ -62,28 +62,28 @@
     <span translate="yes">Érvénytelen számlaszám</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Elégtelen források</span>
+    <span translate="yes">Fedezethiány</span>
   </template>
   <template id="declined">
-    <span translate="yes">A bank által elutasított átutalás</span>
+    <span translate="yes">A bank elutasította az átutalást</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Nincs bankszámla tartozik</span>
+    <span translate="yes">Nincs bankszámla terhelés</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Nem lehet feldolgozni</span>
+    <span translate="yes">Nem sikerült feldolgozni</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">A bank tulajdonjoga megváltozott</span>
+    <span translate="yes">Megváltozott a bank tulajdonjoga</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Bankszámlákorlátozás</span>
+    <span translate="yes">Bankszámla korlátozva</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Befagyasztott bankszámla</span>
+    <span translate="yes">A bankszámla befagyasztva</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Lezárt bankszámla</span>
+    <span translate="yes">Bankszámla zárva</span>
   </template>
 </body>
 </html>

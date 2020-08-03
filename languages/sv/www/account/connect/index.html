@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe Connect konton</title>
+  <title translate="yes">Stripe Connect-konton</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe Connect konton</h1>
-  <p><span translate="yes">Bli leverantör genom att verifiera din personliga identitet och företagsinformation via</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe Connect-konton</h1>
+  <p><span translate="yes">Bli leverantör genom att verifiera din personliga identitet och företagsinformation genom</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
@@ -29,10 +29,10 @@
         <h2 translate="yes">Affärskrav</h2>
         <ol>
           <li translate="yes">Verifierad personlig information</li>
-          <li translate="yes">Företag som är registrerade i ett land som stöds</li>
+          <li translate="yes">Företag registrerade i ett land som stöds</li>
           <li translate="yes">Bankkonto i ett land som stöds</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Starta företagsregistrering</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Starta företagets registrering</a>
       </div>
     </div>
   </div>
@@ -42,10 +42,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
           <th translate="yes">Status</th>
           <th translate="yes">Skapad</th>
-          <th translate="yes">Inskickat</th>
+          <th translate="yes">Lämnats</th>
         </tr>
       </thead>
     </table>
@@ -56,10 +56,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
           <th translate="yes">Status</th>
           <th translate="yes">Skapad</th>
-          <th translate="yes">Inskickat</th>
+          <th translate="yes">Lämnats</th>
         </tr>
       </thead>
     </table>
@@ -69,7 +69,7 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Ännu inte tillhandahållits</td>
+      <td id="blank-name-${account.id}" translate="yes">Ännu inte tillhandahållen</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
@@ -79,41 +79,41 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Inte inlämnad ännu</span>
+    <span translate="yes">Inte skickat ännu</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registreringen har accepterats</span>
+    <span translate="yes">Registrering har accepterats</span>
   </template>
   <template id="verified">
     <span translate="yes">Inaktiverad av Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Kräver att du skickar in ytterligare information igen</span>
+    <span translate="yes">Kräver att skicka in nytt med ytterligare information</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Väntande inlämning</span>
+    <span translate="yes">Väntar på inlämning</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Inaktiverad av Stripe, se vanliga orsaker</span>
+      <span translate="yes">Inaktiverad av Stripe, se vanliga skäl</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Inaktiverad av Stripe, se vanliga orsaker</span>
+      <span translate="yes">Inaktiverad av Stripe, se vanliga skäl</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Inaktiverad av Stripe, se vanliga orsaker</span>
+      <span translate="yes">Inaktiverad av Stripe, se vanliga skäl</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Inaktiverad av Stripe, se vanliga orsaker</span>
+      <span translate="yes">Inaktiverad av Stripe, se vanliga skäl</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
@@ -128,7 +128,7 @@
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Inaktiverad av Stripe, se vanliga orsaker</span>
+      <span translate="yes">Inaktiverad av Stripe, se vanliga skäl</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>

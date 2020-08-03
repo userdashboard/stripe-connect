@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Se ${stripeAccount.id}</title>
+  <title translate="yes">Udsigt ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Se ${stripeAccount.id}</h1>
+  <h1 translate="yes">Udsigt ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Status</th>
+        <th translate="yes">status</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Forelagt</th>
+        <th translate="yes">indsendt</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Ikke indsendt endnu</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Oplysninger om registrering</h2>
+    <h2 translate="yes">Registreringsinformation</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Virksomhedens repræsentant</h2>
-    <p translate="yes">Hvis du vil undgå kontoafbrydelse, skal du indsende nye repræsentative oplysninger, hvis den angivne person forlader virksomheden eller ikke længere repræsenterer virksomheden.</p>
+    <h2 translate="yes">Virksomhedsrepræsentant</h2>
+    <p translate="yes">For at undgå afbrydelse af kontoen skal du indsende nye repræsentative oplysninger, hvis den specificerede person forlader eller ikke længere repræsenterer virksomheden.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Navn</th>
-          <th translate="yes">Nødvendige oplysninger</th>
+          <th translate="yes">Nødvendig information</th>
         </tr>
       </thead>
     </table>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Andre oplysninger om reelle ejere</h2>
-    <p translate="yes">Du skal levere dokumentation for alle andre, der ejer en væsentlig (25+) procent af virksomheden eller har ansvaret for virksomheden, finanser eller operationer.</p>
+    <h2 translate="yes">Andre gavnlige ejere information</h2>
+    <p translate="yes">Du skal fremlægge dokumentation til alle andre, der ejer en betydelig (25+) procent af virksomheden eller har ansvaret for virksomheden, økonomi eller drift.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Oplysninger om virksomhedsledere</h2>
-    <p translate="yes">Du skal oplyse fulde navne på din virksomheds bestyrelse og/eller personer, der er ansvarlige for at opretholde overholdelse af lovgivningen.</p>
+    <h2 translate="yes">Oplysninger om selskabets direktører</h2>
+    <p translate="yes">Du skal angive fulde navne på din virksomheds bestyrelse og / eller personer, der er ansvarlige for at opretholde lovgivningsmæssig overholdelse.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Betalingsoplysninger</h2>
+    <h2 translate="yes">Betalingsinformation</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Send registrering</h2>
+    <h2 translate="yes">Indsend registrering</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,13 +120,13 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Tilføje oplysninger</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Tilføj oplysninger</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Midler udbetales til konto ${bank_account.bank_name}.</p>
+    <p translate="yes">Midler indbetales til konto ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Bankoplysninger skal gives for at modtage midler.</p>
@@ -135,13 +135,13 @@
     <p translate="yes">Registreringen er ikke indsendt.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Registreringen blev indgivet den ${account.dateFormatted}.</p>
+    <p translate="yes">Registreringen blev indsendt den ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Registreringsoplysningerne er ikke angivet.</p>
+    <p translate="yes">Registreringsinformationen er ikke leveret.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Registreringsoplysningerne er blevet givet.</p>
+    <p translate="yes">Registreringsinformationen er leveret.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">Ikke indsendt endnu</span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Afvist af Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

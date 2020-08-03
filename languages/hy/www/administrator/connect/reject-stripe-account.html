@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Մերժել ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Մերժել ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Մերժման պատճառը</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Ընտրեք պատճառը
+        </option>
+        <option value="fraud" translate="yes">
+          Խարդախություն
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Ծառայությունների մատուցման պայմանների խախտում
+        </option>
+        <option value="other" translate="yes">
+          Այլ
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Մերժել</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Հաջողություն: Stripe հաշիվը մերժվել է
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Սխալ: Հաշիվը պետք է ունենա a / bin / sh հաշվեկշիռ, նախքան մերժելը
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Սխալ: Stripe հաշիվը ջնջելու ժամանակ տեղի ունեցավ սխալ
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Դեռ չի ներկայացվել</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Գրանցումն ընդունվել է</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Անջատված է Stripe- ի կողմից</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Պահանջում է լրացուցիչ տեղեկատվություն</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Պահանջում է լրացուցիչ տեղեկատվություն</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Սպասում է ներկայացնելը</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Մերժված է Stripe- ի միջոցով, տե՛ս</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Մերժված է Stripe- ի միջոցով, տե՛ս</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Մերժված է Stripe- ի միջոցով, տե՛ս</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Մերժված է Stripe- ի միջոցով, տե՛ս</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Լրացուցիչ տեղեկություններ են պահանջվում</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Վերանայման ներքո ՝ Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Վերանայման ներքո ՝ Stripe</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Անջատված է Stripe- ի միջոցով, տե՛ս</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

@@ -11,28 +11,28 @@
 </head>
 <body>
   <h1 translate="yes">Stripe Connect கணக்குகள்</h1>
-  <p><span translate="yes">உங்கள் தனிப்பட்ட அடையாளம் மற்றும் நிறுவனத் தகவலைச் சரிபார்த்து ஒரு விற்பனையாளனாக ஆக</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">உங்கள் தனிப்பட்ட அடையாளம் மற்றும் நிறுவனத்தின் தகவல்களை சரிபார்த்து விற்பனையாளராகுங்கள்</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">தனிப்பட்ட தேவைகள்</h2>
         <ol>
-          <li translate="yes">சரிபார்க்கப்பட்ட தனிப்பட்ட தகவல்</li>
-          <li translate="yes">ஆதரிக்கப்படும் நாட்டில் வசிப்பவர்</li>
-          <li translate="yes">ஆதரிக்கப்படும் நாட்டில் வங்கிக் கணக்கு</li>
+          <li translate="yes">சரிபார்க்கப்பட்ட தனிப்பட்ட தகவல்கள்</li>
+          <li translate="yes">ஆதரிக்கும் நாட்டில் வசிப்பவர்</li>
+          <li translate="yes">ஆதரிக்கப்படும் நாட்டில் வங்கி கணக்கு</li>
         </ol>
         <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">தனிப்பட்ட பதிவைத் தொடங்கவும்</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">வணிக தேவைகள்</h2>
+        <h2 translate="yes">வணிகத் தேவைகள்</h2>
         <ol>
-          <li translate="yes">சரிபார்க்கப்பட்ட தனிப்பட்ட தகவல்</li>
-          <li translate="yes">ஆதரிக்கப்படும் நாட்டில் பதிவு செய்யப்பட்ட வணிகம்</li>
-          <li translate="yes">ஆதரிக்கப்படும் நாட்டில் வங்கிக் கணக்கு</li>
+          <li translate="yes">சரிபார்க்கப்பட்ட தனிப்பட்ட தகவல்கள்</li>
+          <li translate="yes">ஆதரவு நாட்டில் பதிவுசெய்யப்பட்ட வணிகம்</li>
+          <li translate="yes">ஆதரிக்கப்படும் நாட்டில் வங்கி கணக்கு</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">நிறுவன ப் பதிவு தொடங்க</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">நிறுவனத்தின் பதிவைத் தொடங்கவும்</a>
       </div>
     </div>
   </div>
@@ -43,8 +43,8 @@
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">சமுதாயப் படிநிலை</th>
-          <th translate="yes">உருவாக்க</th>
+          <th translate="yes">நிலை</th>
+          <th translate="yes">உருவாக்கப்பட்டது</th>
           <th translate="yes">சமர்ப்பிக்கப்பட்டது</th>
         </tr>
       </thead>
@@ -57,8 +57,8 @@
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">சமுதாயப் படிநிலை</th>
-          <th translate="yes">உருவாக்க</th>
+          <th translate="yes">நிலை</th>
+          <th translate="yes">உருவாக்கப்பட்டது</th>
           <th translate="yes">சமர்ப்பிக்கப்பட்டது</th>
         </tr>
       </thead>
@@ -82,10 +82,10 @@
     <span translate="yes">இன்னும் சமர்ப்பிக்கப்படவில்லை</span>
   </template>
   <template id="verified">
-    <span translate="yes">பதிவு ஏற்றுக்கொள்ளப்பட்டது</span>
+    <span translate="yes">பதிவு ஏற்றுக்கொள்ளப்பட்டுள்ளது</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe மூலம் முடக்கப்பட்டது</span>
+    <span translate="yes">Stripe ஆல் முடக்கப்பட்டது</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">கூடுதல் தகவலுடன் மீண்டும் சமர்ப்பிக்க வேண்டும்</span>
@@ -95,25 +95,25 @@
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Stripe முடக்கப்பட்டது, பொதுவான காரணங்களைப் பார்க்கவும்</span>
+      <span translate="yes">Stripe ஆல் முடக்கப்பட்டது, பொதுவான காரணங்களைக் காண்க</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Stripe முடக்கப்பட்டது, பொதுவான காரணங்களைப் பார்க்கவும்</span>
+      <span translate="yes">Stripe ஆல் முடக்கப்பட்டது, பொதுவான காரணங்களைக் காண்க</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Stripe முடக்கப்பட்டது, பொதுவான காரணங்களைப் பார்க்கவும்</span>
+      <span translate="yes">Stripe ஆல் முடக்கப்பட்டது, பொதுவான காரணங்களைக் காண்க</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Stripe முடக்கப்பட்டது, பொதுவான காரணங்களைப் பார்க்கவும்</span>
+      <span translate="yes">Stripe ஆல் முடக்கப்பட்டது, பொதுவான காரணங்களைக் காண்க</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
@@ -121,19 +121,19 @@
     <span translate="yes">மேலும் தகவல் தேவை</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe மதிப்பாய்வு கீழ்</span>
+    <span translate="yes">Stripe ஆல் மதிப்பாய்வு செய்யப்படுகிறது</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe மதிப்பாய்வு கீழ்</span>
+    <span translate="yes">Stripe ஆல் மதிப்பாய்வு செய்யப்படுகிறது</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Stripe முடக்கப்பட்டது, பொதுவான காரணங்களைப் பார்க்கவும்</span>
+      <span translate="yes">Stripe ஆல் முடக்கப்பட்டது, பொதுவான காரணங்களைக் காண்க</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
+    <span translate="yes">கூடுதல் தகவல் தேவை</span>
   </template>
 </body>
 </html>

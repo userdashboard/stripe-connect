@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Төлем туралы мәліметтер ${stripeAccount.id}</title>
+  <title translate="yes">Төлем туралы ақпарат ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,21 +27,21 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">Төлем туралы мәліметтер ${stripeAccount.id}</h1>
-  <p translate="yes">Кіріс төлемін алатын банк шотын жаңартыңыз.</p>
+  <h1 translate="yes">Төлем туралы ақпарат ${stripeAccount.id}</h1>
+  <p translate="yes">Төлемдеріңізді алатын банктік шотты жаңартыңыз.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">Банк елі</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Таңдау
+          Таңдаңыз
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Тіркелгі түрі</label>
+      <label translate="yes">Шот түрі</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,17 +52,17 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Шот валютасы</label>
+          <label for="currency" translate="yes">Шоттың валютасы</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Таңдау
+              Таңдаңыз
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Тіркелгі иесінің аты</label>
+      <label for="account-holder-name" translate="yes">Шот иесінің аты</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -71,7 +71,7 @@
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -85,15 +85,15 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Транзит нөмірі</label>
+        <label for="transit_number" translate="yes">Транзиттік нөмір</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="institution_number" translate="yes">Мекеменің нөмірі</label>
+        <label for="institution_number" translate="yes">Мекеме нөмірі</label>
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -130,15 +130,15 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">Баламалы пішім</h2>
+      <h2 translate="yes">Балама формат</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Сұрыптау коды</label>
+          <label for="sort_code" translate="yes">Емле коды</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+          <label for="account_number" translate="yes">Шот нөмірі</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -153,11 +153,11 @@
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Филиалдың коды</label>
+        <label for="branch_code" translate="yes">Филиал коды</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -175,11 +175,11 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Филиалдың коды</label>
+        <label for="branch_code" translate="yes">Филиал коды</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Жолдау нөмірі</label>
+        <label for="routing_number" translate="yes">Бағыт нөмірі</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Жолдау нөмірі</label>
+        <label for="routing_number" translate="yes">Бағыт нөмірі</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -237,11 +237,11 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Филиалдың коды</label>
+        <label for="branch_code" translate="yes">Филиал коды</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,16 +259,16 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Жолдау нөмірі</label>
+        <label for="routing_number" translate="yes">Бағыт нөмірі</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Тіркелгі нөмірі</label>
+        <label for="account_number" translate="yes">Шот нөмірі</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Төлем ақпаратын сақтау</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Төлем туралы ақпаратты сақтаңыз</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,12 +283,12 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Табыс! Төлем туралы ақпарат жаңартылды
+      Жетістік! Төлем туралы ақпарат жаңартылды
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Қате! Төлем туралы ақпаратты жаңарту қатесі
+      Қате! Төлем туралы ақпаратты жаңарту кезінде қате орын алды
     </div>
   </template>
   <template id="invalid-country">
@@ -298,67 +298,67 @@
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Қате! Шоттың дұрыс емес немесе жоқ валютасы
+      Қате! Шоттың валютасы жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Қате! Тіркелгінің жарамсыз немесе жоқ түрі
+      Қате! Есептік жазба түрі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ есептік нөмір
+      Қате! Шот нөмірі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ BSB нөмірі
+      Қате! BSB нөмірі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Қате! Банк кодының жарамсыз немесе жоқ нөмірі
+      Қате! Банк кодының нөмірі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Қате! Дұрыс емес немесе жоқ Сұрыптау коды
+      Қате! Жарамсыз немесе жоқ Сұрыптау коды
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ Мекеме нөмірі
+      Қате! Мекеме нөмірі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ транзит нөмірі
+      Қате! Транзиттік нөмір жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ Клиринг кодексінің нөмірі
+      Қате! Клиринг кодының нөмірі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ филиал кодының нөмірі
+      Қате! Филиалдың коды дұрыс емес немесе жоқ
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ тіркелгі ұстаушының аты
+      Қате! Шот иесінің аты жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Қате! Жарамсыз немесе жоқ IBAN нөмірі
+      Қате! IBAN нөмірі жарамсыз немесе жоқ
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Қате! Транзиттің жарамсыз немесе жоқ нөмірі
+      Қате! Транзит нөмірі жарамсыз немесе жоқ
     </div>
   </template>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Πρόσωπα για ${stripeAccount.id}</title>
+  <title translate="yes">Άτομα για ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,42 +11,42 @@
 <body>
   <h1 translate="yes">Άτομα</h1>
   <div id="representative-container">
-    <h2 translate="yes">Εκπρόσωπος εταιρείας</h2>
-    <p translate="yes">Εάν αλλάξει η κατάσταση του υποψηφίου ατόμου, πρέπει να δημιουργήσετε έναν νέο αντιπρόσωπο.</p>
+    <h2 translate="yes">Εκπρόσωπος της εταιρείας</h2>
+    <p translate="yes">Εάν αλλάξει η κατάσταση του υποψηφίου, πρέπει να δημιουργήσετε έναν νέο αντιπρόσωπο.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Δημιουργία νέου αντιπροσώπου</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
           <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Πραγματικοί ιδιοκτήτες</h2>
-    <p translate="yes">Πρέπει να προσκομίσετε έγγραφα για οποιονδήποτε άλλο κατέχει ένα σημαντικό (25+) τοις εκατό της εταιρείας ή είναι υπεύθυνος για την εταιρεία, τα οικονομικά ή τις δραστηριότητές της.</p>
+    <h2 translate="yes">Ευεργετικοί ιδιοκτήτες</h2>
+    <p translate="yes">Πρέπει να παρέχετε τεκμηρίωση για οποιονδήποτε άλλον κατέχει σημαντικό (25+) τοις εκατό της εταιρείας ή υπεύθυνο για την εταιρεία, τα οικονομικά ή τις δραστηριότητές της.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Προσθήκη κατόχου</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
           <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Διευθυντές εταιρειών</h2>
-    <p translate="yes">Πρέπει να προσκομίσετε έγγραφα για το διοικητικό συμβούλιο.</p>
+    <h2 translate="yes">Διευθυντές της εταιρείας</h2>
+    <p translate="yes">Πρέπει να παρέχετε τεκμηρίωση για το διοικητικό συμβούλιο.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Προσθήκη κατόχου</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
           <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Προσθήκη πληροφοριών</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Προσθέστε πληροφορίες</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

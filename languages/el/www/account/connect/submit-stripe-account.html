@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Υποβάλει ${stripeAccount.id}</title>
+  <title translate="yes">υποβάλλουν ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Υποβάλει ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> διαδικασία επαλήθευσης με την υποβολή της συμπληρωμένης εγγραφής σας.</p>
+  <h1 translate="yes">υποβάλλουν ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> διαδικασία επαλήθευσης υποβάλλοντας την ολοκληρωμένη εγγραφή σας.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Πραγματικοί ιδιοκτήτες</h2>
+    <h2 translate="yes">Ευεργετικοί ιδιοκτήτες</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Διευθυντές εταιρειών</h2>
+    <h2 translate="yes">Διευθυντές της εταιρείας</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
         </tr>
       </thead>
     </table>
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Η καταχώριση έχει ελλιπείς πληροφορίες εγγραφής
+      Η εγγραφή έχει ελλιπείς πληροφορίες εγγραφής
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Σφάλμα! Πρέπει να υποβάλετε τους διευθυντές της εταιρείας
+      Λάθος! Πρέπει να υποβάλετε τους διευθυντές της εταιρείας
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Σφάλμα! Πρέπει να υποβάλετε τους πραγματικούς δικαιούχους της εταιρείας
+      Λάθος! Πρέπει να υποβάλετε τους πραγματικούς δικαιούχους της εταιρείας
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Σφάλμα! Πρέπει να υποβάλετε τις πληροφορίες του αντιπροσώπου της εταιρείας
+      Λάθος! Πρέπει να υποβάλετε τα στοιχεία του εκπροσώπου της εταιρείας
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Σφάλμα! Η καταχώριση έχει ελλιπείς πληροφορίες πληρωμής
+      Λάθος! Η εγγραφή έχει ελλιπή στοιχεία πληρωμής
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Επιτυχία! Η καταχώριση έχει υποβληθεί
+      Επιτυχία! Η εγγραφή έχει υποβληθεί
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Παρουσιάστηκε σφάλμα κατά την υποβολή της καταχώρησης
+      Λάθος! Παρουσιάστηκε σφάλμα κατά την υποβολή της εγγραφής
     </div>
   </template>
 </body>

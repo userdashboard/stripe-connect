@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Tiro ${payout.id}</title>
+  <title translate="yes">Tirohia ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Tiro ${payout.id}</h1>
+  <h1 translate="yes">Tirohia ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -18,25 +18,25 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Nui</th>
+        <th translate="yes">Kaha</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Stripe pūkete</th>
+        <th translate="yes">Pūkete Stripe</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">Mana</th>
+        <th translate="yes">Te mana</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Whakamārama:</th>
+        <th translate="yes">Whakaahuatanga</th>
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Waihangatia</th>
+        <th translate="yes">I hanga</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Kāore i kitea he pūkete pēke</span>
+    <span translate="yes">Kaore i kitea he putea putea</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Moni muhu</span>
+    <span translate="yes">Moni kore</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Tau pūkete muhu</span>
+    <span translate="yes">Te nama kaute kore</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Moni iti</span>
+    <span translate="yes">He iti nga moni</span>
   </template>
   <template id="declined">
-    <span translate="yes">Whakawhiti i te pēke</span>
+    <span translate="yes">Kua heke te peeke</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Kāore he nama pūkete pēke</span>
+    <span translate="yes">Kaore he putea kaute nama</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Kāore i taea te tukanga</span>
+    <span translate="yes">Kaore i taea te whakahaere</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Kua huri te pupuritanga pēke</span>
+    <span translate="yes">Kua hurihia te rangatiratanga o te peeke</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">Kua rāhuitia te pūkete pēke</span>
+    <span translate="yes">Kua aukati te putea putea</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Pātiotio pūkete pēke</span>
+    <span translate="yes">He huka te putea peeke</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Kua katia te pūkete pēke</span>
+    <span translate="yes">Katia nga putea putea</span>
   </template>
 </body>
 </html>

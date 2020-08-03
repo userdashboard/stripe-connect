@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
-    <title translate="yes">Edytuj ${person.id}</title>
+    <title translate="yes">Edytować ${person.id}</title>
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -21,7 +21,7 @@
     <h1 translate="yes">Edytuj osobę</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Związek z firmą</h2>
+      <h2 translate="yes">Stosunek do firmy</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,14 +29,14 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Tytuł zadania, roli lub relacji</label>
+        <label for="relationship_title" translate="yes">Stanowisko, stanowisko lub tytuł związku</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Procent posiadanych (jeśli istnieje)</label>
+        <label for="relationship_percent_ownership" translate="yes">Posiadany procent (jeśli istnieje)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Dane osobowe</h2>
+      <h2 translate="yes">Informacje osobiste</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
@@ -124,37 +124,37 @@
       </div>
       <div id="gender-container" class="pure-control-group">
         <a id="gender-anchor"></a>
-        <label for="female" translate="yes">Płci</label>
+        <label for="female" translate="yes">Płeć</label>
         <div class="pure-checkbox">
          <label><input id="female" name="gender" type="radio" value="female"> Female</label>
          <label><input id="male" name="gender" type="radio" value="male"> Male</label>
         </div>
       </div>
       <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4" translate="yes">SSN ostatnie 4 cyfry</label>
+        <label for="ssn_last_4" translate="yes">PESEL ostatnie 4 cyfry</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
-        <h2 translate="yes">Identyfikacja osobista</h2>
+        <h2 translate="yes">Osobista identyfikacja</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Numer paszportu lub do dokumentu tożsamości</label>
+        <label for="id_number" translate="yes">Numer paszportu lub dowodu osobistego</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Skanowanie z przodu/zdjęcie</label>
+        <label for="verification_document_front" translate="yes">Skan / zdjęcie z przodu</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Skanowanie wstecz/zdjęcie</label>
+        <label for="verification_document_back" translate="yes">Wstecz skan / zdjęcie</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
         <h2 translate="yes">Potwierdzenie adresu</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Skanowanie z przodu/zdjęcie</label>
+        <label for="verification_additional_document_front" translate="yes">Skan / zdjęcie z przodu</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Skanowanie wstecz/zdjęcie</label>
+        <label for="verification_additional_document_back" translate="yes">Wstecz skan / zdjęcie</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -171,14 +171,14 @@
         </div>
         <div id="address_city-container" class="pure-control-group">
           <a id="address_city-anchor"></a>
-          <label for="address_city" translate="yes">Miasta</label>
+          <label for="address_city" translate="yes">Miasto</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
           <div class="pure-g">
             <div id="address_state-container" class="pure-u-16-24">
               <a id="address_state-anchor"></a>
-              <label for="address_state" translate="yes">Województwo</label>
+              <label for="address_state" translate="yes">Stan lub prowincja</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
                   Wybierz
@@ -197,7 +197,7 @@
           <div class="pure-g">
             <div class="pure-u-16-24">
               <a id="address_country-anchor"></a>
-              <label for="address_country" translate="yes">Kraju</label>
+              <label for="address_country" translate="yes">Kraj</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
                   Wybierz kraj
@@ -220,18 +220,18 @@
           <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
         </div>
         <div id="address_kana_city-container" class="pure-control-group">
-          <label for="address_kana_city" translate="yes">Miasta</label>
+          <label for="address_kana_city" translate="yes">Miasto</label>
           <a id="address_kana_city-anchor"></a>
           <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
         </div>
         <div id="address_kana_town-container" class="pure-control-group">
-          <label for="address_kana_town" translate="yes">Miasta</label>
+          <label for="address_kana_town" translate="yes">Miasto</label>
           <a id="address_kana_town-anchor"></a>
           <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Państwa</label>
+          <label for="address_kana_state" translate="yes">Stan</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
@@ -241,7 +241,7 @@
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">Adres osobisty Kanji</h2>
+        <h2 translate="yes">Adres osobisty w Kanji</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
           <label for="address_kanji_line1" translate="yes">Linia 1</label>
@@ -249,17 +249,17 @@
         </div>
         <div id="address_kanji_city-container" class="pure-control-group">
           <a id="address_kanji_city-anchor"></a>
-          <label for="address_kanji_city" translate="yes">Miasta</label>
+          <label for="address_kanji_city" translate="yes">Miasto</label>
           <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
         </div>
         <div id="address_kanji_town-container" class="pure-control-group">
           <a id="address_kanji_town-anchor"></a>
-          <label for="address_kanji_town" translate="yes">Miasta</label>
+          <label for="address_kanji_town" translate="yes">Miasto</label>
           <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Państwa</label>
+          <label for="address_kanji_state" translate="yes">Stan</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
@@ -269,13 +269,13 @@
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Aktualizuj rejestrację</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Zaktualizuj rejestrację</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Błąd! Wystąpił błąd podczas przesyłania formularza
+      Błąd! Wystąpił błąd podczas wysyłania formularza
     </div>
   </template>
   <template id="country-option">
@@ -290,42 +290,42 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Błąd! Wystąpił błąd udpating informacji
+      Błąd! Wystąpił błąd podczas aktualizowania informacji
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Błąd! Wystąpił błąd podczas przesyłania zdjęcia lub skanowania
+      Błąd! Wystąpił błąd podczas przesyłania zdjęcia lub skanu
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowy lub brakujący numer do osobistego identyfikatora
+      Błąd! Nieprawidłowy lub brakujący numer dowodu osobistego
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowa lub brakującą płeć
+      Błąd! Nieprawidłowa lub brakująca płeć
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące ostatnie 4 cyfry numeru ubezpieczenia społecznego
+      Błąd! Nieprawidłowe lub brakujące 4 ostatnie cyfry numeru ubezpieczenia społecznego
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Błąd! Nieważna lub brak daty urodzenia
+      Błąd! Nieprawidłowa lub brakująca data urodzenia
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Błąd! Nieważna lub brak daty urodzenia
+      Błąd! Nieprawidłowa lub brakująca data urodzenia
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Błąd! Nieważna lub brak daty urodzenia
+      Błąd! Nieprawidłowa lub brakująca data urodzenia
     </div>
   </template>
   <template id="invalid-first_name">
@@ -340,7 +340,7 @@
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowa lub brakującą nazwą Kanjifirst
+      Błąd! Nieprawidłowa lub brakująca nazwa Kanjifirst
     </div>
   </template>
   <template id="invalid-last_name">
@@ -360,7 +360,7 @@
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowa lub chybiana wiadomość e-mail
+      Błąd! Nieprawidłowy lub brakujący adres e-mail
     </div>
   </template>
   <template id="invalid-phone">
@@ -370,37 +370,37 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowa lub brak własności procentowa
+      Błąd! Nieprawidłowy lub brakujący procent własności
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące skanowanie z przodu lub zdjęcie z przodu dokumentu
+      Błąd! Nieprawidłowy lub brakujący skan przedniego dokumentu lub zdjęcie
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowy lub brakujący dokument skanuje lub fotograficznie
+      Błąd! Nieprawidłowy lub brakujący skan lub zdjęcie z powrotem dokumentu
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące dodatkowe skanowanie z przodu dokumentu lub zdjęcie
+      Błąd! Nieprawidłowy lub brak dodatkowego skanu lub zdjęcia z przodu dokumentu
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące dodatkowe skanowanie lub zdjęcie dodatkowego dokumentu
+      Błąd! Nieprawidłowy lub brakujący dodatkowy skan lub zdjęcie z tyłu dokumentu
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowy lub brakujący adres kraju
+      Błąd! Nieprawidłowy lub brakujący kraj w adresie osobistym
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące miasto adresu osobistego
+      Błąd! Nieprawidłowe lub brakujące miasto w adresie osobistym
     </div>
   </template>
   <template id="invalid-address_state">
@@ -410,7 +410,7 @@
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowy lub brakujący adres osobisty wiersz 1
+      Błąd! Nieprawidłowa lub brakująca linia adresu osobistego 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
@@ -420,7 +420,7 @@
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące miasto adresów osobistych Kana
+      Błąd! Nieprawidłowe lub brakujące miasto w adresie osobistym Kana
     </div>
   </template>
   <template id="invalid-address_kana_state">
@@ -430,12 +430,12 @@
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub zaginione miasto adresów osobistych Kana
+      Błąd! Nieprawidłowe lub brakujące miasto adresu osobistego Kana
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowy lub brakujący adres kana adres wiersz 1
+      Błąd! Nieprawidłowy lub brakujący wiersz osobistego adresu Kana 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
@@ -445,7 +445,7 @@
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub brakujące miasto adresów osobistych Kanji
+      Błąd! Nieprawidłowe lub brakujące miasto w adresie osobistym Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_state">
@@ -455,12 +455,12 @@
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowe lub zaginione miasto kanji adres osobisty
+      Błąd! Nieprawidłowe lub brakujące miasto adresu osobistego Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Błąd! Nieprawidłowy lub brakujący adres osobisty Kanji wiersz 1
+      Błąd! Nieprawidłowy lub brakujący wiersz osobistego adresu Kanji 1
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">

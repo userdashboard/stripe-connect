@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Баш тарт ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Баш тарт ${stripeAccount.id}</h1>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-control-group">
+      <label for="reason" translate="yes">Баш тарту сәбәбе</label>
+      <select id="reason" name="reason">
+        <option value="" translate="yes">
+          Сәбәпне сайлагыз
+        </option>
+        <option value="fraud" translate="yes">
+          Мошенниклык
+        </option>
+        <option value="terms_of_service" translate="yes">
+          Хезмәтне бозу шартлары
+        </option>
+        <option value="other" translate="yes">
+          Бүтәннәр
+        </option>
+      </select>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Баш тарт</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Уңыш! Stripe хисабы кире кагылды
+    </div>
+  </template>
+  <template id="balance-error">
+    <div class="error message" translate="yes">
+      Хата! Хисапны кире кагар алдыннан / bin / sh балансы булырга тиеш
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Хата! Stripe счетын чыгаруда хата килеп чыкты
+    </div>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">Тәкъдим ителмәгән</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Теркәлү кабул ителде</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Stripe белән инвалид</span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">Өстәмә мәгълүмат таләп итә</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">Өстәмә мәгълүмат таләп итә</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">Тапшыруны көтәләр</span>
+  </template>
+  <template id="rejected.fraud">
+    <span><span translate="yes">Stripe тарафыннан кире кагылды, кара</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.terms">
+    <span><span translate="yes">Stripe тарафыннан кире кагылды, кара</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.listed">
+    <span><span translate="yes">Stripe тарафыннан кире кагылды, кара</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="rejected.other">
+    <span><span translate="yes">Stripe тарафыннан кире кагылды, кара</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">Күбрәк мәгълүмат кирәк</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">Stripe тарафыннан карала</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">Stripe тарафыннан карала</span>
+  </template>
+  <template id="disabled">
+    <span><span translate="yes">Stripe белән инвалид, карагыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+  </template>
+</body>
+</html>

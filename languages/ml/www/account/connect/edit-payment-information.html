@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">എന്നതിന് പെയ് മെന്റ് വിവരങ്ങൾ ${stripeAccount.id}</title>
+  <title translate="yes">പേയ്u200cമെന്റ് വിവരങ്ങൾ ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,15 +27,15 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">എന്നതിന് പെയ് മെന്റ് വിവരങ്ങൾ ${stripeAccount.id}</h1>
-  <p translate="yes">നിങ്ങളുടെ റവന്യൂ പേഔട്ടുകൾ സ്വീകരിക്കുന്ന ബാങ്ക് അക്കൗണ്ട് അപ് ഡേറ്റ് ചെയ്യുക.</p>
+  <h1 translate="yes">പേയ്u200cമെന്റ് വിവരങ്ങൾ ${stripeAccount.id}</h1>
+  <p translate="yes">നിങ്ങളുടെ വരുമാന പേ outs ട്ടുകൾ ലഭിക്കുന്ന ബാങ്ക് അക്കൗണ്ട് അപ്u200cഡേറ്റുചെയ്യുക.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">ബാങ്ക് രാജ്യം</label>
+      <label for="country" translate="yes">ബാങ്കിന്റെ രാജ്യം</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          തെരഞ്ഞെടുക്കുക
+          തിരഞ്ഞെടുക്കുക
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
@@ -55,7 +55,7 @@
           <label for="currency" translate="yes">അക്കൗണ്ട് കറൻസി</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              തെരഞ്ഞെടുക്കുക
+              തിരഞ്ഞെടുക്കുക
             </option>
           </select>
         </div>
@@ -67,7 +67,7 @@
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">BSB സംഖ്യ</label>
+        <label for="bsb_number" translate="yes">ബിഎസ്ബി നമ്പർ</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -130,10 +130,10 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">ഇതര രീതി</h2>
+      <h2 translate="yes">ഇതര ഫോർമാറ്റ്</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">കോഡ് ക്രമീകരിക്കുക</label>
+          <label for="sort_code" translate="yes">അക്ഷരത്തെറ്റ് കോഡ്</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">കോഡ് വൃത്തിയാക്കൽ</label>
+        <label for="clearing_code" translate="yes">കോഡ് മായ്u200cക്കുന്നു</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">ശാഖാ കോഡ്</label>
+        <label for="branch_code" translate="yes">ബ്രാഞ്ച് കോഡ്</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,11 +171,11 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">ബാങ്ക് കോഡ്</label>
+        <label for="bank_code" translate="yes">ബാങ്ക് കോഡ്</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">ശാഖാ കോഡ്</label>
+        <label for="branch_code" translate="yes">ബ്രാഞ്ച് കോഡ്</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,11 +233,11 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">ബാങ്ക് കോഡ്</label>
+        <label for="bank_code" translate="yes">ബാങ്ക് കോഡ്</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">ശാഖാ കോഡ്</label>
+        <label for="branch_code" translate="yes">ബ്രാഞ്ച് കോഡ്</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">പേയ് മെന്റ് വിവരങ്ങൾ സംരക്ഷിക്കുക</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">പേയ്u200cമെന്റ് വിവരങ്ങൾ സംരക്ഷിക്കുക</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      വിജയം! പെയ് മെന്റ് വിവരങ്ങൾ അപ് ഡേറ്റ് ചെയ്തു
+      വിജയം! പേയ്u200cമെന്റ് വിവരങ്ങൾ അപ്u200cഡേറ്റുചെയ്u200cതു
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      തെറ്റ്! പെയ് മെന്റ് വിവരങ്ങൾ അപ് ഡേറ്റ് ചെയ്യുന്നതിൽ പിശക്
+      പിശക്! പേയ്u200cമെന്റ് വിവരങ്ങൾ അപ്u200cഡേറ്റുചെയ്യുന്നതിൽ ഒരു പിശക് സംഭവിച്ചു
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ നഷ്ടപ്പെട്ട ബാങ്ക്
+      പിശക്! ബാങ്കിന്റെ അസാധുവായ അല്ലെങ്കിൽ നഷ്u200cടമായ രാജ്യം
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ നഷ്ടപ്പെട്ട അക്കൗണ്ട് കറൻസി
+      പിശക്! അക്ക of ണ്ടിന്റെ അസാധുവായ അല്ലെങ്കിൽ നഷ്u200cടമായ കറൻസി
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ നഷ്ടപ്പെട്ടതോ ആയ അക്കൗണ്ട്
+      പിശക്! അക്കൗണ്ട് അസാധുവായതോ നഷ്u200cടമായതോ ആണ്
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ അക്കൗണ്ട് നമ്പർ
+      പിശക്! അക്കൗണ്ട് നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ BSB നമ്പർ
+      പിശക്! ബിu200cഎസ്u200cബി നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ നഷ്ടപ്പെട്ട ബാങ്ക് കോഡ് നമ്പർ
+      പിശക്! ബാങ്ക് കോഡ് നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ സോർട്ട് കോഡ്
+      പിശക്! അടുക്കുക കോഡ് കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ഇൻസ്റ്റിറ്റ്യൂഷൻ നമ്പർ
+      പിശക്! സ്ഥാപന നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ വിട്ടുപോയ ട്രാൻസിറ്റ് നമ്പർ
+      പിശക്! ട്രാൻസിറ്റ് നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ക്ലിയറിംഗ് കോഡ് നമ്പർ
+      പിശക്! ക്ലിയറിംഗ് കോഡ് നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ബ്രാഞ്ച് കോഡ് നമ്പർ
+      പിശക്! ബ്രാഞ്ച് കോഡ് നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ കാണുന്നില്ല
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ അക്കൗണ്ട് ഉടമയുടെ പേര്
+      പിശക്! അക്കൗണ്ട് ഉടമയുടെ പേര് അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായഅല്ലെങ്കിൽ വിട്ടുപോയ IBAN നമ്പർ
+      പിശക്! അസാധുവായ അല്ലെങ്കിൽ നഷ്u200cടമായ IBAN നമ്പർ
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      തെറ്റ്! അസാധുവായതോ വിട്ടുപോയതോ ആയ ട്രാൻസിറ്റ് നമ്പർ
+      പിശക്! ട്രാൻസിറ്റ് നമ്പർ അസാധുവാണ് അല്ലെങ്കിൽ നഷ്u200cടമായി
     </div>
   </template>
 </body>

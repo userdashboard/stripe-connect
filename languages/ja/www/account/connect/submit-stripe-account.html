@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">送信 ${stripeAccount.id}</title>
+  <title translate="yes">参加する ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">送信 ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> 完了した登録を提出して確認プロセスを行います。</p>
+  <h1 translate="yes">参加する ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> 完了した登録を送信することによる確認プロセス。</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">有益な所有者</h2>
+    <h2 translate="yes">受益者</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">会社役員</h2>
+    <h2 translate="yes">会社の取締役</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">登録を送信する</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">登録を送信</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,7 +90,7 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      登録に不完全な登録情報が含まれる
+      登録に不完全な登録情報があります
     </div>
   </template>
   <template id="invalid-company-directors">
@@ -100,17 +100,17 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      エラー！会社の有益な所有者を提出する必要があります。
+      エラー！会社の受益者を提出する必要があります
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      エラー！会社代表情報を提出する必要があります
+      エラー！会社の代表者の情報を提出する必要があります
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      エラー！登録に不完全な支払情報があります
+      エラー！登録に不完全な支払い情報があります
     </div>
   </template>
   <template id="success">

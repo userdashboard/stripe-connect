@@ -12,26 +12,26 @@
 </head>
 <body>
   <h1 translate="yes">Жіберу ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> тексеру процесі аяқталған тіркеуіңізді ұсыну арқылы.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> аяқталған тіркеуді жіберу арқылы тексеру процесі.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Бенефициарлық меншік иелері</h2>
+    <h2 translate="yes">Пайдалы иелері</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Атауы</th>
+          <th translate="yes">Аты</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Компания ның директорлары</h2>
+    <h2 translate="yes">Компанияның директорлары</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Атауы</th>
+          <th translate="yes">Аты</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Тіркеуден тапсыру</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Тіркелу</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Тіркеу туралы толық емес мәліметтердің бар-күні
+      Тіркеуде тіркеу туралы толық ақпарат жоқ
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Қате! Сіз компанияның директорларын ұсынуыңыз қажет
+      Қате! Сіз компанияның директорларын ұсынуыңыз керек
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Қате! Сіз компанияның бенефициарлық меншік иелерін ұсынуыңыз керек
+      Қате! Сіз компанияның пайдалы иелерін ұсынуыңыз керек
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Қате! Сіз компания өкілінің ақпаратын ұсынуыңыз қажет
+      Қате! Сіз компания өкілінің ақпаратын ұсынуыңыз керек
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Қате! Есепке қою кезінде төлем туралы толық емес мәліметтер бар
+      Қате! Тіркеуде төлем туралы толық ақпарат жоқ
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Табыс! Тіркеу тапсырылды _____________________________________________________________________ (тіркеу
+      Жетістік! Тіркеу жіберілді
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Қате! Тіркеуге ұсыну қатесі пайда болды
+      Қате! Тіркеуді жіберу кезінде қате пайда болды
     </div>
   </template>
 </body>

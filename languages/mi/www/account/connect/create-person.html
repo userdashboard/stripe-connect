@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Waihanga tangata hōu mō ${stripeAccount.id}</title>
+  <title translate="yes">Hangaia he tangata hou mo ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,11 +10,11 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Waihanga tangata hōu</h1>
-    <p translate="yes">Ko te poari o directors, ko te rangatira me te mangai, me noho ki ō huringa mōhiohio.</p>
+    <h1 translate="yes">Hangaia te tangata hou</h1>
+    <p translate="yes">Ko te poari whakahaere, rangatira me rangatira hei pupuri i nga wa katoa i te wa e rereke ana o korero.</p>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Pātahitanga ki te kamupene</h2>
+      <h2 translate="yes">Whanaungatanga ki te kamupene</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
         <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
@@ -22,56 +22,56 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Taitara mahi, tūnga, pātahitanga rānei</label>
+        <label for="relationship_title" translate="yes">Tohu, mahi, taitara hononga ranei</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Ōrau pupuri ātahi (mēnā he)</label>
+        <label for="relationship_percent_ownership" translate="yes">Ko te Tatauranga (ahakoa he)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Whakahōu rēhitatanga</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Whakahou rehitatanga</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Angitu! Kua whakahōungia te rēhitatanga
+      Ka angitu! Kua whakahoutia te rehitatanga
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hē! Kua puta mai tētahi hapa i te waihangatanga o te rēhitatanga
+      He hapa! Kua puta he hapa mo te hanga i te rehitatanga
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Kāore e hiahiatia ana tō pūkete Stripe whaihua mōhiohio kaipupuru
+      Kaore to pūkete Stripe e hiahiatia ana nga korero rangatira rangatira
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Kāore e hiahiatia e tō pūkete Stripe te mōhiohio kaiwhakahaere kamupene
+      Kaore to pūkete Stripe e hiahia ana i nga korero a te kaiwhakahaere a nga kamupene
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Me mamahi te māngai kamupene
+      Ko nga kamupene a te Kamupene me whakahaere
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Mangai, me tīpako te kaipupuri, te kaipupuru rānei
+      Ahakoa tetahi o nga māngai, kaiwhakahaere, rangatira ranei me whiriwhiri
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Hē! Kei te muhu, pupuritanga rānei te ōrau (0 mēnā kāore anō)
+      He hapa! Whakawhiwhia, ngaro ranei te mana ōrau (0 mena kaore)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Hē! Taitara pātahitanga muhu, kāore i te ngaro rānei
+      He hapa! Taitara honohono ngaro ranei
     </div>
   </template>
 </body>

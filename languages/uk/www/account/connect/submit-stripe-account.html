@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Представити ${stripeAccount.id}</title>
+  <title translate="yes">Надіслати ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Представити ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> процес верифікації, надіславши заповнену реєстрацію.</p>
+  <h1 translate="yes">Надіслати ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> процес підтвердження, подавши завершену реєстрацію.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Бенефіціарних власників</h2>
+    <h2 translate="yes">Вигідні власники</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Директори компаній</h2>
+    <h2 translate="yes">Директори компанії</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Реєстрація має неповні реєстраційні дані
+      Реєстрація має неповну інформацію про реєстрацію
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Помилка! Ви повинні представити директорів компанії
+      Помилка! Ви повинні подати директорів компанії
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Помилка! Ви повинні надати бенефіціарним власникам компанії
+      Помилка! Ви повинні подати вигідних власників компанії
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Помилка! Ви повинні представити інформацію представника компанії
+      Помилка! Ви повинні подати інформацію представника компанії
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Помилка! Реєстрація має неповну платіжну інформацію
+      Помилка! Реєстрація має неповну інформацію про оплату
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Успіху! Реєстрація була подана
+      Успіху! Реєстрація подана
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Помилка! Сталася помилка під час надсилання реєстрації
+      Помилка! Під час реєстрації сталася помилка
     </div>
   </template>
 </body>

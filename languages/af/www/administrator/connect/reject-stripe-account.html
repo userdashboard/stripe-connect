@@ -2,47 +2,47 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Verwerp ${stripeAccount.id}</title>
+  <title translate="yes">verwerp ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Verwerp ${stripeAccount.id}</h1>
+  <h1 translate="yes">verwerp ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">Verwerping rede</label>
+      <label for="reason" translate="yes">Verwerpings rede</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
           Kies rede
         </option>
         <option value="fraud" translate="yes">
-          Bedrog
+          bedrog
         </option>
         <option value="terms_of_service" translate="yes">
-          Terme van diensskending
+          Diensoortreding
         </option>
         <option value="other" translate="yes">
-          Ander
+          ander
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">Verwerp</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">verwerp</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Sukses! Die Stripe rekening is verwerp
+      Sukses! Die Stripe-rekening is verwerp
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      Fout! Die rekening moet 'n/BIN/sh-saldo hê voordat dit verwerp word
+      Fout! Die rekening moet 'n / bin / sh-balans hê voordat dit verwerp word
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! 'N Fout het voorgekom toe die Stripe rekening verwerp is
+      Fout! Kon nie die Stripe-rekening uitskiet nie
     </div>
   </template>
   <template id="not-submitted">
@@ -52,16 +52,16 @@
     <span translate="yes">Registrasie is aanvaar</span>
   </template>
   <template id="verified">
-    <span translate="yes">Versper deur Stripe</span>
+    <span translate="yes">Uitgeskakel deur Stripe</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Vereis bykomende inligting</span>
+    <span translate="yes">Vereis addisionele inligting</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Vereis bykomende inligting</span>
+    <span translate="yes">Vereis addisionele inligting</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Hangende indiening</span>
+    <span translate="yes">In afwagting van indiening</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Verwerp deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -76,16 +76,16 @@
     <span><span translate="yes">Verwerp deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Meer inligting word vereis</span>
+    <span translate="yes">Meer inligting is nodig</span>
   </template>
   <template id="listed">
-    <span translate="yes">Onder oorsig deur Stripe</span>
+    <span translate="yes">Ondersoek deur Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Onder oorsig deur Stripe</span>
+    <span translate="yes">Ondersoek deur Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Versper deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Uitgeskakel deur Stripe, sien</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

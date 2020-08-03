@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">தனியொரு மனிதர் ${person.id}</title>
+  <title translate="yes">நபர் ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">தனியொரு மனிதர் ${person.id}</h1>
-  <p translate="yes">காண்பிக்கப்படாத கூடுதல் தகவல்கள் சமர்ப்பிக்கப்பட்டிருக்கலாம்.</p>
+  <h1 translate="yes">நபர் ${person.id}</h1>
+  <p translate="yes">காட்டப்படாத கூடுதல் தகவல்கள் சமர்ப்பிக்கப்பட்டிருக்கலாம்.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,7 +18,7 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">செயல்</th>
+        <th translate="yes">பங்கு</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
@@ -32,7 +32,7 @@
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">தேவையான தகவல்கள்</th>
+        <th translate="yes">தேவையான தகவல்</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

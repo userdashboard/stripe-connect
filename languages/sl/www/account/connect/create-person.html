@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Ustvarite novo osebo za ${stripeAccount.id}</title>
+  <title translate="yes">Ustvari novo osebo za ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Ustvarjanje nove osebe</h1>
-    <p translate="yes">Upravni odbor, lastniki in zastopniki morajo biti posodobljeni, ko se podatki spreminjajo.</p>
+    <h1 translate="yes">Ustvari novo osebo</h1>
+    <p translate="yes">Upravni odbor, lastniki in zastopniki morajo biti posodobljeni, ko se spreminjajo vaše informacije.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Odnos do podjetja</h2>
@@ -22,56 +22,56 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Job, vloga ali odnos naslov</label>
+        <label for="relationship_title" translate="yes">Zaposlitev, vloga ali naslov odnosa</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Odstotek v lasti (če sploh)</label>
+        <label for="relationship_percent_ownership" translate="yes">Odstotek v lasti (če obstaja)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Posodobitev registracije</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Posodobite registracijo</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspeh! Registracija je bila posodobljena
+      Uspeh! Registracija je posodobljena
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Napaka! Prišlo je do napake pri ustvarjanju registracije
+      Napaka! Pri ustvarjanju registracije je prišlo do napake
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Vaš račun Stripe ne zahteva informacij o dejanskem lastniku
+      Vaš račun Stripe ne potrebuje koristnih podatkov o lastniku
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Vaš račun Stripe ne zahteva informacij direktorja podjetja
+      Vaš račun Stripe ne potrebuje podatkov direktorja podjetja
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Predstavniki podjetij morajo biti vodilni
+      Predstavniki podjetja morajo biti vodstveni delavci
     </div>
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Vsak zastopnik, direktor ali lastnik mora biti izbran
+      Izbrati je treba predstavnika, direktorja ali lastnika
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Napaka! Neveljavno ali manjkajoče odstotke lastništva (0, če ni)
+      Napaka! Neveljavno ali manjkajoče odstotno lastništvo (0, če ga ni)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Napaka! Neveljaven ali manjkajoč naslov relacije
+      Napaka! Neveljaven ali manjkajoč naslov zveze
     </div>
   </template>
 </body>

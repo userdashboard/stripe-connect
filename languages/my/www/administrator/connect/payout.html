@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ကြည့်ရှုပါ ${payout.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ကြည့်ရှုပါ ${payout.id}</h1>
+  <div id="message-container"></div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <tbody id="${payout.id}">
+      <tr>
+        <th>ID</th>
+        <td>${payout.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">ပမာဏ</th>
+        <td>${payout.amountFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Stripe အကောင့်</th>
+        <td>
+          <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+        </td>
+      </tr>
+      <tr>
+        <th translate="yes">အခြေအနေ</th>
+        <td id="status-${payout.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">ဖော်ပြချက်</th>
+        <td>${payout.description}</td>
+      </tr>
+      <tr>
+        <th translate="yes">နေပြည်တော်</th>
+        <td>${payout.createdFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">ဘဏ်အကောင့်မရှိပါ</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">မမှန်ကန်သောငွေကြေး</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">မမှန်ကန်သောအကောင့်နံပါတ်</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">ငွေကြေးမလုံလောက်</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">ဘဏ်မှလွှဲပြောင်းခြင်းကိုငြင်းဆိုခဲ့သည်</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">ဘဏ်အကောင့် debit မရှိပါ</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">မပြုလုပ်နိုင်ပါ</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">ဘဏ်ပိုင်ဆိုင်မှုပြောင်းလဲသွားသည်</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">ဘဏ်အကောင့်ကန့်သတ်ထားသည်</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">ဘဏ်အကောင့်အေးခဲနေပြီ</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">ဘဏ်အကောင့်ပိတ်လိုက်တယ်</span>
+  </template>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Chotsani ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Chotsani ${stripeAccount.id}</h1>
+  <p translate="yes">Akaunti ya Stripe idzachotsedwa nthawi yomweyo ndipo singathe kupezanso.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Chotsani</button>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Kupambana! Akaunti ya Stripe yachotsedwa
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Zolakwika! Panali vuto pothetsa akaunti ya Stripe
+    </div>
+  </template>
+</body>
+</html>

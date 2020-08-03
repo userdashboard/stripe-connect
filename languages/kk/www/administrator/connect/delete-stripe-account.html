@@ -2,20 +2,20 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Өшіру ${stripeAccount.id}</title>
+  <title translate="yes">Жою ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Өшіру ${stripeAccount.id}</h1>
+  <h1 translate="yes">Жою ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Атауы</th>
+        <th translate="yes">Аты</th>
         <th translate="yes">Күй</th>
       </tr>
     </thead>
@@ -31,59 +31,59 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Өшіру</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Жою</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Табыс! Stripe тіркелгі жойылды
+      Жетістік! Stripe есептік жазбасы жойылды
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Қате! Stripe тіркелгісін жою қатесі
+      Қате! Stripe есептік жазбасын жою кезінде қате орын алды
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Әлі ұсынылмаған</span>
+    <span translate="yes">Әзірге жіберілмеген</span>
   </template>
   <template id="verified">
-    <span translate="yes">Тіркеу 20__ ж. «___» ____________ қабылданды</span>
+    <span translate="yes">Тіркелу қабылданды</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe бойынша мүгедек</span>
+    <span translate="yes">Stripe өшірілген</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Қосымша ақпаратты талап етеді</span>
+    <span translate="yes">Қосымша ақпаратты қажет етеді</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Ұсынуды күтуде</span>
+    <span translate="yes">Жіберу күтілуде</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Ұсынуды күтуде</span>
+    <span translate="yes">Жіберу күтілуде</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Қосымша ақпарат қажет</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe қарап жатыр</span>
+    <span translate="yes">Stripe қарастыруда</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe қарап жатыр</span>
+    <span translate="yes">Stripe қарастыруда</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe бойынша ажыратылған, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe өшірілген, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
     <span translate="yes">Жойылған</span>

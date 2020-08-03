@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Osoba ${person.id}</h1>
-  <p translate="yes">Dodatne informacije su možda podnesene koji nisu prikazani.</p>
+  <p translate="yes">Možda su poslane dodatne informacije koje nisu prikazane.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,13 +18,13 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Ulogu</th>
+        <th translate="yes">Uloga</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Odnos</th>
+        <th translate="yes">Veza</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
@@ -32,7 +32,7 @@
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Potrebne informacije</th>
+        <th translate="yes">Tražene informacije</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

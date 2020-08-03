@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">இத்்்்்் ${stripeAccount.id}</title>
+  <title translate="yes">நபர்கள் ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -12,42 +12,42 @@
   <h1 translate="yes">நபர்கள்</h1>
   <div id="representative-container">
     <h2 translate="yes">நிறுவனத்தின் பிரதிநிதி</h2>
-    <p translate="yes">நியமிக்கப்பட்ட நபரின் நிலை மாறினால், நீங்கள் ஒரு புதிய பிரதிநிதியை உருவாக்க வேண்டும்.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">புதிய பிரதிநிதியை உருவாக்கு</a></p>
+    <p translate="yes">பரிந்துரைக்கப்பட்ட நபரின் நிலை மாறினால் நீங்கள் ஒரு புதிய பிரதிநிதியை உருவாக்க வேண்டும்.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">புதிய பிரதிநிதியை உருவாக்கவும்</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">தேவைப்படுகிறது</th>
+          <th translate="yes">தேவை</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
     <h2 translate="yes">நன்மை பயக்கும் உரிமையாளர்கள்</h2>
-    <p translate="yes">நிறுவனத்தின் கணிசமான (25+) சதவீதத்தை சொந்தமாக வைத்திருக்கும் எவருக்கும் அல்லது நிறுவனத்தின், அதன் நிதி அல்லது செயல்பாடுகளுக்கு பொறுப்பான எவருக்கும் நீங்கள் ஆவணங்களை வழங்க வேண்டும்.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">உரிமையாளரைச் சேர்</a></p>
+    <p translate="yes">நிறுவனத்தின் கணிசமான (25+) சதவீதத்தை வைத்திருக்கும் அல்லது நிறுவனத்தின் பொறுப்பான வேறு எவருக்கும் நீங்கள் ஆவணங்களை வழங்க வேண்டும், அதன் நிதி அல்லது செயல்பாடுகள்.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">உரிமையாளரைச் சேர்க்கவும்</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">தேவைப்படுகிறது</th>
+          <th translate="yes">தேவை</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
     <h2 translate="yes">நிறுவன இயக்குநர்கள்</h2>
-    <p translate="yes">இயக்குநர் குழுவிற்கான ஆவணங்களை நீங்கள் வழங்க வேண்டும்.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">உரிமையாளரைச் சேர்</a></p>
+    <p translate="yes">இயக்குநர்கள் குழுவிற்கான ஆவணங்களை நீங்கள் வழங்க வேண்டும்.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">உரிமையாளரைச் சேர்க்கவும்</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">தேவைப்படுகிறது</th>
+          <th translate="yes">தேவை</th>
         </tr>
       </thead>
     </table>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">தகவலைச் சேர்</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">தகவலைச் சேர்க்கவும்</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

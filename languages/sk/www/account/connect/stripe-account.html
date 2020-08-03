@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Zobraziť ${stripeAccount.id}</title>
+  <title translate="yes">vyhliadka ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Zobraziť ${stripeAccount.id}</h1>
+  <h1 translate="yes">vyhliadka ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,28 +17,28 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Typ</th>
+        <th translate="yes">typ</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">meno</th>
+        <th translate="yes">názov</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Krajiny</th>
+        <th translate="yes">Krajina</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Stav</th>
+        <th translate="yes">Postavenie</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Predložené</th>
+        <th translate="yes">predložené</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Zatiaľ neboli odoslané</td>
       </tr>
     </tbody>
   </table>
@@ -52,12 +52,12 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Zástupca spoločnosti</h2>
-    <p translate="yes">Aby sa zabránilo narušeniu účtu, odošlite nové reprezentatívne informácie, ak daná osoba opustí alebo už nezastupuje spoločnosť.</p>
+    <p translate="yes">Aby sa predišlo narušeniu účtu, poskytnite nové reprezentatívne informácie, ak určená osoba odchádza alebo už viac nezastupuje spoločnosť.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">meno</th>
+          <th translate="yes">názov</th>
           <th translate="yes">Požadované informácie</th>
         </tr>
       </thead>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Informácie o iných konečných užívateľoch výhod</h2>
-    <p translate="yes">Musíte poskytnúť dokumentáciu pre každého, kto vlastní podstatné (25 +) percent spoločnosti alebo na starosti spoločnosti, financií alebo operácií.</p>
+    <h2 translate="yes">Informácie o ďalších skutočných majiteľoch</h2>
+    <p translate="yes">Musíte poskytnúť dokumentáciu každému, kto vlastní podstatné (25+) percento spoločnosti alebo je zodpovedný za spoločnosť, financie alebo operácie.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">meno</th>
-          <th translate="yes">Vyžaduje</th>
+          <th translate="yes">názov</th>
+          <th translate="yes">vyžaduje</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informácie riaditeľov spoločnosti</h2>
-    <p translate="yes">Musíte uviesť úplné mená správnej rady vašej spoločnosti a/alebo osôb zodpovedných za udržiavanie súladu s predpismi.</p>
+    <h2 translate="yes">Informácie o riaditeľoch spoločnosti</h2>
+    <p translate="yes">Musíte uviesť celé mená správnej rady vašej spoločnosti a / alebo osôb zodpovedných za dodržiavanie regulačných predpisov.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">meno</th>
-          <th translate="yes">Vyžaduje</th>
+          <th translate="yes">názov</th>
+          <th translate="yes">vyžaduje</th>
         </tr>
       </thead>
     </table>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Odoslať registráciu</h2>
+    <h2 translate="yes">Odošlite registráciu</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,16 +120,16 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Pridať informácie</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Pridajte informácie</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Finančné prostriedky sa vyplácajú na účet ${bank_account.bank_name}.</p>
+    <p translate="yes">Prostriedky sa platia na účet ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Na prijímanie finančných prostriedkov sa musia poskytnúť bankové údaje.</p>
+    <p translate="yes">Na získanie finančných prostriedkov sa musia uviesť bankové údaje.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">Registrácia nebola predložená.</p>
@@ -141,10 +141,10 @@
     <p translate="yes">Registračné informácie neboli poskytnuté.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Registračné informácie boli poskytnuté.</p>
+    <p translate="yes">Informácie o registrácii boli poskytnuté.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Zatiaľ nepredložené</span>
+    <span translate="yes">Zatiaľ neboli odoslané</span>
   </template>
   <template id="verified">
     <span translate="yes">Registrácia bola prijatá</span>
@@ -153,31 +153,31 @@
     <span translate="yes">Vyžaduje ďalšie informácie</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čakajúce na predloženie</span>
+    <span translate="yes">Čaká sa na odoslanie</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Predmetom preskúmania Stripe</span>
+    <span translate="yes">Prebieha kontrola od Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Predmetom preskúmania Stripe</span>
+    <span translate="yes">Prebieha kontrola od Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Odmietnuté Stripe, pozrite si</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odmietnuté používateľom Stripe, pozri</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Vyžaduje ďalšie informácie</span>

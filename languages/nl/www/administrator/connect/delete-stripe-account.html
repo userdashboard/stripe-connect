@@ -16,7 +16,7 @@
       <tr>
         <th>ID</th>
         <th translate="yes">Naam</th>
-        <th translate="yes">Status</th>
+        <th translate="yes">Toestand</th>
       </tr>
     </thead>
     <tr id="${stripeAccount.id}">
@@ -35,16 +35,16 @@
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Succes! Het Stripe account is verwijderd
+      Succes! Het Stripe-account is verwijderd
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! Er is een fout opgetreden bij het verwijderen van het Stripe account
+      Fout! Er is een fout opgetreden bij het verwijderen van het Stripe-account
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nog niet ingediend</span>
+    <span translate="yes">nog niet ingediend</span>
   </template>
   <template id="verified">
     <span translate="yes">Registratie is geaccepteerd</span>
@@ -56,10 +56,10 @@
     <span translate="yes">Vereist aanvullende informatie</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">In behandeling zijnde indiening</span>
+    <span translate="yes">In afwachting van indiening</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">In behandeling zijnde indiening</span>
+    <span translate="yes">In afwachting van indiening</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Afgewezen door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -77,10 +77,10 @@
     <span translate="yes">Meer informatie is vereist</span>
   </template>
   <template id="listed">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">In door Stripe</span>
+    <span translate="yes">Wordt beoordeeld door Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Uitgeschakeld door Stripe, zie</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

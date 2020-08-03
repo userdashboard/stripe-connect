@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">ikusi ${payout.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">ikusi ${payout.id}</h1>
+  <div id="message-container"></div>
+  <table id="payouts-table" class="pure-table pure-table-striped list-table">
+    <tbody id="${payout.id}">
+      <tr>
+        <th>ID</th>
+        <td>${payout.id}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Zenbateko</th>
+        <td>${payout.amountFormatted}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Stripe kontua</th>
+        <td>
+          <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
+        </td>
+      </tr>
+      <tr>
+        <th translate="yes">Egoera</th>
+        <td id="status-${payout.id}"></td>
+      </tr>
+      <tr>
+        <th translate="yes">deskribapena</th>
+        <td>${payout.description}</td>
+      </tr>
+      <tr>
+        <th translate="yes">Sortu</th>
+        <td>${payout.createdFormatted}</td>
+      </tr>
+    </tbody>
+  </table>
+  <template id="unsupported_card">
+    <span>Card unsupported by bank.</span>
+  </template>
+  <template id="no_account">
+    <span translate="yes">Ez da banku kontua aurkitu</span>
+  </template>
+  <template id="invalid_currency">
+    <span translate="yes">Moneta baliogabea</span>
+  </template>
+  <template id="incorrect_account_holder_name">
+    <span>Incorrect account holder name.</span>
+  </template>
+  <template id="invalid_account_number">
+    <span translate="yes">Kontu kopurua baliogabea</span>
+  </template>
+  <template id="insufficient_funds">
+    <span translate="yes">Ez dira funts nahikoak</span>
+  </template>
+  <template id="declined">
+    <span translate="yes">Bankuak uko egin dio transferentziari</span>
+  </template>
+  <template id="debit_not_authorized">
+    <span translate="yes">Banku kontuaren zordunik ez</span>
+  </template>
+  <template id="could_not_process">
+    <span translate="yes">Ezin izan da prozesatu</span>
+  </template>
+  <template id="bank_ownership_changed">
+    <span translate="yes">Bankuaren jabetza aldatu da</span>
+  </template>
+  <template id="bank_account_restricted">
+    <span translate="yes">Banku kontua mugatuta dago</span>
+  </template>
+  <template id="account_frozen">
+    <span translate="yes">Banku kontua izoztuta dago</span>
+  </template>
+  <template id="account_closed">
+    <span translate="yes">Banku kontua itxita</span>
+  </template>
+</body>
+</html>

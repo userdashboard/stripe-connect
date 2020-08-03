@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1 translate="yes">Lähetä ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> vahvistusprosessin aikana lähettämällä täytetyn rekisteröinnin.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> vahvistusprosessi lähettämällä täytetty rekisteröinti.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Tosiasialliset omistajat ja edunsaajat</h2>
+    <h2 translate="yes">Edunsaajat</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Yhtiön johtajat</h2>
+    <h2 translate="yes">Yrityksen johtajat</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -90,27 +90,27 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Rekisteröinnillä on puutteelliset rekisteröintitiedot
+      Rekisteröinnissä on puutteellisia rekisteröintitietoja
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Virhe! Sinun on toimitettava yhtiön johtajat
+      Virhe! Sinun on lähetettävä yrityksen johtajat
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Virhe! Sinun on toimitettava yrityksen tosiasialliset edunsaajat
+      Virhe! Sinun on lähetettävä yrityksen tosiasialliset omistajat
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Virhe! Yrityksen edustajan on toimitettava tiedot
+      Virhe! Sinun on toimitettava yrityksen edustajan tiedot
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Virhe! Rekisteröinnissä on puutteelliset maksutiedot
+      Virhe! Rekisteröinnissä on puutteellisia maksutietoja
     </div>
   </template>
   <template id="success">
@@ -120,7 +120,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Virhe! Virhe lähetettäessä rekisteröintiä
+      Virhe! Rekisteröinnin lähettämisessä tapahtui virhe
     </div>
   </template>
 </body>

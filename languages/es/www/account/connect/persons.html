@@ -11,7 +11,7 @@
 <body>
   <h1 translate="yes">Personas</h1>
   <div id="representative-container">
-    <h2 translate="yes">Representante de la empresa</h2>
+    <h2 translate="yes">Representante de la compañía</h2>
     <p translate="yes">Si el estado de la persona nominada cambia, debe crear un nuevo representante.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Crear nuevo representante</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
@@ -25,9 +25,9 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Propietarios beneficiosos</h2>
-    <p translate="yes">Debe proporcionar documentación para cualquier otra persona que posea un porcentaje sustancial (25+) de la empresa o a cargo de la empresa, sus finanzas u operaciones.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Añadir propietario</a></p>
+    <h2 translate="yes">Propietarios beneficiarios</h2>
+    <p translate="yes">Debe proporcionar documentación para cualquier persona que posea un porcentaje sustancial (más del 25) de la compañía o que esté a cargo de la compañía, sus finanzas u operaciones.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Agregar propietario</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -39,9 +39,9 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Directores de empresa</h2>
-    <p translate="yes">Debe proporcionar documentación para el consejo de administración.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Añadir propietario</a></p>
+    <h2 translate="yes">Directores de la empresa</h2>
+    <p translate="yes">Debe proporcionar documentación para la junta directiva.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Agregar propietario</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>

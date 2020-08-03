@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Auina atu anaina mo ${stripeAccount.id}</title>
+  <title translate="yes">Auina tagata e ona ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Auina atu anaina mo ${stripeAccount.id}</h1>
-  <p translate="yes">Afai ua uma ona e faaopoopoina uma isi au, pe afai e i ai, auina mai i latou mo le toe iloiloina.</p>
+  <h1 translate="yes">Auina tagata e ona ${stripeAccount.id}</h1>
+  <p translate="yes">A maeʻa ona faʻaopopo uma isi au, pe afai e i ai, lafo i latou mo se iloiloga.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">E faamanuiaina</h2>
+    <h2 translate="yes">Aogā e ana</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Igoa</th>
-          <th translate="yes">E manaomia ai</th>
+          <th translate="yes">Manaomia</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Auina atu</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Faauuina pule</button>
     </div>
   </form>
   <template id="person-row">
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Faaopoopo ia faamatalaga</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Faaopopo faamatalaga</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Mea sese! O loo i ai pea faamatalaga o loo manaomia.
+      Sese! E i ai tagata e manaʻomia pea faʻamatalaga.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Manuia! Ua uma ona auina atu le kamupani e anaina
+      Manuia! Ua maeʻa faʻamauina le au fai pisinisi
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Mea sese! Na i ai se mea sese i le auina atu o e anaina
+      Sese! Na iai se faʻaletonu na tupu i le lafoina o tagata e ona
     </div>
   </template>
 </body>

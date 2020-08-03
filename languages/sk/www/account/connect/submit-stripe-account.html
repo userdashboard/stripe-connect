@@ -12,15 +12,15 @@
 </head>
 <body>
   <h1 translate="yes">Predložiť ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> overovací proces odoslaním vašej dokončenej registrácie.</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proces overenia odoslaním dokončenej registrácie.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Koneční vlastníci</h2>
+    <h2 translate="yes">Priazniví vlastníci</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">meno</th>
+          <th translate="yes">názov</th>
         </tr>
       </thead>
     </table>
@@ -31,7 +31,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">meno</th>
+          <th translate="yes">názov</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Odoslať registráciu</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Odošlite registráciu</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,7 +90,7 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Registrácia má neúplné registračné informácie
+      Registrácia obsahuje neúplné registračné informácie
     </div>
   </template>
   <template id="invalid-company-directors">
@@ -100,7 +100,7 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Chyba! Musíte predložiť spoločnosti konečných užívateľov výhod
+      Chyba! Musíte odoslať skutočných vlastníkov spoločnosti
     </div>
   </template>
   <template id="invalid-company-representative">
@@ -110,7 +110,7 @@
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Chyba! Registrácia má neúplné platobné údaje
+      Chyba! Registrácia obsahuje neúplné informácie o platbe
     </div>
   </template>
   <template id="success">

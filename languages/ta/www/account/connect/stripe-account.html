@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">நோக்கு ${stripeAccount.id}</title>
+  <title translate="yes">காண்க ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">நோக்கு ${stripeAccount.id}</h1>
+  <h1 translate="yes">காண்க ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,7 +17,7 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">மாதிப் படிவம்</th>
+        <th translate="yes">வகை</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">சமுதாயப் படிநிலை</th>
+        <th translate="yes">நிலை</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
         <th translate="yes">சமர்ப்பிக்கப்பட்டது</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">இன்னும் சமர்ப்பிக்கப்படவில்லை</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">பதிவு த் தகவல்</h2>
+    <h2 translate="yes">பதிவு தகவல்</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">நிறுவனத்தின் பிரதிநிதி</h2>
-    <p translate="yes">கணக்கு இடையூறு களைத் தவிர்க்க குறிப்பிட்ட நபர் நிறுவனத்தை விட்டு வெளியேறினால் அல்லது இனி நிறுவனம் பிரதிநிதித்துவப்படுத்தவில்லை என்றால் புதிய பிரதிநிதி தகவலைசமர்ப்பிக்கவும்.</p>
+    <p translate="yes">கணக்கு சீர்குலைவைத் தவிர்க்க, குறிப்பிட்ட நபர் வெளியேறினால் அல்லது நிறுவனத்தை பிரதிநிதித்துவப்படுத்தாவிட்டால் புதிய பிரதிநிதி தகவல்களை சமர்ப்பிக்கவும்.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">தேவையான தகவல்கள்</th>
+          <th translate="yes">தேவையான தகவல்</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">பிற நன்மை பயக்கும் உரிமையாளர்களின் தகவல்கள்</h2>
-    <p translate="yes">நிறுவனத்தின் கணிசமான (25+) சதவீதத்தை வைத்திருக்கும் எவருக்கும் அல்லது நிறுவனத்தின் நிதி அல்லது செயல்பாடுகளுக்கு பொறுப்பான எவருக்கும் நீங்கள் ஆவணங்களை வழங்க வேண்டும்.</p>
+    <h2 translate="yes">பிற நன்மை பயக்கும் உரிமையாளர்களின் தகவல்</h2>
+    <p translate="yes">நிறுவனத்தின் கணிசமான (25+) சதவீதத்தை வைத்திருக்கும் அல்லது நிறுவனத்தின், நிதி அல்லது செயல்பாடுகளுக்கு பொறுப்பான வேறு எவருக்கும் நீங்கள் ஆவணங்களை வழங்க வேண்டும்.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">தேவைப்படுகிறது</th>
+          <th translate="yes">தேவை</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">நிறுவனத்தின் இயக்குனர்களின் தகவல்</h2>
-    <p translate="yes">ஒழுங்குமுறை இணக்கத்தை பராமரிப்பதற்கு உங்கள் நிறுவனத்தின் நிர்வாகக் குழு மற்றும்/அல்லது பொறுப்பான நபர்களின் முழுப் பெயர்களையும் நீங்கள் வழங்க வேண்டும்.</p>
+    <h2 translate="yes">நிறுவன இயக்குநர்கள் தகவல்</h2>
+    <p translate="yes">உங்கள் நிறுவனத்தின் நிர்வாகக் குழு மற்றும் / அல்லது ஒழுங்குமுறை இணக்கத்தை பராமரிப்பதற்கு பொறுப்பான நபர்களின் முழு பெயர்களை நீங்கள் வழங்க வேண்டும்.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">பெயர்</th>
-          <th translate="yes">தேவைப்படுகிறது</th>
+          <th translate="yes">தேவை</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">பணம் செலுத்தும் தகவல்</h2>
+    <h2 translate="yes">கொடுப்பனவு தகவல்</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -120,16 +120,16 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">தகவலைச் சேர்</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">தகவலைச் சேர்க்கவும்</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">கணக்கில் பணம் செலுத்தப்படுகிறது ${bank_account.bank_name}.</p>
+    <p translate="yes">கணக்கில் நிதி செலுத்தப்படுகிறது ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">வங்கி த் தகவல்கள் நிதி பெற வழங்கப்பட வேண்டும்.</p>
+    <p translate="yes">நிதி பெற வங்கி விவரங்கள் வழங்கப்பட வேண்டும்.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">பதிவு சமர்ப்பிக்கப்படவில்லை.</p>
@@ -138,49 +138,49 @@
     <p translate="yes">பதிவு சமர்ப்பிக்கப்பட்டது ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">பதிவு த் தகவல் வழங்கப்படவில்லை.</p>
+    <p translate="yes">பதிவு தகவல் வழங்கப்படவில்லை.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">பதிவு த் தகவல் அளிக்கப்பட்டுள்ளது.</p>
+    <p translate="yes">பதிவு தகவல் வழங்கப்பட்டுள்ளது.</p>
   </template>
   <template id="not-submitted">
     <span translate="yes">இன்னும் சமர்ப்பிக்கப்படவில்லை</span>
   </template>
   <template id="verified">
-    <span translate="yes">பதிவு ஏற்றுக்கொள்ளப்பட்டது</span>
+    <span translate="yes">பதிவு ஏற்றுக்கொள்ளப்பட்டுள்ளது</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
+    <span translate="yes">கூடுதல் தகவல் தேவை</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">சமர்ப்பிப்பு நிலுவையில் உள்ளது</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe மதிப்பாய்வு கீழ்</span>
+    <span translate="yes">Stripe ஆல் மதிப்பாய்வு செய்யப்படுகிறது</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe மதிப்பாய்வு கீழ்</span>
+    <span translate="yes">Stripe ஆல் மதிப்பாய்வு செய்யப்படுகிறது</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe நிராகரிக்கப்பட்டது, பார்க்க</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe ஆல் நிராகரிக்கப்பட்டது, பார்க்கவும்</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">கூடுதல் தகவல் தேவைப்படுகிறது</span>
+    <span translate="yes">கூடுதல் தகவல் தேவை</span>
   </template>
 </body>
 </html>

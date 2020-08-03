@@ -14,17 +14,17 @@
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">खाता प्रकार</label>
+      <label for="individual" translate="yes">खाते का प्रकार</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">निवास/निगमन का देश</label>
+      <label for="country" translate="yes">निवास / निगमन का देश</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          देश का चयन करें
+          देश चुनिए
         </option>
       </select>
     </div>
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! पंजीकरण बनाने में हुई त्रुटि
+      त्रुटि! पंजीकरण बनाते समय एक त्रुटि हुई
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      त्रुटि! अमान्य या लापता देश
+      त्रुटि! अमान्य या छूटा हुआ देश
     </div>
   </template>
 </body>

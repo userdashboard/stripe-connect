@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">நோக்கு ${payout.id}</title>
+  <title translate="yes">காண்க ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">நோக்கு ${payout.id}</h1>
+  <h1 translate="yes">காண்க ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -18,7 +18,7 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">மொத்தம்</th>
+        <th translate="yes">தொகை</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
@@ -28,15 +28,15 @@
         </td>
       </tr>
       <tr>
-        <th translate="yes">சமுதாயப் படிநிலை</th>
+        <th translate="yes">நிலை</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">விரித்துரைத்தல்</th>
+        <th translate="yes">விளக்கம்</th>
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">உருவாக்க</th>
+        <th translate="yes">உருவாக்கப்பட்டது</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,37 +45,37 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">வங்கி கணக்கு எதுவும் இல்லை</span>
+    <span translate="yes">வங்கி கணக்கு எதுவும் கிடைக்கவில்லை</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">செல்லாத நாணயம்</span>
+    <span translate="yes">தவறான நாணயம்</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">செல்லுபடியாகாத கணக்கு எண்</span>
+    <span translate="yes">தவறான கணக்கு எண்</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">போதுமான நிதி இல்லை</span>
+    <span translate="yes">போதுமான பணம் இல்லை</span>
   </template>
   <template id="declined">
-    <span translate="yes">வங்கி மாற்றமறுப்பு</span>
+    <span translate="yes">வங்கி பரிமாற்றத்தை மறுத்துவிட்டது</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">வங்கிக் கணக்கு பற்று இல்லை</span>
+    <span translate="yes">வங்கி கணக்கு பற்று இல்லை</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">செயலாக்க முடியவில்லை</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">வங்கி உரிமை மாற்றம்</span>
+    <span translate="yes">வங்கி உரிமை மாற்றப்பட்டது</span>
   </template>
   <template id="bank_account_restricted">
-    <span translate="yes">வங்கி கணக்கு தடை</span>
+    <span translate="yes">வங்கி கணக்கு தடைசெய்யப்பட்டுள்ளது</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">வங்கி கணக்கு முடக்கம்</span>
+    <span translate="yes">வங்கி கணக்கு முடக்கப்பட்டது</span>
   </template>
   <template id="account_closed">
     <span translate="yes">வங்கி கணக்கு மூடப்பட்டது</span>

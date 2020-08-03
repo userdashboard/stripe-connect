@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Lumikha ng pagpaparehistro</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Lumikha ng pagpaparehistro</h1>
+  <p translate="yes">Ang isang nakumpletong rehistrasyon ay nagbibigay-daan sa iyo upang makatanggap ng mga payout sa kita sa pamamagitan ng Stripe Connect.</p>
+  <div id="message-container"></div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
+    <div class="pure-control-group">
+      <label for="individual" translate="yes">Uri ng account</label>
+      <div class="pure-checkbox">
+        <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
+        <label><input id="company" type="radio" name="type" value="company"> Company</label>
+      </div>
+    </div>
+    <div class="pure-control-group">
+      <label for="country" translate="yes">Bansa ng paninirahan / pagsasama</label>
+      <select name="country" id="country">
+        <option value="" translate="yes">
+          Piliin ang bansa
+        </option>
+      </select>
+    </div>
+    <div class="pure-controls">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Simulan ang pagpaparehistro</button>
+    </div>
+  </form>
+  <template id="country-option">
+    <option value="${country_spec.id}">
+      ${country_spec.name}
+    </option>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Error! May naganap na error sa paglikha ng pagpaparehistro
+    </div>
+  </template>
+  <template id="invalid-country">
+    <div class="error message" translate="yes">
+      Error! Di-wasto o nawawalang bansa
+    </div>
+  </template>
+</body>
+</html>

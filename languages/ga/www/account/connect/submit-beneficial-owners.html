@@ -12,7 +12,7 @@
 </head>
 <body>
   <h1 translate="yes">Cuir úinéirí isteach le haghaidh ${stripeAccount.id}</h1>
-  <p translate="yes">Nuair a bheidh tú críochnaithe ag cur gach úinéir eile, más ann, iad a chur isteach le haghaidh athbhreithnithe.</p>
+  <p translate="yes">Nuair a bheidh tú críochnaithe leis na húinéirí eile go léir a chur leis, más ann dóibh, cuir isteach iad le haghaidh athbhreithnithe.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Úinéirí tairbhiúla</h2>
@@ -20,7 +20,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Ainm@ item: inlist</th>
+          <th translate="yes">Ainm</th>
           <th translate="yes">Éilíonn</th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Cuir úinéirí isteach</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Cuir isteach úinéirí</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,7 +45,7 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Earráid! Tá úinéirí fós ag teastáil faisnéis.
+      Earráid! Tá úinéirí fós ag teastáil faisnéise.
     </div>
   </template>
   <template id="success">
@@ -55,7 +55,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Earráid! Tharla earráid a chuir na húinéirí isteach
+      Earráid! Tharla earráid ag cur na n-úinéirí isteach
     </div>
   </template>
 </body>

@@ -10,18 +10,18 @@
 </head>
 <body>
   <h1 translate="yes">Skep registrasie</h1>
-  <p translate="yes">'N voltooide registrasie laat jou toe om inkomsteuitbetalings deur middel van Stripe Connect te ontvang.</p>
+  <p translate="yes">Met 'n voltooide registrasie kan u inkomste uitbetaal via Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Rekeningtipe</label>
+      <label for="individual" translate="yes">Soort Rekening</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Land van verblyf/inlywing</label>
+      <label for="country" translate="yes">Land van woon / inlywing</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Kies land
@@ -39,7 +39,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! 'N Fout het voorgekom met die skep van die registrasie
+      Fout! Kon nie die registrasie skep nie
     </div>
   </template>
   <template id="invalid-country">

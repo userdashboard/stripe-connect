@@ -9,45 +9,45 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Whakapai kanohi</h1>
+  <h1 translate="yes">Tangata</h1>
   <div id="representative-container">
-    <h2 translate="yes">Mangai kamupene</h2>
-    <p translate="yes">Ki te whakaingoatia te tūnga o te tangata, me waihanga he mangai hōu.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Waihanga mangai hōu</a></p>
+    <h2 translate="yes">Te māngai Kamupene</h2>
+    <p translate="yes">Mena ka rereke te ahua o te tangata kua tohua me hanga he kanohi hou.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Hangaia he māngai hou</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ingoa</th>
-          <th translate="yes">Me whai</th>
+          <th translate="yes">Kei te hiahia</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Whaihua rangatira</h2>
-    <p translate="yes">Me tuku koe i ngā tuhinga mō te tangata e owning ana i tētahi painga (ka taea te%) ōrau o te kamupene, te utu rānei o te kamupene, te mahi pūtea, te mahinga rānei.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Tāpiri kaipupuru</a></p>
+    <h2 translate="yes">Rangatira painga</h2>
+    <p translate="yes">Me whakarato tuhinga koe mo tetahi atu e whiwhi ana i te nui (25+) ōrau o te kamupene, kei a ia ano te whakahaere a te kamupene, ona putea me te whakahaere.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Tapiri rangatira</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ingoa</th>
-          <th translate="yes">Me whai</th>
+          <th translate="yes">Kei te hiahia</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Directors kamupene</h2>
-    <p translate="yes">Me homai e koe he tuhinga mo te poari directors.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Tāpiri kaipupuru</a></p>
+    <h2 translate="yes">Kaiwhakahaere Kamupene</h2>
+    <p translate="yes">Me whakarato tuhinga koe mo te poari whakahaere.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Tapiri rangatira</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Ingoa</th>
-          <th translate="yes">Me whai</th>
+          <th translate="yes">Kei te hiahia</th>
         </tr>
       </thead>
     </table>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Tāpiri mōhiohio</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Whakanohia nga korero</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

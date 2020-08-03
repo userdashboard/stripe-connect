@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">: tlntu ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <base target="_top" href="/">
+  <script id="stripe-js-v2"></script>
+  <script id="stripe-js-v3"></script>
+</head>
+<body>
+  <h1 translate="yes">: tlntu ${stripeAccount.id}</h1>
+  <p translate="yes">: tlntu</p>
+  <div id="message-container"></div>
+  <div id="owners-container">
+    <h2 translate="yes">: tlntu</h2>
+    <table id="owners-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">: tlntu</th>
+          <th translate="yes">: tlntu</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
+    <div class="pure-controls spaced-buttons">
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">: tlntu</button>
+    </div>
+  </form>
+  <template id="person-row">
+    <tr id="${person.id}">
+      <td>
+        <a href="/account/connect/person?personid=${person.id}">${person.id}</a>
+      </td>
+      <td>${person.first_name} ${person.last_name}</td>
+      <td id="requires-information-${person.id}">
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">: tlntu</a>
+      </td>
+      <td id="requires-no-information-${person.id}">-</td>
+    </tr> 
+  </template>
+  <template id="invalid-beneficial-owners">
+    <div class="error message" translate="yes">
+      : tlntu
+    </div>
+  </template>
+  <template id="success">
+    <div class="success message" translate="yes">
+      : tlntu
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      : tlntu
+    </div>
+  </template>
+</body>
+</html>

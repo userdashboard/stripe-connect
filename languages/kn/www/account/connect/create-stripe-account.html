@@ -2,29 +2,29 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">ನೋಂದಣಿ ಯನ್ನು ರಚಿಸಿ</title>
+  <title translate="yes">ನೋಂದಣಿ ರಚಿಸಿ</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">ನೋಂದಣಿ ಯನ್ನು ರಚಿಸಿ</h1>
-  <p translate="yes">ಪೂರ್ಣಗೊಂಡ ನೋಂದಣಿಯು Stripe Connect ಮೂಲಕ ಆದಾಯ ಪಾವತಿಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ನಿಮಗೆ ಅನುಮತಿಸುತ್ತದೆ.</p>
+  <h1 translate="yes">ನೋಂದಣಿ ರಚಿಸಿ</h1>
+  <p translate="yes">ಪೂರ್ಣಗೊಂಡ ನೋಂದಣಿ ನಿಮಗೆ Stripe Connect ಮೂಲಕ ಆದಾಯ ಪಾವತಿಗಳನ್ನು ಸ್ವೀಕರಿಸಲು ಅನುಮತಿಸುತ್ತದೆ.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">ಖಾತೆ ಪ್ರಕಾರ</label>
+      <label for="individual" translate="yes">ಖಾತೆಯ ಪ್ರಕಾರ</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">ವಾಸದ ದೇಶ / ಸೇರ್ಪಡೆ</label>
+      <label for="country" translate="yes">ವಾಸಿಸುವ ದೇಶ / ಸಂಯೋಜನೆ</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          ದೇಶಆಯ್ಕೆಮಾಡಿ
+          ದೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಿ
         </option>
       </select>
     </div>
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ನೋಂದಣಿ ಯನ್ನು ರಚಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ
+      ದೋಷ! ನೋಂದಣಿಯನ್ನು ರಚಿಸುವಲ್ಲಿ ದೋಷ ಸಂಭವಿಸಿದೆ
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      ತಪ್ಪು! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ದೇಶ
+      ದೋಷ! ಅಮಾನ್ಯ ಅಥವಾ ಕಾಣೆಯಾದ ದೇಶ
     </div>
   </template>
 </body>

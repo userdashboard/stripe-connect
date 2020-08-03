@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Szerkesztése ${stripeAccount.id}</title>
+  <title translate="yes">szerkesztése ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -17,22 +17,22 @@
 <body class="entry">
   <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Szerkesztése ${stripeAccount.id}</h1>
+    <h1 translate="yes">szerkesztése ${stripeAccount.id}</h1>
     <div id="message-container"></div>
     <div id="business-profile-container">
       <div id="business_profile_url-container" class="pure-control-group">
-        <label for="business_profile_url" translate="yes">Webhely URL-címe</label>
+        <label for="business_profile_url" translate="yes">Weboldal URL</label>
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">Termék leírása</label>
+        <label for="business_profile_product_description" translate="yes">Termékleírás</label>
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">Kereskedői kategória kódja</label>
+        <label for="business_profile_mcc" translate="yes">Kereskedő kategória kódja</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
-            Válassza ki a vállalkozás kódját
+            Válassza ki vállalkozásának kódját
           </option>
         </select>
       </div>
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Cégnév</label>
+            <label for="name" translate="yes">Vállalkozás neve</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Adóazonosító száma</label>
+            <label for="tax_id" translate="yes">Adóazonosító szám</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -59,14 +59,14 @@
         <div class="pure-u-1-2">
           <div id="name_kana-container" class="pure-control-group">
             <a id="name_kana-anchor"></a>
-            <label for="name_kana" translate="yes">Kana cégneve</label>
+            <label for="name_kana" translate="yes">Kana üzleti név</label>
             <input required="required" id="name_kana" name="name_kana" type="text" maxlength="50">
           </div>
         </div>
         <div class="pure-u-1-2">
           <div id="name_kanji-container" class="pure-control-group">
             <a id="name_kanji-anchor"></a>
-            <label for="name_kanji" translate="yes">Kanji cégnév</label>
+            <label for="name_kanji" translate="yes">Kanji üzleti név</label>
             <input required="required" id="name_kanji" name="name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -75,7 +75,7 @@
         <div class="pure-u-12-24">
           <div id="business_profile_url-container" class="pure-control-group">
             <a id="business_profile_url-anchor"></a>
-            <label for="business_profile_url" translate="yes">Webhely URL-címe</label>
+            <label for="business_profile_url" translate="yes">Weboldal URL</label>
             <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
           </div>
         </div>
@@ -91,19 +91,19 @@
       <div id="company-verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <h2 translate="yes">Vállalat alapítása</h2>
-        <label for="verification_document_front" translate="yes">Első vizsgálat/fénykép</label>
+        <h2 translate="yes">A társaság alapítása</h2>
+        <label for="verification_document_front" translate="yes">Elülső beolvasás / fénykép</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Vissza beszkaval/fénykép</label>
+        <label for="verification_document_back" translate="yes">Hátsó beolvasás / fénykép</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Személyes adatok</h2>
+      <h2 translate="yes">Személyes adat</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
-            <label for="first_name" translate="yes">Utónév</label>
+            <label for="first_name" translate="yes">Keresztnév</label>
             <input class="full-width" required="required" id="first_name" name="first_name" type="text" maxlength="50">
           </div>
         </div>
@@ -116,7 +116,7 @@
         </div>
       </div>
       <div id="email-container" class="pure-control-group">
-        <label for="email" translate="yes">E-mail cím</label>
+        <label for="email" translate="yes">Email cím</label>
         <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
       </div>
       <div id="phone-container" class="pure-control-group">
@@ -129,7 +129,7 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kana-container" class="pure-control-group">
-            <label for="first_name_kana" translate="yes">Utónév</label>
+            <label for="first_name_kana" translate="yes">Keresztnév</label>
             <input required="required" id="first_name_kana" name="first_name_kana" type="text" maxlength="50">
           </div>
         </div>
@@ -147,7 +147,7 @@
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
-            <label for="first_name_kanji" translate="yes">Utónév</label>
+            <label for="first_name_kanji" translate="yes">Keresztnév</label>
             <input required="required" id="first_name_kanji" name="first_name_kanji" type="text" maxlength="50">
           </div>
         </div>
@@ -161,7 +161,7 @@
       </div>
     </div>
     <div id="dob-container" class="pure-control-group">
-      <label for="dob_day" translate="yes">születési dátum</label>
+      <label for="dob_day" translate="yes">Születési dátum</label>
       <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
       <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
       <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
@@ -171,32 +171,32 @@
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Nemek közötti</label>
+      <label for="gender" translate="yes">nem</label>
       <div class="pure-checkbox">
         <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Női</span></label>
         <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Férfi</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
-      <h2 translate="yes">Személyi igazolvány</h2>
-      <label for="id_number" translate="yes">Útlevél vagy személyi igazolvány száma</label>
+      <h2 translate="yes">Személyi azonosító</h2>
+      <label for="id_number" translate="yes">Útlevél vagy személyi azonosító szám</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Első vizsgálat/fénykép</label>
+      <label for="verification_document_front" translate="yes">Elülső beolvasás / fénykép</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Vissza beszkaval/fénykép</label>
+      <label for="verification_document_back" translate="yes">Hátsó beolvasás / fénykép</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Lakcímigazolás</h2>
+      <h2 translate="yes">A cím igazolása</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Első vizsgálat/fénykép</label>
+      <label for="verification_additional_document_front" translate="yes">Elülső beolvasás / fénykép</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Vissza beszkaval/fénykép</label>
+      <label for="verification_additional_document_back" translate="yes">Hátsó beolvasás / fénykép</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
@@ -219,7 +219,7 @@
             <label for="address_state" translate="yes">Állam vagy tartomány</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Állapot kiválasztása
+                Válassza ki az államot
               </option>
             </select>
           </div>
@@ -234,7 +234,7 @@
       </div>
     </div>
     <div id="kana-address-container">
-      <h2 translate="yes">Kana cím</h2>
+      <h2 translate="yes">Kana címe</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
         <label for="address_kana_line1" translate="yes">1. sor</label>
         <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
@@ -248,11 +248,11 @@
         <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
-        <label for="address_kana_state" translate="yes">Állami</label>
+        <label for="address_kana_state" translate="yes">Állapot</label>
         <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
-        <label for="address_kana_postal_code" translate="yes">Irányítószám</label>
+        <label for="address_kana_postal_code" translate="yes">irányítószám</label>
         <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
       </div>
     </div>
@@ -271,16 +271,16 @@
         <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
-        <label for="address_kanji_state" translate="yes">Állami</label>
+        <label for="address_kanji_state" translate="yes">Állapot</label>
         <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
-        <label for="address_kanji_postal_code" translate="yes">Irányítószám</label>
+        <label for="address_kanji_postal_code" translate="yes">irányítószám</label>
         <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Fiók frissítése Stripe</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Frissítse az Stripe fiókot</button>
     </div>
   </form>
   <template id="mcc-option">
@@ -291,8 +291,8 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">Siker! A Stripe fiók frissítve lett</span>
-      <a href="/account/connect" translate="yes">Vissza a számlához</a>
+      <span translate="yes">Siker! Az Stripe fiók frissült</span>
+      <a href="/account/connect" translate="yes">Vissza a fiókhoz</a>
     </div>
   </template>
   <template id="unknown-error">
@@ -302,22 +302,22 @@
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Hiba! Hiba történt a dokumentumképek feltöltésekén
+      Hiba! Hiba történt a dokumentum képek feltöltésekor
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Hiba! Hiba történt az űrlap elküldésekor
+      Hiba! Hiba történt az űrlap benyújtásakor
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó üzleti URL-cím
+      Hiba! Érvénytelen vagy hiányzó üzleti URL
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó üzleti kereskedői kategóriakód
+      Hiba! Érvénytelen vagy hiányzó üzleti kereskedő kategóriakód
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
@@ -327,47 +327,47 @@
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó dokumentum előlapi vizsgálat vagy fénykép
+      Hiba! Érvénytelen vagy hiányzó dokumentum beolvasása vagy fénykép
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó dokumentum vissza scan vagy fénykép
+      Hiba! Érvénytelen vagy hiányzó dokumentum-visszaolvasás vagy fénykép
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó további dokumentum előlapi vizsgálat vagy fénykép
+      Hiba! Érvénytelen vagy hiányzik a dokumentum eredeti beolvasása vagy fényképe
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó további dokumentum vissza scan vagy fénykép
+      Hiba! Érvénytelen vagy hiányzó kiegészítő dokumentum-visszaolvasás vagy fénykép
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó személyes azonosítószám
+      Hiba! Érvénytelen vagy hiányzik a személyi azonosító száma
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó cégnév
+      Hiba! Érvénytelen vagy hiányzó üzleti név
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó kana cégnév
+      Hiba! Érvénytelen vagy hiányzik a kana üzleti név
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó kandzsi cégnév
+      Hiba! Érvénytelen vagy hiányzik a kanji üzleti név
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó iparűzési adó azonosítója
+      Hiba! Érvénytelen vagy hiányzó üzleti adószám
     </div>
   </template>
   <template id="invalid-phone">
@@ -382,7 +382,7 @@
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Hiba! A társadalombiztosítási szám utolsó 4 számjegye érvénytelen vagy hiányzik
+      Hiba! Érvénytelen vagy hiányzik a társadalombiztosítási szám utolsó 4 számjegye
     </div>
   </template>
   <template id="invalid-dob_day">
@@ -402,22 +402,22 @@
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó utónév
+      Hiba! Érvénytelen vagy hiányzó keresztnév
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kana utónév
+      Hiba! Érvénytelen vagy hiányzó Kana vezetéknév
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kanji utónév
+      Hiba! Érvénytelen vagy hiányzó Kanji keresztnév
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó vezetéknév
+      Hiba! Érvénytelen vagy hiányzik a vezetékneve
     </div>
   </template>
   <template id="invalid-last_name_kana">
@@ -442,12 +442,12 @@
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó személyes címállapot
+      Hiba! Érvénytelen vagy hiányzik a személyes cím állapota
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó személyes címsor 1
+      Hiba! Érvénytelen vagy hiányzik az 1. személyes cím
     </div>
   </template>
   <template id="invalid-address_postal_code">
@@ -457,52 +457,52 @@
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kana személyes cím város
+      Hiba! Érvénytelen vagy hiányzó Kana személyi című város
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kana személyes cím állam
+      Hiba! Érvénytelen vagy hiányzik a Kana személyes cím állapota
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kana személyes cím város
+      Hiba! Érvénytelen vagy hiányzó Kana személyes címváros
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kana személyes cím 1.
+      Hiba! Érvénytelen vagy hiányzik a Kana személyes cím 1. sora
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kana személyes cím irányítószám
+      Hiba! Érvénytelen vagy hiányzik a Kana személyes cím irányítószám
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kanji személyes cím város
+      Hiba! Érvénytelen vagy hiányzó Kanji személyes címváros
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kanji személyes címállapot
+      Hiba! Érvénytelen vagy hiányzik a Kanji személyes cím állapota
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kanji személyes cím város
+      Hiba! Érvénytelen vagy hiányzó Kanji személyi című város
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kanji személyes cím1- es sor
+      Hiba! Érvénytelen vagy hiányzik a Kanji 1. személyes címsor
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Hiba! Érvénytelen vagy hiányzó Kanji személyes cím irányítószám
+      Hiba! Érvénytelen vagy hiányzik a Kanji személyes cím irányítószám
     </div>
   </template>
 </body>

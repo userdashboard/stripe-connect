@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Stripe Connect ගිණුම්</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+  <base target="_top" href="/">
+</head>
+<body>
+  <h1 translate="yes">Stripe Connect ගිණුම්</h1>
+  <p><span translate="yes">ඔබේ පුද්ගලික අනන්u200dයතාවය සහ සමාගමේ තොරතුරු සත්u200dයාපනය කිරීමෙන් වෙළෙන්දෙකු වන්න</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <div class="pure-g requirements-wrapper">
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">තනි අවශ්u200dයතා</h2>
+        <ol>
+          <li translate="yes">සත්u200dයාපිත පුද්ගලික තොරතුරු</li>
+          <li translate="yes">සහාය දක්වන රටක පදිංචිකරුවෙකි</li>
+          <li translate="yes">සහාය දක්වන රටක බැංකු ගිණුම</li>
+        </ol>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">තනි ලියාපදිංචිය ආරම්භ කරන්න</a>
+      </div>
+    </div>
+    <div class="pure-u-1-2 requirements-container">
+      <div class="requirements">
+        <h2 translate="yes">ව්u200dයාපාර අවශ්u200dයතා</h2>
+        <ol>
+          <li translate="yes">සත්u200dයාපිත පුද්ගලික තොරතුරු</li>
+          <li translate="yes">සහාය දක්වන රටක ව්u200dයාපාර ලියාපදිංචි කර ඇත</li>
+          <li translate="yes">සහාය දක්වන රටක බැංකු ගිණුම</li>
+        </ol>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">සමාගම් ලියාපදිංචිය ආරම්භ කරන්න</a>
+      </div>
+    </div>
+  </div>
+  <div id="individual-container">
+    <h2 translate="yes">තනි ලියාපදිංචිය</h2>
+    <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">නම</th>
+          <th translate="yes">තත්ත්වය</th>
+          <th translate="yes">නිර්මාණය කරන ලදි</th>
+          <th translate="yes">ඉදිරිපත් කරන ලදී</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="company-container">
+    <h2 translate="yes">සමාගම් ලියාපදිංචිය</h2>
+    <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th translate="yes">නම</th>
+          <th translate="yes">තත්ත්වය</th>
+          <th translate="yes">නිර්මාණය කරන ලදි</th>
+          <th translate="yes">ඉදිරිපත් කරන ලදී</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <template id="stripe-account-row">
+    <tr id="${account.id}">
+      <td>
+        <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
+      </td>
+      <td id="blank-name-${account.id}" translate="yes">තවම සපයා නැත</td>
+      <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
+      <td id="business-name-${account.id}">${account.company.name}</td>
+      <td id="account-status-${account.id}"></td>
+      <td>${account.createdFormatted}</td>
+      <td id="submitted-${account.id}">${account.submittedFormatted}</td>
+      <td id="not-submitted-${account.id}" translate="yes">නැත</td>
+    </tr>
+  </template>
+  <template id="not-submitted">
+    <span translate="yes">තවම ඉදිරිපත් කර නැත</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">ලියාපදිංචිය පිළිගෙන ඇත</span>
+  </template>
+  <template id="verified">
+    <span translate="yes">Stripe විසින් අක්u200dරීය කර ඇත</span>
+  </template>
+  <template id="verified-requires-fields">
+    <span translate="yes">අමතර තොරතුරු සමඟ නැවත ඉදිරිපත් කිරීම අවශ්u200dය වේ</span>
+  </template>
+  <template id="pending-submission">
+    <span translate="yes">ඉදිරිපත් කිරීම අපේක්ෂිතය</span>
+  </template>
+  <template id="rejected.fraud">
+    <span>
+      <span translate="yes">Stripe විසින් අක්u200dරීය කර ඇත, පොදු හේතු බලන්න</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="rejected.terms">
+    <span>
+      <span translate="yes">Stripe විසින් අක්u200dරීය කර ඇත, පොදු හේතු බලන්න</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="rejected.listed">
+    <span>
+      <span translate="yes">Stripe විසින් අක්u200dරීය කර ඇත, පොදු හේතු බලන්න</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="rejected.other">
+    <span>
+      <span translate="yes">Stripe විසින් අක්u200dරීය කර ඇත, පොදු හේතු බලන්න</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="fields_needed">
+    <span translate="yes">වැඩි විස්තර අවශ්u200dයයි</span>
+  </template>
+  <template id="listed">
+    <span translate="yes">සමාලෝචනය යටතේ Stripe</span>
+  </template>
+  <template id="under-review">
+    <span translate="yes">සමාලෝචනය යටතේ Stripe</span>
+  </template>
+  <template id="disabled">
+    <span>
+      <span translate="yes">Stripe විසින් අක්u200dරීය කර ඇත, පොදු හේතු බලන්න</span>
+      <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
+    </span>
+  </template>
+  <template id="requirements.past_due">
+    <span translate="yes">අමතර තොරතුරු අවශ්u200dයයි</span>
+  </template>
+</body>
+</html>

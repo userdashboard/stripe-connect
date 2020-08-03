@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">इसके लिए मालिकों को सबमिट करें ${stripeAccount.id}</title>
+  <title translate="yes">के लिए मालिक सबमिट करें ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">इसके लिए मालिकों को सबमिट करें ${stripeAccount.id}</h1>
-  <p translate="yes">जब आपने अन्य सभी मालिकों को जोड़ना समाप्त कर दिया हो, यदि कोई हो, तो उन्हें समीक्षा के लिए सबमिट करें।</p>
+  <h1 translate="yes">के लिए मालिक सबमिट करें ${stripeAccount.id}</h1>
+  <p translate="yes">जब आपने सभी अन्य मालिकों को जोड़ना समाप्त कर लिया है, यदि कोई हो, तो उन्हें समीक्षा के लिए सबमिट करें।</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">फायदेमंद मालिक</h2>
+    <h2 translate="yes">लाभदायक स्वामी</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">नाम</th>
-          <th translate="yes">आवश्यक</th>
+          <th translate="yes">आवश्यक है</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">जमा मालिक</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">मालिकों को जमा करें</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      त्रुटि! वहां अभी भी जानकारी की आवश्यकता मालिकों रहे हैं ।
+      त्रुटि! मालिकों को अभी भी जानकारी की आवश्यकता है।
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      सफलता! कंपनी के मालिकों को प्रस्तुत किया गया है
+      सफलता! कंपनी के मालिकों को जमा कर दिया गया है
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      त्रुटि! मालिकों को सबमिट करने में हुई गड़बड़ी
+      त्रुटि! मालिकों को सबमिट करने में त्रुटि हुई
     </div>
   </template>
 </body>

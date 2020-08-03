@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">konta Stripe Connect</title>
+  <title translate="yes">Konta Stripe Connect</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,15 +10,15 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">konta Stripe Connect</h1>
-  <p><span translate="yes">Zostań dostawcą, weryfikując swoją tożsamość i informacje o firmie za pośrednictwem</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Konta Stripe Connect</h1>
+  <p><span translate="yes">Zostań sprzedawcą, weryfikując swoją tożsamość i informacje o firmie za pośrednictwem</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Indywidualne wymagania</h2>
         <ol>
           <li translate="yes">Zweryfikowane dane osobowe</li>
-          <li translate="yes">Mieszkaniec kraju, w który się ze wsparciem</li>
+          <li translate="yes">Mieszkaniec wspieranego kraju</li>
           <li translate="yes">Konto bankowe w obsługiwanym kraju</li>
         </ol>
         <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Rozpocznij rejestrację indywidualną</a>
@@ -42,10 +42,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Nazwa</th>
-          <th translate="yes">Stan</th>
-          <th translate="yes">Utworzone</th>
-          <th translate="yes">Przekazywane</th>
+          <th translate="yes">Imię</th>
+          <th translate="yes">Status</th>
+          <th translate="yes">Utworzony</th>
+          <th translate="yes">Przesłano</th>
         </tr>
       </thead>
     </table>
@@ -56,10 +56,10 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Nazwa</th>
-          <th translate="yes">Stan</th>
-          <th translate="yes">Utworzone</th>
-          <th translate="yes">Przekazywane</th>
+          <th translate="yes">Imię</th>
+          <th translate="yes">Status</th>
+          <th translate="yes">Utworzony</th>
+          <th translate="yes">Przesłano</th>
         </tr>
       </thead>
     </table>
@@ -69,7 +69,7 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Jeszcze nie pod warunkiem</td>
+      <td id="blank-name-${account.id}" translate="yes">Jeszcze nie podano</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
@@ -79,7 +79,7 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Nie zostały jeszcze przesłane</span>
+    <span translate="yes">jeszcze nie oddany</span>
   </template>
   <template id="verified">
     <span translate="yes">Rejestracja została zaakceptowana</span>
@@ -88,10 +88,10 @@
     <span translate="yes">Wyłączone przez Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Wymaga ponownego przesłaniania dodatkowych informacji</span>
+    <span translate="yes">Wymaga ponownego przesłania z dodatkowymi informacjami</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Oczekujące na złożenie wniosku</span>
+    <span translate="yes">Oczekujące na przesłanie</span>
   </template>
   <template id="rejected.fraud">
     <span>
@@ -118,7 +118,7 @@
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Więcej informacji jest wymaganych</span>
+    <span translate="yes">Wymagane są dodatkowe informacje</span>
   </template>
   <template id="listed">
     <span translate="yes">W trakcie przeglądu przez Stripe</span>

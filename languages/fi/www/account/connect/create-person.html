@@ -11,7 +11,7 @@
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
     <h1 translate="yes">Luo uusi henkilö</h1>
-    <p translate="yes">Hallitus, omistajat ja edustaja on pidettävä ajan tasalla, kun tietosi muuttuvat.</p>
+    <p translate="yes">Hallitus, omistajat ja edustaja on pidettävä ajan tasalla tietosi muuttuessa.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Suhde yritykseen</h2>
@@ -22,11 +22,11 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Työn, roolin tai suhteen otsikko</label>
+        <label for="relationship_title" translate="yes">Työ, rooli tai parisuhde</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Omistamaprosentti (jos sellainen on)</label>
+        <label for="relationship_percent_ownership" translate="yes">Omistusprosentti (jos on)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
@@ -41,12 +41,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Virhe! Virhe luotaessa rekisteröintiä
+      Virhe! Rekisteröinnin luomisessa tapahtui virhe
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Stripe-tilisi ei vaadi tosiasiallisen edunsaajan tietoja
+      Stripe-tilisi ei vaadi tosiasiallisia omistajia koskevia tietoja
     </div>
   </template>
   <template id="invalid-director">
@@ -56,7 +56,7 @@
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Yritysten edustajien on oltava johtajia
+      Yrityksen edustajien on oltava johtajia
     </div>
   </template>
   <template id="invalid-selection">
@@ -66,7 +66,7 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Virhe! Virheellinen tai puuttuva prosentuaalinen omistus (0, jos ei mitään)
+      Virhe! Virheellinen tai puuttuva omistajuusprosentti (0, jos sitä ei ole)
     </div>
   </template>
   <template id="invalid-relationship_title">

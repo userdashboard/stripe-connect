@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">ಇದಕ್ಕಾಗಿ ವ್ಯಕ್ತಿಗಳು ${stripeAccount.id}</title>
+  <title translate="yes">ವ್ಯಕ್ತಿಗಳು ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -12,7 +12,7 @@
   <h1 translate="yes">ವ್ಯಕ್ತಿಗಳು</h1>
   <div id="representative-container">
     <h2 translate="yes">ಕಂಪನಿ ಪ್ರತಿನಿಧಿ</h2>
-    <p translate="yes">ನಾಮನಿರ್ದೇಶಿತ ವ್ಯಕ್ತಿಯ ಸ್ಥಾನಮಾನವು ಬದಲಾದರೆ ನೀವು ಹೊಸ ಪ್ರತಿನಿಧಿಯನ್ನು ರಚಿಸಬೇಕು.</p>
+    <p translate="yes">ನಾಮನಿರ್ದೇಶಿತ ವ್ಯಕ್ತಿಯ ಸ್ಥಿತಿ ಬದಲಾದರೆ ನೀವು ಹೊಸ ಪ್ರತಿನಿಧಿಯನ್ನು ರಚಿಸಬೇಕು.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">ಹೊಸ ಪ್ರತಿನಿಧಿಯನ್ನು ರಚಿಸಿ</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -25,9 +25,9 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">ಲಾಭದಾಯಕ ಮಾಲೀಕರು</h2>
-    <p translate="yes">ನೀವು ಕಂಪನಿ, ಹಣಕಾಸು ಅಥವಾ ಕಾರ್ಯಾಚರಣೆಗಳ ಉಸ್ತುವಾರಿಯಲ್ಲಿ ಗಣನೀಯ (25+) ಪ್ರತಿಶತ ವನ್ನು ಹೊಂದಿರುವ ಯಾರಿಗಾದರೂ ದಾಖಲೆಯನ್ನು ಒದಗಿಸಬೇಕು.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">ಮಾಲೀಕನನ್ನು ಸೇರಿಸು</a></p>
+    <h2 translate="yes">ಪ್ರಯೋಜನಕಾರಿ ಮಾಲೀಕರು</h2>
+    <p translate="yes">ಕಂಪನಿಯ ಗಣನೀಯ (25+) ಶೇಕಡಾವನ್ನು ಹೊಂದಿರುವ ಅಥವಾ ಕಂಪನಿಯ ಉಸ್ತುವಾರಿ, ಅದರ ಹಣಕಾಸು ಅಥವಾ ಕಾರ್ಯಾಚರಣೆಗಳಿಗೆ ನೀವು ದಸ್ತಾವೇಜನ್ನು ಒದಗಿಸಬೇಕು.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">ಮಾಲೀಕರನ್ನು ಸೇರಿಸಿ</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -40,8 +40,8 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">ಕಂಪನಿ ನಿರ್ದೇಶಕರು</h2>
-    <p translate="yes">ನಿರ್ದೇಶಕರ ಮಂಡಳಿಗೆ ನೀವು ದಾಖಲೆಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">ಮಾಲೀಕನನ್ನು ಸೇರಿಸು</a></p>
+    <p translate="yes">ನಿರ್ದೇಶಕರ ಮಂಡಳಿಗೆ ನೀವು ದಸ್ತಾವೇಜನ್ನು ಒದಗಿಸಬೇಕು.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">ಮಾಲೀಕರನ್ನು ಸೇರಿಸಿ</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">ಮಾಹಿತಿ ಸೇರಿಸು</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">ಮಾಹಿತಿಯನ್ನು ಸೇರಿಸಿ</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

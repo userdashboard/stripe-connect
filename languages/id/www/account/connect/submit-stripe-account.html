@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Kirim ${stripeAccount.id}</title>
+  <title translate="yes">Kirimkan ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Kirim ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proses verifikasi dengan mengirimkan pendaftaran Anda selesai.</p>
+  <h1 translate="yes">Kirimkan ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proses verifikasi dengan mengirimkan pendaftaran Anda yang sudah selesai.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Pemilik yang menguntungkan</h2>
+    <h2 translate="yes">Pemilik menguntungkan</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Pendaftaran memiliki informasi pendaftaran tidak lengkap
+      Registrasi memiliki informasi pendaftaran yang tidak lengkap
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Kesalahan! Anda harus menyerahkan direksi perusahaan
+      Kesalahan! Anda harus mengirimkan direktur perusahaan
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Kesalahan! Anda harus menyerahkan pemilik perusahaan yang menguntungkan
+      Kesalahan! Anda harus mengirimkan pemilik manfaat perusahaan
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Kesalahan! Anda harus menyerahkan informasi perwakilan perusahaan
+      Kesalahan! Anda harus mengirimkan informasi perwakilan perusahaan
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Kesalahan! Pendaftaran memiliki informasi pembayaran yang tidak lengkap
+      Kesalahan! Registrasi memiliki informasi pembayaran yang tidak lengkap
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Sukses! Pendaftaran telah diserahkan
+      Keberhasilan! Registrasi telah diajukan
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kesalahan! Terjadi galat pengiriman pendaftaran
+      Kesalahan! Terjadi kesalahan saat mengirimkan pendaftaran
     </div>
   </template>
 </body>

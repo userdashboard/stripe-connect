@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Создание нового человека для ${stripeAccount.id}</title>
+  <title translate="yes">Создать нового человека для ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Создание нового человека</h1>
-    <p translate="yes">Совет директоров, владельцев и представителей должен быть в курсе изменений вашей информации.</p>
+    <h1 translate="yes">Создать нового человека</h1>
+    <p translate="yes">Совет директоров, владельцы и представитель должны обновляться по мере изменения вашей информации.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Отношение к компании</h2>
@@ -22,21 +22,21 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Название задания, роли или отношений</label>
+        <label for="relationship_title" translate="yes">Должность, должность или отношение</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Процент, принадлежащий (если таковые имеется)</label>
+        <label for="relationship_percent_ownership" translate="yes">Проценты в собственности (если есть)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Регистрация обновления</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Обновить регистрацию</button>
       </div>
     </div>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Регистрация обновлена
+      Успех! Регистрация была обновлена
     </div>
   </template>
   <template id="unknown-error">
@@ -46,12 +46,12 @@
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Ваша Stripe учетная запись не требует информации о бенефициарных владельцах
+      Ваша учетная запись Stripe не требует информации о бенефициарном владельце
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Ваша Stripe учетная запись не требует информации о директоре компании
+      Ваша учетная запись Stripe не требует информации о директоре компании
     </div>
   </template>
   <template id="invalid-executive">
@@ -61,17 +61,17 @@
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Либо представитель, директор или владелец должны быть выбраны
+      Любой представитель, директор или владелец должен быть выбран
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий процент собственности (0, если нет)
+      Ошибка! Неверный или отсутствующий процент владения (0, если нет)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее название отношений
+      Ошибка! Неверный или отсутствующий заголовок отношения
     </div>
   </template>
 </body>

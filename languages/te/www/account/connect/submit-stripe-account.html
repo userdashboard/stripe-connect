@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">సమర్పించు ${stripeAccount.id}</title>
+  <title translate="yes">సమర్పించండి ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">సమర్పించు ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> మీ పూర్తి చేయబడ్డ రిజిస్ట్రేషన్ సబ్మిట్ చేయడం ద్వారా వెరిఫికేషన్ ప్రక్రియ</p>
+  <h1 translate="yes">సమర్పించండి ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> మీ పూర్తి రిజిస్ట్రేషన్u200cను సమర్పించడం ద్వారా ధృవీకరణ ప్రక్రియ.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">లాభదాయక యజమానులు</h2>
+    <h2 translate="yes">ప్రయోజనకరమైన యజమానులు</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">రిజిస్ట్రేషన్ సబ్మిట్ చేయండి</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">రిజిస్ట్రేషన్ సమర్పించండి</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      రిజిస్ట్రేషన్ పూర్తి కాని రిజిస్ట్రేషన్ సమాచారం ఉంది
+      రిజిస్ట్రేషన్u200cలో అసంపూర్ణ రిజిస్ట్రేషన్ సమాచారం ఉంది
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      తప్పు! మీరు కంపెనీ డైరెక్టర్ లను విధిగా సబ్మిట్ చేయాలి.
+      లోపం! మీరు కంపెనీ డైరెక్టర్లను తప్పక సమర్పించాలి
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      తప్పు! కంపెనీ యొక్క లాభదాయక యజమానులను మీరు విధిగా సబ్మిట్ చేయాలి.
+      లోపం! మీరు సంస్థ యొక్క ప్రయోజనకరమైన యజమానులను సమర్పించాలి
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      తప్పు! మీరు విధిగా కంపెనీ ప్రతినిధి యొక్క సమాచారాన్ని సబ్మిట్ చేయాలి.
+      లోపం! మీరు కంపెనీ ప్రతినిధి సమాచారాన్ని తప్పక సమర్పించాలి
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      తప్పు! రిజిస్ట్రేషన్ లో అసంపూర్ణ పేమెంట్ సమాచారం ఉంది.
+      లోపం! రిజిస్ట్రేషన్u200cలో అసంపూర్ణ చెల్లింపు సమాచారం ఉంది
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      విజయం! రిజిస్ట్రేషన్ సబ్మిట్ చేయబడింది
+      విజయం! నమోదు సమర్పించబడింది
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      తప్పు! రిజిస్ట్రేషన్ సబ్మిట్ చేయడంలో ఒక దోషం ఏర్పడింది
+      లోపం! నమోదును సమర్పించడంలో లోపం సంభవించింది
     </div>
   </template>
 </body>

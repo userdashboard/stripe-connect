@@ -10,19 +10,19 @@
 </head>
 <body>
   <h1 translate="yes">Verwijderen ${stripeAccount.id}</h1>
-  <p translate="yes">Het Stripe account wordt onmiddellijk verwijderd en kan niet worden hersteld.</p>
+  <p translate="yes">Het Stripe-account wordt onmiddellijk verwijderd en kan niet worden hersteld.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Verwijderen</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Succes! Het Stripe account is verwijderd
+      Succes! Het Stripe-account is verwijderd
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! Er is een fout opgetreden bij het verwijderen van het Stripe account
+      Fout! Er is een fout opgetreden bij het verwijderen van het Stripe-account
     </div>
   </template>
 </body>

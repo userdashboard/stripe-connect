@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Ver ${stripeAccount.id}</title>
+  <title translate="yes">Visão ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Ver ${stripeAccount.id}</h1>
+  <h1 translate="yes">Visão ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Estado</th>
+        <th translate="yes">Status</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
         <th translate="yes">Submetido</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Ainda não enviado</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Informação de registo</h2>
+    <h2 translate="yes">Informações de registro</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Representante da empresa</h2>
-    <p translate="yes">Para evitar perturbações na conta, submeta novas informações representativas se a pessoa especificada sair ou deixar de representar a empresa.</p>
+    <p translate="yes">Para evitar interrupções na conta, envie novas informações representativas se a pessoa especificada deixar ou não representar mais a empresa.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Nome</th>
-          <th translate="yes">Informação necessária</th>
+          <th translate="yes">Informação requerida</th>
         </tr>
       </thead>
     </table>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Outras informações benéficas dos proprietários</h2>
-    <p translate="yes">Deve fornecer documentação para qualquer pessoa que possua um substancial (25+) por cento da empresa ou responsável pela empresa, finanças ou operações.</p>
+    <h2 translate="yes">Outras informações úteis dos proprietários</h2>
+    <p translate="yes">Você deve fornecer documentação para qualquer outra pessoa que possua uma porcentagem substancial (25+) da empresa ou responsável pela empresa, finanças ou operações.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informação dos administradores da empresa</h2>
-    <p translate="yes">Deve fornecer nomes completos do conselho diretivo da sua empresa e/ou pessoas responsáveis pela manutenção da conformidade regulamentar.</p>
+    <h2 translate="yes">Informações aos diretores da empresa</h2>
+    <p translate="yes">Você deve fornecer nomes completos do conselho de administração da sua empresa e / ou pessoas responsáveis por manter a conformidade regulamentar.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Submeter inscrição</h2>
+    <h2 translate="yes">Enviar registro</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Os fundos são pagos por conta ${bank_account.bank_name}.</p>
+    <p translate="yes">Os fundos são pagos para a conta ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Os dados bancários devem ser fornecidos para receber fundos.</p>
+    <p translate="yes">Os detalhes bancários devem ser fornecidos para receber fundos.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">O registo não foi submetido.</p>
+    <p translate="yes">O registro não foi enviado.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">O registo foi submetido em ${account.dateFormatted}.</p>
+    <p translate="yes">O registro foi enviado em ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">As informações de registo não foram fornecidas.</p>
+    <p translate="yes">As informações de registro não foram fornecidas.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">A informação de registo foi fornecida.</p>
+    <p translate="yes">As informações de registro foram fornecidas.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Ainda não foi submetido.</span>
+    <span translate="yes">Ainda não enviado</span>
   </template>
   <template id="verified">
-    <span translate="yes">As inscrições foram aceites</span>
+    <span translate="yes">O registro foi aceito</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Requer informações adicionais</span>
+    <span translate="yes">Requer informação adicional</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Submissão pendente</span>
+    <span translate="yes">Envio pendente</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rejeitado por Stripe.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rejeitado por Stripe, consulte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rejeitado por Stripe.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rejeitado por Stripe, consulte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rejeitado por Stripe.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rejeitado por Stripe, consulte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rejeitado por Stripe.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rejeitado por Stripe, consulte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Sob revisão por Stripe</span>
+    <span translate="yes">Em revisão por Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Sob revisão por Stripe</span>
+    <span translate="yes">Em revisão por Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Rejeitado por Stripe.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rejeitado por Stripe, consulte</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Requer informações adicionais</span>
+    <span translate="yes">Requer informação adicional</span>
   </template>
 </body>
 </html>

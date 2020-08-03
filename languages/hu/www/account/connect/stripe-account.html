@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Nézd ${stripeAccount.id}</title>
+  <title translate="yes">Kilátás ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Nézd ${stripeAccount.id}</h1>
+  <h1 translate="yes">Kilátás ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,12 +17,12 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Típus</th>
+        <th translate="yes">típus</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">név</th>
+        <th translate="yes">Név</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Elküldve</th>
+        <th translate="yes">benyújtott</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Még nem nyújtották be</td>
       </tr>
     </tbody>
   </table>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">A vállalat képviselője</h2>
-    <p translate="yes">A fiókmegszakadás elkerülése érdekében nyújtson be új reprezentatív információkat, ha a megadott személy elhagyja a vállalatot, vagy már nem képviseli azt.</p>
+    <h2 translate="yes">A cég képviselője</h2>
+    <p translate="yes">A számlazavar elkerülése érdekében nyújtson be új reprezentatív információkat, ha a megadott személy elhagyja vagy már nem képviseli a társaságot.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">név</th>
-          <th translate="yes">Szükséges információk</th>
+          <th translate="yes">Név</th>
+          <th translate="yes">Szükséges információ</th>
         </tr>
       </thead>
     </table>
@@ -68,13 +68,13 @@
   </div>
   <div id="owners-container">
     <h2 translate="yes">Egyéb tényleges tulajdonosokra vonatkozó információk</h2>
-    <p translate="yes">Be kell nyújtania dokumentációt bárki más tulajdonában jelentős (25 +) százaléka a társaság, vagy felelős a társaság, pénzügyek vagy műveletek.</p>
+    <p translate="yes">Dokumentációt kell benyújtania mindenki számára, aki a vállalat jelentős (25+) százalékát birtokolja, vagy a vállalatért, a pénzügyekért vagy a műveletekért felelős.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">név</th>
-          <th translate="yes">Megköveteli</th>
+          <th translate="yes">Név</th>
+          <th translate="yes">Igényel</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">A vállalat igazgatóinak tájékoztatása</h2>
-    <p translate="yes">Meg kell adnia a vállalat igazgatótanácsának és/vagy a jogszabályi megfelelőség fenntartásáért felelős személyek teljes nevét.</p>
+    <h2 translate="yes">Cégvezetőkre vonatkozó információk</h2>
+    <p translate="yes">Meg kell adnia a társaság igazgatótanácsának és / vagy a szabályozás betartásának fenntartásáért felelős személyek teljes nevét.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">név</th>
-          <th translate="yes">Megköveteli</th>
+          <th translate="yes">Név</th>
+          <th translate="yes">Igényel</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Fizetési adatok</h2>
+    <h2 translate="yes">Fizetési információ</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Regisztráció elküldése</h2>
+    <h2 translate="yes">Regisztráció benyújtása</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,64 +120,64 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Adatok hozzáadása</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Adjon hozzá információkat</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">A pénzeszközöket a számlára fizetik ${bank_account.bank_name}.</p>
+    <p translate="yes">A pénzeszközöket számlára fizetik ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">A banki adatokat meg kell adni a pénzfogadáshoz.</p>
+    <p translate="yes">A pénzeszközök fogadásához banki adatokat kell megadni.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">A regisztráció nem lett elküldve.</p>
+    <p translate="yes">A regisztrációt nem nyújtották be.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">A regisztrációt a ${account.dateFormatted}.</p>
+    <p translate="yes">A regisztrációt ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">A regisztrációs adatokat nem adták meg.</p>
+    <p translate="yes">A regisztrációs információt nem adták meg.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">A regisztrációs adatokat megadták.</p>
+    <p translate="yes">A regisztrációs információkat megtettük.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Még nincs benyújtva</span>
+    <span translate="yes">Még nem nyújtották be</span>
   </template>
   <template id="verified">
-    <span translate="yes">A regisztráció elfogadva</span>
+    <span translate="yes">A regisztrációt elfogadták</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">További információkat igényel</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Benyújtásra vár</span>
+    <span translate="yes">A benyújtás függőben van</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">A Stripe által végzett felülvizsgálat alatt</span>
+    <span translate="yes">Felülvizsgálat alatt: Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">A Stripe által végzett felülvizsgálat alatt</span>
+    <span translate="yes">Felülvizsgálat alatt: Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Elutasította Stripe, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe elutasította, lásd</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">További információkat igényel</span>

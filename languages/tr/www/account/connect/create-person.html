@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Için yeni kişi oluşturun ${stripeAccount.id}</title>
+  <title translate="yes">İçin yeni kişi oluştur ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Yeni kişi oluşturma</h1>
-    <p translate="yes">Bilginiz değiştikçe yönetim kurulu, sahipleri ve temsilcisi güncel tutulmalıdır.</p>
+    <h1 translate="yes">Yeni kişi oluştur</h1>
+    <p translate="yes">Bilgileriniz değiştikçe yönetim kurulu, sahipler ve temsilci güncel tutulmalıdır.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Şirketle ilişki</h2>
@@ -22,7 +22,7 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">İş, rol veya ilişki unvanı</label>
+        <label for="relationship_title" translate="yes">İş, rol veya ilişki başlığı</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -30,7 +30,7 @@
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Kaydı güncelleştir</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Kaydı güncelleyin</button>
       </div>
     </div>
   </form>
@@ -41,17 +41,17 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hata! Kayıt oluşturma hatası oluştu
+      Hata! Kayıt oluşturulurken bir hata oluştu
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Stripe hesabınız faydalı sahip bilgileri gerektirmez
+      Stripe hesabınız sahip sahibi bilgisi gerektirmez
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Stripe hesabınız şirket müdürü bilgilerini gerektirmez
+      Stripe hesabınız şirket yöneticisi bilgisi gerektirmiyor
     </div>
   </template>
   <template id="invalid-executive">
@@ -61,12 +61,12 @@
   </template>
   <template id="invalid-selection">
     <div class="error message" translate="yes">
-      Temsilci, yönetmen veya sahip seçilmelidir
+      Temsilci, müdür veya sahip seçilmelidir
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Hata! Geçersiz veya eksik yüzde sahipliği (0 varsa)
+      Hata! Geçersiz veya eksik sahiplik yüzdesi (yoksa 0)
     </div>
   </template>
   <template id="invalid-relationship_title">

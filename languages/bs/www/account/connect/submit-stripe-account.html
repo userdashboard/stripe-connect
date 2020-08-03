@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Dostaviti ${stripeAccount.id}</title>
+  <title translate="yes">Pošaljite ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Dostaviti ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> proces verifikacije podnošenjem vaše završene registracije.</p>
+  <h1 translate="yes">Pošaljite ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> postupka verifikacije podnošenjem završene registracije.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Korisne vlasnike</h2>
+    <h2 translate="yes">Beneficirani vlasnici</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Direktori kompanije</h2>
+    <h2 translate="yes">Direktori kompanija</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Predaj registraciju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pošaljite registraciju</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Registracija ima nepotpune informacije o registraciji
+      Registracija ima nepotpune podatke o registraciji
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Greška! Morate predati režiserima kompanije.
+      Greška! Morate predati direktore kompanije
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Greška! Moraš da predaš vlasniku kompanije korisne vlasnike
+      Greška! Morate dostaviti stvarne vlasnike kompanije
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Greška! Morate dostaviti informacije predstavnika kompanije
+      Greška! Morate dostaviti podatke predstavnika kompanije
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Greška! Registracija ima nepotpune informacije o plaćanju
+      Greška! Registracija ima nepotpune podatke o plaćanju
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspjeh! Registracija je podnesena
+      Uspeh! Registracija je predata
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Greška! Pojavila se greška prilikom podnošenja registracije
+      Greška! Došlo je do pogreške prilikom slanja registracije
     </div>
   </template>
 </body>

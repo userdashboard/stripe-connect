@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">பணம் செலுத்துதல் தகவல் ${stripeAccount.id}</title>
+  <title translate="yes">கட்டணம் செலுத்தும் தகவல் ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,15 +27,15 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">பணம் செலுத்துதல் தகவல் ${stripeAccount.id}</h1>
-  <p translate="yes">உங்கள் வருவாய் பேஅவுட்களைப் பெறும் வங்கிக் கணக்கைப் புதுப்பிக்கவும்.</p>
+  <h1 translate="yes">கட்டணம் செலுத்தும் தகவல் ${stripeAccount.id}</h1>
+  <p translate="yes">உங்கள் வருவாய் செலுத்துதல்களைப் பெறும் வங்கிக் கணக்கைப் புதுப்பிக்கவும்.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">வங்கி நாடு</label>
+      <label for="country" translate="yes">வங்கியின் நாடு</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          தேர்ந்தெடுக்கப்பெற்ற
+          தேர்ந்தெடு
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
@@ -55,7 +55,7 @@
           <label for="currency" translate="yes">கணக்கு நாணயம்</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              தேர்ந்தெடுக்கப்பெற்ற
+              தேர்ந்தெடு
             </option>
           </select>
         </div>
@@ -67,7 +67,7 @@
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">BSB எண்</label>
+        <label for="bsb_number" translate="yes">பி.எஸ்.பி எண்</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">இடைத்தங்கல் எண்</label>
+        <label for="transit_number" translate="yes">போக்குவரத்து எண்</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -133,7 +133,7 @@
       <h2 translate="yes">மாற்று வடிவம்</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">குறியீடு வரிசைப்படுத்து</label>
+          <label for="sort_code" translate="yes">எழுத்துப்பிழை குறியீடு</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">குறியீடு அழிக்கிறது</label>
+        <label for="clearing_code" translate="yes">குறியீட்டை அழிக்கிறது</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">கிளை குறியீடு</label>
+        <label for="branch_code" translate="yes">கிளைக் குறியீடு</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -175,7 +175,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">கிளை குறியீடு</label>
+        <label for="branch_code" translate="yes">கிளைக் குறியீடு</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">ரூட்டிங் எண்</label>
+        <label for="routing_number" translate="yes">வழித்தட எண்</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">ரூட்டிங் எண்</label>
+        <label for="routing_number" translate="yes">வழித்தட எண்</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -237,7 +237,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">கிளை குறியீடு</label>
+        <label for="branch_code" translate="yes">கிளைக் குறியீடு</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">ரூட்டிங் எண்</label>
+        <label for="routing_number" translate="yes">வழித்தட எண்</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">பணம் செலுத்தும் தகவலைச் சேமிக்கவும்</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">கட்டணத் தகவலைச் சேமிக்கவும்</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      வெற்றி! கட்டணம் செலுத்தும் தகவல் புதுப்பிக்கப்பட்டது
+      வெற்றி! கட்டண தகவல் புதுப்பிக்கப்பட்டது
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      தவறு! கட்டணம் செலுத்தும் தகவலைப் புதுப்பிப்பதில் ஒரு பிழை
+      பிழை! கட்டணத் தகவலைப் புதுப்பிப்பதில் பிழை ஏற்பட்டது
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      தவறு! வங்கியின் செல்லாத அல்லது காணாமல் போன நாடு
+      பிழை! வங்கியின் தவறான அல்லது காணாமல் போன நாடு
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      தவறு! கணக்கு செல்லாத அல்லது விடுபட்ட நாணயம்
+      பிழை! கணக்கின் தவறான அல்லது காணாமல் போன நாணயம்
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      தவறு! தவறான அல்லது தவறிய வகை கணக்கு
+      பிழை! தவறான அல்லது காணாமல் போன வகை
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      தவறு! செல்லுபடியாகாத அல்லது தவறிய கணக்கு எண்
+      பிழை! கணக்கு எண் தவறானது அல்லது இல்லை
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      தவறு! தவறான அல்லது விடுபட்ட BSB எண்
+      பிழை! பி.எஸ்.பி எண் தவறானது அல்லது இல்லை
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      தவறு! செல்லாத அல்லது தவறிய வங்கி குறியீட்டு எண்
+      பிழை! தவறான அல்லது காணாமல் போன வங்கி குறியீடு எண்
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      தவறு! செல்லாத அல்லது இல்லாத வரிசைப்படுத்து குறியீடு
+      பிழை! வரிசை குறியீடு தவறானது அல்லது இல்லை
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      தவறு! செல்லுபடியாகாத அல்லது விடுபட்ட நிறுவன எண்
+      பிழை! தவறான அல்லது காணாமல் போன நிறுவன எண்
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      தவறு! தவறான அல்லது விடுபட்ட போக்குவரத்து எண்
+      பிழை! தவறான அல்லது தவறான போக்குவரத்து எண்
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      தவறு! செல்லுபடியாகாத அல்லது விடுபட்ட துடைவு குறியீடு எண்
+      பிழை! குறியீட்டு எண்ணை அழித்தல் தவறானது அல்லது இல்லை
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      தவறு! தவறான அல்லது விடுபட்ட கிளை குறியீடு எண்
+      பிழை! கிளைக் குறியீடு எண் தவறானது அல்லது இல்லை
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      தவறு! தவறான அல்லது தவறிய கணக்கு வைத்திருப்பவர் பெயர்
+      பிழை! கணக்கு வைத்திருப்பவரின் பெயர் தவறானது அல்லது இல்லை
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      தவறு! செல்லாத அல்லது விடுபட்ட IBAN எண்
+      பிழை! IBAN எண் தவறானது அல்லது காணவில்லை
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      தவறு! செல்லாத அல்லது விடுபட்ட போக்குவரத்து எண்
+      பிழை! தவறான அல்லது காணாமல் போன போக்குவரத்து எண்
     </div>
   </template>
 </body>

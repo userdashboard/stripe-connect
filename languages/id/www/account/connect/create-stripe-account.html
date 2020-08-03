@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Buat pendaftaran</h1>
-  <p translate="yes">Pendaftaran selesai memungkinkan Anda untuk menerima pembayaran pendapatan melalui Stripe Connect.</p>
+  <p translate="yes">Registrasi yang lengkap memungkinkan Anda menerima pembayaran pendapatan melalui Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Negara kediaman/pendirian</label>
+      <label for="country" translate="yes">Negara tempat tinggal / pendirian</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Pilih negara
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kesalahan! Terjadi galat membuat pendaftaran
+      Kesalahan! Terjadi kesalahan saat membuat pendaftaran
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Kesalahan! Negara yang tidak valid atau hilang
+      Kesalahan! Negara tidak valid atau hilang
     </div>
   </template>
 </body>

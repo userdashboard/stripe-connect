@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Δημιουργία νέου ατόμου για ${stripeAccount.id}</title>
+  <title translate="yes">Δημιουργήστε νέο άτομο για ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,8 +10,8 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Δημιουργία νέου ατόμου</h1>
-    <p translate="yes">Το διοικητικό συμβούλιο, οι ιδιοκτήτες και ο αντιπρόσωπος πρέπει να ενημερώνονται καθώς αλλάζουν οι πληροφορίες σας.</p>
+    <h1 translate="yes">Δημιουργήστε νέο άτομο</h1>
+    <p translate="yes">Το διοικητικό συμβούλιο, οι ιδιοκτήτες και ο αντιπρόσωπος πρέπει να είναι ενημερωμένοι καθώς οι πληροφορίες σας αλλάζουν.</p>
     <div id="message-container"></div>
     <div id="form-container">
       <h2 translate="yes">Σχέση με την εταιρεία</h2>
@@ -22,7 +22,7 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Τίτλος εργασίας, ρόλου ή σχέσης</label>
+        <label for="relationship_title" translate="yes">Θέση εργασίας, ρόλου ή σχέσης</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -41,22 +41,22 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Παρουσιάστηκε σφάλμα κατά τη δημιουργία της καταχώρησης
+      Λάθος! Παρουσιάστηκε σφάλμα κατά τη δημιουργία της εγγραφής
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Ο λογαριασμός Stripe σας δεν απαιτεί πληροφορίες για τον πραγματικό δικαιούχο
+      Ο λογαριασμός σας Stripe δεν απαιτεί πληροφορίες πραγματικού κατόχου
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Ο λογαριασμός Stripe σας δεν απαιτεί πληροφορίες διευθυντή εταιρείας
+      Ο λογαριασμός σας Stripe δεν απαιτεί πληροφορίες διευθυντή εταιρείας
     </div>
   </template>
   <template id="invalid-executive">
     <div class="error message" translate="yes">
-      Εκπρόσωποι της εταιρείας πρέπει να είναι στελέχη
+      Οι εκπρόσωποι της εταιρείας πρέπει να είναι στελέχη
     </div>
   </template>
   <template id="invalid-selection">
@@ -66,12 +66,12 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρη ή λείπει το ποσοστό ιδιοκτησίας (0 εάν δεν υπάρχει)
+      Λάθος! Μη έγκυρη ή λείπει ποσοστό ιδιοκτησίας (0 αν δεν υπάρχει)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος ή λείπει ο τίτλος σχέσης
+      Λάθος! Μη έγκυρος ή λείπει τίτλος σχέσης
     </div>
   </template>
 </body>

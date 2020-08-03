@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Izbrišete ${stripeAccount.id}</title>
+  <title translate="yes">Избриши ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Izbrišete ${stripeAccount.id}</h1>
-  <p translate="yes">Stripe nalog biće izbrisan odmah i ne može biti spasen.</p>
+  <h1 translate="yes">Избриши ${stripeAccount.id}</h1>
+  <p translate="yes">С_Т_Р_И_П_Е налог ће бити одмах обрисан и није га могуће вратити.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Izbrišete</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Избриши</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspeh! Stripe nalog je izbrisan
+      Успех! С_Т_Р_И_П_Е налог је обрисан
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Greška! Greška pri brisanju Stripe naloga
+      Грешка! Дошло је до грешке приликом брисања налога С_Т_Р_И_П_Е
     </div>
   </template>
 </body>

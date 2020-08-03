@@ -12,17 +12,17 @@
   <h1 translate="yes">Akaunti za Stripe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Hakuna akaunti za Stripe zimeundwa bado.</p>
+    <p translate="yes">Hakuna akaunti za Stripe ambazo zimeundwa.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Aina</th>
+        <th translate="yes">Chapa</th>
         <th translate="yes">Jina</th>
         <th translate="yes">Hali</th>
-        <th translate="yes">Aliumba</th>
-        <th translate="yes">Kuwasilishwa</th>
+        <th translate="yes">Imeundwa</th>
+        <th translate="yes">Imewasilishwa</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Haijatolewa bado</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,58 +48,58 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Fedha ni kulipwa kwa akaunti x</p>
+    <p translate="yes">Fedha hulipwa kwa akaunti x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Maelezo ya benki lazima kutolewa ili kupokea fedha.</p>
+    <p translate="yes">Maelezo ya benki lazima yatolewe ili kupokea pesa.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Usajili huo bado umewasilishwa.</p>
+    <p translate="yes">Usajili haujawasilishwa.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Usajili huo uliwasilishwa kwa ${account.dateFormatted}.</p>
+    <p translate="yes">Usajili uliwasilishwa ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Haijatowasilishwa bado</span>
+    <span translate="yes">Haijawasilishwa</span>
   </template>
   <template id="verified">
     <span translate="yes">Usajili umekubaliwa</span>
   </template>
   <template id="verified">
-    <span translate="yes">Imezuiwa na Stripe</span>
+    <span translate="yes">Imlemazwa na Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Inahitaji taarifa ya ziada</span>
+    <span translate="yes">Inahitaji habari zaidi</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Inasubiri kuwasilisha</span>
+    <span translate="yes">Inasubiri uwasilishaji</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Inahitaji taarifa ya ziada</span>
+    <span translate="yes">Inahitaji habari zaidi</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Imekataliwa na Stripe, ona</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Imekataliwa na Stripe, ona</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Imekataliwa na Stripe, ona</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Imekataliwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Imekataliwa na Stripe, ona</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Taarifa zaidi inahitajika</span>
+    <span translate="yes">Habari zaidi inahitajika</span>
   </template>
   <template id="listed">
-    <span translate="yes">Chini ya ukaguzi na Stripe</span>
+    <span translate="yes">Inakaguliwa na Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Chini ya ukaguzi na Stripe</span>
+    <span translate="yes">Inakaguliwa na Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Imezuiwa na Stripe, angalia</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Walemavu wa Stripe, ona</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

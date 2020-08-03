@@ -28,20 +28,20 @@
 </head>
 <body>
   <h1 translate="yes">Greiðsluupplýsingar fyrir ${stripeAccount.id}</h1>
-  <p translate="yes">Uppfærðu bankareikninginn sem mun fá greiðsluborganir þínar.</p>
+  <p translate="yes">Uppfærðu bankareikninginn sem fær tekjuútborgun þína.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">Landsbankans</label>
+      <label for="country" translate="yes">Land banka</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Velja
+          Veldu
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Gerð lykils</label>
+      <label translate="yes">Tegund reiknings</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -55,14 +55,14 @@
           <label for="currency" translate="yes">Gjaldmiðill reiknings</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Velja
+              Veldu
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Nafn reikningshafans</label>
+      <label for="account-holder-name" translate="yes">Nafn reikningseiganda</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -89,7 +89,7 @@
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="institution_number" translate="yes">Númer stofnunar</label>
+        <label for="institution_number" translate="yes">Stofnunarnúmer</label>
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -130,10 +130,10 @@
         <label for="iban" >IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
-      <h2 translate="yes">Annað snið</h2>
+      <h2 translate="yes">Aðrar snið</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Raða kóða</label>
+          <label for="sort_code" translate="yes">Stafakóða</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Hreinsa kóða</label>
+        <label for="clearing_code" translate="yes">Hreinsar kóða</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Greinarkóði</label>
+        <label for="branch_code" translate="yes">Útibúsnúmer</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -175,7 +175,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Greinarkóði</label>
+        <label for="branch_code" translate="yes">Útibúsnúmer</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -197,7 +197,7 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Leiðarnúmer</label>
+        <label for="routing_number" translate="yes">Beinarnúmer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -211,7 +211,7 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Leiðarnúmer</label>
+        <label for="routing_number" translate="yes">Beinarnúmer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -237,7 +237,7 @@
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">Greinarkóði</label>
+        <label for="branch_code" translate="yes">Útibúsnúmer</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -259,7 +259,7 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Leiðarnúmer</label>
+        <label for="routing_number" translate="yes">Beinarnúmer</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Vista greiðsluupplýsingar</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Vistaðu greiðsluupplýsingar</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,52 +283,52 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Árangri! Greiðsluupplýsingar hafa verið uppfærðar
+      Árangur! Greiðsluupplýsingarnar hafa verið uppfærðar
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Villa! Villa við uppfærslu á greiðsluupplýsingum
+      Villa! Villa kom upp við uppfærslu greiðsluupplýsinganna
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantalið land bankans
+      Villa! Ógilt land banka vantar eða vantar
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Villa! Ógildur eða vantalinn Gjaldmiðill reiknings
+      Villa! Ógildur gjaldmiðill reiknings vantar eða vantar
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Villa! Ógild eða vantar gerð lykils
+      Villa! Ógild eða gerð vantar af reikningi
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantar reikningsnúmer
+      Villa! Ógilt eða númer reiknings vantar
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Villa! Ótækt eða BSB-númer vantar
+      Villa! Ógilt eða BSB númer vantar
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða númer Bankakóði vantar
+      Villa! Ógilt eða númer bankakóða vantar
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantar röðunarkóða
+      Villa! Ógildur eða vantar Raða kóða
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Villa! Ótækt eða vantar stofnun númer
+      Villa! Ógilt eða vantar stofnunarnúmer
     </div>
   </template>
   <template id="invalid-routing_number">
@@ -338,27 +338,27 @@
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantalið Númerakóði
+      Villa! Ógilt eða vantar hreinsunarnúmer
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantar númer Greinarkóða
+      Villa! Ógilt eða greinanúmer útibúsins vantar
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Villa! Ótækt eða nafn handhafa lykils vantar
+      Villa! Ógilt eða vant nafn reikningshafa
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantar IBAN númer
+      Villa! Ógilt eða vantar IBAN-númer
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantar flutningsnúmer
+      Villa! Ógilt flutningsnúmer eða vantar
     </div>
   </template>
 </body>

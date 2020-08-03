@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Tara ${stripeAccount.id}</title>
+  <title translate="yes">Ara ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Tara ${stripeAccount.id}</h1>
+  <h1 translate="yes">Ara ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -32,18 +32,18 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Istatus</th>
+        <th translate="yes">Status</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
         <th translate="yes">Sottomessi</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Mhux ippreżentat għadu</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Informazzjoni dwar ir-reġistrazzjoni</h2>
+    <h2 translate="yes">Informazzjoni dwar ir-Reġistrazzjoni</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,8 +51,8 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Rappreżentant tal-kumpanija</h2>
-    <p translate="yes">Biex jiġi evitat tfixkil fil-kont tissottometti informazzjoni rappreżentattiva ġdida jekk il-persuna speċifikata titlaq jew ma tibqax tirrappreżenta l-kumpanija.</p>
+    <h2 translate="yes">Rappreżentant tal-Kumpanija</h2>
+    <p translate="yes">Biex tevita tfixkil fil-kont tissottometti informazzjoni rappreżentattiva ġdida jekk il-persuna speċifikata titlaq jew ma tibqax tirrappreżenta l-kumpanija.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Informazzjoni oħra dwar is-sidien benefiċjarji</h2>
-    <p translate="yes">Għandek tipprovdi dokumentazzjoni għal kull min għandu fil-mija sostanzjali (25+) tal-kumpanija jew inkarigat mill-kumpanija, il-finanzi jew l-operazzjonijiet.</p>
+    <h2 translate="yes">Tagħrif ta 'benefiċċju ieħor għas-sidien</h2>
+    <p translate="yes">Int trid tipprovdi dokumentazzjoni għal kull min ikun sid ta 'sostanzjali (25+) fil-mija tal-kumpanija jew responsabbli tal-kumpanija, finanzi jew operazzjonijiet.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Informazzjoni dwar id-diretturi tal-kumpanija</h2>
-    <p translate="yes">Għandek tipprovdi ismijiet sħaħ tal-bord ta' tmexxija tal-kumpanija tiegħek u/jew tal-persuni responsabbli għaż-żamma tal-konformità regolatorja.</p>
+    <h2 translate="yes">Informazzjoni dwar id-diretturi tal-Kumpanija</h2>
+    <p translate="yes">Int trid tipprovdi ismijiet sħaħ tal-bord ta 'tmexxija tal-kumpanija tiegħek u / jew persuni responsabbli għaż-żamma tal-konformità regolatorja.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -126,61 +126,61 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Il-fondi jitħallsu responsabbli ${bank_account.bank_name}.</p>
+    <p translate="yes">Il-fondi jitħallsu għall-kont ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Id-dettalji bankarji għandhom jiġu pprovduti biex jirċievu fondi.</p>
+    <p translate="yes">Dettalji bankarji għandhom jiġu pprovduti biex jirċievu fondi.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Ir-reġistrazzjoni ma ġietx sottomessa.</p>
+    <p translate="yes">Ir-reġistrazzjoni ma ġietx ippreżentata.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Ir-reġistrazzjoni ġiet sottomessa fuq ${account.dateFormatted}.</p>
+    <p translate="yes">Ir-reġistrazzjoni ġiet ippreżentata fit- ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">L-informazzjoni dwar ir-reġistrazzjoni ma ġietx ipprovduta.</p>
+    <p translate="yes">L-informazzjoni dwar ir-reġistrazzjoni ma ngħatatx.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">L-informazzjoni dwar ir-reġistrazzjoni ġiet ipprovduta.</p>
+    <p translate="yes">L-informazzjoni tar-reġistrazzjoni ġiet ipprovduta.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Għadu ma ġiex sottomess</span>
+    <span translate="yes">Mhux ippreżentat għadu</span>
   </template>
   <template id="verified">
     <span translate="yes">Ir-reġistrazzjoni ġiet aċċettata</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Jeħtieġ informazzjoni addizzjonali</span>
+    <span translate="yes">Teħtieġ informazzjoni addizzjonali</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Sakemm issir is-sottomissjoni</span>
+    <span translate="yes">Sakemm tintbagħat</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Miċħuda mill-Stripe, ara l-</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rifjutata minn Stripe, ara</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Miċħuda mill-Stripe, ara l-</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rifjutata minn Stripe, ara</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Miċħuda mill-Stripe, ara l-</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rifjutata minn Stripe, ara</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Miċħuda mill-Stripe, ara l-</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rifjutata minn Stripe, ara</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Taħt reviżjoni mill-Stripe</span>
+    <span translate="yes">Taħt reviżjoni minn Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Taħt reviżjoni mill-Stripe</span>
+    <span translate="yes">Taħt reviżjoni minn Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Miċħuda mill-Stripe, ara l-</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rifjutata minn Stripe, ara</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Jeħtieġ informazzjoni addizzjonali</span>
+    <span translate="yes">Teħtieġ informazzjoni addizzjonali</span>
   </template>
 </body>
 </html>

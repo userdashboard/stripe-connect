@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Tape ${stripeAccount.id}</title>
+  <title translate="yes">Tapē ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Tape ${stripeAccount.id}</h1>
-  <p translate="yes">O le a vave ona tape le faitotoa Stripe ma e le mafai ona toe malosi.</p>
+  <h1 translate="yes">Tapē ${stripeAccount.id}</h1>
+  <p translate="yes">O le Stripe tala o le a tafiesea vave ma e le mafai ona toe maua mai.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tape</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tapē</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Manuia! Ua tapeese le Faitotoa a le Stripe
+      Manuia! O le Stripe tala ua aveese
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Mea sese! O se mea sese ocurred le tapeina o le faitotoa Stripe
+      Sese! O se mea na tupu na tupu le tapeina o le Stripe teugatupe
     </div>
   </template>
 </body>

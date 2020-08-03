@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Cynnig ${stripeAccount.id}</title>
+  <title translate="yes">Cyflwyno ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Cynnig ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> broses ddilysu drwy gyflwyno eich cofrestriad.</p>
+  <h1 translate="yes">Cyflwyno ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> y broses ddilysu trwy gyflwyno'ch cofrestriad gorffenedig.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Perchnogion buddiol</h2>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Gyflwyno cofrestriad</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Cyflwyno cofrestriad</button>
     </div>
   </form>
   <template id="owner-row">
@@ -95,7 +95,7 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Gwall! Rhaid i chi gyflwyno Cyfarwyddwyr y cwmni
+      Gwall! Rhaid i chi gyflwyno cyfarwyddwyr y cwmni
     </div>
   </template>
   <template id="invalid-beneficial-owners">
@@ -105,12 +105,12 @@
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Gwall! Mae'n rhaid i chi gyflwyno gwybodaeth cynrychiolydd y cwmni
+      Gwall! Rhaid i chi gyflwyno gwybodaeth cynrychiolydd y cwmni
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Gwall! Mae'r cofrestriad wedi cael gwybodaeth anghyflawn am daliadau
+      Gwall! Mae gan y cofrestriad wybodaeth dalu anghyflawn
     </div>
   </template>
   <template id="success">

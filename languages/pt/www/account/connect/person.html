@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Pessoa ${person.id}</h1>
-  <p translate="yes">Podem ter sido apresentadas informações adicionais que não são apresentadas.</p>
+  <p translate="yes">Informações adicionais podem ter sido enviadas que não são exibidas.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -18,13 +18,13 @@
         <td>${person.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Papel</th>
+        <th translate="yes">Função</th>
         <td id="owner" translated="yes">Beneficial owner</td>
         <td id="director" translated="yes">Company director</td>
         <td id="representative" translated="yes">Company representative</td>
       </tr>
       <tr>
-        <th translate="yes">Relacionamento</th>
+        <th translate="yes">Relação</th>
         <td>${person.relationship.title}</td>
       </tr>
       <tr>
@@ -32,7 +32,7 @@
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">Informação necessária</th>
+        <th translate="yes">Informação requerida</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

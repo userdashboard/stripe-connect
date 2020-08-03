@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe тіркелгілері</title>
+  <title translate="yes">Stripe есептік жазбалар</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,32 +10,32 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe тіркелгілері</h1>
-  <p><span translate="yes">Жеке тұлға және компания ақпаратын тексеру арқылы жеткізуші болу</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe есептік жазбалар</h1>
+  <p><span translate="yes">Жеке куәлігіңізді және компания туралы ақпаратты тексеру арқылы сатушы болыңыз</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Әзірге Stripe тіркелгілер әлі құрылмаған.</p>
+    <p translate="yes">Әлі бір Stripe есептік жазба жасалмады.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">Жеке талаптар</h2>
         <ol>
-          <li translate="yes">Тексерілген жеке ақпарат</li>
-          <li translate="yes">Қолдау көрсетілетін елдің резиденті</li>
-          <li translate="yes">Қолдау көрсетілетін елдегі банк шоты</li>
+          <li translate="yes">Расталған жеке мәліметтер</li>
+          <li translate="yes">Қолдау көрсетілетін елдің тұрғыны</li>
+          <li translate="yes">Қолдау көрсетілетін елдегі банктік шот</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Жеке тіркеуді бастау</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Жеке тіркеуді бастаңыз</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Кәсiпкерлiк қызметке қойылатын талаптар</h2>
+        <h2 translate="yes">Кәсіпкерлікке қойылатын талаптар</h2>
         <ol>
-          <li translate="yes">Тексерілген жеке ақпарат</li>
+          <li translate="yes">Расталған жеке мәліметтер</li>
           <li translate="yes">Қолдау көрсетілетін елде тіркелген бизнес</li>
-          <li translate="yes">Қолдау көрсетілетін елдегі банк шоты</li>
+          <li translate="yes">Қолдау көрсетілетін елдегі банктік шот</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Старт-компания тіркелген</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Компанияны тіркеуді бастаңыз</a>
       </div>
     </div>
   </div>
@@ -46,24 +46,24 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Атауы</th>
+            <th translate="yes">Аты</th>
             <th translate="yes">Күй</th>
-            <th translate="yes">Құрылып қалар</th>
-            <th translate="yes">Ұсынылған</th>
+            <th translate="yes">Жасалды</th>
+            <th translate="yes">Жіберілді</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h2 translate="yes">Компанияларды тіркеу</h2>
+      <h2 translate="yes">Компанияны тіркеу</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
             <th translate="yes">Бизнес атауы</th>
             <th translate="yes">Күй</th>
-            <th translate="yes">Құрылып қалар</th>
-            <th translate="yes">Ұсынылған</th>
+            <th translate="yes">Жасалды</th>
+            <th translate="yes">Жіберілді</th>
           </tr>
         </thead>
       </table>
@@ -84,46 +84,46 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Әлі ұсынылмаған</span>
+    <span translate="yes">Әзірге жіберілмеген</span>
   </template>
   <template id="verified">
-    <span translate="yes">Тіркеу 20__ ж. «___» ____________ қабылданды</span>
+    <span translate="yes">Тіркелу қабылданды</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripe бойынша мүгедек</span>
+    <span translate="yes">Stripe өшірілген</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Қосымша ақпаратты талап етеді</span>
+    <span translate="yes">Қосымша ақпаратты қажет етеді</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Ұсынуды күтуде</span>
+    <span translate="yes">Жіберу күтілуде</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripe қабылданбады, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe қабылдамады, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Қосымша ақпарат қажет</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe қарап жатыр</span>
+    <span translate="yes">Stripe қарастыруда</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe қарап жатыр</span>
+    <span translate="yes">Stripe қарастыруда</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripe бойынша ажыратылған, см.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripe өшірілген, қараңыз</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Қосымша ақпаратты талап етеді</span>
+    <span translate="yes">Қосымша ақпаратты қажет етеді</span>
   </template>
 </body>
 </html>

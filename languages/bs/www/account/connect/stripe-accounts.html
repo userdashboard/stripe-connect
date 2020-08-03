@@ -11,59 +11,59 @@
 </head>
 <body>
   <h1 translate="yes">Stripe računi</h1>
-  <p><span translate="yes">Postani prodavač tako što ćeš verificira svoj osobni identitet i informacije o kompaniji kroz</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Postanite dobavljač potvrđivanjem svog ličnog identiteta i podataka o kompaniji putem</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Još Stripe računi nisu kreirani.</p>
+    <p translate="yes">Još nije stvoren Stripe račun.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Pojedinačnih zahtjeva</h2>
+        <h2 translate="yes">Individualni zahtevi</h2>
         <ol>
-          <li translate="yes">Potvrđena lična informacija</li>
+          <li translate="yes">Provjereni lični podaci</li>
           <li translate="yes">Stanovnik podržane zemlje</li>
-          <li translate="yes">Bankovni račun u podržani zemlji</li>
+          <li translate="yes">Bankovni račun u podržanoj zemlji</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Pokreni pojedinačnu registraciju</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">Započnite pojedinačnu registraciju</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Poslovne zahtjeve</h2>
+        <h2 translate="yes">Poslovni zahtjevi</h2>
         <ol>
-          <li translate="yes">Potvrđena lična informacija</li>
-          <li translate="yes">Posao registriran u podržani zemlji</li>
-          <li translate="yes">Bankovni račun u podržani zemlji</li>
+          <li translate="yes">Provjereni lični podaci</li>
+          <li translate="yes">Posao registriran u podržanoj zemlji</li>
+          <li translate="yes">Bankovni račun u podržanoj zemlji</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Pokreni registraciju kompanije</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Započnite registraciju kompanije</a>
       </div>
     </div>
   </div>
   <div id="registrations-container">
     <div id="individual-container">
-      <h2 translate="yes">Pojedinačna registracija</h2>
+      <h2 translate="yes">Individualna registracija</h2>
       <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
             <th translate="yes">Ime</th>
             <th translate="yes">Status</th>
-            <th translate="yes">Kreiran</th>
-            <th translate="yes">Podnijela</th>
+            <th translate="yes">Napravljeno</th>
+            <th translate="yes">Podneseno</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h2 translate="yes">Registracija kompanije</h2>
+      <h2 translate="yes">Registracije kompanija</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Poslovno ime</th>
+            <th translate="yes">Naziv firme</th>
             <th translate="yes">Status</th>
-            <th translate="yes">Kreiran</th>
-            <th translate="yes">Podnijela</th>
+            <th translate="yes">Napravljeno</th>
+            <th translate="yes">Podneseno</th>
           </tr>
         </thead>
       </table>
@@ -84,43 +84,43 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Još nije podneseno</span>
+    <span translate="yes">Još nije podnesen</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registracija je prihvaćena.</span>
+    <span translate="yes">Registracija je prihvaćena</span>
   </template>
   <template id="verified">
-    <span translate="yes">Onesposobljena od strane Stripe</span>
+    <span translate="yes">Onemogućeno od Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Zahtijeva dodatne informacije</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čeka se pokornost</span>
+    <span translate="yes">U toku predaje</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Potrebno je više informacija</span>
   </template>
   <template id="listed">
-    <span translate="yes">Pod revizijom Stripe</span>
+    <span translate="yes">Pregleda Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Pod revizijom Stripe</span>
+    <span translate="yes">Pregleda Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Onesposobljena od Stripe, vidite</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Onemogućeno od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Zahtijeva dodatne informacije</span>

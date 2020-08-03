@@ -2,17 +2,17 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Tala Stripe</title>
+  <title translate="yes">Stripe teuga tupe</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Tala Stripe</h1>
+  <h1 translate="yes">Stripe teuga tupe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">E leai se Stripe faitotoa na fatuina.</p>
+    <p translate="yes">Leai ni Stripe tala na fai.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -21,8 +21,8 @@
         <th translate="yes">Ituaiga</th>
         <th translate="yes">Igoa</th>
         <th translate="yes">Tulaga</th>
-        <th translate="yes">Foafoaina</th>
-        <th translate="yes">Auina atu</th>
+        <th translate="yes">Na faia</th>
+        <th translate="yes">Faasisina</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">E leʻi saunia</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,58 +48,58 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Ua totogi tupe i le faitotoa x</p>
+    <p translate="yes">E totogi tupe i le teugatupe x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">E tatau ona saunia ia auiliiliga o teugatupe e maua ai tupe.</p>
+    <p translate="yes">Faletupe faamatalaga e tatau ona saunia e maua ai tupe.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">E le i auina atu le lesitala.</p>
+    <p translate="yes">E leʻi aumaia le faʻamaumauga.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Na auina atu le lesitala i le ${account.dateFormatted}.</p>
+    <p translate="yes">O le resitalaina na lafoina i luga ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">E lei auina atu</span>
+    <span translate="yes">E leʻi auina mai</span>
   </template>
   <template id="verified">
-    <span translate="yes">Ua taliaina le lesitala</span>
+    <span translate="yes">Ua taliaina le resitalaina</span>
   </template>
   <template id="verified">
-    <span translate="yes">Taofia e Stripe</span>
+    <span translate="yes">Faʻaleaogaina e Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Manaomia ni faamatalaga faaopoopo</span>
+    <span translate="yes">Manaʻomia nisi faʻamatalaga</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Auina atu o loo faatalitali</span>
+    <span translate="yes">O loʻo faʻatalosagaina le faʻatonuga</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Manaomia ni faamatalaga faaopoopo</span>
+    <span translate="yes">Manaʻomia nisi faʻamatalaga</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Teena e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Teteeina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">E tele nisi faamatalaga e manaomia</span>
+    <span translate="yes">E tele faʻamatalaga e manaʻomia</span>
   </template>
   <template id="listed">
-    <span translate="yes">I lalo o le iloiloga a Stripe</span>
+    <span translate="yes">Ua uma ona iloiloina e Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">I lalo o le iloiloga a Stripe</span>
+    <span translate="yes">Ua uma ona iloiloina e Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Taofia e Stripe, tagai</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Faʻaleaogaina e Stripe, see</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

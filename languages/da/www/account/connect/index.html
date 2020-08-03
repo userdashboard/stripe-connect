@@ -11,7 +11,7 @@
 </head>
 <body>
   <h1 translate="yes">Stripe Connect konti</h1>
-  <p><span translate="yes">Bliv leverandør ved at bekræfte din personlige identitet og virksomhedsoplysninger via</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Bliv en leverandør ved at verificere din personlige identitet og virksomhedsinformation gennem</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
@@ -26,10 +26,10 @@
     </div>
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Forretningsmæssige krav</h2>
+        <h2 translate="yes">Forretningskrav</h2>
         <ol>
           <li translate="yes">Bekræftede personlige oplysninger</li>
-          <li translate="yes">Virksomhed, der er registreret i et understøttet land</li>
+          <li translate="yes">Virksomhed registreret i et støttet land</li>
           <li translate="yes">Bankkonto i et understøttet land</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Start virksomhedsregistrering</a>
@@ -43,9 +43,9 @@
         <tr>
           <th>ID</th>
           <th translate="yes">Navn</th>
-          <th translate="yes">Status</th>
-          <th translate="yes">Lavet</th>
-          <th translate="yes">Forelagt</th>
+          <th translate="yes">status</th>
+          <th translate="yes">lavet</th>
+          <th translate="yes">indsendt</th>
         </tr>
       </thead>
     </table>
@@ -57,9 +57,9 @@
         <tr>
           <th>ID</th>
           <th translate="yes">Navn</th>
-          <th translate="yes">Status</th>
-          <th translate="yes">Lavet</th>
-          <th translate="yes">Forelagt</th>
+          <th translate="yes">status</th>
+          <th translate="yes">lavet</th>
+          <th translate="yes">indsendt</th>
         </tr>
       </thead>
     </table>
@@ -69,13 +69,13 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
-      <td id="blank-name-${account.id}" translate="yes">Endnu ikke oplyst</td>
+      <td id="blank-name-${account.id}" translate="yes">Endnu ikke leveret</td>
       <td id="individual-name-${account.id}">${account.individual.first_name} ${account.individual.last_name}</td>
       <td id="business-name-${account.id}">${account.company.name}</td>
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">Nej</td>
+      <td id="not-submitted-${account.id}" translate="yes">Ingen</td>
     </tr>
   </template>
   <template id="not-submitted">
@@ -88,7 +88,7 @@
     <span translate="yes">Deaktiveret af Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Kræver genudsendelse med yderligere oplysninger</span>
+    <span translate="yes">Kræver genindsendelse med yderligere oplysninger</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">Afventer indsendelse</span>
@@ -118,13 +118,13 @@
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Der kræves flere oplysninger</span>
+    <span translate="yes">Mere information er påkrævet</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under revision af Stripe</span>
+    <span translate="yes">Under gennemgang af Stripe</span>
   </template>
   <template id="disabled">
     <span>

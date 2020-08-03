@@ -12,7 +12,7 @@
   <h1 translate="yes">Stripe računi</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Još Stripe računi nisu kreirani.</p>
+    <p translate="yes">Još nije stvoren Stripe račun.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -21,8 +21,8 @@
         <th translate="yes">Tip</th>
         <th translate="yes">Ime</th>
         <th translate="yes">Status</th>
-        <th translate="yes">Kreiran</th>
-        <th translate="yes">Podnijela</th>
+        <th translate="yes">Napravljeno</th>
+        <th translate="yes">Podneseno</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Još nije dostavljeno</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,58 +48,58 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Sredstva su plaćena za korisnički račun x</p>
+    <p translate="yes">Sredstva se uplaćuju na račun x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Podaci o bankarstvu moraju biti obezbjeđen za primanje sredstava.</p>
+    <p translate="yes">Za primanje sredstava moraju se osigurati bankarski detalji.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Registracija nije podnesena.</p>
+    <p translate="yes">Registracija nije predata.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Registracija je prijavljena ${account.dateFormatted}.</p>
+    <p translate="yes">Registracija je podnesena dana ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Još nije podneseno</span>
+    <span translate="yes">Još nije podnesen</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registracija je prihvaćena.</span>
+    <span translate="yes">Registracija je prihvaćena</span>
   </template>
   <template id="verified">
-    <span translate="yes">Onesposobljena od strane Stripe</span>
+    <span translate="yes">Onemogućeno od Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Zahtijeva dodatne informacije</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čeka se pokornost</span>
+    <span translate="yes">U toku predaje</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Zahtijeva dodatne informacije</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Odbijen od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Odbio Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Potrebno je više informacija</span>
   </template>
   <template id="listed">
-    <span translate="yes">Pod revizijom Stripe</span>
+    <span translate="yes">Pregleda Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Pod revizijom Stripe</span>
+    <span translate="yes">Pregleda Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Onesposobljena od Stripe, vidite</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Onemogućeno od Stripe, vidi</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

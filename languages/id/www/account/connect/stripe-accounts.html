@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Akun Stripe</title>
+  <title translate="yes">Stripe akun</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,17 +10,17 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Akun Stripe</h1>
-  <p><span translate="yes">Menjadi vendor dengan memverifikasi identitas pribadi dan informasi perusahaan melalui</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe akun</h1>
+  <p><span translate="yes">Menjadi vendor dengan memverifikasi identitas pribadi Anda dan informasi perusahaan melalui</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
-    <p translate="yes">Tidak ada akun Stripe telah dibuat belum.</p>
+    <p translate="yes">Belum ada akun Stripe.</p>
   </div>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">Persyaratan individu</h2>
+        <h2 translate="yes">Persyaratan individual</h2>
         <ol>
-          <li translate="yes">Informasi pribadi yang terverifikasi</li>
+          <li translate="yes">Informasi pribadi terverifikasi</li>
           <li translate="yes">Penduduk negara yang didukung</li>
           <li translate="yes">Rekening bank di negara yang didukung</li>
         </ol>
@@ -31,8 +31,8 @@
       <div class="requirements">
         <h2 translate="yes">Persyaratan bisnis</h2>
         <ol>
-          <li translate="yes">Informasi pribadi yang terverifikasi</li>
-          <li translate="yes">Bisnis yang terdaftar di negara yang didukung</li>
+          <li translate="yes">Informasi pribadi terverifikasi</li>
+          <li translate="yes">Bisnis terdaftar di negara yang didukung</li>
           <li translate="yes">Rekening bank di negara yang didukung</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Mulai pendaftaran perusahaan</a>
@@ -41,7 +41,7 @@
   </div>
   <div id="registrations-container">
     <div id="individual-container">
-      <h2 translate="yes">Pendaftaran perorangan</h2>
+      <h2 translate="yes">Registrasi perorangan</h2>
       <table id="individual-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
@@ -49,7 +49,7 @@
             <th translate="yes">Nama</th>
             <th translate="yes">Status</th>
             <th translate="yes">Dibuat</th>
-            <th translate="yes">Dikirimkan</th>
+            <th translate="yes">Diserahkan</th>
           </tr>
         </thead>
       </table>
@@ -60,10 +60,10 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Nama bisnis</th>
+            <th translate="yes">Nama Bisnis</th>
             <th translate="yes">Status</th>
             <th translate="yes">Dibuat</th>
-            <th translate="yes">Dikirimkan</th>
+            <th translate="yes">Diserahkan</th>
           </tr>
         </thead>
       </table>
@@ -84,7 +84,7 @@
     </tr>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Belum diserahkan</span>
+    <span translate="yes">Belum dikirim</span>
   </template>
   <template id="verified">
     <span translate="yes">Pendaftaran telah diterima</span>
@@ -93,10 +93,10 @@
     <span translate="yes">Dinonaktifkan oleh Stripe</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Memerlukan informasi tambahan</span>
+    <span translate="yes">Membutuhkan informasi tambahan</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pengajuan tertunda</span>
+    <span translate="yes">Pengajuan yang tertunda</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Ditolak oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -111,19 +111,19 @@
     <span><span translate="yes">Ditolak oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Informasi lebih lanjut diperlukan</span>
+    <span translate="yes">Diperlukan lebih banyak informasi</span>
   </template>
   <template id="listed">
-    <span translate="yes">Dalam peninjauan oleh Stripe</span>
+    <span translate="yes">Sedang ditinjau oleh Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Dalam peninjauan oleh Stripe</span>
+    <span translate="yes">Sedang ditinjau oleh Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Dinonaktifkan oleh Stripe, lihat</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Memerlukan informasi tambahan</span>
+    <span translate="yes">Membutuhkan informasi tambahan</span>
   </template>
 </body>
 </html>

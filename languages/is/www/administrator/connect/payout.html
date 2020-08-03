@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Skoða ${payout.id}</title>
+  <title translate="yes">Útsýni ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Skoða ${payout.id}</h1>
+  <h1 translate="yes">Útsýni ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -18,17 +18,17 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Upphæð</th>
+        <th translate="yes">Magn</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Stripe reikning</th>
+        <th translate="yes">Stripe reikningur</th>
         <td>
           <a href="/administrator/connect/stripe-account?stripeid=${payout.stripeid}">${payout.stripeid}</a>
         </td>
       </tr>
       <tr>
-        <th translate="yes">Stöðu</th>
+        <th translate="yes">Staða</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Stofnuð</th>
+        <th translate="yes">Búið til</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,40 +45,40 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Enginn Bankareikningur fannst</span>
+    <span translate="yes">Enginn bankareikningur fannst</span>
   </template>
   <template id="invalid_currency">
-    <span translate="yes">Ógildur Gjaldmiðill</span>
+    <span translate="yes">Ógildur gjaldmiðill</span>
   </template>
   <template id="incorrect_account_holder_name">
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Ógilt lykilnúmer</span>
+    <span translate="yes">Ógilt reikningsnúmer</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Nægt fé</span>
+    <span translate="yes">Ófullnægjandi fjármunir</span>
   </template>
   <template id="declined">
     <span translate="yes">Bankinn hafnaði flutningi</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Engin debet-bankareikningur</span>
+    <span translate="yes">Engin debet á bankareikningum</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Ekki tókst að vinna úr</span>
+    <span translate="yes">Gat ekki afgreitt</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Eignarhald banka breytt</span>
+    <span translate="yes">Bankareign breyttist</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Bankareikningur takmarkaður</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Bankareikningur Frosinn</span>
+    <span translate="yes">Bankareikningur frosinn</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Bankareikningur lokaður</span>
+    <span translate="yes">Bankareikningi lokað</span>
   </template>
 </body>
 </html>

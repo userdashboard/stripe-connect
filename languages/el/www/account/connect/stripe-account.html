@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Δείτε ${stripeAccount.id}</title>
+  <title translate="yes">Θέα ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Δείτε ${stripeAccount.id}</h1>
+  <h1 translate="yes">Θέα ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,12 +17,12 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Πληκτρολογήστε</th>
+        <th translate="yes">Τύπος</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Όνομα</th>
+        <th translate="yes">Ονομα</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -38,12 +38,12 @@
       <tr>
         <th translate="yes">Υποβλήθηκε</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Δεν έχει υποβληθεί ακόμα</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Πληροφορίες εγγραφής</h2>
+    <h2 translate="yes">Πληροφορίες για τις εγγραφές</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,13 +51,13 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Εκπρόσωπος εταιρείας</h2>
-    <p translate="yes">Για να αποφύγετε τη διακοπή του λογαριασμού, υποβάλετε νέες αντιπροσωπευτικές πληροφορίες εάν το συγκεκριμένο πρόσωπο αποχωρήσει ή δεν εκπροσωπεί πλέον την εταιρεία.</p>
+    <h2 translate="yes">Εκπρόσωπος της εταιρείας</h2>
+    <p translate="yes">Για να αποφύγετε τη διακοπή του λογαριασμού, υποβάλετε νέες αντιπροσωπευτικές πληροφορίες εάν το συγκεκριμένο άτομο αποχωρήσει ή δεν εκπροσωπεί πλέον την εταιρεία.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
           <th translate="yes">Απαιτούμενες πληροφορίες</th>
         </tr>
       </thead>
@@ -67,13 +67,13 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Άλλες πληροφορίες για τους πραγματικούς δικαιούχους</h2>
-    <p translate="yes">Πρέπει να προσκομίσετε έγγραφα για οποιονδήποτε άλλο κατέχει ένα σημαντικό (25+) τοις εκατό της εταιρείας ή είναι υπεύθυνος για την εταιρεία, τα οικονομικά ή τις λειτουργίες.</p>
+    <h2 translate="yes">Άλλες πληροφορίες σχετικά με τους πραγματικούς κατόχους</h2>
+    <p translate="yes">Πρέπει να παρέχετε τεκμηρίωση για οποιονδήποτε άλλον κατέχει σημαντικό (25+) τοις εκατό της εταιρείας ή υπεύθυνο για την εταιρεία, τα οικονομικά ή τις λειτουργίες.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
           <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
@@ -84,13 +84,13 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Πληροφορίες διευθυντών εταιρειών</h2>
-    <p translate="yes">Πρέπει να δώσετε πλήρη ονόματα του διοικητικού συμβουλίου της εταιρείας σας ή/και των ατόμων που είναι υπεύθυνα για τη διατήρηση της κανονιστικής συμμόρφωσης.</p>
+    <h2 translate="yes">Πληροφορίες διευθυντών εταιρείας</h2>
+    <p translate="yes">Πρέπει να δώσετε πλήρη ονόματα του διοικητικού συμβουλίου της εταιρείας σας ή / και των ατόμων που είναι υπεύθυνα για τη διατήρηση της συμμόρφωσης με τους κανονισμούς.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Όνομα</th>
+          <th translate="yes">Ονομα</th>
           <th translate="yes">Απαιτεί</th>
         </tr>
       </thead>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Πληροφορίες πληρωμής</h2>
+    <h2 translate="yes">Πληροφορίες Πληρωμής</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -120,22 +120,22 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Προσθήκη πληροφοριών</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Προσθέστε πληροφορίες</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Τα κεφάλαια καταβάλλονται για λογαριασμό ${bank_account.bank_name}.</p>
+    <p translate="yes">Τα χρήματα καταβάλλονται στον λογαριασμό ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Τα τραπεζικά στοιχεία πρέπει να παρέχονται για τη λήψη κεφαλαίων.</p>
+    <p translate="yes">Τα τραπεζικά στοιχεία πρέπει να παρέχονται για τη λήψη χρημάτων.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Η καταχώριση δεν έχει υποβληθεί.</p>
+    <p translate="yes">Η εγγραφή δεν έχει υποβληθεί.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Η καταχώριση υποβλήθηκε στις ${account.dateFormatted}.</p>
+    <p translate="yes">Η εγγραφή υποβλήθηκε στις ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">Οι πληροφορίες εγγραφής δεν έχουν παρασχεθεί.</p>
@@ -147,25 +147,25 @@
     <span translate="yes">Δεν έχει υποβληθεί ακόμα</span>
   </template>
   <template id="verified">
-    <span translate="yes">Η εγγραφή έγινε δεκτή</span>
+    <span translate="yes">Η εγγραφή έγινε αποδεκτή</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">Απαιτεί πρόσθετες πληροφορίες</span>
+    <span translate="yes">Απαιτεί επιπλέον πληροφορίες</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Εκκρεμείς παρατηρήσεις</span>
+    <span translate="yes">Εκκρεμεί υποβολή</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
@@ -177,10 +177,10 @@
     <span translate="yes">Υπό εξέταση από Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Απορρίφθηκε από Stripe, βλ.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Απορρίφθηκε από Stripe, δείτε</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Απαιτεί πρόσθετες πληροφορίες</span>
+    <span translate="yes">Απαιτεί επιπλέον πληροφορίες</span>
   </template>
 </body>
 </html>

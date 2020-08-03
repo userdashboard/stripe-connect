@@ -12,17 +12,17 @@
   <h1 translate="yes">Исплате</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">До сада није дошло до исплате.</p>
+    <p translate="yes">Исплате још нису извршене.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
         <th translate="yes">Износ</th>
-        <th translate="yes">Stripe налог</th>
+        <th translate="yes">С_Т_Р_И_П_Е налог</th>
         <th translate="yes">Статус</th>
         <th translate="yes">Опис</th>
-        <th translate="yes">Креирали</th>
+        <th translate="yes">Направљено</th>
       </tr>
     </thead>
   </table>
@@ -50,7 +50,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Ниједан рачун у банци није пронађен</span>
+    <span translate="yes">Није пронађен ниједан банковни рачун</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Неважећа валута</span>
@@ -62,19 +62,19 @@
     <span translate="yes">Неважећи број рачуна</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">Недовољна средства</span>
+    <span translate="yes">Недовољно средстава</span>
   </template>
   <template id="declined">
-    <span translate="yes">Банка одбила пренос</span>
+    <span translate="yes">Банка је одбила трансфер</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Нема дебитних рачуна у банци</span>
+    <span translate="yes">Нема задужења на банковном рачуну</span>
   </template>
   <template id="could_not_process">
     <span translate="yes">Није могуће обрадити</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Промењен је власништво банака</span>
+    <span translate="yes">Власништво банке је промењено</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Банковни рачун је ограничен</span>
@@ -83,7 +83,7 @@
     <span translate="yes">Банковни рачун је замрзнут</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Рачун у банци затворен</span>
+    <span translate="yes">Банковни рачун затворен</span>
   </template>
 </body>
 </html>

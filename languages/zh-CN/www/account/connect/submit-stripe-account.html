@@ -12,15 +12,15 @@
 </head>
 <body>
   <h1 translate="yes">提交 ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> 通过提交已完成的注册进行验证。</p>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> 通过提交完整的注册来进行验证过程。</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">受益所有人</h2>
+    <h2 translate="yes">实益拥有人</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">名字</th>
+          <th translate="yes">名称</th>
         </tr>
       </thead>
     </table>
@@ -31,7 +31,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">名字</th>
+          <th translate="yes">名称</th>
         </tr>
       </thead>
     </table>
@@ -90,17 +90,17 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      注册注册信息不完整
+      注册中的注册信息不完整
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      错误！您必须提交公司的董事
+      错误！您必须提交公司董事
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      错误！您必须提交公司的受益所有者
+      错误！您必须提交公司的实益拥有人
     </div>
   </template>
   <template id="invalid-company-representative">
@@ -110,17 +110,17 @@
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      错误！注册有不完整的付款信息
+      错误！注册中的付款信息不完整
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      成功！已提交注册
+      成功！注册已提交
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      错误！提交注册时出错
+      错误！提交注册时发生错误
     </div>
   </template>
 </body>

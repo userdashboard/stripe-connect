@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">కొరకు చెల్లింపు సమాచారం ${stripeAccount.id}</title>
+  <title translate="yes">కోసం చెల్లింపు సమాచారం ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,15 +27,15 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">కొరకు చెల్లింపు సమాచారం ${stripeAccount.id}</h1>
-  <p translate="yes">మీ రెవిన్యూ చెల్లింపులు అందుకునే బ్యాంకు ఖాతాను అప్ డేట్ చేయండి.</p>
+  <h1 translate="yes">కోసం చెల్లింపు సమాచారం ${stripeAccount.id}</h1>
+  <p translate="yes">మీ ఆదాయ చెల్లింపులను స్వీకరించే బ్యాంక్ ఖాతాను నవీకరించండి.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">బ్యాంకు యొక్క దేశం</label>
+      <label for="country" translate="yes">బ్యాంక్ దేశం</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          ఎంచ
+          ఎంచుకోండి
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
@@ -55,7 +55,7 @@
           <label for="currency" translate="yes">ఖాతా కరెన్సీ</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              ఎంచ
+              ఎంచుకోండి
             </option>
           </select>
         </div>
@@ -67,7 +67,7 @@
     </div>
     <div id="AU-container">
       <div class="pure-control-group">
-        <label for="bsb_number" translate="yes">బిఎస్ బి నెంబరు</label>
+        <label for="bsb_number" translate="yes">బీఎస్u200cబీ నంబర్</label>
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">ట్రాన్సిట్ నెంబరు</label>
+        <label for="transit_number" translate="yes">రవాణా సంఖ్య</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -133,7 +133,7 @@
       <h2 translate="yes">ప్రత్యామ్నాయ ఆకృతి</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">కోడ్ క్రమీకరించు</label>
+          <label for="sort_code" translate="yes">స్పెల్ కోడ్</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,11 +149,11 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">కోడ్ క్లియర్ చేస్తోంది</label>
+        <label for="clearing_code" translate="yes">కోడ్ క్లియరింగ్</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">శాఖ కోడ్</label>
+        <label for="branch_code" translate="yes">శాఖయొక్క సంకేత పదం</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,11 +171,11 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">బ్యాంకు కోడ్</label>
+        <label for="bank_code" translate="yes">బ్యాంక్ కోడ్</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">శాఖ కోడ్</label>
+        <label for="branch_code" translate="yes">శాఖయొక్క సంకేత పదం</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,11 +233,11 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">బ్యాంకు కోడ్</label>
+        <label for="bank_code" translate="yes">బ్యాంక్ కోడ్</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="branch_code" translate="yes">శాఖ కోడ్</label>
+        <label for="branch_code" translate="yes">శాఖయొక్క సంకేత పదం</label>
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">చెల్లింపు సమాచారాన్ని భద్రపర్చు</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">చెల్లింపు సమాచారాన్ని సేవ్ చేయండి</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      విజయం! పేమెంట్ సమాచారం అప్ డేట్ చేయబడింది
+      విజయం! చెల్లింపు సమాచారం నవీకరించబడింది
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      తప్పు! పేమెంట్ సమాచారాన్ని అప్ డేట్ చేయడంలో దోషం ఏర్పడింది
+      లోపం! చెల్లింపు సమాచారాన్ని నవీకరించడంలో లోపం సంభవించింది
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా బ్యాంకు యొక్క దేశం
+      లోపం! బ్యాంక్ యొక్క చెల్లని లేదా తప్పిపోయిన దేశం
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      తప్పు! అకౌంట్ చెల్లుబాటు కాని లేదా మిస్ అయిన కరెన్సీ
+      లోపం! ఖాతా యొక్క కరెన్సీ చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన ఖాతా రకం
+      లోపం! ఖాతా యొక్క చెల్లని లేదా తప్పిపోయిన రకం
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన ఖాతా నెంబరు
+      లోపం! ఖాతా సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన BSB నెంబరు
+      లోపం! BSB సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన బ్యాంక్ కోడ్ నెంబరు
+      లోపం! చెల్లని లేదా తప్పిపోయిన బ్యాంక్ కోడ్ సంఖ్య
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లని లేదా మిస్ అయిన సార్ట్ కోడ్
+      లోపం! క్రమబద్ధీకరించు కోడ్ లేదు
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన ఇన్ స్టిట్యూషన్ నెంబరు
+      లోపం! ఇన్స్టిట్యూషన్ సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన ట్రాన్సిట్ నెంబరు
+      లోపం! రవాణా సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన క్లియరింగ్ కోడ్ నెంబరు
+      లోపం! క్లియరింగ్ కోడ్ సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన బ్రాంచీ కోడ్ నెంబరు
+      లోపం! బ్రాంచ్ కోడ్ సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన అకౌంట్ హోల్డర్ పేరు
+      లోపం! ఖాతా హోల్డర్ పేరు చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లని లేదా మిస్ అయిన IBAN నెంబరు
+      లోపం! IBAN సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      తప్పు! చెల్లుబాటు కాని లేదా మిస్ అయిన రవాణా నెంబరు
+      లోపం! రవాణా సంఖ్య చెల్లదు లేదా లేదు
     </div>
   </template>
 </body>

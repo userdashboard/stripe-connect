@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stvaranje registracije</title>
+  <title translate="yes">Kreirajte registraciju</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stvaranje registracije</h1>
-  <p translate="yes">Dovršena registracija omogućuje primanje isplata prihoda putem Stripe Connect.</p>
+  <h1 translate="yes">Kreirajte registraciju</h1>
+  <p translate="yes">Završena registracija omogućava vam primanje isplate prihoda kroz Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,15 +21,15 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Zemlja boravišta / osnivanja</label>
+      <label for="country" translate="yes">Zemlja prebivališta / sjedišta</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Odaberite državu
+          Odaberi državu
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Započni registraciju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Započnite registraciju</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom stvaranja registracije
+      Greška! Došlo je do pogreške prilikom registracije
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Pogreška! Država koja nije valjana ili nedostaje
+      Greška! Nevažeća ili nestala zemlja
     </div>
   </template>
 </body>

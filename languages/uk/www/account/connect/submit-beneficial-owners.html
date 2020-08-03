@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Надсилання власникам для ${stripeAccount.id}</title>
+  <title translate="yes">Надіслати власників для ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Надсилання власникам для ${stripeAccount.id}</h1>
-  <p translate="yes">Після завершення додавання всіх інших власників, якщо такі є, надішліть їх на рецензію.</p>
+  <h1 translate="yes">Надіслати власників для ${stripeAccount.id}</h1>
+  <p translate="yes">Закінчивши додавання всіх інших власників, якщо такі є, надішліть їх на розгляд.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Бенефіціарних власників</h2>
+    <h2 translate="yes">Вигідні власники</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Надіслати власникам</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Подати власників</button>
     </div>
   </form>
   <template id="person-row">
@@ -38,24 +38,24 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Додати інформацію</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}&amp;return-url=/account/connect/submit-beneficial-owners%3Fstripeid=${person.account}" translate="yes">Додайте інформацію</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr> 
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Помилка! Є власники, як і раніше потребують інформації.
+      Помилка! Є власники, які все ще потребують інформації.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Успіху! Власники компанії були представлені
+      Успіху! Власники компанії подані
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Помилка! Сталася помилка під час надсилання власників
+      Помилка! Під час подання власників сталася помилка
     </div>
   </template>
 </body>

@@ -10,11 +10,11 @@
 </head>
 <body class="entry">
   <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
-    <h1 translate="yes">Opret ny person</h1>
-    <p translate="yes">Bestyrelsen, ejerne og repræsentanten skal holdes opdateret, efterhånden som dine oplysninger ændres.</p>
+    <h1 translate="yes">Opret en ny person</h1>
+    <p translate="yes">Bestyrelse, ejere og repræsentant skal holdes ajour, når dine oplysninger ændres.</p>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Relation til virksomhed</h2>
+      <h2 translate="yes">Forholdet til virksomheden</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
         <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
@@ -22,7 +22,7 @@
         <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Stillings-, rolle- eller relationstitel</label>
+        <label for="relationship_title" translate="yes">Job, rolle eller forholdstitel</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
@@ -41,17 +41,17 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fejl! Der opstod en fejl under oprettelse af registreringen
+      Fejl! Der opstod en fejl ved oprettelse af registreringen
     </div>
   </template>
   <template id="invalid-owner">
     <div class="error message" translate="yes">
-      Din Stripe konto kræver ikke oplysninger om den reelle ejer
+      Din Stripe-konto kræver ikke gavnlige ejeroplysninger
     </div>
   </template>
   <template id="invalid-director">
     <div class="error message" translate="yes">
-      Din Stripe konto kræver ikke oplysninger om virksomhedens direktør
+      Din Stripe-konto kræver ikke virksomhedsdirektøroplysninger
     </div>
   </template>
   <template id="invalid-executive">
@@ -66,12 +66,12 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Fejl! Ugyldig eller manglende procentejerskab (0 hvis ingen)
+      Fejl! Ugyldigt eller manglende procentvis ejerskab (0 hvis ingen)
     </div>
   </template>
   <template id="invalid-relationship_title">
     <div class="error message" translate="yes">
-      Fejl! Ugyldig eller manglende relationstitel
+      Fejl! Ugyldig eller manglende forholdstitel
     </div>
   </template>
 </body>

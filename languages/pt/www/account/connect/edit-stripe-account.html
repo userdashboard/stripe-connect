@@ -25,14 +25,14 @@
         <input required="required" id="business_profile_url" name="business_profile_url" type="text" maxlength="50">
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
-        <label for="business_profile_product_description" translate="yes">Descrição do produto</label>
+        <label for="business_profile_product_description" translate="yes">Descrição do Produto</label>
         <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
-        <label for="business_profile_mcc" translate="yes">Código de categoria de comerciante</label>
+        <label for="business_profile_mcc" translate="yes">Código da categoria do comerciante</label>
         <select id="business_profile_mcc" name="business_profile_mcc">
           <option value="" translate="yes">
-            Selecione o código para o seu negócio
+            Selecione o código para sua empresa
           </option>
         </select>
       </div>
@@ -42,7 +42,7 @@
         <div class="pure-u-12-24">
           <div id="name-container" class="pure-control-group">
             <a id="name-anchor"></a>
-            <label for="name" translate="yes">Nome comercial</label>
+            <label for="name" translate="yes">Nome da empresa</label>
             <input required="required" id="name" name="name" type="text" maxlength="50">
           </div>
         </div>
@@ -50,7 +50,7 @@
         <div class="pure-u-11-24">
           <div id ="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
-            <label for="tax_id" translate="yes">Número de ID do imposto</label>
+            <label for="tax_id" translate="yes">Número de identificação fiscal</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
           </div>
         </div>
@@ -91,15 +91,15 @@
       <div id="company-verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <h2 translate="yes">Incorporação da empresa</h2>
-        <label for="verification_document_front" translate="yes">Digitalização frontal/foto</label>
+        <h2 translate="yes">Constituição da empresa</h2>
+        <label for="verification_document_front" translate="yes">Digitalização frontal / foto</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Scan/foto de trás</label>
+        <label for="verification_document_back" translate="yes">Digitalização traseira / foto</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
     </div>
     <div id="personal-container">
-      <h2 translate="yes">Informações pessoais</h2>
+      <h2 translate="yes">Informação pessoal</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name-container" class="pure-control-group">
@@ -143,7 +143,7 @@
       </div>
     </div>
     <div id="kanji-personal-information-container">
-      <h2 translate="yes">Informações pessoais de Kanji</h2>
+      <h2 translate="yes">Informações pessoais Kanji</h2>
       <div class="pure-g">
         <div class="pure-u-11-24">
           <div id="first_name_kanji-container" class="pure-control-group">
@@ -167,36 +167,36 @@
       <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
     </div>
     <div id="ssn_last_4-container" class="pure-control-group">
-      <label for="ssn_last_4" translate="yes">SSN últimos 4 dígitos</label>
+      <label for="ssn_last_4" translate="yes">Últimos 4 dígitos do SSN</label>
       <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="4">
     </div>
     <div id="gender-container" class="pure-control-group">
-      <label for="gender" translate="yes">Género</label>
+      <label for="gender" translate="yes">Gênero</label>
       <div class="pure-checkbox">
         <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">Fêmea</span></label>
-        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Homem</span></label>
+        <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">Masculino</span></label>
       </div>
     </div>
     <div id="id_number-container" class="pure-control-group">
       <h2 translate="yes">Identificação pessoal</h2>
-      <label for="id_number" translate="yes">Passaporte ou número de ID</label>
+      <label for="id_number" translate="yes">Passaporte ou número de identificação</label>
       <input required="required" id="id_number" name="id_number" type="text" maxlength="50">
     </div>
     <div id="individual-document-container" class="pure-control-group">
       <a id="verification_document_front-anchor"></a>
       <a id="verification_document_back-anchor"></a>
-      <label for="verification_document_front" translate="yes">Digitalização frontal/foto</label>
+      <label for="verification_document_front" translate="yes">Digitalização frontal / foto</label>
       <input name="verification_document_front" id="verification_document_front" type="file">
-      <label for="verification_document_back" translate="yes">Scan/foto de trás</label>
+      <label for="verification_document_back" translate="yes">Digitalização traseira / foto</label>
       <input name="verification_document_back" id="verification_document_back" type="file">
     </div>
     <div id="individual-additional-document-container" class="pure-control-group">
-      <h2 translate="yes">Comprovativo de endereço</h2>
+      <h2 translate="yes">Prova de endereço</h2>
       <a id="verification_additional_document_front-anchor"></a>
       <a id="verification_additional_document_back-anchor"></a>
-      <label for="verification_additional_document_front" translate="yes">Digitalização frontal/foto</label>
+      <label for="verification_additional_document_front" translate="yes">Digitalização frontal / foto</label>
       <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-      <label for="verification_additional_document_back" translate="yes">Scan/foto de trás</label>
+      <label for="verification_additional_document_back" translate="yes">Digitalização traseira / foto</label>
       <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
     </div>
     <div id="address-container">
@@ -216,10 +216,10 @@
       <div class="pure-control-group">
         <div class="pure-g">
           <div id="address_state-container" class="pure-u-17-24">
-            <label for="address_state" translate="yes">Estado ou província</label>
+            <label for="address_state" translate="yes">Estado ou Província</label>
             <select id="address_state" name="address_state">
               <option value="" translate="yes">
-                Selecione estado
+                Selecionar estado
               </option>
             </select>
           </div>
@@ -291,218 +291,218 @@
   </template>
   <template id="success">
     <div class="success message">
-      <span translate="yes">Que sucesso! A conta Stripe foi atualizada</span>
-      <a href="/account/connect" translate="yes">Devolução à conta</a>
+      <span translate="yes">Sucesso! A conta Stripe foi atualizada</span>
+      <a href="/account/connect" translate="yes">Retornar à conta</a>
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Um erro desconhecido ocorrido
+      Erro! Ocorreu um erro desconhecido
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro no upload de imagens de documentos
+      Erro! Ocorreu um erro ao fazer upload de imagens do documento
     </div>
   </template>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro ao submeter o formulário
+      Erro! Ocorreu um erro ao enviar o formulário
     </div>
   </template>
   <template id="invalid-business_profile_url">
     <div class="error message" translate="yes">
-      Um erro! URL de negócios inválido ou em falta
+      Erro! URL da empresa inválido ou ausente
     </div>
   </template>
   <template id="invalid-business_profile_mcc">
     <div class="error message" translate="yes">
-      Um erro! Código de categoria de comerciantes inválido ou em falta
+      Erro! Código de categoria de comerciante comercial inválido ou ausente
     </div>
   </template>
   <template id="invalid-business_profile_product_description">
     <div class="error message" translate="yes">
-      Um erro! Descrição inválida ou em falta do produto comercial
+      Erro! Descrição do produto comercial inválida ou ausente
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Um erro! Tomografia ou foto frontal de documento inválido ou em falta
+      Erro! Digitalização ou foto frontal do documento inválida ou ausente
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Um erro! Tomografia ou foto de documento inválido ou em falta
+      Erro! Documento inválido ou ausente, digitalização traseira ou foto
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Um erro! Inválido ou em falta de documento adicional ou foto
+      Erro! Digitalização ou foto frontal adicional de documento inválida ou ausente
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Um erro! Inválido ou em falta de documento ou foto
+      Erro! Documento adicional inválido ou ausente, digitalização traseira ou foto
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Um erro! Número de ID pessoal inválido ou desaparecido
+      Erro! Número de identificação pessoal inválido ou ausente
     </div>
   </template>
   <template id="invalid-name">
     <div class="error message" translate="yes">
-      Um erro! Nome de negócio inválido ou desaparecido
+      Erro! Nome da empresa inválido ou ausente
     </div>
   </template>
   <template id="invalid-name_kana">
     <div class="error message" translate="yes">
-      Um erro! Nome comercial inválido ou desaparecido de kana
+      Erro! Nome da empresa kana inválido ou ausente
     </div>
   </template>
   <template id="invalid-name_kanji">
     <div class="error message" translate="yes">
-      Um erro! Nome comercial de kanji inválido ou desaparecido
+      Erro! Nome da empresa kanji inválido ou ausente
     </div>
   </template>
   <template id="invalid-tax_id">
     <div class="error message" translate="yes">
-      Um erro! Id de imposto de negócios inválido ou em falta
+      Erro! ID de imposto comercial inválido ou ausente
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Um erro! Número de telefone inválido ou em falta
+      Erro! Número de telefone inválido ou ausente
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Um erro! Sexo inválido ou desaparecido
+      Erro! Sexo inválido ou ausente
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Um erro! Inválido ou em falta nos últimos 4 dígitos do Número de Segurança Social
+      Erro! Últimos 4 dígitos inválidos ou ausentes do Número de Segurança Social
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Um erro! Data de nascimento inválida ou em falta
+      Erro! Data de nascimento inválida ou ausente
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Um erro! Data de nascimento inválida ou em falta
+      Erro! Data de nascimento inválida ou ausente
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Um erro! Data de nascimento inválida ou em falta
+      Erro! Data de nascimento inválida ou ausente
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Um erro! Primeiro nome inválido ou desaparecido
+      Erro! Nome inválido ou ausente
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Um erro! Primeiro nome de Kana inválido ou desaparecido
+      Erro! Nome Kana inválido ou ausente
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Um erro! Primeiro nome de Kanji inválido ou desaparecido
+      Erro! Nome Kanji inválido ou ausente
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Um erro! Apelido inválido ou desaparecido
+      Erro! Sobrenome inválido ou ausente
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Um erro! Nome de Kana inválido ou desaparecido
+      Erro! Sobrenome Kana inválido ou ausente
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Um erro! Nome de Kanji inválido ou desaparecido
+      Erro! Sobrenome Kanji inválido ou ausente
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Um erro! E-mail inválido ou desaparecido
+      Erro! E-mail inválido ou ausente
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Um erro! Cidade de endereço pessoal inválido ou desaparecido
+      Erro! Cidade do endereço pessoal ausente ou inválida
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Um erro! Estado de endereço pessoal inválido ou desaparecido
+      Erro! Estado de endereço pessoal inválido ou ausente
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Um erro! Linha de endereço pessoal inválida ou em falta 1
+      Erro! Linha de endereço pessoal 1 inválida ou ausente
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Um erro! Código postal pessoal inválido ou em falta
+      Erro! Código postal pessoal inválido ou ausente
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Um erro! Cidade de endereço pessoal de Kana inválida ou desaparecida
+      Erro! Cidade inválida ou ausente do endereço pessoal de Kana
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Um erro! Estado de endereço pessoal de Kana inválido ou desaparecido
+      Erro! Estado de endereço pessoal de Kana inválido ou ausente
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Um erro! Cidade de endereço pessoal de Kana inválida ou desaparecida
+      Erro! Cidade pessoal inválida ou ausente do endereço Kana
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Um erro! Linha de endereço pessoal inválida ou desaparecida da Kana 1
+      Erro! Linha de endereço pessoal Kana inválida ou ausente
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Um erro! Código postal de endereço pessoal de Kana inválido ou desaparecido
+      Erro! Código postal do endereço pessoal de Kana inválido ou ausente
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Um erro! Cidade de endereço pessoal de Kanji inválida ou desaparecida
+      Erro! Cidade de endereço pessoal Kanji inválida ou ausente
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Um erro! Estado de endereço pessoal de Kanji inválido ou desaparecido
+      Erro! Estado de endereço pessoal Kanji inválido ou ausente
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Um erro! Cidade de endereço pessoal de Kanji inválida ou desaparecida
+      Erro! Cidade de endereço pessoal Kanji inválida ou ausente
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Um erro! Linha de endereço pessoal inválida ou desaparecida de Kanji 1
+      Erro! Linha de endereço pessoal Kanji inválida ou ausente
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Um erro! Código postal de endereço pessoal de Kanji inválido ou desaparecido
+      Erro! Código postal do endereço pessoal Kanji inválido ou ausente
     </div>
   </template>
 </body>

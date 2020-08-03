@@ -2,57 +2,57 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">拒否 ${stripeAccount.id}</title>
+  <title translate="yes">拒否する ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">拒否 ${stripeAccount.id}</h1>
+  <h1 translate="yes">拒否する ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
-      <label for="reason" translate="yes">拒否理由</label>
+      <label for="reason" translate="yes">拒否の理由</label>
       <select id="reason" name="reason">
         <option value="" translate="yes">
-          理由の選択
+          理由を選択してください
         </option>
         <option value="fraud" translate="yes">
           詐欺
         </option>
         <option value="terms_of_service" translate="yes">
-          サービス規約違反
+          利用規約違反
         </option>
         <option value="other" translate="yes">
-          他
+          その他の
         </option>
       </select>
-    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">拒否</button>
+    </div><button id="submit-button" class="pure-button pure-button-primary" translate="yes">拒否する</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      成功！Stripe アカウントが拒否されました
+      成功！ Stripeアカウントが拒否されました
     </div>
   </template>
   <template id="balance-error">
     <div class="error message" translate="yes">
-      エラー！アカウントは、拒否する前に /bin/sh 残高を持っている必要があります
+      エラー！アカウントは拒否する前に/ bin / sh残高が必要です
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      エラー！Stripe アカウントを拒否するエラーが発生しました
+      エラー！ Stripeアカウントの取り出し中にエラーが発生しました
     </div>
   </template>
   <template id="not-submitted">
     <span translate="yes">まだ提出されていません</span>
   </template>
   <template id="verified">
-    <span translate="yes">登録が受け付けられました</span>
+    <span translate="yes">登録が受理されました</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripeによって無効</span>
+    <span translate="yes">Stripeにより無効化</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">追加情報が必要</span>
@@ -61,31 +61,31 @@
     <span translate="yes">追加情報が必要</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">保留中の提出</span>
+    <span translate="yes">保留中の送信</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Stripeによって拒否されました, を参照してください。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripeによって拒否されました。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Stripeによって拒否されました, を参照してください。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripeによって拒否されました。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Stripeによって拒否されました, を参照してください。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripeによって拒否されました。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Stripeによって拒否されました, を参照してください。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripeによって拒否されました。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">詳細な情報が必要です</span>
+    <span translate="yes">詳細情報が必要です</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripeによる審査中</span>
+    <span translate="yes">Stripeによるレビュー中</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripeによる審査中</span>
+    <span translate="yes">Stripeによるレビュー中</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Stripeによって無効にされた、</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Stripeによって無効にされました。</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">ഇതിനായി ഉടമകൾ സമർപ്പിക്കുക ${stripeAccount.id}</title>
+  <title translate="yes">ഇതിനായി ഉടമകളെ സമർപ്പിക്കുക ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,24 +11,24 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">ഇതിനായി ഉടമകൾ സമർപ്പിക്കുക ${stripeAccount.id}</h1>
-  <p translate="yes">നിങ്ങൾ മറ്റെല്ലാ ഉടമകളും ചേർക്കുന്നത് പൂർത്തിയായാൽ, അവ അവലോകനത്തിനായി സമർപ്പിക്കുക.</p>
+  <h1 translate="yes">ഇതിനായി ഉടമകളെ സമർപ്പിക്കുക ${stripeAccount.id}</h1>
+  <p translate="yes">മറ്റെല്ലാ ഉടമകളെയും ചേർക്കുന്നത് നിങ്ങൾ പൂർത്തിയാക്കുമ്പോൾ, അവ അവലോകനത്തിനായി സമർപ്പിക്കുക.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">ഗുണമുള്ള ഉടമകൾ</h2>
+    <h2 translate="yes">പ്രയോജനകരമായ ഉടമകൾ</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമാണ്</th>
         </tr>
       </thead>
     </table>
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ഉടമസ്ഥർ സമർപ്പിക്കുക</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">ഉടമകളെ സമർപ്പിക്കുക</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      തെറ്റ്! ഇപ്പോഴും വിവരങ്ങൾ ആവശ്യപ്പെടുന്ന ഉടമകൾ ഉണ്ട്.
+      പിശക്! ഇപ്പോഴും വിവരങ്ങൾ ആവശ്യമുള്ള ഉടമകളുണ്ട്.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      വിജയം! കമ്പനിയുടെ ഉടമസ്ഥർ സമർപ്പിച്ചിട്ടുണ്ട്
+      വിജയം! കമ്പനിയുടെ ഉടമകൾ സമർപ്പിച്ചു
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      തെറ്റ്! ഉടമസ്ഥർ സമർപ്പിക്കുന്നതിൽ പിശക് സംഭവിച്ചു
+      പിശക്! ഉടമകൾ സമർപ്പിക്കുന്നതിൽ ഒരു പിശക് സംഭവിച്ചു
     </div>
   </template>
 </body>

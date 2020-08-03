@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
-    <title translate="yes">Bewerken ${person.id}</title>
+    <title translate="yes">Bewerk ${person.id}</title>
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -21,7 +21,7 @@
     <h1 translate="yes">Persoon bewerken</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Relatie tot bedrijf</h2>
+      <h2 translate="yes">Relatie met bedrijf</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,14 +29,14 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Functie,rol of relatietitel</label>
+        <label for="relationship_title" translate="yes">Functie, functie of relatietitel</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Percentage in handen (indien aanwezig)</label>
+        <label for="relationship_percent_ownership" translate="yes">Percentage eigendom (indien aanwezig)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Persoonlijke gegevens</h2>
+      <h2 translate="yes">Persoonlijke informatie</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div id="kana-information-container">
-        <h2 translate="yes">Persoonlijke gegevens van Kana</h2>
+        <h2 translate="yes">Kana Persoonlijke informatie</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kana-container" class="pure-control-group">
@@ -94,7 +94,7 @@
         </div>
       </div>
       <div id="kanji-information-container">
-        <h2 translate="yes">Persoonlijke gegevens van Kanji</h2>
+        <h2 translate="yes">Kanji Persoonlijke informatie</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kanji-container" class="pure-control-group">
@@ -137,31 +137,31 @@
       <div id="id_number-container" class="pure-control-group">
         <h2 translate="yes">Persoonlijke identificatie</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Paspoort- of identiteitskaart</label>
+        <label for="id_number" translate="yes">Paspoort of ID-nummer</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Voorscan/foto</label>
+        <label for="verification_document_front" translate="yes">Front scan / foto</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Terug scannen / foto</label>
+        <label for="verification_document_back" translate="yes">Terug scan / foto</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
         <h2 translate="yes">Bewijs van adres</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Voorscan/foto</label>
+        <label for="verification_additional_document_front" translate="yes">Front scan / foto</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Terug scannen / foto</label>
+        <label for="verification_additional_document_back" translate="yes">Terug scan / foto</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
         <h2 translate="yes">Persoonlijk adres</h2>
         <div id="address_line1-container" class="pure-control-group">
           <a id="address_line1-anchor"></a>
-          <label for="address_line1" translate="yes">Regel 1</label>
+          <label for="address_line1" translate="yes">Lijn 1</label>
          <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
         </div>
         <div id="address_line2-container" class="pure-control-group">
@@ -171,7 +171,7 @@
         </div>
         <div id="address_city-container" class="pure-control-group">
           <a id="address_city-anchor"></a>
-          <label for="address_city" translate="yes">Stad</label>
+          <label for="address_city" translate="yes">stad</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
@@ -200,7 +200,7 @@
               <label for="address_country" translate="yes">Land</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
-                  Land selecteren
+                  Selecteereereereer land
                 </option>
               </select>
             </div>
@@ -216,11 +216,11 @@
         <h2 translate="yes">Kana persoonlijk adres</h2>
         <div id="address_kana_line1-container" class="pure-control-group">
           <a id="address_kana_line1-anchor"></a>
-          <label for="address_kana_line1" translate="yes">Regel 1</label>
+          <label for="address_kana_line1" translate="yes">Lijn 1</label>
           <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
         </div>
         <div id="address_kana_city-container" class="pure-control-group">
-          <label for="address_kana_city" translate="yes">Stad</label>
+          <label for="address_kana_city" translate="yes">stad</label>
           <a id="address_kana_city-anchor"></a>
           <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
         </div>
@@ -244,12 +244,12 @@
         <h2 translate="yes">Kanji persoonlijk adres</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
-          <label for="address_kanji_line1" translate="yes">Regel 1</label>
+          <label for="address_kanji_line1" translate="yes">Lijn 1</label>
           <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
         </div>
         <div id="address_kanji_city-container" class="pure-control-group">
           <a id="address_kanji_city-anchor"></a>
-          <label for="address_kanji_city" translate="yes">Stad</label>
+          <label for="address_kanji_city" translate="yes">stad</label>
           <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
         </div>
         <div id="address_kanji_town-container" class="pure-control-group">
@@ -275,7 +275,7 @@
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Fout! Er is een fout opgetreden bij het indienen van het formulier
+      Fout! Er is een fout opgetreden bij het verzenden van het formulier
     </div>
   </template>
   <template id="country-option">
@@ -290,7 +290,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fout! Er is een fout opgetreden bij het maken van de informatie
+      Fout! Er is een fout opgetreden bij het bijwerken van de informatie
     </div>
   </template>
   <template id="upload-error">
@@ -300,7 +300,7 @@
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Fout! Ongeldig of ontbrekend persoonlijk identiteitsnummer
+      Fout! Ongeldig of ontbrekend persoonlijk ID-nummer
     </div>
   </template>
   <template id="invalid-gender">
@@ -335,12 +335,12 @@
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kana voornaam
+      Fout! Ongeldige of ontbrekende voornaam van Kana
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kanjifirst naam
+      Fout! Ongeldige of ontbrekende Kanjifirst-naam
     </div>
   </template>
   <template id="invalid-last_name">
@@ -350,7 +350,7 @@
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kana-achternaam
+      Fout! Ongeldige of ontbrekende achternaam van Kana
     </div>
   </template>
   <template id="invalid-last_name_kanji">
@@ -370,47 +370,47 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Fout! Ongeldig of ontbrekend percentage eigendom
+      Fout! Ongeldig of ontbrekend eigendomspercentage
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende documentfrontscan of foto
+      Fout! Ongeldige of ontbrekende frontscan of foto van document
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende documentrugscan of foto
+      Fout! Ongeldige of ontbrekende document terug-scan of foto
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende extra documentfrontscan of foto
+      Fout! Ongeldige of ontbrekende aanvullende frontscan of foto van document
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende extra document terug scan of foto
+      Fout! Ongeldige of ontbrekende aanvullende documentenscan of foto
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Fout! Ongeldig of ontbrekend adresland
+      Fout! Ongeldig of ontbrekend land voor persoonlijk adres
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende persoonlijke adresstad
+      Fout! Ongeldige of ontbrekende plaats voor persoonlijk adres
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende status van persoonlijk adres
+      Fout! Ongeldige of ontbrekende persoonlijke adresstatus
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Fout! Ongeldig of ontbrekend persoonlijk adres regel 1
+      Fout! Ongeldige of ontbrekende persoonlijke adresregel 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
@@ -420,52 +420,52 @@
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kana persoonlijke adresstad
+      Fout! Ongeldige of ontbrekende stad Kana-adres
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende status van kana-persoonlijk adres
+      Fout! Ongeldige of ontbrekende persoonlijke adresstatus van Kana
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kana persoonlijk adres stad
+      Fout! Ongeldige of ontbrekende persoonlijke Kana-adresstad
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kana-persoonlijke adresregel 1
+      Fout! Ongeldige of ontbrekende persoonlijke adresregel 1 van Kana
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kana persoonlijke adres postcode
+      Fout! Ongeldige of ontbrekende postcode van het persoonlijke adres van Kana
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kanji persoonlijke adresplaats
+      Fout! Ongeldige of ontbrekende Kanji-woonplaats
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende status van kanji-persoonlijk adres
+      Fout! Ongeldige of ontbrekende Kanji-adresstatus
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kanji persoonlijke adresstad
+      Fout! Ongeldige of ontbrekende Kanji-adresplaats
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Fout! Ongeldig of ontbrekende Kanji-adresregel 1
+      Fout! Ongeldige of ontbrekende Kanji persoonlijke adresregel 1
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Fout! Ongeldige of ontbrekende Kanji persoonlijke adres postcode
+      Fout! Ongeldige of ontbrekende Kanji-postcode voor persoonlijk adres
     </div>
   </template>
 </body>

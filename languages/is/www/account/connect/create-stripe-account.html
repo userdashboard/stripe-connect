@@ -2,26 +2,26 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stofna skráningu</title>
+  <title translate="yes">Búðu til skráningu</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stofna skráningu</h1>
-  <p translate="yes">Útfyllt skráning gerir kleift að fá tekjur útborganir í gegnum Stripe Connect.</p>
+  <h1 translate="yes">Búðu til skráningu</h1>
+  <p translate="yes">Lokinni skráningu gerir þér kleift að fá tekjuútborgun í gegnum Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Gerð lykils</label>
+      <label for="individual" translate="yes">Tegund reiknings</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Land bústaða/innfelli</label>
+      <label for="country" translate="yes">Búsland / aðsetur</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Veldu land
@@ -29,7 +29,7 @@
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Hefja skráningu</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Byrjaðu skráningu</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Villa! Villa kom upp við stofnun skráningar
+      Villa! Villa kom upp við að búa til skráninguna
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Villa! Ógilt eða vantar land
+      Villa! Ógilt land eða vantar
     </div>
   </template>
 </body>

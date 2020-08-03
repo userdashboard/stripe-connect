@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Skicka ägare för ${stripeAccount.id}</title>
+  <title translate="yes">Skicka in ägare för ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,16 +11,16 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Skicka ägare för ${stripeAccount.id}</h1>
-  <p translate="yes">När du har lagt till alla andra ägare, om några, skicka dem för granskning.</p>
+  <h1 translate="yes">Skicka in ägare för ${stripeAccount.id}</h1>
+  <p translate="yes">När du är klar med att lägga till alla andra ägare, om några, skicka dem till granskning.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Förmånstagare</h2>
+    <h2 translate="yes">Gynnsamma ägare</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Namn</th>
+          <th translate="yes">namn</th>
           <th translate="yes">Kräver</th>
         </tr>
       </thead>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Skicka ägare</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Skicka in ägare</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,12 +45,12 @@
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fel! Det finns ägare som fortfarande behöver information.
+      Fel! Det finns fortfarande ägare som behöver information.
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Framgång! Bolagets ägare har lämnats in
+      Framgång! Företagets ägare har lämnats in
     </div>
   </template>
   <template id="unknown-error">

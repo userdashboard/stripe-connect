@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vizualizare ${payout.id}</title>
+  <title translate="yes">Vedere ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Vizualizare ${payout.id}</h1>
+  <h1 translate="yes">Vedere ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -18,7 +18,7 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Suma</th>
+        <th translate="yes">Cantitate</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
@@ -28,15 +28,15 @@
         </td>
       </tr>
       <tr>
-        <th translate="yes">Starea</th>
+        <th translate="yes">stare</th>
         <td id="status-${payout.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Descrierea /</th>
+        <th translate="yes">Descriere</th>
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">Creat</th>
+        <th translate="yes">Creată</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -45,7 +45,7 @@
     <span>Card unsupported by bank.</span>
   </template>
   <template id="no_account">
-    <span translate="yes">Nu s-a găsit niciun cont bancar</span>
+    <span translate="yes">Nu a fost găsit niciun cont bancar</span>
   </template>
   <template id="invalid_currency">
     <span translate="yes">Monedă nevalidă</span>
@@ -54,22 +54,22 @@
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Număr de cont nevalid</span>
+    <span translate="yes">număr de cont invalid</span>
   </template>
   <template id="insufficient_funds">
     <span translate="yes">Fonduri insuficiente</span>
   </template>
   <template id="declined">
-    <span translate="yes">Banca a refuzat transferul</span>
+    <span translate="yes">Transferul bancar a refuzat</span>
   </template>
   <template id="debit_not_authorized">
-    <span translate="yes">Fără debit de cont bancar</span>
+    <span translate="yes">Fără debit bancar</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">Imposibil de procesat</span>
+    <span translate="yes">Nu s-a putut procesa</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Proprietatea bancară s-a modificat</span>
+    <span translate="yes">Proprietatea băncii a fost schimbată</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Cont bancar restricționat</span>

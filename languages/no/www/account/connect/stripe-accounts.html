@@ -11,7 +11,7 @@
 </head>
 <body>
   <h1 translate="yes">Stripe kontoer</h1>
-  <p><span translate="yes">Bli leverandør ved å bekrefte din personlige identitet og firmainformasjon gjennom</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">Bli en leverandør ved å bekrefte din personlige identitet og firmainformasjon gjennom</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div id="no-stripe-accounts">
     <p translate="yes">Ingen Stripe kontoer er opprettet ennå.</p>
   </div>
@@ -20,7 +20,7 @@
       <div class="requirements">
         <h2 translate="yes">Individuelle krav</h2>
         <ol>
-          <li translate="yes">Verifisert personlig informasjon</li>
+          <li translate="yes">Bekreftet personlig informasjon</li>
           <li translate="yes">Bosatt i et støttet land</li>
           <li translate="yes">Bankkonto i et støttet land</li>
         </ol>
@@ -31,11 +31,11 @@
       <div class="requirements">
         <h2 translate="yes">Forretningskrav</h2>
         <ol>
-          <li translate="yes">Verifisert personlig informasjon</li>
+          <li translate="yes">Bekreftet personlig informasjon</li>
           <li translate="yes">Virksomhet registrert i et støttet land</li>
           <li translate="yes">Bankkonto i et støttet land</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Start firmaregistrering</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">Start selskapsregistrering</a>
       </div>
     </div>
   </div>
@@ -46,24 +46,24 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">navn</th>
+            <th translate="yes">Navn</th>
             <th translate="yes">Status</th>
-            <th translate="yes">Opprettet</th>
-            <th translate="yes">Sendt inn</th>
+            <th translate="yes">laget</th>
+            <th translate="yes">sendt inn</th>
           </tr>
         </thead>
       </table>
     </div>
     <div id="company-container">
-      <h2 translate="yes">Firmaregistreringer</h2>
+      <h2 translate="yes">Selskapsregistreringer</h2>
       <table id="company-accounts-table" class="pure-table pure-table-striped list-table">
         <thead>
           <tr>
             <th>ID</th>
-            <th translate="yes">Bedriftsnavn</th>
+            <th translate="yes">Firmanavn</th>
             <th translate="yes">Status</th>
-            <th translate="yes">Opprettet</th>
-            <th translate="yes">Sendt inn</th>
+            <th translate="yes">laget</th>
+            <th translate="yes">sendt inn</th>
           </tr>
         </thead>
       </table>
@@ -96,7 +96,7 @@
     <span translate="yes">Krever tilleggsinformasjon</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Ventende innsending</span>
+    <span translate="yes">Venter på innsending</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Avvist av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -114,10 +114,10 @@
     <span translate="yes">Mer informasjon er nødvendig</span>
   </template>
   <template id="listed">
-    <span translate="yes">Under gjennomgang av Stripe</span>
+    <span translate="yes">Under vurdering av Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Under gjennomgang av Stripe</span>
+    <span translate="yes">Under vurdering av Stripe</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Deaktivert av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

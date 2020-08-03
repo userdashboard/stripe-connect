@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">Үчүн жаңы адам түзүү ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">Жаңы адам түзүү</h1>
+    <p translate="yes">Директорлор кеңеши, ээлери жана өкүлү сиздин маалыматыңыз өзгөргөн сайын жаңыртылып турушу керек.</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">Компания менен мамиле</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">Жумуш, роль же мамиленин аталышы</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">Пайдалуу пайыздар (бар болсо)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Каттоону жаңыртыңыз</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      Ийгилик! Каттоо жаңыртылды
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      Error! Каттоону түзүүдө ката кетти
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      Stripe каттоо эсебиңизде пайдалуу ээсинин маалыматы талап кылынбайт
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      Stripe каттоо эсебиңизде компаниянын директору жөнүндө маалымат талап кылынбайт
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      Компаниянын өкүлдөрү башкаруучулар болушу керек
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      Өкүл, директор же ээси тандалышы керек
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      Error! Жараксыз же жок пайыздык ээлик кылуу (жок болсо, 0)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      Error! Жараксыз же жок болгон мамиленин аталышы
+    </div>
+  </template>
+</body>
+</html>

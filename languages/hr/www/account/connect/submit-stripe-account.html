@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Pošaljite ${stripeAccount.id}</title>
+  <title translate="yes">podnijeti ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Pošaljite ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> postupka provjere slanjem izvršene registracije.</p>
+  <h1 translate="yes">podnijeti ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> postupak provjere podnošenjem dovršene registracije.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Stvarni vlasnici</h2>
+    <h2 translate="yes">Beneficirani vlasnici</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Direktori tvrtke</h2>
+    <h2 translate="yes">Direktori tvrtki</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pošalji registraciju</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pošaljite registraciju</button>
     </div>
   </form>
   <template id="owner-row">
@@ -95,32 +95,32 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Pogreška! Morate predati direktore tvrtke.
+      Greška! Morate podnijeti direktore tvrtke
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Pogreška! Morate dostaviti korisne vlasnike tvrtke
+      Greška! Morate dostaviti stvarne vlasnike tvrtke
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Pogreška! Morate dostaviti informacije predstavnika tvrtke
+      Greška! Morate dostaviti podatke predstavnika tvrtke
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Pogreška! Registracija ima nepotpune podatke o plaćanju
+      Greška! Registracija ima nepotpune podatke o plaćanju
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspjeh! Registracija je podnesena
+      Uspjeh! Registracija je poslata
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom slanja registracije
+      Greška! Došlo je do pogreške prilikom slanja registracije
     </div>
   </template>
 </body>

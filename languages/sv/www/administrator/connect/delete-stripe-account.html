@@ -2,20 +2,20 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Ta bort ${stripeAccount.id}</title>
+  <title translate="yes">Radera ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Ta bort ${stripeAccount.id}</h1>
+  <h1 translate="yes">Radera ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Namn</th>
+        <th translate="yes">namn</th>
         <th translate="yes">Status</th>
       </tr>
     </thead>
@@ -31,23 +31,23 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Ta bort</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Radera</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Framgång! Det Stripe kontot har tagits bort
+      Framgång! Stripe-kontot har tagits bort
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fel! Ett fel uppstod när Stripe-kontot togs bort
+      Fel! Ett fel uppstod när Stripe-kontot raderades
     </div>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Inte inlämnad ännu</span>
+    <span translate="yes">Inte skickat ännu</span>
   </template>
   <template id="verified">
-    <span translate="yes">Registreringen har accepterats</span>
+    <span translate="yes">Registrering har accepterats</span>
   </template>
   <template id="verified">
     <span translate="yes">Inaktiverad av Stripe</span>
@@ -56,22 +56,22 @@
     <span translate="yes">Kräver ytterligare information</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Väntande inlämning</span>
+    <span translate="yes">Väntar på inlämning</span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">Väntande inlämning</span>
+    <span translate="yes">Väntar på inlämning</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Avvisad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Avvisas av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Mer information krävs</span>
@@ -86,7 +86,7 @@
     <span><span translate="yes">Inaktiverad av Stripe, se</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
-    <span translate="yes">Tas bort</span>
+    <span translate="yes">raderade</span>
   </template>
 </body>
 </html>

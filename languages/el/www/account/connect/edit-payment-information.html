@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Πληροφορίες πληρωμής για ${stripeAccount.id}</title>
+  <title translate="yes">Στοιχεία πληρωμής για ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,21 +27,21 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">Πληροφορίες πληρωμής για ${stripeAccount.id}</h1>
-  <p translate="yes">Ενημερώστε τον τραπεζικό λογαριασμό που θα λάβει τις πληρωμές των εσόδων σας.</p>
+  <h1 translate="yes">Στοιχεία πληρωμής για ${stripeAccount.id}</h1>
+  <p translate="yes">Ενημερώστε τον τραπεζικό λογαριασμό που θα λάβει τις πληρωμές εσόδων σας.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
-      <label for="country" translate="yes">Χώρα της τράπεζας</label>
+      <label for="country" translate="yes">Χώρα τράπεζας</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Επιλέξτε
+          Επιλέγω
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Τύπος λογαριασμού</label>
+      <label translate="yes">Τύπος Λογαριασμού</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -52,17 +52,17 @@
     <div class="pure-g">
       <div class="pure-u-1-1">
         <div class="pure-control-group">
-          <label for="currency" translate="yes">Νόμισμα λογαριασμού</label>
+          <label for="currency" translate="yes">Τραπεζικός λογαριασμός</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Επιλέξτε
+              Επιλέγω
             </option>
           </select>
         </div>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="account-holder-name" translate="yes">Όνομα κατόχου λογαριασμού</label>
+      <label for="account-holder-name" translate="yes">Ονομα Κατόχου Λογαριασμού</label>
       <input required="required" id="account_holder_name" name="account_holder_name" type="text" maxlength="50">
     </div>
     <div id="AU-container">
@@ -85,7 +85,7 @@
     </div>
     <div id="CA-container">
       <div class="pure-control-group">
-        <label for="transit_number" translate="yes">Αριθμός διαμετακόμισης</label>
+        <label for="transit_number" translate="yes">Αριθμός διέλευσης</label>
         <input required="required" id="transit_number" name="transit_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -133,7 +133,7 @@
       <h2 translate="yes">Εναλλακτική μορφή</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Κωδικός ταξινόμησης</label>
+          <label for="sort_code" translate="yes">Ορθογραφικός κωδικός</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
@@ -149,7 +149,7 @@
     </div>
     <div id="HK-container">
       <div class="pure-control-group">
-        <label for="clearing_code" translate="yes">Κωδικός εκκαθάρισης</label>
+        <label for="clearing_code" translate="yes">Εκκαθάριση κωδικού</label>
         <input required="required" id="clearing_code" name="clearing_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -171,7 +171,7 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Κωδικός τράπεζας</label>
+        <label for="bank_code" translate="yes">τραπεζικός κωδικός</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -233,7 +233,7 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Κωδικός τράπεζας</label>
+        <label for="bank_code" translate="yes">τραπεζικός κωδικός</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -268,7 +268,7 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Αποθήκευση πληροφοριών πληρωμής</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Αποθηκεύστε τα στοιχεία πληρωμής</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Επιτυχία! Οι πληροφορίες πληρωμής έχουν ενημερωθεί
+      Επιτυχία! Τα στοιχεία πληρωμής ενημερώθηκαν
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Σφάλμα! Ένα σφάλμα κατά την ενημέρωση των πληροφοριών πληρωμής
+      Λάθος! Παρουσιάστηκε σφάλμα κατά την ενημέρωση των στοιχείων πληρωμής
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρη ή ελλείπουσα χώρα τράπεζας
+      Λάθος! Μη έγκυρη ή λείπει χώρα τράπεζας
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρο ή λείπει το νόμισμα του λογαριασμού
+      Λάθος! Μη έγκυρο ή λείπει νόμισμα λογαριασμού
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος ή λείπει ο τύπος λογαριασμού
+      Λάθος! Μη έγκυρος ή λείπει τύπος λογαριασμού
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Σφάλμα! Ο αριθμός λογαριασμού που δεν είναι έγκυρος ή λείπει
+      Λάθος! Μη έγκυρος ή ελλιπής αριθμός λογαριασμού
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος αριθμός BSB ή λείπει
+      Λάθος! Μη έγκυρος ή λείπει αριθμός BSB
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος ή λείπει αριθμός κωδικού τράπεζας
+      Λάθος! Μη έγκυρος ή λείπει αριθμός τραπεζικού κωδικού
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος ή λείπει κώδικας ταξινόμησης
+      Λάθος! Μη έγκυρος ή λείπει Κωδικός ταξινόμησης
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος αριθμός ιδρύματος ή λείπει
+      Λάθος! Μη έγκυρος ή λείπει αριθμός ιδρύματος
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος αριθμός διαμετακόμισης ή λείπει
+      Λάθος! Μη έγκυρος ή λείπει αριθμός συγκοινωνίας
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Σφάλμα! Ο αριθμός κωδικού εκκαθάρισης που λείπει ή λείπει δεν είναι έγκυρος
+      Λάθος! Μη έγκυρος ή λείπει αριθμός κωδικού εκκαθάρισης
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος αριθμός κωδικού κλάδου που λείπει ή λείπει
+      Λάθος! Μη έγκυρος ή λείπει αριθμός κωδικού κλάδου
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Σφάλμα! Το όνομα κατόχου λογαριασμού που δεν είναι έγκυρος ή λείπει
+      Λάθος! Μη έγκυρο ή λείπει όνομα κατόχου λογαριασμού
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος αριθμός IBAN ή λείπει
+      Λάθος! Μη έγκυρος ή λείπει αριθμός IBAN
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Σφάλμα! Μη έγκυρος αριθμός διαμετακόμισης ή αριθμός διαμετακόμισης που λείπει
+      Λάθος! Μη έγκυρος ή ελλιπής αριθμός διέλευσης
     </div>
   </template>
 </body>

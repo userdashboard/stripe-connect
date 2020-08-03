@@ -2,26 +2,26 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Payouts</title>
+  <title translate="yes">Xuất chi</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Payouts</h1>
+  <h1 translate="yes">Xuất chi</h1>
   <div id="message-container"></div>
   <div id="no-payouts">
-    <p translate="yes">Chưa có Payouts nào xảy ra.</p>
+    <p translate="yes">Chưa có khoản xuất chi nào xảy ra.</p>
   </div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Lượng</th>
+        <th translate="yes">Số tiền</th>
         <th translate="yes">Tài khoản Stripe</th>
-        <th translate="yes">Tình trạng</th>
-        <th translate="yes">Mô tả</th>
+        <th translate="yes">Trạng thái</th>
+        <th translate="yes">Sự miêu tả</th>
         <th translate="yes">Tạo</th>
       </tr>
     </thead>
@@ -59,13 +59,13 @@
     <span>Incorrect account holder name.</span>
   </template>
   <template id="invalid_account_number">
-    <span translate="yes">Số tài khoản không hợp lệ</span>
+    <span translate="yes">số tài khoản không hợp lệ</span>
   </template>
   <template id="insufficient_funds">
     <span translate="yes">Không đủ tiền</span>
   </template>
   <template id="declined">
-    <span translate="yes">Ngân hàng bị từ chối chuyển</span>
+    <span translate="yes">Ngân hàng từ chối chuyển khoản</span>
   </template>
   <template id="debit_not_authorized">
     <span translate="yes">Không ghi nợ tài khoản ngân hàng</span>
@@ -74,16 +74,16 @@
     <span translate="yes">Không thể xử lý</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">Thay đổi quyền sở hữu ngân hàng</span>
+    <span translate="yes">Thay đổi sở hữu ngân hàng</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">Tài khoản ngân hàng bị hạn chế</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">Tài khoản ngân hàng đông lạnh</span>
+    <span translate="yes">Tài khoản ngân hàng bị đóng băng</span>
   </template>
   <template id="account_closed">
-    <span translate="yes">Đóng tài khoản ngân hàng</span>
+    <span translate="yes">Tài khoản ngân hàng đã đóng</span>
   </template>
 </body>
 </html>

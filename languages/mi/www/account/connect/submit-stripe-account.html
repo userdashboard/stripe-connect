@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Whakaurungia ${stripeAccount.id}</title>
+  <title translate="yes">Tukua ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Whakaurungia ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> tukanga manatokonga mā te tuku i tō rēhitatanga kua oti.</p>
+  <h1 translate="yes">Tukua ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> tukanga whakamana ma te tuku i to rehitatanga kua oti.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Whaihua rangatira</h2>
+    <h2 translate="yes">Rangatira painga</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Directors kamupene</h2>
+    <h2 translate="yes">Kaiwhakahaere Kamupene</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tuku i te rēhitatanga</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tukuna rēhitatanga</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Kua oti i te rēhitatanga te mōhiohio rēhitatanga o te rēhita
+      Ko nga rehitatanga kei te katoa o nga korero mo te rehitatanga
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Hē! Me tuku koe i te directors o te kamupene
+      He hapa! Me tuku e koe nga kaiwhakahaere o te kamupene
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Hē! Me tuku koe i te whaihua o te kamupene rangatira
+      He hapa! Me tuku e koe nga rangatira whai hua o te kamupene
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Hē! Me tuku koe i te mōhiohio o te mangai kamupene
+      He hapa! Me tuku e koe nga korero a te mema hui
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Hē! Kei te rēhitatanga te mōhiohio utunga tārewa
+      He hapa! Ko nga rehitatanga kaore he korero oti mo te utu
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Angitu! Kua tukuna te rēhitatanga
+      Ka angitu! Kua tukuna mai te rehitatanga
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Hē! I hapa i te tuku i te rēhitatanga
+      He hapa! Kua puta he he ki te tuku i te rehitatanga
     </div>
   </template>
 </body>

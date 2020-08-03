@@ -2,7 +2,7 @@
 <html lang="en" data-template="false">
   <head>
     <meta charset="utf-8" /> 
-    <title translate="yes">Uređivanje ${person.id}</title>
+    <title translate="yes">Uredi ${person.id}</title>
     <link rel="stylesheet" href="/public/pure-min.css">
     <link rel="stylesheet" href="/public/content.css">
     <link rel="stylesheet" href="/public/content-additional.css">
@@ -18,10 +18,10 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Uređivanje osobe</h1>
+    <h1 translate="yes">Uredite osobu</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Odnos prema poduzeću</h2>
+      <h2 translate="yes">Odnos prema kompaniji</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,14 +29,14 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Naziv posla, uloge ili odnosa</label>
+        <label for="relationship_title" translate="yes">Naslov posla, uloge ili veze</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Postotak u vlasništvu (ako postoji)</label>
+        <label for="relationship_percent_ownership" translate="yes">Postotak u vlasništvu (ako ih ima)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Osobni podaci</h2>
+      <h2 translate="yes">Osobne informacije</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">Adresa e-pošte</label>
+              <label for="email" translate="yes">Email adresa</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -117,14 +117,14 @@
         <a id="dob_day-anchor"></a>
         <a id="dob_month-anchor"></a>
         <a id="dob_year-anchor"></a>
-        <label for="dob_day" translate="yes">datum rođenja</label>
+        <label for="dob_day" translate="yes">Datum rođenja</label>
         <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
         <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
         <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
       </div>
       <div id="gender-container" class="pure-control-group">
         <a id="gender-anchor"></a>
-        <label for="female" translate="yes">Spol</label>
+        <label for="female" translate="yes">rod</label>
         <div class="pure-checkbox">
          <label><input id="female" name="gender" type="radio" value="female"> Female</label>
          <label><input id="male" name="gender" type="radio" value="male"> Male</label>
@@ -137,24 +137,24 @@
       <div id="id_number-container" class="pure-control-group">
         <h2 translate="yes">Osobna identifikacija</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Putovnica ili identifikacijski broj</label>
+        <label for="id_number" translate="yes">Putovnica ili ID broj</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Prednje skeniranje/fotografija</label>
+        <label for="verification_document_front" translate="yes">Prednji pregled / fotografija</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Pozadinsko skeniranje/fotografija</label>
+        <label for="verification_document_back" translate="yes">Natrag skeniranje / fotografija</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
-        <h2 translate="yes">Dokaz o adresi</h2>
+        <h2 translate="yes">Dokaz adrese</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Prednje skeniranje/fotografija</label>
+        <label for="verification_additional_document_front" translate="yes">Prednji pregled / fotografija</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Pozadinsko skeniranje/fotografija</label>
+        <label for="verification_additional_document_back" translate="yes">Natrag skeniranje / fotografija</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -166,7 +166,7 @@
         </div>
         <div id="address_line2-container" class="pure-control-group">
           <a id="address_line2-anchor"></a>
-          <label for="address_line2" translate="yes">Linija 2</label>
+          <label for="address_line2" translate="yes">Redak 2</label>
          <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
         </div>
         <div id="address_city-container" class="pure-control-group">
@@ -181,7 +181,7 @@
               <label for="address_state" translate="yes">Država ili pokrajina</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
-                  Odaberite
+                  Odaberi
                 </option>
               </select>
             </div>
@@ -197,10 +197,10 @@
           <div class="pure-g">
             <div class="pure-u-16-24">
               <a id="address_country-anchor"></a>
-              <label for="address_country" translate="yes">Zemlji</label>
+              <label for="address_country" translate="yes">Zemlja</label>
               <select name="address_country" id="address_country">
                 <option value="" translate="yes">
-                  Odaberite državu
+                  Odaberi državu
                 </option>
               </select>
             </div>
@@ -231,12 +231,12 @@
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Države</label>
+          <label for="address_kana_state" translate="yes">država</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
           <a id="address_kana_postal_code-anchor"></a>
-          <label for="address_kana_postal_code" translate="yes">Poštanski</label>
+          <label for="address_kana_postal_code" translate="yes">Poštanski broj</label>
           <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
         </div>
       </div>
@@ -259,23 +259,23 @@
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Države</label>
+          <label for="address_kanji_state" translate="yes">država</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
           <a id="address_kanji_postal_code-anchor"></a>
-          <label for="address_kanji_postal_code" translate="yes">Poštanski</label>
+          <label for="address_kanji_postal_code" translate="yes">Poštanski broj</label>
           <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Registracija ažuriranja</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Ažurirajte registraciju</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom slanja obrasca
+      Greška! Došlo je do pogreške prilikom slanja obrasca
     </div>
   </template>
   <template id="country-option">
@@ -290,182 +290,182 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom nja
+      Greška! Došlo je do pogreške prilikom ažuriranja podataka
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom prijenosa fotografije ili skeniranja
+      Greška! Došlo je do pogreške prilikom prijenosa fotografije ili skeniranja
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Pogreška! Osobni ID broj nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući osobni matični broj
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Pogreška! Spol koji nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući spol
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Pogreška! Posljednje 4 znamenke broja socijalnog osiguranja nije valjano ili nedostaje
+      Greška! Nevažeće ili nedostaju posljednje 4 znamenke broja socijalnog osiguranja
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Pogreška! Datum rođenja nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući datum rođenja
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Pogreška! Datum rođenja nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući datum rođenja
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Pogreška! Datum rođenja nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući datum rođenja
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Pogreška! Ime nije valjano ili nedostaje
+      Greška! Nevažeće ili nedostaje ime
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Pogreška! Ime Kane nije valjano ili nedostaje
+      Greška! Nevaljano ili nedostaje ime Kana
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Pogreška! Kanjifirst ime nije valjano ili nedostaje
+      Greška! Nevažeće ili nedostaje ime Kanjifirst
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Pogreška! Prezime nije valjano ili nedostaje
+      Greška! Neispravno ili nedostaje prezime
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Pogreška! Prezime Kana nije valjano ili nedostaje
+      Greška! Nevažeće ili nedostaje prezime Kana
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Pogreška! Prezime nije valjano ili nedostaje
+      Greška! Neispravno ili nedostaje prezime
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Pogreška! E-pošta koja nije valjana ili nedostaje
+      Greška! Nevažeća ili nedostajuća adresa e-pošte
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Pogreška! Telefonski broj koji nevaћe ili nedostaje
+      Greška! Nevažeći ili nedostajući telefonski broj
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Pogreška! Vlasništvo nad nestalim ili nedostaje u postotku
+      Greška! Nevažeće ili nedostaje postotak vlasništva
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Pogreška! Prednje skeniranje ili fotografija dokumenta nije valjana ili nedostaje
+      Greška! Nevažeći ili nedostajući prednji dokument ili fotografija dokumenta
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Pogreška! Skeniranje ili fotografija koje ne nedostaje nije valjano ili nedostaje
+      Greška! Nevažeći ili nedostajući dokument skeniranja ili fotografije
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Pogreška! Dodatno skeniranje ili fotografija koje nedostaje nije valjano ili nedostaje
+      Greška! Nevažeći ili nedostajući dodatni dokument skeniranja ili fotografije
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Pogreška! Skeniranje ili fotografija dodatnog dokumenta nije valjano ili nedostaje
+      Greška! Nevažeći ili nedostajući dodatni skeniranje ili fotografija povratnog dokumenta
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Pogreška! Država osobne adrese koja nije valjana ili nedostaje
+      Greška! Nevažeća ili nedostajuća zemlja osobne adrese
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Pogreška! Nevaljan ili nedostaje grad osobne adrese
+      Greška! Nevažeći ili nedostajući osobni grad
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Pogreška! Stanje osobne adrese nije valjano ili nedostaje
+      Greška! Nevažeće ili nedostaje stanje osobne adrese
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Pogreška! Nevaljan ili nedostaje redak osobne adrese 1
+      Greška! Nevaljana ili nedostajuća linija 1 osobne adrese
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Pogreška! Osobni poštanski broj nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući osobni poštanski broj
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Pogreška! Grad osobne adrese Kana nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući Kana osobna adresa grada
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Pogreška! Stanje osobne adrese Kana nije valjano ili nedostaje
+      Greška! Nevažeće ili nestalo stanje osobne adrese Kana
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Pogreška! Grad osobne adrese Kana nije valjan ili nedostaje
+      Greška! Nevaljani ili nedostajući grad s osobnom adresom Kana
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Pogreška! Nevaljan ili nedostaje Redak osobne adrese Kana 1
+      Greška! Nevažeća ili nedostajuća linija osobne adrese Kana 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Pogreška! Poštanski broj osobne adrese za Osobnu adresu kana ili nedostaje u nedostatku
+      Greška! Nevažeći ili nedostajući poštanski broj za osobnu adresu Kana
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Pogreška! Grad osobne adrese kanji nevaljan ili nedostaje
+      Greška! Nevažeći ili nedostajući Kanji grad s osobnom adresom
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Pogreška! Stanje osobne adrese kanji nevaljano ili nedostaje
+      Greška! Nevažeće ili nestalo stanje osobne adrese Kanjija
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Pogreška! Grad osobne adrese kanji nevaljan ili nedostaje
+      Greška! Nevažeći ili nedostajući grad s osobnom adresom Kanjija
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Pogreška! Kanji osobni redak adrese 1 nije valjan ili nedostaje
+      Greška! Nevažeća ili nedostajuća linija 1. osobne adrese Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Pogreška! Poštanski broj poštanske adrese poštanskog broja osobne adrese nije valjan ili nedostaje
+      Greška! Nevažeći ili nedostajući poštanski broj Kanji osobne adrese
     </div>
   </template>
 </body>

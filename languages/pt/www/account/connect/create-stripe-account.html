@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Criar registo</title>
+  <title translate="yes">Criar registro</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Criar registo</h1>
-  <p translate="yes">Um registo completo permite-lhe receber pagamentos de receitas através de Stripe Connect.</p>
+  <h1 translate="yes">Criar registro</h1>
+  <p translate="yes">Um registro concluído permite que você receba pagamentos de receita por meio de Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,15 +21,15 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">País de residência/incorporação</label>
+      <label for="country" translate="yes">País de residência / incorporação</label>
       <select name="country" id="country">
         <option value="" translate="yes">
-          Selecione país
+          Selecione o pais
         </option>
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Iniciar inscrição</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Iniciar registro</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro ao criar o registo
+      Erro! Ocorreu um erro ao criar o registro
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Um erro! País inválido ou desaparecido
+      Erro! País inválido ou ausente
     </div>
   </template>
 </body>

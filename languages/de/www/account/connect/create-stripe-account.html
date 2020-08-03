@@ -10,18 +10,18 @@
 </head>
 <body>
   <h1 translate="yes">Registrierung erstellen</h1>
-  <p translate="yes">Eine abgeschlossene Registrierung ermöglicht es Ihnen, Umsatzausschüttungen über Stripe Connect zu erhalten.</p>
+  <p translate="yes">Mit einer abgeschlossenen Registrierung können Sie Einnahmenauszahlungen über Stripe Connect erhalten.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
-      <label for="individual" translate="yes">Kontotyp</label>
+      <label for="individual" translate="yes">Konto Typ</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="type" value="individual"> Individual</label>
         <label><input id="company" type="radio" name="type" value="company"> Company</label>
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Wohnsitzland / Gründung</label>
+      <label for="country" translate="yes">Land des Wohnsitzes / der Gründung</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Land auswählen
@@ -29,7 +29,7 @@
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Mit der Registrierung beginnen</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Registrierung starten</button>
     </div>
   </form>
   <template id="country-option">
@@ -39,12 +39,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fehler! Beim Erstellen der Registrierung ist ein Fehler aufgetreten.
+      Error! Beim Erstellen der Registrierung ist ein Fehler aufgetreten
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Fehler! Ungültiges oder fehlendes Land
+      Error! Ungültiges oder fehlendes Land
     </div>
   </template>
 </body>

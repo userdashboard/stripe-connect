@@ -18,10 +18,10 @@
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
-    <h1 translate="yes">Redigere person</h1>
+    <h1 translate="yes">Rediger person</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Forhold til selskapet</h2>
+      <h2 translate="yes">Forhold til selskap</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,11 +29,11 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Jobb-, rolle- eller relasjonstittel</label>
+        <label for="relationship_title" translate="yes">Jobb, rolle eller forholdstittel</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
-        <label for="relationship_percent_ownership" translate="yes">Prosent eid (hvis noen)</label>
+        <label for="relationship_percent_ownership" translate="yes">Prosentvis eid (hvis noen)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
       <h2 translate="yes">Personlig informasjon</h2>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">E-postadresse</label>
+              <label for="email" translate="yes">Epostadresse</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -67,7 +67,7 @@
           <div class="pure-u-11-24">
             <div id="phone-container" class="pure-control-group">
               <a id="phone-anchor"></a>
-              <label for="phone" translate="yes">Telefon</label>
+              <label for="phone" translate="yes">telefon</label>
               <input class="full-width" required="required" id="phone" name="phone" type="text" maxlength="100">
             </div>
           </div>
@@ -117,7 +117,7 @@
         <a id="dob_day-anchor"></a>
         <a id="dob_month-anchor"></a>
         <a id="dob_year-anchor"></a>
-        <label for="dob_day" translate="yes">fødselsdato</label>
+        <label for="dob_day" translate="yes">Fødselsdato</label>
         <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
         <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
         <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
@@ -137,24 +137,24 @@
       <div id="id_number-container" class="pure-control-group">
         <h2 translate="yes">Personlig identifikasjon</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Pass- eller ID-nummer</label>
+        <label for="id_number" translate="yes">Pass eller ID-nummer</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Skanning foran/bilde</label>
+        <label for="verification_document_front" translate="yes">Front scan / foto</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Skanne på baksiden/bildet</label>
+        <label for="verification_document_back" translate="yes">Ryggesøk / foto</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
-        <h2 translate="yes">Bevis på adresse</h2>
+        <h2 translate="yes">Adresse bevis</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Skanning foran/bilde</label>
+        <label for="verification_additional_document_front" translate="yes">Front scan / foto</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Skanne på baksiden/bildet</label>
+        <label for="verification_additional_document_back" translate="yes">Ryggesøk / foto</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
@@ -171,7 +171,7 @@
         </div>
         <div id="address_city-container" class="pure-control-group">
           <a id="address_city-anchor"></a>
-          <label for="address_city" translate="yes">Byen</label>
+          <label for="address_city" translate="yes">By</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
@@ -181,7 +181,7 @@
               <label for="address_state" translate="yes">Stat eller provins</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
-                  Velg
+                  Å velge
                 </option>
               </select>
             </div>
@@ -220,18 +220,18 @@
           <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
         </div>
         <div id="address_kana_city-container" class="pure-control-group">
-          <label for="address_kana_city" translate="yes">Byen</label>
+          <label for="address_kana_city" translate="yes">By</label>
           <a id="address_kana_city-anchor"></a>
           <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
         </div>
         <div id="address_kana_town-container" class="pure-control-group">
-          <label for="address_kana_town" translate="yes">Byen</label>
+          <label for="address_kana_town" translate="yes">By</label>
           <a id="address_kana_town-anchor"></a>
           <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Staten</label>
+          <label for="address_kana_state" translate="yes">Stat</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
@@ -241,7 +241,7 @@
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">Kanji personlig adresse</h2>
+        <h2 translate="yes">Kanji personlige adresse</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
           <label for="address_kanji_line1" translate="yes">Linje 1</label>
@@ -249,17 +249,17 @@
         </div>
         <div id="address_kanji_city-container" class="pure-control-group">
           <a id="address_kanji_city-anchor"></a>
-          <label for="address_kanji_city" translate="yes">Byen</label>
+          <label for="address_kanji_city" translate="yes">By</label>
           <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
         </div>
         <div id="address_kanji_town-container" class="pure-control-group">
           <a id="address_kanji_town-anchor"></a>
-          <label for="address_kanji_town" translate="yes">Byen</label>
+          <label for="address_kanji_town" translate="yes">By</label>
           <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Staten</label>
+          <label for="address_kanji_state" translate="yes">Stat</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
@@ -269,13 +269,13 @@
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Oppdatere registrering</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Oppdater registrering</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Feil! Det oppstod en feil under sending av skjemaet
+      Feil! Det oppstod en feil ved innsending av skjemaet
     </div>
   </template>
   <template id="country-option">
@@ -290,12 +290,12 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Feil! Det oppstod en feil under oppstildende informasjon
+      Feil! Det oppstod en feil ved oppdatering av informasjonen
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Feil! Det oppstod en feil under opplasting av et bilde eller en skanning
+      Feil! Det oppstod en feil ved opplasting av et bilde eller skanning
     </div>
   </template>
   <template id="invalid-id_number">
@@ -310,7 +310,7 @@
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Feil! Ugyldige eller manglende siste 4 sifre i personnummer
+      Feil! Ugyldige eller manglende de siste fire sifrene i personnummer
     </div>
   </template>
   <template id="invalid-dob_day">
@@ -350,7 +350,7 @@
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kana-etternavn
+      Feil! Ugyldig eller manglende etternavn på Kana
     </div>
   </template>
   <template id="invalid-last_name_kanji">
@@ -360,7 +360,7 @@
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende e-post
+      Feil! Ugyldig eller manglende e-postadresse
     </div>
   </template>
   <template id="invalid-phone">
@@ -370,32 +370,32 @@
   </template>
   <template id="invalid-relationship_percent_ownership">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende prosenteierskap
+      Feil! Ugyldig eller manglende prosentandel
     </div>
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende dokumentfrontskanning eller bilde
+      Feil! Ugyldig eller manglende dokumentskanning eller foto foran
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende dokument tilbakeskanning eller bilde
+      Feil! Ugyldig eller manglende dokumentskanning eller foto
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende ekstra dokument frontskanning eller bilde
+      Feil! Ugyldig eller manglende tilleggsskanning eller foto foran dokumentet
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende ekstra dokumentskanning eller bilde
+      Feil! Ugyldig eller manglende tilleggsskanning eller foto
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende personlig adresseland
+      Feil! Ugyldig eller manglende land med personlig adresse
     </div>
   </template>
   <template id="invalid-address_city">
@@ -405,12 +405,12 @@
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende personlig adressetilstand
+      Feil! Ugyldig eller manglende status for personlig adresse
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende personlige adresselinje 1
+      Feil! Ugyldig eller manglende personlig adresselinje 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
@@ -420,12 +420,12 @@
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kana personlig adresseby
+      Feil! Ugyldig eller manglende Kana-adresse
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kana personlig adressetilstand
+      Feil! Ugyldig eller manglende status for Kana-personlig adresse
     </div>
   </template>
   <template id="invalid-address_kana_town">
@@ -435,37 +435,37 @@
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kana-personlig adresselinje 1
+      Feil! Ugyldig eller manglende Kana personlig adresselinje 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kana-postnummer for personlig adresse
+      Feil! Ugyldig eller manglende postadresse for personlig adresse på Kana
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kanji personlig adresse by
+      Feil! Ugyldig eller manglende personadresse for Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kanji-personlig adressetilstand
+      Feil! Ugyldig eller manglende status for Kanji-personlig adresse
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kanji personlig adresseby
+      Feil! Ugyldig eller manglende personadresse for Kanji
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kanji-personlig adresse linje 1
+      Feil! Ugyldig eller manglende Kanji-personlige adresselinje 1
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Feil! Ugyldig eller manglende Kanji-postnummer for personlig adresse
+      Feil! Ugyldig eller manglende postnummer for Kanji-personlig adresse
     </div>
   </template>
 </body>

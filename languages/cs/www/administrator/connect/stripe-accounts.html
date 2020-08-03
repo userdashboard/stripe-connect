@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe účty</title>
+  <title translate="yes">Účty Stripe</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe účty</h1>
+  <h1 translate="yes">Účty Stripe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Zatím nebyly vytvořeny žádné Stripe účty.</p>
+    <p translate="yes">Zatím nebyly vytvořeny žádné účty Stripe.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
       <tr>
         <th>ID</th>
         <th translate="yes">Typ</th>
-        <th translate="yes">Jméno</th>
-        <th translate="yes">Stav</th>
-        <th translate="yes">Vytvořen</th>
-        <th translate="yes">Předloženy</th>
+        <th translate="yes">název</th>
+        <th translate="yes">Postavení</th>
+        <th translate="yes">Vytvořeno</th>
+        <th translate="yes">Odesláno</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Dosud neposkytnuto</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -51,28 +51,28 @@
     <p translate="yes">Prostředky jsou vypláceny na účet x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Bankovní údaje musí být poskytnuty pro příjem finančních prostředků.</p>
+    <p translate="yes">Pro získání finančních prostředků musí být poskytnuty bankovní údaje.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Registrace nebyla odeslána.</p>
+    <p translate="yes">Registrace nebyla předložena.</p>
   </template>
   <template id="submitted-information">
     <p translate="yes">Registrace byla předložena dne ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Dosud neodloží</span>
+    <span translate="yes">Dosud nebylo odesláno</span>
   </template>
   <template id="verified">
     <span translate="yes">Registrace byla přijata</span>
   </template>
   <template id="verified">
-    <span translate="yes">Zakázáno podle Stripe</span>
+    <span translate="yes">Zakázáno uživatelem Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Vyžaduje další informace</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Čeká na odeslání</span>
+    <span translate="yes">Čeká se na předložení</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Vyžaduje další informace</span>
@@ -90,16 +90,16 @@
     <span><span translate="yes">Odmítnuto Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Je vyžadováno více informací</span>
+    <span translate="yes">Další informace jsou povinné</span>
   </template>
   <template id="listed">
-    <span translate="yes">Přezkoumávány Stripe</span>
+    <span translate="yes">Probíhá kontrola od Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Přezkoumávány Stripe</span>
+    <span translate="yes">Probíhá kontrola od Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Zakázáno Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Zakázáno uživatelem Stripe, viz</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

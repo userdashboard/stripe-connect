@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vista ${stripeAccount.id}</title>
+  <title translate="yes">Ver ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Vista ${stripeAccount.id}</h1>
+  <h1 translate="yes">Ver ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -36,14 +36,14 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Presentado</th>
+        <th translate="yes">Presentada</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">no presentado aún</td>
       </tr>
     </tbody>
   </table>
   <div id="registration-container">
-    <h2 translate="yes">Información de registro</h2>
+    <h2 translate="yes">Información de Registro</h2>
     <div id="account-status"></div>
     <p class="pure-button-group" role="group" id="registration-options">
       <a id="start-registration-link" class="pure-button pure-button-primary" href="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}&amp;return-url=/account/connect/stripe-account%3Fstripeid=${stripeAccount.id}">Start registration</a>
@@ -51,8 +51,8 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Representante de la empresa</h2>
-    <p translate="yes">Para evitar la interrupción de la cuenta, envíe nueva información de representante si la persona especificada sale o ya no representa a la empresa.</p>
+    <h2 translate="yes">Representante de la compañía</h2>
+    <p translate="yes">Para evitar la interrupción de la cuenta, envíe nueva información de representante si la persona especificada se va o ya no representa a la compañía.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Otros datos de propietarios beneficiosos</h2>
-    <p translate="yes">Debe proporcionar documentación para cualquier otra persona que posea un porcentaje sustancial (25+) de la empresa o a cargo de la empresa, finanzas u operaciones.</p>
+    <h2 translate="yes">Otra información de beneficiarios reales</h2>
+    <p translate="yes">Debe proporcionar documentación para cualquier persona que posea un porcentaje sustancial (más del 25%) de la empresa o que esté a cargo de la empresa, las finanzas o las operaciones.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Información de los directores de la empresa</h2>
-    <p translate="yes">Debe proporcionar nombres completos del consejo de administración de su empresa y/o personas responsables de mantener el cumplimiento normativo.</p>
+    <h2 translate="yes">Información de los directores de la compañía</h2>
+    <p translate="yes">Debe proporcionar los nombres completos de la junta directiva de su empresa y / o las personas responsables de mantener el cumplimiento normativo.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Información de pago</h2>
+    <h2 translate="yes">Información del pago</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Presentar el registro</h2>
+    <h2 translate="yes">Enviar registro</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,28 +126,28 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Los fondos se pagan para contabilizar ${bank_account.bank_name}.</p>
+    <p translate="yes">Los fondos se pagan a cuenta ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Los datos bancarios deben proporcionarse para recibir fondos.</p>
+    <p translate="yes">Se deben proporcionar detalles bancarios para recibir fondos.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">El registro no ha sido presentado.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">El registro se presentó el ${account.dateFormatted}.</p>
+    <p translate="yes">El registro fue presentado el ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">No se ha facilitado la información de registro.</p>
+    <p translate="yes">La información de registro no ha sido proporcionada.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Se ha proporcionado la información de registro.</p>
+    <p translate="yes">La información de registro ha sido proporcionada.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Aún no se ha presentado</span>
+    <span translate="yes">no presentado aún</span>
   </template>
   <template id="verified">
-    <span translate="yes">Se ha aceptado el registro</span>
+    <span translate="yes">El registro ha sido aceptado</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Requiere información adicional</span>
@@ -156,16 +156,16 @@
     <span translate="yes">Pendiente de envío</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
@@ -177,7 +177,7 @@
     <span translate="yes">En revisión por Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Requiere información adicional</span>

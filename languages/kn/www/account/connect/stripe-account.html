@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">ದೃಶ್ಯ ${stripeAccount.id}</title>
+  <title translate="yes">ನೋಟ ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">ದೃಶ್ಯ ${stripeAccount.id}</h1>
+  <h1 translate="yes">ನೋಟ ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,7 +17,7 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">ಪ್ರಕಾರ</th>
+        <th translate="yes">ಮಾದರಿ</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Submitted by sy</th>
+        <th translate="yes">ಸಲ್ಲಿಸಲಾಗಿದೆ</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ</td>
       </tr>
     </tbody>
   </table>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">ಕಂಪನಿ ಪ್ರತಿನಿಧಿ</h2>
-    <p translate="yes">ಖಾತೆ ಅಡಚಣೆಯನ್ನು ತಪ್ಪಿಸಲು ನಿರ್ದಿಷ್ಟ ವ್ಯಕ್ತಿ ಯು ಕಂಪನಿಯನ್ನು ತೊರೆದರೆ ಅಥವಾ ಇನ್ನು ಮುಂದೆ ಪ್ರತಿನಿಧಿಸದಿದ್ದಲ್ಲಿ ಹೊಸ ಪ್ರತಿನಿಧಿ ಮಾಹಿತಿಯನ್ನು ಸಲ್ಲಿಸಿ.</p>
+    <p translate="yes">ಖಾತೆಯ ಅಡ್ಡಿ ತಪ್ಪಿಸಲು ನಿರ್ದಿಷ್ಟ ವ್ಯಕ್ತಿಯು ಹೊರಟುಹೋದರೆ ಅಥವಾ ಕಂಪನಿಯನ್ನು ಪ್ರತಿನಿಧಿಸದಿದ್ದರೆ ಹೊಸ ಪ್ರತಿನಿಧಿ ಮಾಹಿತಿಯನ್ನು ಸಲ್ಲಿಸಿ.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">ಹೆಸರು</th>
-          <th translate="yes">ಅಗತ್ಯ ಮಾಹಿತಿ</th>
+          <th translate="yes">ಅಗತ್ಯವಿರುವ ಮಾಹಿತಿ</th>
         </tr>
       </thead>
     </table>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">ಇತರ ಲಾಭದಾಯಕ ಮಾಲೀಕರ ಮಾಹಿತಿ</h2>
-    <p translate="yes">ನೀವು ಕಂಪನಿಯ ಗಣನೀಯ (25+) ಪ್ರತಿಶತ ವನ್ನು ಹೊಂದಿರುವ ಅಥವಾ ಕಂಪನಿ, ಹಣಕಾಸು ಅಥವಾ ಕಾರ್ಯಾಚರಣೆಗಳ ಉಸ್ತುವಾರಿ ಯನ್ನು ಹೊಂದಿರುವ ಯಾರಿಗಾದರೂ ದಾಖಲೆಯನ್ನು ಒದಗಿಸಬೇಕು.</p>
+    <h2 translate="yes">ಇತರ ಪ್ರಯೋಜನಕಾರಿ ಮಾಲೀಕರ ಮಾಹಿತಿ</h2>
+    <p translate="yes">ಕಂಪನಿಯ ಗಣನೀಯ (25+) ಶೇಕಡಾವನ್ನು ಹೊಂದಿರುವ ಅಥವಾ ಕಂಪನಿಯ ಉಸ್ತುವಾರಿ, ಹಣಕಾಸು ಅಥವಾ ಕಾರ್ಯಾಚರಣೆಗಳಿಗೆ ನೀವು ದಸ್ತಾವೇಜನ್ನು ಒದಗಿಸಬೇಕು.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">ಕಂಪನಿ ನಿರ್ದೇಶಕರು ಮಾಹಿತಿ</h2>
-    <p translate="yes">ನೀವು ನಿಮ್ಮ ಕಂಪನಿಯ ಆಡಳಿತ ಮಂಡಳಿ ಮತ್ತು/ಅಥವಾ ನಿಯಂತ್ರಣ ಅನುಸರಣೆಯನ್ನು ನಿರ್ವಹಿಸುವ ಜವಾಬ್ದಾರಿ ಹೊತ್ತವರ ಪೂರ್ಣ ಹೆಸರುಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
+    <h2 translate="yes">ಕಂಪನಿ ನಿರ್ದೇಶಕರ ಮಾಹಿತಿ</h2>
+    <p translate="yes">ನಿಮ್ಮ ಕಂಪನಿಯ ಆಡಳಿತ ಮಂಡಳಿ ಮತ್ತು / ಅಥವಾ ನಿಯಂತ್ರಕ ಅನುಸರಣೆಯನ್ನು ನಿರ್ವಹಿಸುವ ಜವಾಬ್ದಾರಿಯುತ ಜನರ ಪೂರ್ಣ ಹೆಸರುಗಳನ್ನು ನೀವು ಒದಗಿಸಬೇಕು.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -120,40 +120,40 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">ಮಾಹಿತಿ ಸೇರಿಸು</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">ಮಾಹಿತಿಯನ್ನು ಸೇರಿಸಿ</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">ಖಾತೆಗೆ ಹಣ ಸಂದಾಯಮಾಡಲಾಗುತ್ತದೆ ${bank_account.bank_name}.</p>
+    <p translate="yes">ಖಾತೆಗೆ ಹಣವನ್ನು ಪಾವತಿಸಲಾಗುತ್ತದೆ ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">ಹಣ ಪಡೆಯಲು ಬ್ಯಾಂಕಿಂಗ್ ವಿವರಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
+    <p translate="yes">ಹಣವನ್ನು ಸ್ವೀಕರಿಸಲು ಬ್ಯಾಂಕಿಂಗ್ ವಿವರಗಳನ್ನು ಒದಗಿಸಬೇಕು.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಕೆಯಾಗಿಲ್ಲ.</p>
+    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">ಈ ಕುರಿತು ನೋಂದಣಿ ಯನ್ನು ಸಲ್ಲಿಸಲಾಗಿದೆ. ${account.dateFormatted}.</p>
+    <p translate="yes">ನೋಂದಣಿ ಸಲ್ಲಿಸಲಾಗಿದೆ ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">ನೋಂದಣಿ ಮಾಹಿತಿ ನೀಡಿಲ್ಲ.</p>
+    <p translate="yes">ನೋಂದಣಿ ಮಾಹಿತಿಯನ್ನು ಒದಗಿಸಿಲ್ಲ.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">ನೋಂದಣಿ ಮಾಹಿತಿ ನೀಡಲಾಗಿದೆ.</p>
+    <p translate="yes">ನೋಂದಣಿ ಮಾಹಿತಿಯನ್ನು ಒದಗಿಸಲಾಗಿದೆ.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಿಲ್ಲ</span>
+    <span translate="yes">ಇನ್ನೂ ಸಲ್ಲಿಸಲಾಗಿಲ್ಲ</span>
   </template>
   <template id="verified">
-    <span translate="yes">ನೋಂದಣಿ ಯನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ</span>
+    <span translate="yes">ನೋಂದಣಿ ಸ್ವೀಕರಿಸಲಾಗಿದೆ</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಅಗತ್ಯವಿದೆ</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">ಸಲ್ಲಿಕೆ ಬಾಕಿ</span>
+    <span translate="yes">ಸಲ್ಲಿಕೆ ಬಾಕಿ ಇದೆ</span>
   </template>
   <template id="rejected.fraud">
     <span><span translate="yes">Stripe ನಿಂದ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
@@ -171,10 +171,10 @@
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripe ಪರಿಶೀಲನೆ</span>
+    <span translate="yes">Stripe ಅವರಿಂದ ಪರಿಶೀಲನೆಯಲ್ಲಿದೆ</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripe ಪರಿಶೀಲನೆ</span>
+    <span translate="yes">Stripe ಅವರಿಂದ ಪರಿಶೀಲನೆಯಲ್ಲಿದೆ</span>
   </template>
   <template id="disabled">
     <span><span translate="yes">Stripe ನಿಂದ ತಿರಸ್ಕರಿಸಲಾಗಿದೆ, ನೋಡಿ</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>

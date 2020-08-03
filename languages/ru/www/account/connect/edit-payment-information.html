@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Информация об оплате ${stripeAccount.id}</title>
+  <title translate="yes">Информация об оплате за ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -27,7 +27,7 @@
   </style>
 </head>
 <body>
-  <h1 translate="yes">Информация об оплате ${stripeAccount.id}</h1>
+  <h1 translate="yes">Информация об оплате за ${stripeAccount.id}</h1>
   <p translate="yes">Обновите банковский счет, который будет получать ваши выплаты дохода.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
@@ -35,13 +35,13 @@
       <label for="country" translate="yes">Страна банка</label>
       <select class="country" name="country" id="country">
         <option value="" translate="yes">
-          Выберите
+          Выбрать
         </option>
       </select>
       <button name="refresh" value="true" class="pure-button">Refresh bank fields</button>
     </div>
     <div class="pure-control-group">
-      <label translate="yes">Тип учетной записи</label>
+      <label translate="yes">Тип аккаунта</label>
       <div class="pure-checkbox">
         <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
       </div>
@@ -55,7 +55,7 @@
           <label for="currency" translate="yes">Валюта счета</label>
           <select class="currency" name="currency" id="currency">
             <option value="" translate="yes">
-              Выберите
+              Выбрать
             </option>
           </select>
         </div>
@@ -71,7 +71,7 @@
         <input required="required" id="bsb_number" name="bsb_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -93,7 +93,7 @@
         <input required="required" id="institution_number" name="institution_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -133,12 +133,12 @@
       <h2 translate="yes">Альтернативный формат</h2>
       <div class="pure-g">
         <div class="pure-u-8-24 pure-control-group">
-          <label for="sort_code" translate="yes">Сортировка кода</label>
+          <label for="sort_code" translate="yes">Код заклинания</label>
           <input required="required" id="sort_code" name="sort_code" type="text" maxlength="50">
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-15-24 pure-control-group">
-          <label for="account_number" translate="yes">Номер счета</label>
+          <label for="account_number" translate="yes">Номер аккаунта</label>
           <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
         </div>
       </div>
@@ -157,7 +157,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -171,7 +171,7 @@
     </div>
     <div id="JP-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Банковский код</label>
+        <label for="bank_code" translate="yes">код банка</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -179,7 +179,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -197,11 +197,11 @@
     </div>
     <div id="MY-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Номер маршрутизации</label>
+        <label for="routing_number" translate="yes">Номер маршрута</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -211,11 +211,11 @@
     </div>
     <div id="NZ-container" class="pure-control-group">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Номер маршрутизации</label>
+        <label for="routing_number" translate="yes">Номер маршрута</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -233,7 +233,7 @@
     </div>
     <div id="SG-container">
       <div class="pure-control-group">
-        <label for="bank_code" translate="yes">Банковский код</label>
+        <label for="bank_code" translate="yes">код банка</label>
         <input required="required" id="bank_code" name="bank_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
@@ -241,7 +241,7 @@
         <input required="required" id="branch_code" name="branch_code" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
@@ -259,16 +259,16 @@
     </div>
     <div id="US-container">
       <div class="pure-control-group">
-        <label for="routing_number" translate="yes">Номер маршрутизации</label>
+        <label for="routing_number" translate="yes">Номер маршрута</label>
         <input required="required" id="routing_number" name="routing_number" type="text" maxlength="50">
       </div>
       <div class="pure-control-group">
-        <label for="account_number" translate="yes">Номер счета</label>
+        <label for="account_number" translate="yes">Номер аккаунта</label>
         <input required="required" id="account_number" name="account_number" type="text" maxlength="50">
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Сохранение платежной информации</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Сохранить информацию об оплате</button>
     </div>
   </form>
   <template id="country-option">
@@ -283,82 +283,82 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Успех! Информация о платежах обновлена
+      Успех! Информация о платеже была обновлена
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Ошибка! Ошибка, полученная в связи с обновлением платежной информации
+      Ошибка! Произошла ошибка при обновлении информации о платеже
     </div>
   </template>
   <template id="invalid-country">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая страна банка
+      Ошибка! Неверная или отсутствующая страна банка
     </div>
   </template>
   <template id="invalid-currency">
     <div class="error message" translate="yes">
-      Ошибка! Недействительная или отсутствующая валюта счета
+      Ошибка! Неверная или отсутствующая валюта счета
     </div>
   </template>
   <template id="invalid-account_holder_type">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий тип учетной записи
+      Ошибка! Неверный или отсутствующий тип аккаунта
     </div>
   </template>
   <template id="invalid-account_number">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер учетной записи
+      Ошибка! Неверный или отсутствующий номер счета
     </div>
   </template>
   <template id="invalid-bsb_number">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер BSB
+      Ошибка! Неверный или отсутствующий номер BSB
     </div>
   </template>
   <template id="invalid-bank_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер Банковского кода
+      Ошибка! Неверный или отсутствующий номер банковского кода
     </div>
   </template>
   <template id="invalid-sort_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий код Сортировки
+      Ошибка! Неверный или отсутствующий код сортировки
     </div>
   </template>
   <template id="invalid-institution_number">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер учреждения
+      Ошибка! Неверный или отсутствующий номер учреждения
     </div>
   </template>
   <template id="invalid-routing_number">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер транзита
+      Ошибка! Неверный или отсутствующий номер транзита
     </div>
   </template>
   <template id="invalid-clearing_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер клирингового кода
+      Ошибка! Неверный или отсутствующий номер клирингового кода
     </div>
   </template>
   <template id="invalid-branch_code">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер кода ветви
+      Ошибка! Неверный или отсутствующий номер филиала
     </div>
   </template>
   <template id="invalid-account_holder_name">
     <div class="error message" translate="yes">
-      Ошибка! Недействительное или отсутствующее имя владельца учетной записи
+      Ошибка! Неверное или отсутствующее имя владельца аккаунта
     </div>
   </template>
   <template id="invalid-iban">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер IBAN
+      Ошибка! Неверный или отсутствующий номер IBAN
     </div>
   </template>
   <template id="invalid-transit_number">
     <div class="error message" translate="yes">
-      Ошибка! Недействительный или отсутствующий номер транзита
+      Ошибка! Неверный или отсутствующий транзитный номер
     </div>
   </template>
 </body>

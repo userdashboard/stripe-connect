@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Barn ${stripeAccount.id}</title>
+  <title translate="yes">Gweld ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Barn ${stripeAccount.id}</h1>
+  <h1 translate="yes">Gweld ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -28,7 +28,7 @@
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Wlad</th>
+        <th translate="yes">Gwlad</th>
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
@@ -36,9 +36,9 @@
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Gyflwynwyd</th>
+        <th translate="yes">Cyflwynwyd</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Heb ei gyflwyno eto</td>
       </tr>
     </tbody>
   </table>
@@ -52,13 +52,13 @@
   </div>
   <div id="representative-container">
     <h2 translate="yes">Cynrychiolydd y cwmni</h2>
-    <p translate="yes">Er mwyn osgoi amharu ar y cyfrif, cyflwynwch wybodaeth gynrychioliadol newydd os yw'r person penodedig yn gadael neu os nad yw'n cynrychioli'r cwmni mwyach.</p>
+    <p translate="yes">Er mwyn osgoi tarfu ar gyfrif, cyflwynwch wybodaeth gynrychioliadol newydd os yw'r person penodedig yn gadael neu ddim yn cynrychioli'r cwmni mwyach.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
           <th translate="yes">Enw</th>
-          <th translate="yes">Wybodaeth ofynnol</th>
+          <th translate="yes">Gwybodaeth Angenrheidiol</th>
         </tr>
       </thead>
     </table>
@@ -67,8 +67,8 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Gwybodaeth perchenogion buddiol eraill</h2>
-    <p translate="yes">Mae'n rhaid i chi ddarparu dogfennau i unrhyw un arall sy'n berchen ar (25 +) y cant o'r cwmni neu sy'n gyfrifol am y cwmni, cyllid neu weithrediadau.</p>
+    <h2 translate="yes">Gwybodaeth perchnogion buddiol arall</h2>
+    <p translate="yes">Rhaid i chi ddarparu dogfennaeth ar gyfer unrhyw un arall sy'n berchen ar ganran sylweddol (25+) o'r cwmni neu sy'n gyfrifol am y cwmni, cyllid neu weithrediadau.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -84,8 +84,8 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Gwybodaeth cyfarwyddwyr cwmnïau</h2>
-    <p translate="yes">Mae'n rhaid i chi ddarparu enwau llawn bwrdd llywodraethu eich cwmni a/neu bobl sy'n gyfrifol am gynnal cydymffurfiaeth reoleiddiol.</p>
+    <h2 translate="yes">Gwybodaeth cyfarwyddwyr cwmni</h2>
+    <p translate="yes">Rhaid i chi ddarparu enwau llawn bwrdd llywodraethu eich cwmni a / neu'r bobl sy'n gyfrifol am gynnal cydymffurfiad rheoliadol.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Gwybodaeth am daliadau</h2>
+    <h2 translate="yes">Gwybodaeth talu</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Gyflwyno cofrestriad</h2>
+    <h2 translate="yes">Cyflwyno cofrestriad</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -126,7 +126,7 @@
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Arian yn cael eu talu i gyfrif ${bank_account.bank_name}.</p>
+    <p translate="yes">Telir arian i gyfrif ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
     <p translate="yes">Rhaid darparu manylion bancio i dderbyn arian.</p>
@@ -138,7 +138,7 @@
     <p translate="yes">Cyflwynwyd y cofrestriad ar ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
-    <p translate="yes">Nid yw'r wybodaeth gofrestru wedi'i darparu.</p>
+    <p translate="yes">Ni ddarparwyd y wybodaeth gofrestru.</p>
   </template>
   <template id="completed-registration">
     <p translate="yes">Mae'r wybodaeth gofrestru wedi'i darparu.</p>
@@ -147,37 +147,37 @@
     <span translate="yes">Heb ei gyflwyno eto</span>
   </template>
   <template id="verified">
-    <span translate="yes">Mae cofrestru wedi'i dderbyn</span>
+    <span translate="yes">Derbyniwyd cofrestru</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Angen gwybodaeth ychwanegol</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Disgwyl Cyflwyniad</span>
+    <span translate="yes">Yn yr arfaeth</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Wrthod gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Gwrthodwyd gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Wrthod gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Gwrthodwyd gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Wrthod gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Gwrthodwyd gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Wrthod gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Gwrthodwyd gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Adolygu gan Stripe</span>
+    <span translate="yes">Yn cael ei adolygu gan Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Adolygu gan Stripe</span>
+    <span translate="yes">Yn cael ei adolygu gan Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Wrthod gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Gwrthodwyd gan Stripe, gweler</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Angen gwybodaeth ychwanegol</span>

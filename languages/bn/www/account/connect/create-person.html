@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" data-navbar="/account/connect/navbar-persons.html">
+<head>
+  <meta charset="utf-8" /> 
+  <title translate="yes">এর জন্য নতুন ব্যক্তি তৈরি করুন ${stripeAccount.id}</title>
+  <link rel="stylesheet" href="/public/pure-min.css">
+  <link rel="stylesheet" href="/public/content.css">
+  <link rel="stylesheet" href="/public/content-additional.css">
+  <link rel="stylesheet" href="/public/connect/connect.css">
+</head>
+<body class="entry">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/create-person?stripeid=${stripeAccount.id}" name="submit-form">
+    <h1 translate="yes">নতুন ব্যক্তি তৈরি করুন</h1>
+    <p translate="yes">আপনার তথ্য পরিবর্তনের সাথে সাথে পরিচালনা পর্ষদের পরিচালক, মালিক এবং প্রতিনিধি অবশ্যই আপ টু ডেট রাখতে হবে।</p>
+    <div id="message-container"></div>
+    <div id="form-container">
+      <h2 translate="yes">সংস্থার সাথে সম্পর্ক</h2>
+      <div class="pure-control-group">
+        <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true"> Representative (must be executive)</label>
+        <label id="executive-container"><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true"> Company executive</label>
+        <label id="director-container"><input type="checkbox" id="relationship_director" name="relationship_director" value="true"> Company director</label>
+        <label id="owner-container"><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true"> Beneficial owner</label>
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_title" translate="yes">কাজ, ভূমিকা বা সম্পর্কের শিরোনাম</label>
+        <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
+      </div>
+      <div class="pure-control-group">
+        <label for="relationship_percent_ownership" translate="yes">শতাংশ মালিকানাধীন (যদি থাকে)</label>
+        <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
+      </div>
+      <div id="submit-container" class="pure-controls">
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">আপডেট নিবন্ধকরণ</button>
+      </div>
+    </div>
+  </form>
+  <template id="success">
+    <div class="success message" translate="yes">
+      সফল! নিবন্ধকরণ আপডেট করা হয়েছে
+    </div>
+  </template>
+  <template id="unknown-error">
+    <div class="error message" translate="yes">
+      ত্রুটি! নিবন্ধকরণ তৈরি করার সময় একটি ত্রুটি ঘটেছে
+    </div>
+  </template>
+  <template id="invalid-owner">
+    <div class="error message" translate="yes">
+      আপনার Stripe অ্যাকাউন্টের জন্য উপকারী মালিকের তথ্যের প্রয়োজন নেই
+    </div>
+  </template>
+  <template id="invalid-director">
+    <div class="error message" translate="yes">
+      আপনার Stripe অ্যাকাউন্টের জন্য কোম্পানির পরিচালক তথ্যের প্রয়োজন নেই
+    </div>
+  </template>
+  <template id="invalid-executive">
+    <div class="error message" translate="yes">
+      কোম্পানির প্রতিনিধি অবশ্যই নির্বাহী হতে হবে
+    </div>
+  </template>
+  <template id="invalid-selection">
+    <div class="error message" translate="yes">
+      প্রতিনিধি, পরিচালক বা মালিক বাছাই করতে হবে
+    </div>
+  </template>
+  <template id="invalid-relationship_percent_ownership">
+    <div class="error message" translate="yes">
+      ত্রুটি! অবৈধ বা অনুপস্থিত শতাংশের মালিকানা (যদি 0 না হয়)
+    </div>
+  </template>
+  <template id="invalid-relationship_title">
+    <div class="error message" translate="yes">
+      ত্রুটি! অবৈধ বা অনুপস্থিত সম্পর্কের শিরোনাম
+    </div>
+  </template>
+</body>
+</html>

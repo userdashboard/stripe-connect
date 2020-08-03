@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Разгледай ${stripeAccount.id}</title>
+  <title translate="yes">изглед ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Разгледай ${stripeAccount.id}</h1>
+  <h1 translate="yes">изглед ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table data-table">
     <tbody id="${stripeAccount.id}">
@@ -22,13 +22,13 @@
         <td id="mcc-description"></td>
       </tr>
       <tr>
-        <th translate="yes">Име</th>
+        <th translate="yes">име</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
       <tr>
-        <th translate="yes">Статут</th>
+        <th translate="yes">Статус</th>
         <td id="account-status"></td>
       </tr>
       <tr>
@@ -36,19 +36,19 @@
         <td>${stripeAccount.createdFormatted}</td>
       </tr>
       <tr>
-        <th translate="yes">Предоставени</th>
+        <th translate="yes">Изпратен</th>
         <td>${stripeAccount.metadata.submittedFormatted}</td>
       </tr>
     </tbody>
   </table>
   <template id="not-submitted">
-    <span translate="yes">Все още не е подадено</span>
+    <span translate="yes">Все още не е изпратено</span>
   </template>
   <template id="verified">
-    <span translate="yes">Регистрацията е приета</span>
+    <span translate="yes">Регистрацията беше приета</span>
   </template>
   <template id="verified">
-    <span translate="yes">Забранено от Stripe</span>
+    <span translate="yes">Деактивирано от Stripe</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Изисква допълнителна информация</span>
@@ -57,34 +57,34 @@
     <span translate="yes">Изисква допълнителна информация</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Чакащи за подаване</span>
+    <span translate="yes">Предстои изпращане</span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Изисква допълнителна информация</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Отхвърлен от Stripe, вж.</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Отхвърлен от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Повече информация е необходима</span>
+    <span translate="yes">Изисква се повече информация</span>
   </template>
   <template id="listed">
-    <span translate="yes">В процес на преразглеждане от Stripe</span>
+    <span translate="yes">В процес на преглед от Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">В процес на преразглеждане от Stripe</span>
+    <span translate="yes">В процес на преглед от Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Забранено от Stripe, вижте</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Деактивирано от Stripe, вж</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

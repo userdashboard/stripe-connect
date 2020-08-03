@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">Izbrisati ${person.id}</h1>
-  <p translate="yes">Podaci o vlasniku bit će odmah izbrisani i ne mogu se vratiti.</p>
+  <p translate="yes">Podaci o vlasniku bit će odmah izbrisani i neće ih biti moguće vratiti.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Izbrisati</button>
@@ -22,7 +22,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Pogreška! Došlo je do pogreške prilikom brisanja vlasnika tvrtke
+      Greška! Došlo je do pogreške pri brisanju vlasnika tvrtke
     </div>
   </template>
 </body>

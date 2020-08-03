@@ -9,11 +9,11 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Persone</h1>
+  <h1 translate="yes">persone</h1>
   <div id="representative-container">
-    <h2 translate="yes">Rappresentante dell'azienda</h2>
+    <h2 translate="yes">Rappresentante della compagnia</h2>
     <p translate="yes">Se lo stato della persona nominata cambia, è necessario creare un nuovo rappresentante.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Crea nuovo rappresentante</a></p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Crea un nuovo rappresentante</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -25,8 +25,8 @@
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Proprietari effettivi</h2>
-    <p translate="yes">È necessario fornire la documentazione per chiunque altro possieda una sostanziale (25o) percentuale della società o responsabile della società, le sue finanze o operazioni.</p>
+    <h2 translate="yes">Proprietari benefici</h2>
+    <p translate="yes">È necessario fornire la documentazione a chiunque possieda una parte sostanziale (del 25%) dell'azienda o responsabile dell'azienda, delle sue finanze o operazioni.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Aggiungi proprietario</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
@@ -39,7 +39,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Direttori d'azienda</h2>
+    <h2 translate="yes">Direttori aziendali</h2>
     <p translate="yes">È necessario fornire la documentazione per il consiglio di amministrazione.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Aggiungi proprietario</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Aggiungere informazioni</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Aggiungi informazioni</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

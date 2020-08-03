@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Hijery ${stripeAccount.id}</title>
+  <title translate="yes">View ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Hijery ${stripeAccount.id}</h1>
+  <h1 translate="yes">View ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -17,12 +17,12 @@
         <td>${stripeAccount.id}</td>
       </tr>
       <tr>
-        <th translate="yes">Karazana</th>
+        <th translate="yes">Type</th>
         <td id="business" translated="yes">Company registration</td>
         <td id="individual" translated="yes">Individual registration</td>
       </tr>
       <tr>
-        <th translate="yes">Anaran'</th>
+        <th translate="yes">Anarana</th>
         <td id="blank-name" translated="yes">Not yet provided</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
@@ -32,13 +32,13 @@
         <td>${stripeAccount.country}</td>
       </tr>
       <tr>
-        <th translate="yes">Saranga</th>
+        <th translate="yes">Status</th>
         <td id="account-status-${stripeAccount.id}"></td>
       </tr>
       <tr>
-        <th translate="yes">Nanoa</th>
+        <th translate="yes">Submitted</th>
         <td id="submitted">${stripeAccount.metadata.submittedFormatted}</td>
-        <td id="not-submitted2" translate="yes">Not submitted yet</td>
+        <td id="not-submitted2" translate="yes">Tsy natolotra</td>
       </tr>
     </tbody>
   </table>
@@ -51,14 +51,14 @@
     </p>
   </div>
   <div id="representative-container">
-    <h2 translate="yes">Solontenan' ny andiany</h2>
-    <p translate="yes">Mba hisorohana ny fitantarana ny fanelingelenana dia mandefa fampahalalana vaovao raha toa ka misy olona voalaza na tsy maneho intsony ilay andian-tsarety.</p>
+    <h2 translate="yes">Solontenan'ny orinasa</h2>
+    <p translate="yes">Mba hialana amin'ny fikorontanan'ny kaonty dia araho ny mombamomba ny solontena vaovao raha lasa ilay olona voatondro na tsy misolo tena ny orinasa intsony.</p>
     <table id="representatives-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Anaran'</th>
-          <th translate="yes">Fampahafantarana izay takiana</th>
+          <th translate="yes">Anarana</th>
+          <th translate="yes">Fampahalalana ilaina</th>
         </tr>
       </thead>
     </table>
@@ -67,14 +67,14 @@
     </p>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Fampahalalana tompon' hafa</h2>
-    <p translate="yes">Tsy maintsy manome documentation ho an' ny olona hafa fananana (25 +) isan-jato ianao na amin' ny andraikitr' ilay orinasa, na ny fitantanam-bola na ny asa.</p>
+    <h2 translate="yes">Ny mombamomba ny tompona mahasoa hafa</h2>
+    <p translate="yes">Tsy maintsy manome antontan-taratasy ho an'ny olon-kafa manana fananana betsaka ianao (25+) isan-jaton'ny orinasa na fitantanana ny orinasa, ara-bola na asa.</p>
     <table id="owners-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Anaran'</th>
-          <th translate="yes">Mitaky</th>
+          <th translate="yes">Anarana</th>
+          <th translate="yes">mitaky</th>
         </tr>
       </thead>
     </table>
@@ -84,14 +84,14 @@
     </p>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Fampahalalana mikasika ny talen' ny orinasa</h2>
-    <p translate="yes">Tsy maintsy manolotra anarana feno amin' ny alalan' ny filankevi-pitantanan' ny vondrona misy anao ianao ary/na ny olona tompon' andraikitra amin' ny fihazonana ny fankatoavana regulatory.</p>
+    <h2 translate="yes">Ny fampahalalana momba ny orinasa</h2>
+    <p translate="yes">Tsy maintsy manome anarana feno avy amin'ny birao fitantanana sy / na olona tompon'andraikitra amin'ny fitazonana ny fanarahan-dalàna ianao.</p>
     <table id="directors-table" class="pure-table pure-table-striped data-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Anaran'</th>
-          <th translate="yes">Mitaky</th>
+          <th translate="yes">Anarana</th>
+          <th translate="yes">mitaky</th>
         </tr>
       </thead>
     </table>
@@ -101,7 +101,7 @@
     </p>
   </div>
   <div id="payment-container">
-    <h2 translate="yes">Fampahalalana mikasika ny fandoavana</h2>
+    <h2 translate="yes">Fampahalalana momba ny fandoavam-bola</h2>
     <div id="payment-information-status"></div>
     <p id="payment-options">
       <a id="setup-payment" class="pure-button pure-button-primary" href="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}">Setup payment information</a>
@@ -109,7 +109,7 @@
     </p>
   </div>
   <div id="submission-container">
-    <h2 translate="yes">Alefaso ny fisoratana anarana</h2>
+    <h2 translate="yes">Mandefa fisoratana anarana</h2>
     <div id="submission-status"></div>
     <p id="submit-registration-link-container"><a id="submit-registration-link" class="pure-button pure-button-primary" href="/account/connect/submit-stripe-account?stripeid=${stripeAccount.id}">Submit registration</a></p>
   </div>
@@ -120,31 +120,31 @@
       </td>
       <td>${person.first_name} ${person.last_name}</td>
       <td id="requires-information-${person.id}">
-        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Manampy fampahalalana</a>
+        <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Manampia fampahalalana</a>
       </td>
       <td id="requires-no-information-${person.id}">-</td>
     </tr>
   </template>
   <template id="payment-information">
-    <p translate="yes">Ny vola dia entina hanaovana tantara ${bank_account.bank_name}.</p>
+    <p translate="yes">Ny vola dia aloa amin'ny kaonty ${bank_account.bank_name}.</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Ny Banking dia tsy maintsy omena mba hahazoana vola.</p>
+    <p translate="yes">Ny antsipirian'ny banky dia tsy maintsy omena hahazoana vola.</p>
   </template>
   <template id="not-submitted-information">
-    <p translate="yes">Tsy natao ny fisoratana anarana.</p>
+    <p translate="yes">Tsy napetraka akory ny fisoratana anarana.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">Ilay fisoratana anarana dia alefa ${account.dateFormatted}.</p>
+    <p translate="yes">Natolotra ny fisoratana anarana ${account.dateFormatted}.</p>
   </template>
   <template id="unstarted-registration">
     <p translate="yes">Tsy nomena ny fampahalalana momba ny fisoratana anarana.</p>
   </template>
   <template id="completed-registration">
-    <p translate="yes">Nomena ny fampahalalana momba ny fisoratana anarana.</p>
+    <p translate="yes">Efa nomena ny mombamomba ny fisoratana anarana.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Tsy mbola tsy nanaiky</span>
+    <span translate="yes">Tsy natolotra</span>
   </template>
   <template id="verified">
     <span translate="yes">Nekena ny fisoratana anarana</span>
@@ -153,31 +153,31 @@
     <span translate="yes">Mitaky fampahalalana fanampiny</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">Pending ny fanekena</span>
+    <span translate="yes">Miandry ny fandefasana</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Nolavin' ny Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Navoakan'i Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Nolavin' ny Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Navoakan'i Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Nolavin' ny Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Navoakan'i Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Nolavin' ny Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Navoakan'i Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span>More information is required.</span>
   </template>
   <template id="listed">
-    <span translate="yes">Eo ambanin' ny Stripe</span>
+    <span translate="yes">Eo ambany fijerin'i Stripe</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Eo ambanin' ny Stripe</span>
+    <span translate="yes">Eo ambany fijerin'i Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Nolavin' ny Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Navoakan'i Stripe, jereo</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="requirements.past_due">
     <span translate="yes">Mitaky fampahalalana fanampiny</span>

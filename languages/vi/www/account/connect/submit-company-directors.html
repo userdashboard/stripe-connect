@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Gửi Giám đốc cho ${stripeAccount.id}</title>
+  <title translate="yes">Gửi giám đốc cho ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Gửi Giám đốc cho ${stripeAccount.id}</h1>
-  <p translate="yes">Khi bạn đã hoàn thành việc thêm các giám đốc của công ty, nếu có, gửi chúng để đánh giá.</p>
+  <h1 translate="yes">Gửi giám đốc cho ${stripeAccount.id}</h1>
+  <p translate="yes">Khi bạn đã hoàn tất việc thêm giám đốc của công ty, nếu có, hãy gửi cho họ để xem xét.</p>
   <div id="message-container"></div>
   <div id="directors-container">
     <h2 translate="yes">Giám đốc công ty</h2>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Gửi Giám đốc</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Trình giám đốc</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Lỗi! Có những giám đốc vẫn còn yêu cầu thông tin
+      Lỗi! Có giám đốc vẫn yêu cầu thông tin
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Success! Giám đốc của công ty đã được gửi
+      Sự thành công! Giám đốc công ty đã được đệ trình
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Lỗi! Lỗi xảy ra khi gửi Giám đốc
+      Lỗi! Đã xảy ra lỗi khi gửi giám đốc
     </div>
   </template>
 </body>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-persons.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">േമസിെന . ${stripeAccount.id}</title>
+  <title translate="yes">വ്യക്തികൾ ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -12,42 +12,42 @@
   <h1 translate="yes">വ്യക്തികൾ</h1>
   <div id="representative-container">
     <h2 translate="yes">കമ്പനി പ്രതിനിധി</h2>
-    <p translate="yes">നാമനിർദ്ദേശം ചെയ്യപ്പെട്ട വ്യക്തിയുടെ നില മാറുകയാണെങ്കിൽ, നിങ്ങൾ പുതിയ പ്രതിനിധിയെ സൃഷ്ടിക്കണം.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">പുതിയ പ്രതിനിധിയെ സൃഷ്ടിക്കുക</a></p>
+    <p translate="yes">നാമനിർദ്ദേശം ചെയ്യപ്പെട്ട വ്യക്തിയുടെ നില മാറുകയാണെങ്കിൽ നിങ്ങൾ ഒരു പുതിയ പ്രതിനിധിയെ സൃഷ്ടിക്കണം.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">പുതിയ പ്രതിനിധി സൃഷ്ടിക്കുക</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമാണ്</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">ഗുണമുള്ള ഉടമകൾ</h2>
-    <p translate="yes">കമ്പനിയുടെ ഗണ്യമായ (25+) ശതമാനം അല്ലെങ്കിൽ കമ്പനിയുടെ സാമ്പത്തികഅല്ലെങ്കിൽ പ്രവർത്തനങ്ങൾ ക്ക് ഉത്തരവാദിത്തമുള്ള മറ്റാർക്കെങ്കിലും നിങ്ങൾ ഡോക്യുമെന്റേഷൻ നൽകണം.</p>
+    <h2 translate="yes">പ്രയോജനകരമായ ഉടമകൾ</h2>
+    <p translate="yes">കമ്പനിയുടെ ഗണ്യമായ (25+) ശതമാനം അല്ലെങ്കിൽ കമ്പനിയുടെ ചുമതലയുള്ള, അതിന്റെ ധനകാര്യങ്ങൾ അല്ലെങ്കിൽ പ്രവർത്തനങ്ങൾ മറ്റാർക്കെങ്കിലും നിങ്ങൾ ഡോക്യുമെന്റേഷൻ നൽകണം.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">ഉടമയെ ചേർക്കുക</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമാണ്</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
     <h2 translate="yes">കമ്പനി ഡയറക്ടർമാർ</h2>
-    <p translate="yes">ഡയറക്ടർ ബോർഡിനുള്ള രേഖകൾ നിങ്ങൾ നൽകണം.</p>
+    <p translate="yes">ഡയറക്ടർ ബോർഡിനായി നിങ്ങൾ ഡോക്യുമെന്റേഷൻ നൽകണം.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">ഉടമയെ ചേർക്കുക</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">പേരു്</th>
-          <th translate="yes">ആവശ്യ</th>
+          <th translate="yes">പേര്</th>
+          <th translate="yes">ആവശ്യമാണ്</th>
         </tr>
       </thead>
     </table>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Submeta diretores para ${stripeAccount.id}</title>
+  <title translate="yes">Enviar diretores para ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,11 +11,11 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Submeta diretores para ${stripeAccount.id}</h1>
-  <p translate="yes">Quando terminar de adicionar os administradores da empresa, se houver, submetê-los para revisão.</p>
+  <h1 translate="yes">Enviar diretores para ${stripeAccount.id}</h1>
+  <p translate="yes">Quando você terminar de adicionar os diretores da empresa, se houver, envie-os para revisão.</p>
   <div id="message-container"></div>
   <div id="directors-container">
-    <h2 translate="yes">Diretores de empresa</h2>
+    <h2 translate="yes">Diretores da empresa</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-company-directors?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Submeta diretores</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Enviar diretores</button>
     </div>
   </form>
   <template id="person-row">
@@ -45,17 +45,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Um erro! Há diretores ainda a precisar de informação
+      Erro! Ainda existem diretores que exigem informações
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Que sucesso! Os diretores da empresa foram submetidos
+      Sucesso! Os diretores da empresa foram submetidos
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Um erro! Ocorreu um erro ao submeter os diretores
+      Erro! Ocorreu um erro ao enviar os diretores
     </div>
   </template>
 </body>

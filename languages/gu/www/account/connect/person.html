@@ -10,7 +10,7 @@
 </head>
 <body>
   <h1 translate="yes">વ્યક્તિ ${person.id}</h1>
-  <p translate="yes">વધારાની માહિતી રજૂ કરવામાં આવી હોઈ શકે છે જે પ્રદર્શિત થયેલ નથી.</p>
+  <p translate="yes">અતિરિક્ત માહિતી રજૂ થઈ શકે છે જે પ્રદર્શિત નથી.</p>
   <table id="persons-table" class="pure-table pure-table-striped data-table">
     <tbody id="${person.id}">
       <tr>
@@ -32,7 +32,7 @@
         <td>${person.first_name} ${person.last_name}</td>
       </tr>
       <tr id="requires-information">
-        <th translate="yes">જરૂરી જાણકારી</th>
+        <th translate="yes">જરૂરી માહિતી</th>
         <td>
           <span translated="yes">Additional information is required about this person</span>
           <p class="pure-button-group"><a class="pure-button pure-button-primary" href="/account/connect/edit-person?personid=${person.id}">Add information</a></p>

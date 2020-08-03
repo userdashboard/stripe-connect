@@ -2,17 +2,17 @@
 <html lang="en" data-navbar="/administrator/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe cuentas</title>
+  <title translate="yes">Cuentas Stripe</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe cuentas</h1>
+  <h1 translate="yes">Cuentas Stripe</h1>
   <div id="message-container"></div>
   <div id="no-stripe-accounts">
-    <p translate="yes">Aún no se ha creado ninguna cuenta Stripe.</p>
+    <p translate="yes">Aún no se han creado cuentas Stripe.</p>
   </div>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped list-table">
     <thead>
@@ -22,7 +22,7 @@
         <th translate="yes">Nombre</th>
         <th translate="yes">Estado</th>
         <th translate="yes">Creado</th>
-        <th translate="yes">Presentado</th>
+        <th translate="yes">Presentada</th>
       </tr>
     </thead>
   </table>
@@ -33,7 +33,7 @@
         <a href="/administrator/connect/stripe-account?stripeid=${account.id}">${account.id}</a>
       </td>
       <td>${account.business_type}</td>
-      <td id="blank-name-${account.id}" translate="yes">Not yet provided</td>
+      <td id="blank-name-${account.id}" translate="yes">Aún no proporcionado</td>
       <td id="individual-name-${account.id}">${account.individual.first_name || ""} ${account.individual.last_name || ""}</td>
       <td id="business-name-${account.id}">${account.company.name || ""}</td>
       <td id="account-status-${account.id}"></td>
@@ -48,25 +48,25 @@
     </li>
   </template>
   <template id="payment-information">
-    <p translate="yes">Los fondos se pagan para cuentar x</p>
+    <p translate="yes">Los fondos se pagan a la cuenta x</p>
   </template>
   <template id="no-payment-information">
-    <p translate="yes">Los datos bancarios deben proporcionarse para recibir fondos.</p>
+    <p translate="yes">Se deben proporcionar detalles bancarios para recibir fondos.</p>
   </template>
   <template id="not-submitted-information">
     <p translate="yes">El registro no ha sido presentado.</p>
   </template>
   <template id="submitted-information">
-    <p translate="yes">El registro se presentó el ${account.dateFormatted}.</p>
+    <p translate="yes">El registro fue presentado el ${account.dateFormatted}.</p>
   </template>
   <template id="not-submitted">
-    <span translate="yes">Aún no se ha presentado</span>
+    <span translate="yes">no presentado aún</span>
   </template>
   <template id="verified">
-    <span translate="yes">Se ha aceptado el registro</span>
+    <span translate="yes">El registro ha sido aceptado</span>
   </template>
   <template id="verified">
-    <span translate="yes">Deshabilitado por Stripe</span>
+    <span translate="yes">Inhabilitado por Stripe</span>
   </template>
   <template id="verified-requires-fields">
     <span translate="yes">Requiere información adicional</span>
@@ -78,19 +78,19 @@
     <span translate="yes">Requiere información adicional</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Rechazado por Stripe, véase</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Rechazado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">Se requiere más información</span>
+    <span translate="yes">Se requiere más información.</span>
   </template>
   <template id="listed">
     <span translate="yes">En revisión por Stripe</span>
@@ -99,7 +99,7 @@
     <span translate="yes">En revisión por Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Discapacitado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Inhabilitado por Stripe, ver</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
 </html>

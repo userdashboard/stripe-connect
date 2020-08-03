@@ -12,10 +12,10 @@
 </head>
 <body>
   <h1 translate="yes">Eigenaren indienen voor ${stripeAccount.id}</h1>
-  <p translate="yes">Wanneer u klaar bent met het toevoegen van alle andere eigenaren, indien van toepassing, dien ze voor beoordeling.</p>
+  <p translate="yes">Als u klaar bent met het toevoegen van alle andere eigenaren, dient u deze ter beoordeling in.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Uiteindelijk begunstigden</h2>
+    <h2 translate="yes">Begunstigde eigenaren</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -28,7 +28,7 @@
   </div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/submit-beneficial-owners?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Eigenaren verzenden</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Eigenaren indienen</button>
     </div>
   </form>
   <template id="person-row">

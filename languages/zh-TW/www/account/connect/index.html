@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Stripe Connect帳戶</title>
+  <title translate="yes">Stripe Connect個帳戶</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -10,16 +10,16 @@
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Stripe Connect帳戶</h1>
-  <p><span translate="yes">通過驗證您的個人身份和公司資訊,成為供應商</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <h1 translate="yes">Stripe Connect個帳戶</h1>
+  <p><span translate="yes">通過驗證您的個人身份和公司信息成為供應商</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
         <h2 translate="yes">個人要求</h2>
         <ol>
-          <li translate="yes">已驗證的個人資訊</li>
-          <li translate="yes">受支援國家/地區的居民</li>
-          <li translate="yes">受支援國家/地區/地區的帳戶</li>
+          <li translate="yes">已驗證的個人信息</li>
+          <li translate="yes">受支持國家的居民</li>
+          <li translate="yes">受支持國家/地區的銀行帳戶</li>
         </ol>
         <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">開始個人註冊</a>
       </div>
@@ -28,9 +28,9 @@
       <div class="requirements">
         <h2 translate="yes">業務需求</h2>
         <ol>
-          <li translate="yes">已驗證的個人資訊</li>
-          <li translate="yes">在受支持國家/地區註冊的業務</li>
-          <li translate="yes">受支援國家/地區/地區的帳戶</li>
+          <li translate="yes">已驗證的個人信息</li>
+          <li translate="yes">在受支持國家/地區註冊的企業</li>
+          <li translate="yes">受支持國家/地區的銀行帳戶</li>
         </ol>
         <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">開始公司註冊</a>
       </div>
@@ -43,9 +43,9 @@
         <tr>
           <th>ID</th>
           <th translate="yes">名稱</th>
-          <th translate="yes">地位</th>
-          <th translate="yes">建立</th>
-          <th translate="yes">提交</th>
+          <th translate="yes">狀態</th>
+          <th translate="yes">已建立</th>
+          <th translate="yes">已提交</th>
         </tr>
       </thead>
     </table>
@@ -57,9 +57,9 @@
         <tr>
           <th>ID</th>
           <th translate="yes">名稱</th>
-          <th translate="yes">地位</th>
-          <th translate="yes">建立</th>
-          <th translate="yes">提交</th>
+          <th translate="yes">狀態</th>
+          <th translate="yes">已建立</th>
+          <th translate="yes">已提交</th>
         </tr>
       </thead>
     </table>
@@ -75,65 +75,65 @@
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">不</td>
+      <td id="not-submitted-${account.id}" translate="yes">沒有</td>
     </tr>
   </template>
   <template id="not-submitted">
     <span translate="yes">尚未提交</span>
   </template>
   <template id="verified">
-    <span translate="yes">已接受註冊</span>
+    <span translate="yes">註冊已被接受</span>
   </template>
   <template id="verified">
-    <span translate="yes">按Stripe</span>
+    <span translate="yes">被Stripe禁用</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">需要重新提交額外資訊</span>
+    <span translate="yes">需要重新提交其他信息</span>
   </template>
   <template id="pending-submission">
     <span translate="yes">待提交</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">按Stripe禁用,請參閱常見原因</span>
+      <span translate="yes">被Stripe禁用，請參見常見原因</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">按Stripe禁用,請參閱常見原因</span>
+      <span translate="yes">被Stripe禁用，請參見常見原因</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">按Stripe禁用,請參閱常見原因</span>
+      <span translate="yes">被Stripe禁用，請參見常見原因</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">按Stripe禁用,請參閱常見原因</span>
+      <span translate="yes">被Stripe禁用，請參見常見原因</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">需要更多資訊</span>
+    <span translate="yes">需要更多信息</span>
   </template>
   <template id="listed">
-    <span translate="yes">由Stripe</span>
+    <span translate="yes">正在由Stripe審核</span>
   </template>
   <template id="under-review">
-    <span translate="yes">由Stripe</span>
+    <span translate="yes">正在由Stripe審核</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">按Stripe禁用,請參閱常見原因</span>
+      <span translate="yes">被Stripe禁用，請參見常見原因</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="requirements.past_due">
-    <span translate="yes">需要其他資訊</span>
+    <span translate="yes">需要其他信息</span>
   </template>
 </body>
 </html>

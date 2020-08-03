@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Predloži ${stripeAccount.id}</title>
+  <title translate="yes">Pošlji ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,16 +11,16 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Predloži ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> postopka preverjanja s predložitvijo vaše izpolnjene registracije.</p>
+  <h1 translate="yes">Pošlji ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> postopek preverjanja s predložitvijo zaključene registracije.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Dejanski lastniki</h2>
+    <h2 translate="yes">Upravičeni lastniki</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
         </tr>
       </thead>
     </table>
@@ -31,7 +31,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Pošlji registracijo</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Oddaj registracijo</button>
     </div>
   </form>
   <template id="owner-row">
@@ -95,17 +95,17 @@
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Napaka! Morate predložiti direktorjev družbe
+      Napaka! Predložiti morate direktorje podjetja
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Napaka! Morate predložiti podjetja dejanskih lastnikov
+      Napaka! Predložiti morate upravičene lastnike podjetja
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Napaka! Predložiti morate informacije predstavnika podjetja
+      Napaka! Predložiti morate podatke zastopnika podjetja
     </div>
   </template>
   <template id="invalid-payment-details">
@@ -115,12 +115,12 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Uspeh! Registracija je bila predložena
+      Uspeh! Registracija je bila oddana
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Napaka! Prišlo je do napake pri predložitvi registracije
+      Napaka! Pri oddaji registracije je prišlo do napake
     </div>
   </template>
 </body>

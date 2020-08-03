@@ -2,27 +2,27 @@
 <html lang="en" data-navbar="/account/connect/navbar-person.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Tape ${person.id}</title>
+  <title translate="yes">Tapē ${person.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Tape ${person.id}</h1>
-  <p translate="yes">O le a vave ona tape faamatalaga o le ana ma e le mafai ona toe malosi.</p>
+  <h1 translate="yes">Tapē ${person.id}</h1>
+  <p translate="yes">O le tagata e ona faamatalaga o le a soloia vave ma e le mafai ona toe maua.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/delete-person?personid=${person.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tape</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Tapē</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">
-      Manuia! Ua tape le pule o le kamupani
+      Manuia! O le kamupani kamupani ua tape
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Mea sese! O se mea sese ocurred le tapeina o le pule a le kamupani
+      Sese! Sa iai se mea sese i le tapeina o le kamupani e ona
     </div>
   </template>
 </body>

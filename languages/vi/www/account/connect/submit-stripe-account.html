@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Gửi ${stripeAccount.id}</title>
+  <title translate="yes">Gửi đi ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Gửi ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> quá trình xác minh bằng cách gửi đăng ký đã hoàn tất.</p>
+  <h1 translate="yes">Gửi đi ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> quá trình xác minh bằng cách gửi đăng ký hoàn thành của bạn.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Chủ sở hữu có lợi</h2>
@@ -90,12 +90,12 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Đăng ký có thông tin đăng ký chưa hoàn chỉnh
+      Việc đăng ký có thông tin đăng ký không đầy đủ
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Lỗi! Bạn phải nộp các giám đốc của công ty
+      Lỗi! Bạn phải nộp giám đốc của công ty
     </div>
   </template>
   <template id="invalid-beneficial-owners">
@@ -105,7 +105,7 @@
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Lỗi! Bạn phải nộp thông tin của đại diện công ty
+      Lỗi! Bạn phải gửi thông tin của đại diện công ty
     </div>
   </template>
   <template id="invalid-payment-details">
@@ -115,12 +115,12 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Success! Việc đăng ký đã được gửi
+      Sự thành công! Đăng ký đã được gửi
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Lỗi! Lỗi xảy ra khi gửi đăng ký
+      Lỗi! Đã xảy ra lỗi khi đăng ký
     </div>
   </template>
 </body>

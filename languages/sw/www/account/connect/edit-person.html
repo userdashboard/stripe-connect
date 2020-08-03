@@ -21,7 +21,7 @@
     <h1 translate="yes">Hariri mtu</h1>
     <div id="message-container"></div>
     <div id="form-container">
-      <h2 translate="yes">Uhusiano na kampuni</h2>
+      <h2 translate="yes">Ma uhusiano kwa kampuni</h2>
       <div class="pure-control-group">
         <label><input type="checkbox" id="relationship_representative" name="relationship_representative" value="true" disabled="disabled"> Representative</label>
         <label><input type="checkbox" id="relationship_executive" name="relationship_executive" value="true" disabled="disabled"> Executive</label>
@@ -29,14 +29,14 @@
         <label><input type="checkbox" id="relationship_owner" name="relationship_owner" value="true" disabled="disabled"> Owner</label>
       </div>
       <div class="pure-control-group">
-        <label for="relationship_title" translate="yes">Kazi, jukumu au uhusiano kichwa</label>
+        <label for="relationship_title" translate="yes">Kazi, jukumu au kichwa cha uhusiano</label>
         <input class="full-width" required="required" id="relationship_title" name="relationship_title" type="text" maxlength="100">
       </div>
       <div class="pure-control-group">
         <label for="relationship_percent_ownership" translate="yes">Asilimia inayomilikiwa (kama ipo)</label>
         <input class="full-width" required="required" id="relationship_percent_ownership" name="relationship_percent_ownership" type="text" maxlength="4">
       </div>
-      <h2 translate="yes">Maelezo ya kibinafsi</h2>
+      <h2 translate="yes">Habari ya kibinafsi</h2>
       <div id="information-container">
         <div id="name-container" class="pure-g">
           <div class="pure-u-12-24">
@@ -50,7 +50,7 @@
           <div class="pure-u-11-24">
             <div id="last_name-container" class="pure-control-group">
               <a id="last_name-anchor"></a>
-              <label for="last_name" translate="yes">Jina la mwisho</label>
+              <label for="last_name" translate="yes">Jina la familia</label>
               <input class="full-width" required="required" id="last_name" name="last_name" type="text" maxlength="50">
             </div>
           </div>
@@ -59,7 +59,7 @@
           <div class="pure-u-12-24">
             <div id="email-container" class="pure-control-group">
               <a id="email-anchor"></a>
-              <label for="email" translate="yes">Anwani ya barua pepe</label>
+              <label for="email" translate="yes">Barua pepe</label>
               <input class="full-width" required="required" id="email" name="email" type="text" maxlength="100">
             </div>
           </div>
@@ -74,7 +74,7 @@
         </div>
       </div>
       <div id="kana-information-container">
-        <h2 translate="yes">Maelezo ya kibinafsi ya kana</h2>
+        <h2 translate="yes">Kana habari ya kibinafsi</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kana-container" class="pure-control-group">
@@ -87,14 +87,14 @@
           <div class="pure-u-11-24">
             <div id="last_name_kana-container" class="pure-control-group">
               <a id="last_name_kana-anchor"></a>
-              <label for="last_name_kana" translate="yes">Jina la mwisho</label>
+              <label for="last_name_kana" translate="yes">Jina la familia</label>
               <input required="required" id="last_name_kana" name="last_name_kana" type="text" maxlength="50">
             </div>
           </div>
         </div>
       </div>
       <div id="kanji-information-container">
-        <h2 translate="yes">KanJi taarifa binafsi</h2>
+        <h2 translate="yes">Kanji Maelezo ya kibinafsi</h2>
         <div class="pure-g">
           <div class="pure-u-12-24">
             <div id="first_name_kanji-container" class="pure-control-group">
@@ -107,7 +107,7 @@
           <div class="pure-u-11-24">
             <div id="last_name_kanji-container" class="pure-control-group">
               <a id="last_name_kanji-anchor"></a>
-              <label for="last_name_kanji" translate="yes">Jina la mwisho</label>
+              <label for="last_name_kanji" translate="yes">Jina la familia</label>
               <input required="required" id="last_name_kanji" name="last_name_kanji" type="text" maxlength="50">
             </div>
           </div>
@@ -131,47 +131,47 @@
         </div>
       </div>
       <div id="ssn_last_4-container" class="pure-control-group">
-        <label for="ssn_last_4" translate="yes">SSN tarakimu za mwisho 4</label>
+        <label for="ssn_last_4" translate="yes">SSN mwisho 4 tarakimu</label>
         <input required="required" id="ssn_last_4" name="ssn_last_4" type="text" maxlength="100">
       </div>
       <div id="id_number-container" class="pure-control-group">
-        <h2 translate="yes">Utambulisho binafsi</h2>
+        <h2 translate="yes">Kitambulisho cha kibinafsi</h2>
         <a id="id_number-anchor"></a>
-        <label for="id_number" translate="yes">Namba ya pasipoti au ID</label>
+        <label for="id_number" translate="yes">Pasipoti au nambari ya kitambulisho</label>
         <input class="full-width" required="required" id="id_number" name="id_number" type="text" maxlength="50">
       </div>
       <div id="verification_document-container" class="pure-control-group">
         <a id="verification_document_front-anchor"></a>
         <a id="verification_document_back-anchor"></a>
-        <label for="verification_document_front" translate="yes">Tambazo la mbele/picha</label>
+        <label for="verification_document_front" translate="yes">Picha ya mbele / picha</label>
         <input name="verification_document_front" id="verification_document_front" type="file">
-        <label for="verification_document_back" translate="yes">Tambazo la nyuma/picha</label>
+        <label for="verification_document_back" translate="yes">Scan ya nyuma / picha</label>
         <input name="verification_document_back" id="verification_document_back" type="file">
       </div>
       <div id="verification_additional_document-container" class="pure-control-group">
-        <h2 translate="yes">Uthibitisho wa anwani</h2>
+        <h2 translate="yes">Uthibitishaji wa anwani</h2>
         <a id="verification_additional_document_front-anchor"></a>
         <a id="verification_additional_document_back-anchor"></a>
-        <label for="verification_additional_document_front" translate="yes">Tambazo la mbele/picha</label>
+        <label for="verification_additional_document_front" translate="yes">Picha ya mbele / picha</label>
         <input name="verification_additional_document_front" id="verification_additional_document_front" type="file">
-        <label for="verification_additional_document_back" translate="yes">Tambazo la nyuma/picha</label>
+        <label for="verification_additional_document_back" translate="yes">Scan ya nyuma / picha</label>
         <input name="verification_additional_document_back" id="verification_additional_document_back" type="file">
       </div>
       <div id="address-container">
-        <h2 translate="yes">Anwani binafsi</h2>
+        <h2 translate="yes">Anwani ya kibinafsi</h2>
         <div id="address_line1-container" class="pure-control-group">
           <a id="address_line1-anchor"></a>
-          <label for="address_line1" translate="yes">Mstari 1</label>
+          <label for="address_line1" translate="yes">Mstari wa 1</label>
          <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
         </div>
         <div id="address_line2-container" class="pure-control-group">
           <a id="address_line2-anchor"></a>
-          <label for="address_line2" translate="yes">Mstari 2</label>
+          <label for="address_line2" translate="yes">Mstari wa 2</label>
          <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
         </div>
         <div id="address_city-container" class="pure-control-group">
           <a id="address_city-anchor"></a>
-          <label for="address_city" translate="yes">Mji</label>
+          <label for="address_city" translate="yes">Jiji</label>
           <input class="full-width" required="required" id="address_city" name="address_city" type="text" maxlength="100">
         </div>
         <div class="pure-control-group">
@@ -181,7 +181,7 @@
               <label for="address_state" translate="yes">Jimbo au mkoa</label>
               <select id="address_state" name="address_state">
                 <option value="" translate="yes">
-                  Teua
+                  Chagua
                 </option>
               </select>
             </div>
@@ -213,69 +213,69 @@
         </div>
       </div>
       <div id="kana-address-container">
-        <h2 translate="yes">Anwani ya kibinafsi ya kana</h2>
+        <h2 translate="yes">Anwani ya kibinafsi</h2>
         <div id="address_kana_line1-container" class="pure-control-group">
           <a id="address_kana_line1-anchor"></a>
-          <label for="address_kana_line1" translate="yes">Mstari 1</label>
+          <label for="address_kana_line1" translate="yes">Mstari wa 1</label>
           <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
         </div>
         <div id="address_kana_city-container" class="pure-control-group">
-          <label for="address_kana_city" translate="yes">Mji</label>
+          <label for="address_kana_city" translate="yes">Jiji</label>
           <a id="address_kana_city-anchor"></a>
           <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
         </div>
         <div id="address_kana_town-container" class="pure-control-group">
-          <label for="address_kana_town" translate="yes">Mji</label>
+          <label for="address_kana_town" translate="yes">Jiji</label>
           <a id="address_kana_town-anchor"></a>
           <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
         </div>
         <div id="address_kana_state-container" class="pure-control-group">
           <a id="address_kana_state-anchor"></a>
-          <label for="address_kana_state" translate="yes">Hali</label>
+          <label for="address_kana_state" translate="yes">Jimbo</label>
           <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
         </div>
         <div id="address_kana_postal_code-container" class="pure-control-group">
           <a id="address_kana_postal_code-anchor"></a>
-          <label for="address_kana_postal_code" translate="yes">Msimbo wa posta</label>
+          <label for="address_kana_postal_code" translate="yes">Nambari ya posta</label>
           <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="kanji-address-container">
-        <h2 translate="yes">KanJi anwani binafsi</h2>
+        <h2 translate="yes">Anuani ya kibinafsi ya Kanji</h2>
         <div id="address_kanji_line1-container" class="pure-control-group">
           <a id="address_kanji_line1-anchor"></a>
-          <label for="address_kanji_line1" translate="yes">Mstari 1</label>
+          <label for="address_kanji_line1" translate="yes">Mstari wa 1</label>
           <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
         </div>
         <div id="address_kanji_city-container" class="pure-control-group">
           <a id="address_kanji_city-anchor"></a>
-          <label for="address_kanji_city" translate="yes">Mji</label>
+          <label for="address_kanji_city" translate="yes">Jiji</label>
           <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
         </div>
         <div id="address_kanji_town-container" class="pure-control-group">
           <a id="address_kanji_town-anchor"></a>
-          <label for="address_kanji_town" translate="yes">Mji</label>
+          <label for="address_kanji_town" translate="yes">Jiji</label>
           <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
         </div>
         <div id="address_kanji_state-container" class="pure-control-group">
           <a id="address_kanji_state-anchor"></a>
-          <label for="address_kanji_state" translate="yes">Hali</label>
+          <label for="address_kanji_state" translate="yes">Jimbo</label>
           <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
         </div>
         <div id="address_kanji_postal_code-container" class="pure-control-group">
           <a id="address_kanji_postal_code-anchor"></a>
-          <label for="address_kanji_postal_code" translate="yes">Msimbo wa posta</label>
+          <label for="address_kanji_postal_code" translate="yes">Nambari ya posta</label>
           <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
         </div>
       </div>
       <div id="submit-container" class="pure-controls">
-        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sasaisha usajili</button>
+        <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sasisha usajili</button>
       </div>
     </div>
   </form>
   <template id="invalid-token">
     <div class="error message" translate="yes">
-      Kosa! Kosa limejitokeza wakati wa kuwasilisha fomu
+      Kosa! Kosa limetokea wakati wa kuwasilisha fomu
     </div>
   </template>
   <template id="country-option">
@@ -290,82 +290,82 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Kosa! Kosa limejitokeza kufanya udaguzi taarifa
+      Kosa! Kosa limetokea kusasisha habari hiyo
     </div>
   </template>
   <template id="upload-error">
     <div class="error message" translate="yes">
-      Kosa! Kosa lilitokea wakati wa kupakia picha au kutambaza
+      Kosa! Kosa limetokea wakati wa kupakia picha au Scan
     </div>
   </template>
   <template id="invalid-id_number">
     <div class="error message" translate="yes">
-      Kosa! Nambari ya KITAMBULISHI cha kibinafsi au inakosekana
+      Kosa! Nambari ya kitambulisho kibinafsi au inakosekana
     </div>
   </template>
   <template id="invalid-gender">
     <div class="error message" translate="yes">
-      Kosa! Jinsia batili au inakosekana
+      Kosa! Jinsia batili au linalokosekana
     </div>
   </template>
   <template id="invalid-ssn_last_4">
     <div class="error message" translate="yes">
-      Kosa! Tarakimu za mwisho za 4 au zilizopotea za namba ya usalama wa jamii
+      Kosa! Nambari 4 za mwisho za Nambari ya Usalama wa Jamii au sio sahihi
     </div>
   </template>
   <template id="invalid-dob_day">
     <div class="error message" translate="yes">
-      Kosa! Tarehe batili au inakosekana ya kuzaliwa
+      Kosa! Tarehe sahihi ya kuzaliwa au kukosa
     </div>
   </template>
   <template id="invalid-dob_month">
     <div class="error message" translate="yes">
-      Kosa! Tarehe batili au inakosekana ya kuzaliwa
+      Kosa! Tarehe sahihi ya kuzaliwa au kukosa
     </div>
   </template>
   <template id="invalid-dob_year">
     <div class="error message" translate="yes">
-      Kosa! Tarehe batili au inakosekana ya kuzaliwa
+      Kosa! Tarehe sahihi ya kuzaliwa au kukosa
     </div>
   </template>
   <template id="invalid-first_name">
     <div class="error message" translate="yes">
-      Kosa! Jina batili au la kwanza linakosekana
+      Kosa! Jina la kwanza batili au linalokosekana
     </div>
   </template>
   <template id="invalid-first_name_kana">
     <div class="error message" translate="yes">
-      Kosa! Jina la kwanza la kana au linakosekana
+      Kosa! Jina la kwanza la Kana au linalosaidia
     </div>
   </template>
   <template id="invalid-first_name_kanji">
     <div class="error message" translate="yes">
-      Kosa! Jina la Kanjifirst batili au linakosekana
+      Kosa! Jina batili la Kanjifirst au batili
     </div>
   </template>
   <template id="invalid-last_name">
     <div class="error message" translate="yes">
-      Kosa! Jina batili au linakosekana
+      Kosa! Jina la mwisho batili au linalokosekana
     </div>
   </template>
   <template id="invalid-last_name_kana">
     <div class="error message" translate="yes">
-      Kosa! Jina batili la mwisho au linakosekana
+      Kosa! Jina la mwisho la Kana au halipo
     </div>
   </template>
   <template id="invalid-last_name_kanji">
     <div class="error message" translate="yes">
-      Kosa! Jina batili au linakosekana
+      Kosa! Jina la mwisho batili au linalokosekana
     </div>
   </template>
   <template id="invalid-email">
     <div class="error message" translate="yes">
-      Kosa! Baruapepe batili au inakosekana
+      Kosa! Barua pepe batili au kukosa
     </div>
   </template>
   <template id="invalid-phone">
     <div class="error message" translate="yes">
-      Kosa! Namba ya simu batili au inakosekana
+      Kosa! Nambari batili au haipo
     </div>
   </template>
   <template id="invalid-relationship_percent_ownership">
@@ -375,97 +375,97 @@
   </template>
   <template id="invalid-verification_document_front">
     <div class="error message" translate="yes">
-      Kosa! Tambazo la ndani au linakosekana waraka wa mbele au picha
+      Kosa! Scan ya mbele ya picha au picha isiyo sahihi
     </div>
   </template>
   <template id="invalid-verification_document_back">
     <div class="error message" translate="yes">
-      Kosa! Waraka batili au haupo kwenye tambazo au picha
+      Kosa! Scan ya picha ya nyuma au picha isiyo halali au kukosa
     </div>
   </template>
   <template id="invalid-verification_additional_document_front">
     <div class="error message" translate="yes">
-      Kosa! Kitambazo cha ziada au kinachopatikana mbele ya waraka au picha
+      Kosa! Skena ya mbele au picha isiyo sahihi ya hati ya ziada
     </div>
   </template>
   <template id="invalid-verification_additional_document_back">
     <div class="error message" translate="yes">
-      Kosa! Waraka wa ziada au haupo katika kitambazo au picha
+      Kosa! Skena ya nyuma au picha isiyo ya ziada ya hati ya ziada
     </div>
   </template>
   <template id="invalid-address_country">
     <div class="error message" translate="yes">
-      Kosa! Nchi Anwani batili au inakosekana
+      Kosa! Nchi batili ya anwani ya kibinafsi au haipo
     </div>
   </template>
   <template id="invalid-address_city">
     <div class="error message" translate="yes">
-      Kosa! Mji wa Anwani batili au inakosekana
+      Kosa! Jiji lisilo sahihi au lisilo na anwani ya kibinafsi
     </div>
   </template>
   <template id="invalid-address_state">
     <div class="error message" translate="yes">
-      Kosa! Hali ya Anwani batili au inakosekana
+      Kosa! Hali batili au isiyo sawa ya anwani ya kibinafsi
     </div>
   </template>
   <template id="invalid-address_line1">
     <div class="error message" translate="yes">
-      Kosa! Mstari anwani wa binafsi au inakosekana 1
+      Kosa! Mstari wa anwani ya kibinafsi au haipo 1
     </div>
   </template>
   <template id="invalid-address_postal_code">
     <div class="error message" translate="yes">
-      Kosa! Msimbo wa posta wa kibinafsi au unakosa
+      Kosa! Nambari ya posta isiyo sahihi au inayokosekana
     </div>
   </template>
   <template id="invalid-address_kana_city">
     <div class="error message" translate="yes">
-      Kosa! Mji wa anwani wa kibinafsi au unakosa kana
+      Kosa! Jiji la anwani ya kibinafsi ya batili au haipo
     </div>
   </template>
   <template id="invalid-address_kana_state">
     <div class="error message" translate="yes">
-      Kosa! Hali ya anwani ya binafsi au iliyopotea ya kana
+      Kosa! Hali ya anwani ya kibinafsi ya Kana au isiyo sawa
     </div>
   </template>
   <template id="invalid-address_kana_town">
     <div class="error message" translate="yes">
-      Kosa! Mji wa anwani wa kibinafsi au unakosa kana
+      Kosa! Jiji la anwani ya kibinafsi ya batili au haipo
     </div>
   </template>
   <template id="invalid-address_kana_line1">
     <div class="error message" translate="yes">
-      Kosa! Mstari wa anwani ya binafsi au kukosa kana 1
+      Kosa! Mstari wa anwani ya kibinafsi ya batili au haipo 1
     </div>
   </template>
   <template id="invalid-address_kana_postal_code">
     <div class="error message" translate="yes">
-      Kosa! Msimbo wa posta wa Anwani batili au unakosa kana
+      Kosa! Nambari ya posta ya kibinafsi ya batili au haipo
     </div>
   </template>
   <template id="invalid-address_kanji_city">
     <div class="error message" translate="yes">
-      Kosa! Mji wa anwani wa kibinafsi au haupo KanJi
+      Kosa! Anwani ya kibinafsi ya Kanji au batili
     </div>
   </template>
   <template id="invalid-address_kanji_state">
     <div class="error message" translate="yes">
-      Kosa! Hali batili au inakosekana KanJi ya anwani binafsi
+      Kosa! Hali ya anwani ya kibinafsi ya Kanji au haipo
     </div>
   </template>
   <template id="invalid-address_kanji_town">
     <div class="error message" translate="yes">
-      Kosa! Mji wa anwani wa kibinafsi au haupo KanJi
+      Kosa! Anwani ya kibinafsi ya Kanji au batili
     </div>
   </template>
   <template id="invalid-address_kanji_line1">
     <div class="error message" translate="yes">
-      Kosa! Mstari wa anwani wa binafsi au inakosekana KanJi 1
+      Kosa! Mstari wa anwani ya kibinafsi ya Kanji batili au haipo
     </div>
   </template>
   <template id="invalid-address_kanji_postal_code">
     <div class="error message" translate="yes">
-      Kosa! Msimbo wa posta wa Anwani batili au inakosekana KanJi
+      Kosa! Nambari ya posta ya kibinafsi ya Kanji au haipo
     </div>
   </template>
 </body>

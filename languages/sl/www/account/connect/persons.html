@@ -11,28 +11,28 @@
 <body>
   <h1 translate="yes">Osebe</h1>
   <div id="representative-container">
-    <h2 translate="yes">Predstavnik podjetja</h2>
-    <p translate="yes">Če se status imenovane osebe spremeni, morate ustvariti novega predstavnika.</p>
-    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Ustvarjanje novega predstavnika</a></p>
+    <h2 translate="yes">Zastopnik podjetja</h2>
+    <p translate="yes">Če se status nominirane osebe spremeni, morate ustvariti novega zastopnika.</p>
+    <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_representative=true" translate="yes">Ustvari novega predstavnika</a></p>
     <table id="representatives-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
           <th translate="yes">Zahteva</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="owners-container">
-    <h2 translate="yes">Dejanski lastniki</h2>
-    <p translate="yes">Predložiti morate dokumentacijo za kogar koli drugega, ki ima v lasti znaten (25 +) odstotkov družbe ali zadolžen za podjetje, njegove finance ali poslovanje.</p>
+    <h2 translate="yes">Upravičeni lastniki</h2>
+    <p translate="yes">Predložiti morate dokumentacijo za vse druge, ki imajo v lasti znaten (25+) odstotkov družbe ali so zadolženi za podjetje, njegove finance ali poslovanje.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_owner=true" translate="yes">Dodaj lastnika</a></p>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
           <th translate="yes">Zahteva</th>
         </tr>
       </thead>
@@ -40,13 +40,13 @@
   </div>
   <div id="directors-container">
     <h2 translate="yes">Direktorji podjetij</h2>
-    <p translate="yes">Predložiti morate dokumentacijo za odbor direktorjev.</p>
+    <p translate="yes">Predložiti morate dokumentacijo za upravni odbor.</p>
     <p><a class="pure-button pure-button-primary" href="/account/connect/create-person?stripeid=${stripeAccount.id}&amp;relationship_director=true" translate="yes">Dodaj lastnika</a></p>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">ime</th>
+          <th translate="yes">Ime</th>
           <th translate="yes">Zahteva</th>
         </tr>
       </thead>
@@ -60,7 +60,7 @@
         </td>
         <td>${person.first_name} ${person.last_name}</td>
         <td id="requires-information-${person.id}">
-          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Dodajanje informacij</a>
+          <a class="pure-button" href="/account/connect/edit-person?personid=${person.id}" translate="yes">Dodajte podatke</a>
         </td>
         <td id="requires-no-information-${person.id}">-</td>
       </tr>

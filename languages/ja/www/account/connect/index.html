@@ -11,17 +11,17 @@
 </head>
 <body>
   <h1 translate="yes">Stripe Connectアカウント</h1>
-  <p><span translate="yes">個人の ID と会社情報を検証して、ベンダーになる</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
+  <p><span translate="yes">を介して個人の身元と会社情報を確認することでベンダーになります</span> <a href="https://stripe.com/connect">Stripe Connect</a>.</p>
   <div class="pure-g requirements-wrapper">
     <div class="pure-u-1-2 requirements-container">
       <div class="requirements">
-        <h2 translate="yes">個々の要件</h2>
+        <h2 translate="yes">個別の要件</h2>
         <ol>
           <li translate="yes">確認済みの個人情報</li>
           <li translate="yes">サポートされている国の居住者</li>
           <li translate="yes">サポートされている国の銀行口座</li>
         </ol>
-        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">個別登録の開始</a>
+        <a id="create-individual-link" href="/account/connect/create-stripe-account?type=individual" class="pure-button pure-button-primary" translate="yes">個人登録を開始</a>
       </div>
     </div>
     <div class="pure-u-1-2 requirements-container">
@@ -29,10 +29,10 @@
         <h2 translate="yes">ビジネス要件</h2>
         <ol>
           <li translate="yes">確認済みの個人情報</li>
-          <li translate="yes">サポートされている国で登録されたビジネス</li>
+          <li translate="yes">サポートされている国で登録されている事業</li>
           <li translate="yes">サポートされている国の銀行口座</li>
         </ol>
-        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">会社登録の開始</a>
+        <a href="/account/connect/create-stripe-account?type=company" class="pure-button pure-button-primary" translate="yes">会社登録を開始</a>
       </div>
     </div>
   </div>
@@ -43,9 +43,9 @@
         <tr>
           <th>ID</th>
           <th translate="yes">名前</th>
-          <th translate="yes">ステータス</th>
-          <th translate="yes">作成</th>
-          <th translate="yes">提出</th>
+          <th translate="yes">状態</th>
+          <th translate="yes">作成した</th>
+          <th translate="yes">提出済み</th>
         </tr>
       </thead>
     </table>
@@ -57,9 +57,9 @@
         <tr>
           <th>ID</th>
           <th translate="yes">名前</th>
-          <th translate="yes">ステータス</th>
-          <th translate="yes">作成</th>
-          <th translate="yes">提出</th>
+          <th translate="yes">状態</th>
+          <th translate="yes">作成した</th>
+          <th translate="yes">提出済み</th>
         </tr>
       </thead>
     </table>
@@ -75,60 +75,60 @@
       <td id="account-status-${account.id}"></td>
       <td>${account.createdFormatted}</td>
       <td id="submitted-${account.id}">${account.submittedFormatted}</td>
-      <td id="not-submitted-${account.id}" translate="yes">いいえ</td>
+      <td id="not-submitted-${account.id}" translate="yes">番号</td>
     </tr>
   </template>
   <template id="not-submitted">
     <span translate="yes">まだ提出されていません</span>
   </template>
   <template id="verified">
-    <span translate="yes">登録が受け付けられました</span>
+    <span translate="yes">登録が受理されました</span>
   </template>
   <template id="verified">
-    <span translate="yes">Stripeによって無効</span>
+    <span translate="yes">Stripeにより無効化</span>
   </template>
   <template id="verified-requires-fields">
-    <span translate="yes">追加情報を再送信する必要があります</span>
+    <span translate="yes">追加情報を含めて再送信する必要があります</span>
   </template>
   <template id="pending-submission">
-    <span translate="yes">保留中の提出</span>
+    <span translate="yes">保留中の送信</span>
   </template>
   <template id="rejected.fraud">
     <span>
-      <span translate="yes">Stripeによって無効にされた、一般的な理由を参照してください。</span>
+      <span translate="yes">Stripeによって無効にされました。一般的な理由を参照してください</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.terms">
     <span>
-      <span translate="yes">Stripeによって無効にされた、一般的な理由を参照してください。</span>
+      <span translate="yes">Stripeによって無効にされました。一般的な理由を参照してください</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.listed">
     <span>
-      <span translate="yes">Stripeによって無効にされた、一般的な理由を参照してください。</span>
+      <span translate="yes">Stripeによって無効にされました。一般的な理由を参照してください</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="rejected.other">
     <span>
-      <span translate="yes">Stripeによって無効にされた、一般的な理由を参照してください。</span>
+      <span translate="yes">Stripeによって無効にされました。一般的な理由を参照してください</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>
   <template id="fields_needed">
-    <span translate="yes">詳細な情報が必要です</span>
+    <span translate="yes">詳細情報が必要です</span>
   </template>
   <template id="listed">
-    <span translate="yes">Stripeによる審査中</span>
+    <span translate="yes">Stripeによるレビュー中</span>
   </template>
   <template id="under-review">
-    <span translate="yes">Stripeによる審査中</span>
+    <span translate="yes">Stripeによるレビュー中</span>
   </template>
   <template id="disabled">
     <span>
-      <span translate="yes">Stripeによって無効にされた、一般的な理由を参照してください。</span>
+      <span translate="yes">Stripeによって無効にされました。一般的な理由を参照してください</span>
       <a href="https://stripe.com/blog/why-some-businesses-arent-allowed"></a>
     </span>
   </template>

@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Enviar ${stripeAccount.id}</title>
+  <title translate="yes">Presentar ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,8 +11,8 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Enviar ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> procés de verificació mitjançant l'enviament de la inscripció emplenada.</p>
+  <h1 translate="yes">Presentar ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> enviant el registre completat.</p>
   <div id="message-container"></div>
   <div id="owners-container">
     <h2 translate="yes">Propietaris beneficiosos</h2>
@@ -26,7 +26,7 @@
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Directors d'empresa</h2>
+    <h2 translate="yes">Directius de l'empresa</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Presentar inscripció</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Envieu el registre</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,22 +90,22 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      La inscripció té informació de registre incompleta
+      El registre té informació de registre incompleta
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Error! Cal presentar els administradors de la societat
+      Error! Heu d’enviar els directors de l’empresa
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Error! Vostè ha de presentar els propietaris beneficiosos de la companyia
+      Error! Heu d’enviar els propietaris beneficiosos de l’empresa
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Error! Has de presentar la informació del representant de l'empresa
+      Error! Heu d’enviar la informació del representant de l’empresa
     </div>
   </template>
   <template id="invalid-payment-details">
@@ -115,12 +115,12 @@
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Èxit! La inscripció s'ha presentat
+      Èxit! La inscripció s’ha enviat
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Error! S'ha produït un error en presentar la inscripció
+      Error! S'ha produït un error en enviar el registre
     </div>
   </template>
 </body>

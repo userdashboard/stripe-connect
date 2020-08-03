@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-payout.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">देखना ${payout.id}</title>
+  <title translate="yes">राय ${payout.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">देखना ${payout.id}</h1>
+  <h1 translate="yes">राय ${payout.id}</h1>
   <div id="message-container"></div>
   <table id="payouts-table" class="pure-table pure-table-striped list-table">
     <tbody id="${payout.id}">
@@ -18,7 +18,7 @@
         <td>${payout.id}</td>
       </tr>
       <tr>
-        <th translate="yes">राशि</th>
+        <th translate="yes">रकम</th>
         <td>${payout.amountFormatted}</td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
         <td>${payout.description}</td>
       </tr>
       <tr>
-        <th translate="yes">बनाया</th>
+        <th translate="yes">बनाया था</th>
         <td>${payout.createdFormatted}</td>
       </tr>
     </tbody>
@@ -57,25 +57,25 @@
     <span translate="yes">अमान्य खाता संख्या</span>
   </template>
   <template id="insufficient_funds">
-    <span translate="yes">अपर्याप्त धन</span>
+    <span translate="yes">अपर्याप्त कोष</span>
   </template>
   <template id="declined">
-    <span translate="yes">बैंक ने मना किया स्थानांतरण</span>
+    <span translate="yes">बैंक ने किया तबादला</span>
   </template>
   <template id="debit_not_authorized">
     <span translate="yes">कोई बैंक खाता डेबिट नहीं</span>
   </template>
   <template id="could_not_process">
-    <span translate="yes">प्रक्रिया नहीं कर सका</span>
+    <span translate="yes">प्रक्रिया नहीं हो सकी</span>
   </template>
   <template id="bank_ownership_changed">
-    <span translate="yes">बैंक स्वामित्व बदल गया</span>
+    <span translate="yes">बैंक का स्वामित्व बदल गया</span>
   </template>
   <template id="bank_account_restricted">
     <span translate="yes">बैंक खाता प्रतिबंधित</span>
   </template>
   <template id="account_frozen">
-    <span translate="yes">बैंक खाता फ्रीज</span>
+    <span translate="yes">बैंक खाता जम गया</span>
   </template>
   <template id="account_closed">
     <span translate="yes">बैंक खाता बंद</span>

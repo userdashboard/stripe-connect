@@ -2,15 +2,15 @@
 <html lang="en" data-navbar="/account/connect/navbar.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Vytvoriť registráciu</title>
+  <title translate="yes">Vytvorte registráciu</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Vytvoriť registráciu</h1>
-  <p translate="yes">Dokončená registrácia vám umožní prijímať výplaty príjmov prostredníctvom Stripe Connect.</p>
+  <h1 translate="yes">Vytvorte registráciu</h1>
+  <p translate="yes">Dokončená registrácia vám umožní prijímať výplaty výnosov prostredníctvom Stripe Connect.</p>
   <div id="message-container"></div>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/create-stripe-account" name="submit-form">
     <div class="pure-control-group">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="pure-control-group">
-      <label for="country" translate="yes">Krajina bydliska /založenia</label>
+      <label for="country" translate="yes">Krajina bydliska / registrácie</label>
       <select name="country" id="country">
         <option value="" translate="yes">
           Vyberte krajinu
@@ -29,7 +29,7 @@
       </select>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Spustiť registráciu</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Spustite registráciu</button>
     </div>
   </form>
   <template id="country-option">

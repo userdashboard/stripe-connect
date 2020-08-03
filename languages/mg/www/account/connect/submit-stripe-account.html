@@ -2,7 +2,7 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Hanoa ${stripeAccount.id}</title>
+  <title translate="yes">Submit ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
@@ -11,27 +11,27 @@
   <script id="stripe-js-v3"></script>
 </head>
 <body>
-  <h1 translate="yes">Hanoa ${stripeAccount.id}</h1>
-  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> verification ny dingana vita amin' ny alalan' ny fandefasana ny fisoratana anarana nataonao.</p>
+  <h1 translate="yes">Submit ${stripeAccount.id}</h1>
+  <p translate="yes">Complete your <a href="https://stripe.com/connect">Stripe Connect</a> Dingana fanamarinana amin'ny alàlan'ny fandefasana ny fisoratana anarana vita.</p>
   <div id="message-container"></div>
   <div id="owners-container">
-    <h2 translate="yes">Mahasoa ny tompon'</h2>
+    <h2 translate="yes">Tompona mahasoa</h2>
     <table id="owners-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Anaran'</th>
+          <th translate="yes">Anarana</th>
         </tr>
       </thead>
     </table>
   </div>
   <div id="directors-container">
-    <h2 translate="yes">Talen' ny orinasa</h2>
+    <h2 translate="yes">Mpandrindra orinasa</h2>
     <table id="directors-table" class="pure-table pure-table-striped list-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th translate="yes">Anaran'</th>
+          <th translate="yes">Anarana</th>
         </tr>
       </thead>
     </table>
@@ -57,7 +57,7 @@
       </div>
     </div>
     <div class="pure-controls spaced-buttons">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Alefaso ny fisoratana anarana</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Mandefa fisoratana anarana</button>
     </div>
   </form>
   <template id="owner-row">
@@ -90,37 +90,37 @@
   </template>
   <template id="invalid-registration">
     <div class="error message" translate="yes">
-      Ny fisoratana anarana dia tsy manana fampahalalana momba ny fisoratana anarana
+      Ny fisoratana anarana dia manana fampahalalana momba ny fisoratana anarana tsy feno
     </div>
   </template>
   <template id="invalid-company-directors">
     <div class="error message" translate="yes">
-      Fahadisoana! Tsy maintsy mampifanaraka ilay talen' ny andiany ianao.
+      Error! Mila mandefa ny talen'ny orinasa ianao
     </div>
   </template>
   <template id="invalid-beneficial-owners">
     <div class="error message" translate="yes">
-      Fahadisoana! Tsy maintsy mampifanaraka ny tompon' ny andiany ianao.
+      Error! Tsy maintsy alefanao ireo tompona mahasoa ilay orinasa
     </div>
   </template>
   <template id="invalid-company-representative">
     <div class="error message" translate="yes">
-      Fahadisoana! Tsy maintsy mampifanaraka ny mombamomba ny tompon' andraikitry ny andiany ianao.
+      Error! Tsy maintsy mametraka ny mombamomba ny solontenan'ilay orinasa ianao
     </div>
   </template>
   <template id="invalid-payment-details">
     <div class="error message" translate="yes">
-      Fahadisoana! Ny fisoratana anarana dia tsy manana fampahalalana mikasika ny fandoavana tsy misy
+      Error! Ny fisoratana anarana dia manana fampahalalana momba ny fandoavam-bola
     </div>
   </template>
   <template id="success">
     <div class="success message" translate="yes">
-      Fahombiazana! Ny fisoratana anarana dia natao
+      Fahombiazana! Natolotra ny fisoratana anarana
     </div>
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Fahadisoana! Nisy fahadisoana nitranga tamin' ny fandefasana ny fisoratana anarana
+      Error! Nisy fahadisoana nitranga tamin'ny fandefasana ny fisoratana anarana
     </div>
   </template>
 </body>
