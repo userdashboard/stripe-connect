@@ -39,6 +39,13 @@ jobs:
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
+        git clone https://github.com/userdashboard/localization.git /tmp/localize
+        cd /tmp/localize
+        npm install @userdashboard/dashboard
+        for LOCALE in `cat languages`; do
+          node clean-cache.js "$LOCALE" /home/runner/work/localization/localization/project/stripe-connect $HERE
+          node localize.js "$LOCALE" $HERE
+        done
     - name: Lint (standard.js)
       run: standard src
     - name: Test (redis)
