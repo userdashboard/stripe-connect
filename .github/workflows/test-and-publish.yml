@@ -72,6 +72,11 @@ jobs:
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
         TEST_SUITE_REUSABLE_WEBHOOK: true
+        GENERATE_RESPONSE: true
+        GENERATE_SCREENSHOTS: true
+        RESPONSE_PATH: "/home/runner/work/organizations/organizations/documentation"
+        SCREENSHOT_PATH: "/home/runner/work/organizations/organizations/documentation/screenshots"
+        SCREENSHOT_LANGUAGES: "en,es"
     - name: Generate supporting texts
       run: node main.js
       working-directory: /home/runner/work/stripe-connect/stripe-connect/
@@ -98,3 +103,11 @@ jobs:
       uses: JS-DevTools/npm-publish@v1
       with:
         token: ${{ secrets.NPM_TOKEN }}
+    - name: Publish documentation assets
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        external_repository: "userdashboard/userdashboard.github.io"
+        personal_token: ${{ secrets.DOCUMENTATION_PAT }}
+        publish_dir: documentation
+        publish_branch: master
+        keep_files: true
