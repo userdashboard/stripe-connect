@@ -154,7 +154,7 @@
       ✓ should require a document
       ✓ should require a total greater than 0
       ✓ should require an offset less than total
-      ✓ should accept null or string offset (43ms)
+      ✓ should accept null or string offset (38ms)
       ✓ should enforce global page size
       ✓ should override global page size
 
@@ -178,14 +178,14 @@
 
   internal-api/proxy
     Proxy#pass
-      ✓ should include x-accountid header (43ms)
+      ✓ should include x-accountid header (38ms)
       ✓ should include x-sessionid header
       ✓ should include x-dashboard-server header
       ✓ should create x-application-server-token header
       ✓ should include referer header
       ✓ should send POST data
-      ✓ should send multipart POST data (42ms)
-      ✓ should send file upload POST data (39ms)
+      ✓ should send multipart POST data
+      ✓ should send file upload POST data
       ✓ should execute proxy handlers
 
   internal-api/response
@@ -197,7 +197,7 @@
       ✓ should remove menus for guests
       ✓ should disable administrator menu for normal user
       ✓ should add account menu links from package.json
-      ✓ should add administrator menu links from package.json (45ms)
+      ✓ should add administrator menu links from package.json
     Response#wrapTemplateWithSrcDoc (config override)
       ✓ should transfer head content from page to template
       ✓ should transfer head content from template to page
@@ -269,14 +269,14 @@
       ✓ should skip duplicates
     StorageList#count
       ✓ should count the items (3607ms)
-      ✓ should not count removed items (4809ms)
+      ✓ should not count removed items (4805ms)
     StorageList#remove
-      ✓ should remove the item (2404ms)
+      ✓ should remove the item (2403ms)
     StorageList#list
-      ✓ should change page size (4810ms)
+      ✓ should change page size (4809ms)
       ✓ should enforce offset (3605ms)
     StorageList#listAll
-      ✓ should return all records (7210ms)
+      ✓ should return all records (7213ms)
 
   internal-api/storage-object
     getProperties
@@ -336,90 +336,90 @@
 
   /account/change-password
     view
-      ✓ should present the form (872ms)
+      ✓ should present the form (603ms)
     submit
-      ✓ should apply new password (screenshots) (53456ms)
+      ✓ should apply new password (screenshots) (49196ms)
     errors
-      ✓ invalid-new-password (1733ms)
-      ✓ invalid-new-password-length (2030ms)
-      ✓ invalid-confirm-password (1877ms)
-      ✓ invalid-password (1561ms)
+      ✓ invalid-new-password (1707ms)
+      ✓ invalid-new-password-length (1932ms)
+      ✓ invalid-confirm-password (1858ms)
+      ✓ invalid-password (1508ms)
 
   /account/change-username
     view
-      ✓ should present the form (488ms)
+      ✓ should present the form (457ms)
     submit
-      ✓ should apply new username (screenshots) (45283ms)
+      ✓ should apply new username (screenshots) (43163ms)
     errors
-      ✓ invalid-new-username (1380ms)
-      ✓ invalid-new-username-length (1391ms)
-      ✓ invalid-password (1733ms)
+      ✓ invalid-new-username (1342ms)
+      ✓ invalid-new-username-length (1389ms)
+      ✓ invalid-password (1689ms)
 
   /account/create-profile
     view
-      ✓ should present the form (484ms)
-      ✓ should have elements for full-name (510ms)
-      ✓ should have elements for contact-email (504ms)
-      ✓ should have elements for display-email (494ms)
-      ✓ should have elements for dob (491ms)
-      ✓ should have elements for phone (510ms)
-      ✓ should have elements for occupation (493ms)
-      ✓ should have elements for location (472ms)
-      ✓ should have elements for company-name (493ms)
-      ✓ should have elements for website (507ms)
+      ✓ should present the form (458ms)
+      ✓ should have elements for full-name (457ms)
+      ✓ should have elements for contact-email (443ms)
+      ✓ should have elements for display-email (448ms)
+      ✓ should have elements for dob (504ms)
+      ✓ should have elements for phone (466ms)
+      ✓ should have elements for occupation (441ms)
+      ✓ should have elements for location (452ms)
+      ✓ should have elements for company-name (445ms)
+      ✓ should have elements for website (465ms)
     submit
-      ✓ should create profile (screenshots) (62603ms)
-      ✓ should create profile with full-name (1283ms)
-      ✓ should create profile and set default (1357ms)
-      ✓ should create profile with display name (1179ms)
-      ✓ should create profile with contact-email (1615ms)
-      ✓ should create profile with display-email (1601ms)
-      ✓ should create profile with dob in YYYY-MM-DD (1216ms)
-      ✓ should create profile with dob in MM-DD-YYYY (1221ms)
-      ✓ should create profile with phone (1662ms)
-      ✓ should create profile with occupation (1651ms)
-      ✓ should create profile with location (1632ms)
-      ✓ should create profile with company-name (1635ms)
-      ✓ should create profile with website (1676ms)
+      ✓ should create profile (screenshots) (59561ms)
+      ✓ should create profile with full-name (1248ms)
+      ✓ should create profile and set default (1280ms)
+      ✓ should create profile with display name (1067ms)
+      ✓ should create profile with contact-email (1327ms)
+      ✓ should create profile with display-email (1475ms)
+      ✓ should create profile with dob in YYYY-MM-DD (1141ms)
+      ✓ should create profile with dob in MM-DD-YYYY (1137ms)
+      ✓ should create profile with phone (1625ms)
+      ✓ should create profile with occupation (1607ms)
+      ✓ should create profile with location (1580ms)
+      ✓ should create profile with company-name (1626ms)
+      ✓ should create profile with website (1612ms)
     errors
-      ✓ invalid-first-name (973ms)
-      ✓ invalid-first-name-length (2238ms)
-      ✓ invalid-last-name (1000ms)
-      ✓ invalid-last-name-length (2223ms)
-      ✓ invalid-contact-email (1827ms)
-      ✓ invalid-display-email (1807ms)
-      ✓ invalid-display-name (856ms)
-      ✓ invalid-display-name-length (1923ms)
-      ✓ invalid-dob (1876ms)
-      ✓ invalid-phone (836ms)
-      ✓ invalid-occupation (833ms)
-      ✓ invalid-location (828ms)
-      ✓ invalid-company-name (876ms)
-      ✓ invalid-website (838ms)
+      ✓ invalid-first-name (945ms)
+      ✓ invalid-first-name-length (2127ms)
+      ✓ invalid-last-name (956ms)
+      ✓ invalid-last-name-length (2131ms)
+      ✓ invalid-contact-email (1760ms)
+      ✓ invalid-display-email (1770ms)
+      ✓ invalid-display-name (791ms)
+      ✓ invalid-display-name-length (1869ms)
+      ✓ invalid-dob (1831ms)
+      ✓ invalid-phone (803ms)
+      ✓ invalid-occupation (821ms)
+      ✓ invalid-location (809ms)
+      ✓ invalid-company-name (803ms)
+      ✓ invalid-website (825ms)
 
   /account/create-reset-code
     view
-      ✓ should present the form (500ms)
+      ✓ should present the form (468ms)
     submit
-      ✓ should create reset code (screenshots) (40633ms)
+      ✓ should create reset code (screenshots) (37449ms)
     errors
-      ✓ invalid-secret-code (928ms)
-      ✓ invalid-secret-code-length (1839ms)
+      ✓ invalid-secret-code (930ms)
+      ✓ invalid-secret-code-length (1789ms)
 
   /account/delete-account-complete
     view
-      ✓ should present 3 days remaining message (1401ms)
-      ✓ should present 7 days remaining message (1421ms)
-      ✓ should present instant deletion message (1435ms)
-      ✓ should present instant delete message (screenshots) (33323ms)
+      ✓ should present 3 days remaining message (1403ms)
+      ✓ should present 7 days remaining message (1381ms)
+      ✓ should present instant deletion message (1364ms)
+      ✓ should present instant delete message (screenshots) (30944ms)
 
   /account/delete-account
     view
-      ✓ should present the form (535ms)
+      ✓ should present the form (479ms)
     submit
-      ✓ should mark account deleted (screenshots) (33462ms)
+      ✓ should mark account deleted (screenshots) (30911ms)
     errors
-      ✓ invalid-password (1062ms)
+      ✓ invalid-password (1000ms)
 
   /account/delete-profile
     before
@@ -427,100 +427,100 @@
     exceptions
       ✓ invalid-profileid
       ✓ invalid-profile
-      ✓ invalid-account (71ms)
+      ✓ invalid-account (61ms)
     view
-      ✓ should present the form (541ms)
+      ✓ should present the form (474ms)
     submit
-      ✓ should delete profile (screenshots) (65275ms)
+      ✓ should delete profile (screenshots) (61756ms)
 
   /account/delete-reset-code
     before
       ✓ should bind data
     exceptions
       ✓ invalid-reset-codeid
-      ✓ invalid-account (50ms)
+      ✓ invalid-account (48ms)
     view
-      ✓ should present the form (491ms)
+      ✓ should present the form (485ms)
     submit
-      ✓ should delete reset code (screenshots) (53332ms)
+      ✓ should delete reset code (screenshots) (49747ms)
 
   /account/edit-profile
     view
-      ✓ should present the form (498ms)
-      ✓ should have elements for full-name (504ms)
-      ✓ should have elements for display-name (500ms)
-      ✓ should have elements for contact-email (504ms)
-      ✓ should have elements for display-email (508ms)
-      ✓ should have elements for dob (531ms)
-      ✓ should have elements for phone (499ms)
-      ✓ should have elements for occupation (496ms)
-      ✓ should have elements for location (502ms)
-      ✓ should have elements for company-name (507ms)
-      ✓ should have elements for website (516ms)
+      ✓ should present the form (444ms)
+      ✓ should have elements for full-name (479ms)
+      ✓ should have elements for display-name (482ms)
+      ✓ should have elements for contact-email (470ms)
+      ✓ should have elements for display-email (468ms)
+      ✓ should have elements for dob (454ms)
+      ✓ should have elements for phone (500ms)
+      ✓ should have elements for occupation (470ms)
+      ✓ should have elements for location (458ms)
+      ✓ should have elements for company-name (465ms)
+      ✓ should have elements for website (446ms)
     submit
-      ✓ should update profile (screenshots) (97705ms)
-      ✓ should update profile with full-name (1309ms)
-      ✓ should update profile with display name (1139ms)
-      ✓ should update profile with contact-email (1345ms)
-      ✓ should update profile with display-email (1601ms)
-      ✓ should update profile with dob in YYYY-MM-DD (1227ms)
-      ✓ should update profile with dob in MM-DD-YYYY (1221ms)
-      ✓ should update profile with phone (1623ms)
-      ✓ should update profile with occupation (1647ms)
-      ✓ should update profile with location (1662ms)
-      ✓ should update profile with company-name (1625ms)
-      ✓ should update profile with website (1654ms)
+      ✓ should update profile (screenshots) (94007ms)
+      ✓ should update profile with full-name (1262ms)
+      ✓ should update profile with display name (1143ms)
+      ✓ should update profile with contact-email (1521ms)
+      ✓ should update profile with display-email (1408ms)
+      ✓ should update profile with dob in YYYY-MM-DD (1175ms)
+      ✓ should update profile with dob in MM-DD-YYYY (1174ms)
+      ✓ should update profile with phone (1610ms)
+      ✓ should update profile with occupation (1605ms)
+      ✓ should update profile with location (1673ms)
+      ✓ should update profile with company-name (1569ms)
+      ✓ should update profile with website (1630ms)
     errors
-      ✓ invalid-first-name (1010ms)
-      ✓ invalid-first-name-length (2236ms)
-      ✓ invalid-last-name (1018ms)
-      ✓ invalid-last-name-length (2257ms)
-      ✓ invalid-contact-email (1870ms)
-      ✓ invalid-display-email (1862ms)
-      ✓ invalid-display-name (858ms)
-      ✓ invalid-display-name-length (1904ms)
-      ✓ invalid-dob (1928ms)
-      ✓ invalid-phone (856ms)
-      ✓ invalid-occupation (869ms)
-      ✓ invalid-location (858ms)
-      ✓ invalid-company-name (829ms)
-      ✓ invalid-website (856ms)
+      ✓ invalid-first-name (957ms)
+      ✓ invalid-first-name-length (2176ms)
+      ✓ invalid-last-name (970ms)
+      ✓ invalid-last-name-length (2151ms)
+      ✓ invalid-contact-email (1771ms)
+      ✓ invalid-display-email (1820ms)
+      ✓ invalid-display-name (821ms)
+      ✓ invalid-display-name-length (1856ms)
+      ✓ invalid-dob (1842ms)
+      ✓ invalid-phone (867ms)
+      ✓ invalid-occupation (804ms)
+      ✓ invalid-location (841ms)
+      ✓ invalid-company-name (804ms)
+      ✓ invalid-website (817ms)
 
   /account/end-all-sessions
     view
-      ✓ should present the form (490ms)
+      ✓ should present the form (448ms)
     submit
-      ✓ should generate a new session key (screenshots) (31520ms)
+      ✓ should generate a new session key (screenshots) (29325ms)
 
   /account/end-session
     before
       ✓ should bind data to req
     view
-      ✓ should present the form (494ms)
+      ✓ should present the form (453ms)
     submit
-      ✓ should end the session (screenshots) (54153ms)
-      ✓ should end current session (779ms)
+      ✓ should end the session (screenshots) (50219ms)
+      ✓ should end current session (726ms)
 
   /account
     view
-      ✓ should return page (screenshots) (17393ms)
-      ✓ should not link to account preferences (17481ms)
-      ✓ should link to account preferences (17417ms)
+      ✓ should return page (screenshots) (16392ms)
+      ✓ should not link to account preferences (16328ms)
+      ✓ should link to account preferences (16243ms)
 
   /account/language
     exceptions
       ✓ should require language enabled
     view
-      ✓ should present the form (507ms)
+      ✓ should present the form (453ms)
     submit
-      ✓ should change the language (screenshots) (33574ms)
+      ✓ should change the language (screenshots) (31112ms)
 
   /account/profile
     before
       ✓ should bind data to req
     view
-      ✓ should present the profile table (screenshots) (41538ms)
-      ✓ should show fields if data exists (4326ms)
+      ✓ should present the profile table (screenshots) (39607ms)
+      ✓ should show fields if data exists (4052ms)
 
   /account/profiles
     before
@@ -529,76 +529,76 @@
       ✓ should return one page (screenshots)
       ✓ should change page size
       ✓ should change offset
-      ✓ should show fields if data exists (4525ms)
+      ✓ should show fields if data exists (4107ms)
 
   /account/register
     view
-      ✓ should present the form (440ms)
-      ✓ should disable the form (396ms)
-      ✓ should have elements for full-name (386ms)
-      ✓ should have elements for contact-email (393ms)
-      ✓ should have elements for display-email (375ms)
-      ✓ should have elements for dob (412ms)
-      ✓ should have elements for phone (381ms)
-      ✓ should have elements for occupation (376ms)
-      ✓ should have elements for location (383ms)
-      ✓ should have elements for company-name (386ms)
-      ✓ should have elements for website (383ms)
+      ✓ should present the form (360ms)
+      ✓ should disable the form (406ms)
+      ✓ should have elements for full-name (365ms)
+      ✓ should have elements for contact-email (357ms)
+      ✓ should have elements for display-email (347ms)
+      ✓ should have elements for dob (367ms)
+      ✓ should have elements for phone (372ms)
+      ✓ should have elements for occupation (354ms)
+      ✓ should have elements for location (343ms)
+      ✓ should have elements for company-name (348ms)
+      ✓ should have elements for website (355ms)
     submit
-      ✓ should create new account with full name (6550ms)
-      ✓ should create new profile with contact email (6948ms)
-      ✓ should create new profile with display email (6669ms)
-      ✓ should create new profile with display name (6363ms)
-      ✓ should create new profile with dob in YYYY-MM-DD (6467ms)
-      ✓ should create new profile with dob in MM-DD-YYYY (6487ms)
-      ✓ should create new profile with phone (6950ms)
-      ✓ should create new profile with occupation (6920ms)
-      ✓ should create new profile with location (6912ms)
-      ✓ should create new profile with company-name (6882ms)
-      ✓ should create new profile with website (6925ms)
-      ✓ should create 20-minute session (6189ms)
-      ✓ should create account (screenshots) (95729ms)
+      ✓ should create new account with full name (6494ms)
+      ✓ should create new profile with contact email (6722ms)
+      ✓ should create new profile with display email (6819ms)
+      ✓ should create new profile with display name (6356ms)
+      ✓ should create new profile with dob in YYYY-MM-DD (6469ms)
+      ✓ should create new profile with dob in MM-DD-YYYY (6460ms)
+      ✓ should create new profile with phone (6886ms)
+      ✓ should create new profile with occupation (6926ms)
+      ✓ should create new profile with location (6897ms)
+      ✓ should create new profile with company-name (6913ms)
+      ✓ should create new profile with website (6855ms)
+      ✓ should create 20-minute session (6156ms)
+      ✓ should create account (screenshots) (93507ms)
     errors
-      ✓ invalid-username (5399ms)
-      ✓ invalid-username-length (5454ms)
-      ✓ invalid-password (5414ms)
-      ✓ invalid-password-length (5206ms)
-      ✓ invalid-confirm (5549ms)
-      ✓ invalid-first-name (6266ms)
-      ✓ invalid-first-name-length (12792ms)
-      ✓ invalid-last-name (6255ms)
-      ✓ invalid-last-name-length (12828ms)
-      ✓ invalid-contact-email (12413ms)
-      ✓ invalid-display-email (12362ms)
-      ✓ invalid-display-name (6094ms)
-      ✓ invalid-display-name-length (12453ms)
-      ✓ invalid-dob (12531ms)
-      ✓ invalid-phone (6098ms)
-      ✓ invalid-occupation (6128ms)
-      ✓ invalid-location (6112ms)
-      ✓ invalid-company-name (6086ms)
-      ✓ invalid-website (6158ms)
+      ✓ invalid-username (5372ms)
+      ✓ invalid-username-length (5392ms)
+      ✓ invalid-password (5368ms)
+      ✓ invalid-password-length (5147ms)
+      ✓ invalid-confirm (5532ms)
+      ✓ invalid-first-name (6232ms)
+      ✓ invalid-first-name-length (12715ms)
+      ✓ invalid-last-name (6233ms)
+      ✓ invalid-last-name-length (12728ms)
+      ✓ invalid-contact-email (12357ms)
+      ✓ invalid-display-email (12324ms)
+      ✓ invalid-display-name (6040ms)
+      ✓ invalid-display-name-length (12403ms)
+      ✓ invalid-dob (12496ms)
+      ✓ invalid-phone (6084ms)
+      ✓ invalid-occupation (6085ms)
+      ✓ invalid-location (6066ms)
+      ✓ invalid-company-name (6072ms)
+      ✓ invalid-website (6064ms)
 
   /account/reset-account
     view
-      ✓ should present the form (403ms)
+      ✓ should present the form (342ms)
     submit
-      ✓ should reset session key (6874ms)
-      ✓ should reset code last used (6843ms)
-      ✓ should sign in (screenshots) (140452ms)
+      ✓ should reset session key (6865ms)
+      ✓ should reset code last used (6894ms)
+      ✓ should sign in (screenshots) (137336ms)
     errors
-      ✓ invalid-username (5686ms)
-      ✓ invalid-secret-code (5640ms)
-      ✓ invalid-new-password (5598ms)
-      ✓ invalid-new-password-length (5379ms)
-      ✓ invalid-confirm-password (5570ms)
-      ✓ invalid-account (6726ms)
+      ✓ invalid-username (5643ms)
+      ✓ invalid-secret-code (5621ms)
+      ✓ invalid-new-password (5562ms)
+      ✓ invalid-new-password-length (5353ms)
+      ✓ invalid-confirm-password (5562ms)
+      ✓ invalid-account (6682ms)
 
   /account/reset-code
     before
       ✓ should bind data to req
     view
-      ✓ should present the reset code table (screenshots) (32290ms)
+      ✓ should present the reset code table (screenshots) (30168ms)
 
   /account/reset-codes
     before
@@ -610,24 +610,24 @@
 
   /account/restore-account
     view
-      ✓ should present the form (467ms)
+      ✓ should present the form (453ms)
     submit
-      ✓ should unset account deleted (screenshots) (131874ms)
+      ✓ should unset account deleted (screenshots) (128800ms)
     errors
-      ✓ invalid-username (5349ms)
-      ✓ invalid-password (5328ms)
-      ✓ invalid-account (5773ms)
+      ✓ invalid-username (5294ms)
+      ✓ invalid-password (5314ms)
+      ✓ invalid-account (5758ms)
 
   /account/session
     before
       ✓ should bind data to req
     view
-      ✓ should present the session table (screenshots) (32690ms)
+      ✓ should present the session table (screenshots) (30336ms)
 
   /account/sessions
     before
       ✓ should bind data to req
-      ✓ should exclude ended sessions (539ms)
+      ✓ should exclude ended sessions (517ms)
     view
       ✓ should return one page (screenshots)
       ✓ should change page size
@@ -637,42 +637,42 @@
     before
       ✓ should bind data to req
     view
-      ✓ should present the form (513ms)
+      ✓ should present the form (493ms)
     submit
-      ✓ should set the profile as default (screenshots) (64554ms)
+      ✓ should set the profile as default (screenshots) (60422ms)
 
   /account/signin
     view
-      ✓ should present the form (371ms)
+      ✓ should present the form (351ms)
     submit
-      ✓ should create session expiring in 20 minutes as default (5941ms)
-      ✓ should create session expiring in 20 minutes (6063ms)
-      ✓ should create session expiring in 8 hours (12062ms)
-      ✓ should create session expiring in 30 days (6071ms)
-      ✓ should sign in (screenshots) (93578ms)
+      ✓ should create session expiring in 20 minutes as default (5860ms)
+      ✓ should create session expiring in 20 minutes (6039ms)
+      ✓ should create session expiring in 8 hours (12028ms)
+      ✓ should create session expiring in 30 days (6050ms)
+      ✓ should sign in (screenshots) (91142ms)
     errors
-      ✓ invalid-username (4943ms)
-      ✓ invalid-password (5677ms)
+      ✓ invalid-username (4934ms)
+      ✓ invalid-password (5627ms)
 
   /account/signout-complete
     view
-      ✓ should sign out (screenshots) (22406ms)
+      ✓ should sign out (screenshots) (20776ms)
 
   /account/signout
     view
-      ✓ should end the session (578ms)
-      ✓ should redirect to signout complete page (558ms)
-      ✓ should signout (screenshots) (17965ms)
+      ✓ should end the session (529ms)
+      ✓ should redirect to signout complete page (515ms)
+      ✓ should signout (screenshots) (16546ms)
 
   /account/verify
     view
-      ✓ should present the form (477ms)
+      ✓ should present the form (421ms)
     submit
-      ✓ should mark session as verified (5945ms)
-      ✓ should verify session (screenshots) (69332ms)
+      ✓ should mark session as verified (5896ms)
+      ✓ should verify session (screenshots) (67582ms)
     errors
-      ✓ invalid-username (5045ms)
-      ✓ invalid-password (5697ms)
+      ✓ invalid-username (5009ms)
+      ✓ invalid-password (5680ms)
 
   /administrator/account-profiles
     before
@@ -703,13 +703,13 @@
 
   /administrator/account
     before
-      ✓ should bind data to req (55ms)
+      ✓ should bind data to req (46ms)
     view
-      ✓ should present the account table (screenshots) (30889ms)
-      ✓ should present the profile table (553ms)
-      ✓ should present the sessions table (529ms)
-      ✓ should hide empty reset codes table (552ms)
-      ✓ should present a populated reset codes table (529ms)
+      ✓ should present the account table (screenshots) (28749ms)
+      ✓ should present the profile table (495ms)
+      ✓ should present the sessions table (491ms)
+      ✓ should hide empty reset codes table (476ms)
+      ✓ should present a populated reset codes table (478ms)
 
   /administrator/accounts
     before
@@ -731,52 +731,52 @@
 
   /administrator/assign-administrator
     before
-      ✓ should bind data to req (41ms)
+      ✓ should bind data to req
     view
-      ✓ should present the form (521ms)
+      ✓ should present the form (468ms)
     submit
-      ✓ should apply account update (screenshots) (55869ms)
+      ✓ should apply account update (screenshots) (51247ms)
 
   /administrator/create-reset-code
     before
-      ✓ should bind data to req (52ms)
+      ✓ should bind data to req
     view
-      ✓ should present the form (547ms)
+      ✓ should present the form (476ms)
     submit
-      ✓ should create reset code (screenshots) (61309ms)
+      ✓ should create reset code (screenshots) (56389ms)
     errors
-      ✓ invalid-secret-code (965ms)
-      ✓ invalid-secret-code-length (1964ms)
+      ✓ invalid-secret-code (917ms)
+      ✓ invalid-secret-code-length (1806ms)
 
   /administrator/delete-account
     exceptions
       ✓ should reject invalid accountid
     before
-      ✓ should bind data to req (53ms)
+      ✓ should bind data to req
     view
-      ✓ should present the form (541ms)
+      ✓ should present the form (466ms)
     submit
-      ✓ should immediately delete (screenshots) (59211ms)
+      ✓ should immediately delete (screenshots) (54260ms)
 
   /administrator/delete-schedule
     before
-      ✓ should bind data to req (92ms)
+      ✓ should bind data to req (75ms)
     view
-      ✓ should present the deleted accounts table (screenshots) (25323ms)
-      ✓ should return one page (578ms)
-      ✓ should change page size (619ms)
-      ✓ should change offset (590ms)
+      ✓ should present the deleted accounts table (screenshots) (23687ms)
+      ✓ should return one page (553ms)
+      ✓ should change page size (547ms)
+      ✓ should change offset (568ms)
 
   /administrator
     view
-      ✓ should return page (screenshots) (16692ms)
+      ✓ should return page (screenshots) (15845ms)
 
   /administrator/profile
     before
-      ✓ should bind data to req (39ms)
+      ✓ should bind data to req
     view
-      ✓ should present the profile table (screenshots) (40037ms)
-      ✓ should show fields if data exists (4282ms)
+      ✓ should present the profile table (screenshots) (37773ms)
+      ✓ should show fields if data exists (4040ms)
 
   /administrator/profiles
     before
@@ -785,13 +785,13 @@
       ✓ should return one page (screenshots)
       ✓ should change page size
       ✓ should change offset
-      ✓ should show fields if data exists (4367ms)
+      ✓ should show fields if data exists (4110ms)
 
   /administrator/reset-code
     before
-      ✓ should bind data to req (44ms)
+      ✓ should bind data to req (42ms)
     view
-      ✓ should present the reset code table (screenshots) (31830ms)
+      ✓ should present the reset code table (screenshots) (29365ms)
 
   /administrator/reset-codes
     before
@@ -804,50 +804,50 @@
 
   /administrator/reset-session-key
     before
-      ✓ should bind data to req (42ms)
+      ✓ should bind data to req (39ms)
     view
-      ✓ should present the form (516ms)
+      ✓ should present the form (495ms)
     submit
-      ✓ should reset session key (screenshots) (56337ms)
+      ✓ should reset session key (screenshots) (52558ms)
 
   /administrator/revoke-administrator
     before
       ✓ should bind data to req (46ms)
     view
-      ✓ should present the form (515ms)
+      ✓ should present the form (485ms)
     submit
-      ✓ should revoke administrator status (screenshots) (55274ms)
+      ✓ should revoke administrator status (screenshots) (51503ms)
 
   /administrator/schedule-account-delete
     before
-      ✓ should bind data to req (50ms)
+      ✓ should bind data to req
     view
-      ✓ should present the form (539ms)
+      ✓ should present the form (485ms)
     submit
-      ✓ should schedule account for deletion (screenshots) (57359ms)
+      ✓ should schedule account for deletion (screenshots) (53459ms)
 
   /administrator/session
     before
-      ✓ should bind data to req (41ms)
+      ✓ should bind data to req
     view
-      ✓ should present the session table (screenshots) (31353ms)
+      ✓ should present the session table (screenshots) (29152ms)
 
   /administrator/sessions
     before
       ✓ should bind data to req
     view
       ✓ should present the sessions table (screenshots)
-      ✓ should return one page (531ms)
+      ✓ should return one page (490ms)
       ✓ should change page size
       ✓ should change offset
 
   /administrator/transfer-ownership
     before
-      ✓ should bind data to req (41ms)
+      ✓ should bind data to req (43ms)
     view
-      ✓ should present the form (510ms)
+      ✓ should present the form (473ms)
     submit
-      ✓ should change ownership (screenshots) (55667ms)
+      ✓ should change ownership (screenshots) (52016ms)
 
   /api/administrator/account
     exceptions
@@ -855,15 +855,15 @@
         ✓ unspecified querystring accountid
         ✓ invalid querystring accountid
     returns
-      ✓ object (39ms)
+      ✓ object
     redacts
-      ✓ usernameHash (38ms)
-      ✓ passwordHash (44ms)
-      ✓ sessionKey (39ms)
+      ✓ usernameHash (40ms)
+      ✓ passwordHash (38ms)
+      ✓ sessionKey
 
   /api/administrator/accounts-count
     returns
-      ✓ integer (90ms)
+      ✓ integer (66ms)
 
   /api/administrator/accounts
     receives
@@ -881,7 +881,7 @@
 
   /api/administrator/administrator-accounts-count
     returns
-      ✓ integer (43ms)
+      ✓ integer
 
   /api/administrator/administrator-accounts
     receives
@@ -903,14 +903,14 @@
         ✓ unspecified querystring accountid
         ✓ invalid querystring accountid
       invalid-secret-code
-        ✓ missing posted secret-code (40ms)
+        ✓ missing posted secret-code
       invalid-secret-code-length
-        ✓ invalid posted secret-code length (43ms)
+        ✓ invalid posted secret-code length
     returns
-      ✓ object (41ms)
+      ✓ object
     configuration
-      ✓ environment MINIMUM_RESET_CODE_LENGTH (40ms)
-      ✓ environment MAXIMUM_RESET_CODE_LENGTH (40ms)
+      ✓ environment MINIMUM_RESET_CODE_LENGTH
+      ✓ environment MAXIMUM_RESET_CODE_LENGTH
 
   /api/administrator/delete-account
     exceptions
@@ -918,27 +918,27 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
     receieves
-      ✓ querystring accountid (47ms)
+      ✓ querystring accountid
     returns
-      ✓ boolean (43ms)
+      ✓ boolean
 
   /api/administrator/deleted-accounts-count
     returns
-      ✓ querystring accountid (93ms)
+      ✓ querystring accountid (73ms)
 
   /api/administrator/deleted-accounts
     receives
-      ✓ optional querystring offset (integer) (84ms)
-      ✓ optional querystring limit (integer) (64ms)
-      ✓ optional querystring all (boolean) (105ms)
+      ✓ optional querystring offset (integer) (74ms)
+      ✓ optional querystring limit (integer) (62ms)
+      ✓ optional querystring all (boolean) (78ms)
     returns
-      ✓ array (63ms)
+      ✓ array (54ms)
     redacts
-      ✓ usernameHash (45ms)
-      ✓ passwordHash (51ms)
-      ✓ sessionKey (42ms)
+      ✓ usernameHash
+      ✓ passwordHash
+      ✓ sessionKey
     configuration
-      ✓ environment PAGE_SIZE (102ms)
+      ✓ environment PAGE_SIZE (91ms)
 
   /api/administrator/profile
     exceptions
@@ -946,11 +946,11 @@
         ✓ missing querystring profileid
         ✓ invalid querystring profileid
     returns
-      ✓ object (44ms)
+      ✓ object
 
   /api/administrator/profiles-count
     returns
-      ✓ integer (72ms)
+      ✓ integer (76ms)
 
   /api/administrator/profiles
     receives
@@ -969,10 +969,10 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ accessing account is not owner (39ms)
-        ✓ querystring accountid is not administrator (42ms)
+        ✓ accessing account is not owner (38ms)
+        ✓ querystring accountid is not administrator
     returns
-      ✓ object (43ms)
+      ✓ object (38ms)
 
   /api/administrator/reset-code
     exceptions
@@ -980,13 +980,13 @@
         ✓ missing querystring codeid
         ✓ invalid querystring codeid
     returns
-      ✓ object (45ms)
+      ✓ object
     redacts
-      ✓ secretCodeHash (44ms)
+      ✓ secretCodeHash (39ms)
 
   /api/administrator/reset-codes-count
     returns
-      ✓ integer (84ms)
+      ✓ integer (85ms)
 
   /api/administrator/reset-codes
     receives
@@ -1007,11 +1007,11 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
     invalid-account
-      ✓ ineligible querystring account is deleted (47ms)
+      ✓ ineligible querystring account is deleted
     requires
-      ✓ querystring accountid is not deleted (41ms)
+      ✓ querystring accountid is not deleted
     returns
-      ✓ object (44ms)
+      ✓ object
 
   /api/administrator/session
     exceptions
@@ -1019,13 +1019,13 @@
         ✓ unspecified querystring accountid
         ✓ invalid querystring sessionid
     returns
-      ✓ object (38ms)
+      ✓ object
     redacts
-      ✓ tokenHash (43ms)
+      ✓ tokenHash
 
   /api/administrator/sessions-count
     returns
-      ✓ integer (79ms)
+      ✓ integer (64ms)
 
   /api/administrator/sessions
     receives
@@ -1050,7 +1050,7 @@
     requires
       ✓ querystring accountid is not administrator
     returns
-      ✓ object (39ms)
+      ✓ object
 
   /api/administrator/set-account-deleted
     exceptions
@@ -1058,13 +1058,13 @@
         ✓ unspecified querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible querystring account is already deleted (41ms)
+        ✓ ineligible querystring account is already deleted
     invalid-account
-      ✓ querystring accountid is deleted (41ms)
+      ✓ querystring accountid is deleted
     returns
-      ✓ object (38ms)
+      ✓ object
     configuration
-      ✓ environment DELETE_DELAY (38ms)
+      ✓ environment DELETE_DELAY
 
   /api/administrator/set-owner-account
     exceptions
@@ -1072,14 +1072,14 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (62ms)
+        ✓ ineligible accessing account (50ms)
         ✓ ineligible querystring account is already owner
     requires
-      ✓ accessing account is owner (57ms)
+      ✓ accessing account is owner (51ms)
       ✓ querystring account is not owner
-      ✓ querystring account is not deleted (41ms)
+      ✓ querystring account is not deleted
     returns
-      ✓ object (50ms)
+      ✓ object
 
   /api/user/account
     exceptions
@@ -1155,7 +1155,7 @@
       ✓ environment MINIMUM_PASSWORD_LENGTH
       ✓ environment MAXIMUM_PASSWORD_LENGTH
       ✓ environment REQUIRE_PROFILE
-      ✓ environment USER_PROFILE_FIELDS (66ms)
+      ✓ environment USER_PROFILE_FIELDS (53ms)
       ✓ environment MINIMUM_PROFILE_FIRST_NAME_LENGTH
       ✓ environment MAXIMUM_PROFILE_FIRST_NAME_LENGTH
       ✓ environment MINIMUM_PROFILE_LAST_NAME_LENGTH
@@ -1164,7 +1164,7 @@
       ✓ environment MAXIMUM_PROFILE_DISPLAY_NAME_LENGTH
       ✓ environment MINIMUM_PROFILE_COMPANY_NAME_LENGTH
       ✓ environment MAXIMUM_PROFILE_COMPANY_NAME_LENGTH
-      ✓ override req.userProfileFields (54ms)
+      ✓ override req.userProfileFields (46ms)
 
   /api/user/create-profile
     exceptions
@@ -1172,7 +1172,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-accountid
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (41ms)
       invalid-first-name
         ✓ missing posted first-name
       invalid-first-name-length
@@ -1219,7 +1219,7 @@
     returns
       ✓ object
     configuration
-      ✓ environment USER_PROFILE_FIELDS (58ms)
+      ✓ environment USER_PROFILE_FIELDS (52ms)
       ✓ environment MINIMUM_PROFILE_FIRST_NAME_LENGTH
       ✓ environment MAXIMUM_PROFILE_FIRST_NAME_LENGTH
       ✓ environment MINIMUM_PROFILE_LAST_NAME_LENGTH
@@ -1228,7 +1228,7 @@
       ✓ environment MAXIMUM_PROFILE_DISPLAY_NAME_LENGTH
       ✓ environment MINIMUM_PROFILE_COMPANY_NAME_LENGTH
       ✓ environment MAXIMUM_PROFILE_COMPANY_NAME_LENGTH
-      ✓ override req.userProfileFields (38ms)
+      ✓ override req.userProfileFields
 
   /api/user/create-reset-code
     exceptions
@@ -1274,7 +1274,7 @@
         ✓ missing querystring codeid
         ✓ invalid querystring codeid
       invalid-account
-        ✓ ineligible querystring codeid (40ms)
+        ✓ ineligible querystring codeid
     returns
       ✓ boolean
 
@@ -1294,7 +1294,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (38ms)
     returns
       ✓ integer
 
@@ -1304,7 +1304,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (42ms)
+        ✓ ineligible accessing account
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -1347,7 +1347,7 @@
         ✓ missing querystring codeid
         ✓ invalid querystring codeid
       invalid-account
-        ✓ ineligible querystring codeid (43ms)
+        ✓ ineligible querystring codeid
     returns
       ✓ object
     redacts
@@ -1359,9 +1359,9 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (46ms)
     returns
-      ✓ integer (59ms)
+      ✓ integer
 
   /api/user/reset-codes
     exceptions
@@ -1369,7 +1369,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account
+        ✓ ineligible accessing account (41ms)
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -1397,7 +1397,7 @@
         ✓ missing querystring sessionid
         ✓ invalid querystring sessionid
       invalid-account
-        ✓ ineligible querystring sessionid
+        ✓ ineligible querystring sessionid (40ms)
     returns
       ✓ object
     redacts
@@ -1419,7 +1419,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (43ms)
+        ✓ ineligible accessing account
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -1450,7 +1450,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (41ms)
+        ✓ ineligible accessing account
       invalid-language
         ✓ missing posted language
         ✓ invalid posted language
@@ -1583,7 +1583,7 @@
     returns
       ✓ object
     configuration
-      ✓ environment USER_PROFILE_FIELDS (46ms)
+      ✓ environment USER_PROFILE_FIELDS (39ms)
       ✓ environment MINIMUM_PROFILE_FIRST_NAME_LENGTH
       ✓ environment MAXIMUM_PROFILE_FIRST_NAME_LENGTH
       ✓ environment MINIMUM_PROFILE_LAST_NAME_LENGTH
@@ -1634,48 +1634,48 @@
   /account/connect/create-person
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1816ms)
+      ✓ should reject individual registration (1888ms)
     view
-      ✓ should present the form (3025ms)
-      ✓ should remove director option (2553ms)
-      ✓ should remove owner option (2101ms)
+      ✓ should present the form (2769ms)
+      ✓ should remove director option (2329ms)
+      ✓ should remove owner option (2219ms)
     submit
-      ✓ should create representative (screenshots) (89025ms)
-      ✓ should create director (7505ms)
-      ✓ should create owner (7586ms)
+      ✓ should create representative (screenshots) (83785ms)
+      ✓ should create director (7162ms)
+      ✓ should create owner (8004ms)
 
   /account/connect/create-stripe-account
     view
-      ✓ should present the form (580ms)
+      ✓ should present the form (487ms)
     submit
-      ✓ should create Stripe account (screenshots) (37996ms)
+      ✓ should create Stripe account (screenshots) (35344ms)
 
   /account/connect/delete-person
     exceptions
       ✓ should reject invalid personid
-      ✓ should require own Stripe account (4599ms)
+      ✓ should require own Stripe account (4688ms)
     before
-      ✓ should bind data to req (6132ms)
+      ✓ should bind data to req (5828ms)
     view
-      ✓ should present the form (6575ms)
+      ✓ should present the form (6285ms)
     submit
-      ✓ should delete person (screenshots) (125098ms)
+      ✓ should delete person (screenshots) (119336ms)
 
   /account/connect/delete-stripe-account
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should require own Stripe account (1697ms)
+      ✓ should require own Stripe account (2045ms)
     before
-      ✓ should bind data to req (2106ms)
+      ✓ should bind data to req (2046ms)
     view
-      ✓ should present the form (2464ms)
+      ✓ should present the form (2455ms)
     submit
-      ✓ should delete Stripe account (screenshots) (57039ms)
+      ✓ should delete Stripe account (screenshots) (54049ms)
 
   /account/connect/edit-payment-information
     before
       ✓ should reject invalid stripeid
-      ✓ should bind Stripe account to req (2167ms)
+      ✓ should bind Stripe account to req (1791ms)
     view
       ✓ should present the form (AT)
       ✓ should present the form (AU)
@@ -1696,7 +1696,7 @@
       ✓ should present the form (JP)
       ✓ should present the form (LT)
       ✓ should present the form (LU)
-      ✓ should present the form (LV)
+      ✓ should present the form (LV) (39ms)
       ✓ should present the form (MY)
       ✓ should present the form (NL)
       ✓ should present the form (NO)
@@ -1740,38 +1740,38 @@
       ✓ submit payment information (SI)
       ✓ submit payment information (SK)
       ✓ submit payment information (US)
-      ✓ submit payment information (screenshots) (60566ms)
+      ✓ submit payment information (screenshots) (57970ms)
     errors
       ✓ reject invalid fields (AT)
-      ✓ reject invalid fields (AU) (91ms)
+      ✓ reject invalid fields (AU)
       ✓ reject invalid fields (BE)
-      ✓ reject invalid fields (CA) (41ms)
-      ✓ reject invalid fields (CH)
+      ✓ reject invalid fields (CA) (72ms)
+      ✓ reject invalid fields (CH) (46ms)
       ✓ reject invalid fields (DE)
       ✓ reject invalid fields (DK)
-      ✓ reject invalid fields (EE) (56ms)
-      ✓ reject invalid fields (ES) (57ms)
+      ✓ reject invalid fields (EE)
+      ✓ reject invalid fields (ES)
       ✓ reject invalid fields (FI)
       ✓ reject invalid fields (FR)
-      ✓ reject invalid fields (GB) (69ms)
-      ✓ reject invalid fields (GR) (41ms)
-      ✓ reject invalid fields (HK) (65ms)
+      ✓ reject invalid fields (GB) (65ms)
+      ✓ reject invalid fields (GR) (72ms)
+      ✓ reject invalid fields (HK)
       ✓ reject invalid fields (IE)
       ✓ reject invalid fields (IT)
-      ✓ reject invalid fields (JP) (43ms)
+      ✓ reject invalid fields (JP)
       ✓ reject invalid fields (LT)
       ✓ reject invalid fields (LU)
       ✓ reject invalid fields (LV)
-      ✓ reject invalid fields (MY) (39ms)
-      ✓ reject invalid fields (NL) (66ms)
-      ✓ reject invalid fields (NO) (52ms)
+      ✓ reject invalid fields (MY)
+      ✓ reject invalid fields (NL)
+      ✓ reject invalid fields (NO)
       ✓ reject invalid fields (NZ)
       ✓ reject invalid fields (PL)
       ✓ reject invalid fields (PT)
       ✓ reject invalid fields (SE)
-      ✓ reject invalid fields (SG) (44ms)
-      ✓ reject invalid fields (SI)
-      ✓ reject invalid fields (SK)
+      ✓ reject invalid fields (SG) (38ms)
+      ✓ reject invalid fields (SI) (63ms)
+      ✓ reject invalid fields (SK) (53ms)
       ✓ reject invalid fields (US)
 
   /account/connect/edit-person
@@ -1811,8 +1811,8 @@
       ✓ should have element for upload verification_additional_document_front
       ✓ should have element for upload verification_additional_document_back
     submit
-      ✓ should update person (screenshots) no stripe.js (169318ms)
-      ✓ should update person stripe.js v3 (22863ms)
+      ✓ should update person (screenshots) no stripe.js (165154ms)
+      ✓ should update person stripe.js v3 (23203ms)
     errors
       invalid-address_city
         ✓ missing address_city no stripe.js
@@ -1917,13 +1917,13 @@
     view
       ✓ should have element for business_profile_mcc (company)
       ✓ should have element for business_profile_url (company)
-      ✓ should have element for address_city (company)
+      ✓ should have element for address_city (company) (41ms)
       ✓ should have element for address_line1 (company)
       ✓ should have element for address_postal_code (company)
       ✓ should have element for name (company)
       ✓ should have element for phone (company)
-      ✓ should have element for tax_id (company) (38ms)
-      ✓ should have element for address_state (company)
+      ✓ should have element for tax_id (company)
+      ✓ should have element for address_state (company) (44ms)
       ✓ should have element for address_kana_city (company)
       ✓ should have element for address_kana_line1 (company)
       ✓ should have element for address_kana_postal_code (company)
@@ -1936,7 +1936,7 @@
       ✓ should have element for address_kanji_town (company)
       ✓ should have element for name_kana (company)
       ✓ should have element for name_kanji (company)
-      ✓ should have element for address_city (individual) (77ms)
+      ✓ should have element for address_city (individual)
       ✓ should have element for address_line1 (individual)
       ✓ should have element for address_postal_code (individual)
       ✓ should have element for dob_day (individual)
@@ -1965,23 +1965,23 @@
       ✓ should have element for last_name_kana (individual)
       ✓ should have element for last_name_kanji (individual)
       ✓ should have element for id_number (individual)
-      ✓ should have element for ssn_last_4 (individual) (45ms)
+      ✓ should have element for ssn_last_4 (individual)
     submit
-      ✓ should update registration no stripe.js (individual) (10404ms)
-      ✓ should update registration stripe.js v3 (individual) (screenshots) (131466ms)
-      ✓ should update registration no stripe.js (company) (13792ms)
-      ✓ should update registration stripe.js v3 (company) (14443ms)
+      ✓ should update registration no stripe.js (individual) (12714ms)
+      ✓ should update registration stripe.js v3 (individual) (screenshots) (104164ms)
+      ✓ should update registration no stripe.js (company) (13567ms)
+      ✓ should update registration stripe.js v3 (company) (14681ms)
     errors
       ✓ should reject missing business_profile_mcc no stripe.js (company)
-      ✓ should reject missing business_profile_mcc stripe.js v3 (company) (41ms)
-      ✓ should reject missing business_profile_url no stripe.js (company) (52ms)
-      ✓ should reject missing business_profile_url stripe.js v3 (company) (58ms)
-      ✓ should reject missing address_city no stripe.js (company) (44ms)
+      ✓ should reject missing business_profile_mcc stripe.js v3 (company)
+      ✓ should reject missing business_profile_url no stripe.js (company)
+      ✓ should reject missing business_profile_url stripe.js v3 (company)
+      ✓ should reject missing address_city no stripe.js (company)
       ✓ should reject missing address_city stripe.js v3 (company)
       ✓ should reject missing address_line1 no stripe.js (company)
       ✓ should reject missing address_line1 stripe.js v3 (company)
-      ✓ should reject missing address_postal_code no stripe.js (company)
-      ✓ should reject missing address_postal_code stripe.js v3 (company)
+      ✓ should reject missing address_postal_code no stripe.js (company) (38ms)
+      ✓ should reject missing address_postal_code stripe.js v3 (company) (62ms)
       ✓ should reject missing name no stripe.js (company)
       ✓ should reject missing name stripe.js v3 (company)
       ✓ should reject missing phone no stripe.js (company)
@@ -2004,10 +2004,10 @@
       ✓ should reject missing address_kanji_city stripe.js v3 (company)
       ✓ should reject missing address_kanji_line1 no stripe.js (company)
       ✓ should reject missing address_kanji_line1 stripe.js v3 (company)
-      ✓ should reject missing address_kanji_postal_code no stripe.js (company) (40ms)
+      ✓ should reject missing address_kanji_postal_code no stripe.js (company)
       ✓ should reject missing address_kanji_postal_code stripe.js v3 (company)
       ✓ should reject missing address_kanji_state no stripe.js (company)
-      ✓ should reject missing address_kanji_state stripe.js v3 (company)
+      ✓ should reject missing address_kanji_state stripe.js v3 (company) (41ms)
       ✓ should reject missing address_kanji_town no stripe.js (company)
       ✓ should reject missing address_kanji_town stripe.js v3 (company)
       ✓ should reject missing name_kana no stripe.js (company)
@@ -2072,30 +2072,30 @@
       ✓ should reject missing last_name_kanji stripe.js v3 (individual)
       ✓ should reject missing id_number no stripe.js (individual)
       ✓ should reject missing id_number stripe.js v3 (individual)
-      ✓ should reject missing ssn_last_4 no stripe.js (individual) (47ms)
-      ✓ should reject missing ssn_last_4 stripe.js v3 (individual)
+      ✓ should reject missing ssn_last_4 no stripe.js (individual)
+      ✓ should reject missing ssn_last_4 stripe.js v3 (individual) (67ms)
 
   /account/connect
     before
-      ✓ should bind data to req (4960ms)
+      ✓ should bind data to req (4146ms)
     view
-      ✓ should have row for each Stripe account (screenshots) (24763ms)
+      ✓ should have row for each Stripe account (screenshots) (22629ms)
 
   /account/connect/person
     before
       ✓ should reject invalid personid
-      ✓ should bind data to req (5312ms)
+      ✓ should bind data to req (5388ms)
     view
-      ✓ should show table for person (screenshots) (96686ms)
-      ✓ should show person is representative (8470ms)
-      ✓ should show person is owner (8037ms)
-      ✓ should show person is director (5304ms)
-      ✓ should show person requires additional information (5811ms)
+      ✓ should show table for person (screenshots) (92979ms)
+      ✓ should show person is representative (9506ms)
+      ✓ should show person is owner (6087ms)
+      ✓ should show person is director (5335ms)
+      ✓ should show person requires additional information (5815ms)
 
   /account/connect/persons
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (2114ms)
+      ✓ should reject individual registration (1820ms)
     before
       ✓ should bind data to req
     view
@@ -2105,16 +2105,16 @@
 
   /account/connect/stripe-account
     before
-      ✓ should reject invalid stripeid (1899ms)
-      ✓ should reject other account's stripeid (1721ms)
-      ✓ should bind data to req (2057ms)
+      ✓ should reject invalid stripeid (1691ms)
+      ✓ should reject other account's stripeid (1534ms)
+      ✓ should bind data to req (1964ms)
     view
-      ✓ should show registration unstarted (screenshots) (48437ms)
-      ✓ should show registration completed (5399ms)
-      ✓ should show payment information required (6516ms)
-      ✓ should show payment information created (9127ms)
-      ✓ should show ready to submit (5202ms)
-      ✓ should show registration is submitted (78191ms)
+      ✓ should show registration unstarted (screenshots) (43988ms)
+      ✓ should show registration completed (5275ms)
+      ✓ should show payment information required (6238ms)
+      ✓ should show payment information created (14193ms)
+      ✓ should show ready to submit (4671ms)
+      ✓ should show registration is submitted (80932ms)
 
   /account/connect/stripe-accounts
     before
@@ -2125,72 +2125,72 @@
   /account/connect/submit-beneficial-owners
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1600ms)
-      ✓ should reject Stripe account that doesn't require owners (1756ms)
+      ✓ should reject individual registration (1802ms)
+      ✓ should reject Stripe account that doesn't require owners (2096ms)
     before
-      ✓ should bind data to req (11651ms)
+      ✓ should bind data to req (11079ms)
     view
-      ✓ should reject if an owner requires information (6848ms)
-      ✓ should present the form without owners (2942ms)
-      ✓ should present the form with completed owners (104756ms)
+      ✓ should reject if an owner requires information (6389ms)
+      ✓ should present the form without owners (3198ms)
+      ✓ should present the form with completed owners (95817ms)
     submit
-      ✓ should submit owners (screenshots) (173167ms)
-      ✓ should submit without owners (6751ms)
+      ✓ should submit owners (screenshots) (167093ms)
+      ✓ should submit without owners (6620ms)
 
   /account/connect/submit-company-directors
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1786ms)
-      ✓ should reject Stripe account that doesn't require directors (1945ms)
+      ✓ should reject individual registration (1975ms)
+      ✓ should reject Stripe account that doesn't require directors (1848ms)
     before
-      ✓ should bind data to req (8813ms)
+      ✓ should bind data to req (9472ms)
     view
-      ✓ should reject if a director requires information (6161ms)
-      ✓ should present the form without directors (2699ms)
-      ✓ should present the form with directors (11546ms)
+      ✓ should reject if a director requires information (6365ms)
+      ✓ should present the form without directors (2867ms)
+      ✓ should present the form with directors (10688ms)
     submit
-      ✓ should submit directors (screenshots) (101212ms)
-      ✓ should submit without directors (7073ms)
+      ✓ should submit directors (screenshots) (95441ms)
+      ✓ should submit without directors (6489ms)
 
   /account/connect/submit-stripe-account
     exceptions
       ✓ should reject invalid stripeid
     before
-      ✓ should bind data to req (140082ms)
+      ✓ should bind data to req (135194ms)
     view
-      ✓ should reject registration that hasn't submitted payment details (36633ms)
-      ✓ should reject company that hasn't submitted beneficial owners (26441ms)
-      ✓ should reject company that hasn't submitted company directors (32433ms)
-      ✓ should reject company that hasn't submitted representative information (16261ms)
-      ✓ should reject company that hasn't submitted information (14794ms)
-      ✓ should reject individual that hasn't submitted information (4603ms)
-      ✓ should present the form (individual) (94083ms)
-      ✓ should present the form (company) (88080ms)
+      ✓ should reject registration that hasn't submitted payment details (28397ms)
+      ✓ should reject company that hasn't submitted beneficial owners (29734ms)
+      ✓ should reject company that hasn't submitted company directors (40348ms)
+      ✓ should reject company that hasn't submitted representative information (17762ms)
+      ✓ should reject company that hasn't submitted information (15230ms)
+      ✓ should reject individual that hasn't submitted information (4597ms)
+      ✓ should present the form (individual) (86981ms)
+      ✓ should present the form (company) (115889ms)
     submit
-      ✓ should submit registration (company) (screenshots) (144036ms)
-      ✓ should submit registration (individual) (95182ms)
+      ✓ should submit registration (company) (screenshots) (192746ms)
+      ✓ should submit registration (individual) (91626ms)
 
   /administrator/connect/delete-stripe-account
     before
-      ✓ should bind data to req (1478ms)
+      ✓ should bind data to req (1512ms)
     view
-      ✓ should present the form (2137ms)
-      ✓ should present the Stripe account table (2661ms)
+      ✓ should present the form (2241ms)
+      ✓ should present the Stripe account table (2054ms)
     submit
-      ✓ should delete Stripe account (screenshots) (71315ms)
+      ✓ should delete Stripe account (screenshots) (67602ms)
 
   /administrator/connect
     before
-      ✓ should bind data to req (1804ms)
+      ✓ should bind data to req (1733ms)
     view
-      ✓ should have row for each Stripe account (screenshots) (19215ms)
+      ✓ should have row for each Stripe account (screenshots) (18482ms)
 
   /administrator/connect/payout
     before
       ✓ should reject invalid payoutid
-      ✓ should bind data to req (117554ms)
+      ✓ should bind data to req (87845ms)
     view
-      ✓ should have row for payout (screenshots) (115238ms)
+      ✓ should have row for payout (screenshots) (128540ms)
 
   /administrator/connect/payouts
     before
@@ -2202,18 +2202,18 @@
 
   /administrator/connect/reject-stripe-account
     before
-      ✓ should bind data to req (1848ms)
+      ✓ should bind data to req (1945ms)
     view
-      ✓ should present the form (2528ms)
+      ✓ should present the form (2003ms)
     submit
-      ✓ should update the Stripe account as rejected (screenshots) (70108ms)
+      ✓ should update the Stripe account as rejected (screenshots) (64882ms)
 
   /administrator/connect/stripe-account
     before
-      ✓ should reject invalid stripeid (1435ms)
-      ✓ should bind data to req (2079ms)
+      ✓ should reject invalid stripeid (1390ms)
+      ✓ should bind data to req (3509ms)
     view
-      ✓ should have row for Stripe account (screenshots) (27427ms)
+      ✓ should have row for Stripe account (screenshots) (25648ms)
 
   /administrator/connect/stripe-accounts
     before
@@ -2227,9 +2227,9 @@
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid (136ms)
+        ✓ invalid querystring stripeid (129ms)
     returns
-      ✓ boolean (2680ms)
+      ✓ boolean (2579ms)
 
   /api/administrator/connect/payout
     exceptions
@@ -2237,11 +2237,11 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object (82361ms)
+      ✓ object (64364ms)
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (265027ms)
+      ✓ integer (280499ms)
 
   /api/administrator/connect/payouts
     receives
@@ -2259,24 +2259,24 @@
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid (209ms)
+        ✓ invalid querystring stripeid (234ms)
       invalid-reason
         ✓ missing posted reason
         ✓ invalid posted reason
     returns
-      ✓ boolean (3066ms)
+      ✓ boolean (3039ms)
 
   /api/administrator/connect/stripe-account
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid (130ms)
+        ✓ invalid querystring stripeid (132ms)
     returns
-      ✓ object (1717ms)
+      ✓ object (1920ms)
 
   /api/administrator/connect/stripe-accounts-count
     returns
-      ✓ integer (4504ms)
+      ✓ integer (4218ms)
 
   /api/administrator/connect/stripe-accounts
     exceptions
@@ -2297,15 +2297,15 @@
       ✓ missing querystring country
       ✓ invalid querystring country
     returns
-      ✓ object (213ms)
+      ✓ object (238ms)
 
   /api/user/connect/country-specs-count
     returns
-      ✓ integer (2364ms)
+      ✓ integer (2249ms)
 
   /api/user/connect/country-specs
     receives
-      ✓ optional querystring offset (integer) (2697ms)
+      ✓ optional querystring offset (integer) (2461ms)
       ✓ optional querystring limit (integer)
       ✓ optional querystring all (boolean)
     returns
@@ -2319,28 +2319,28 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account for individuals (2045ms)
-        ✓ ineligible stripe account does not require directors (2104ms)
-        ✓ ineligible stripe account does not require owners (1716ms)
+        ✓ ineligible stripe account for individuals (1765ms)
+        ✓ ineligible stripe account does not require directors (1991ms)
+        ✓ ineligible stripe account does not require owners (1865ms)
       invalid-account
-        ✓ ineligible accessing account (1547ms)
+        ✓ ineligible accessing account (1683ms)
       invalid-relationship_percent_ownership
-        ✓ missing posted relationship_percent_ownership (1687ms)
-        ✓ invalid posted relationship_percent_ownership (1940ms)
+        ✓ missing posted relationship_percent_ownership (1813ms)
+        ✓ invalid posted relationship_percent_ownership (1728ms)
       invalid-relationship_title
-        ✓ missing posted relationship_title (2043ms)
-        ✓ invalid posted relationship_title (2214ms)
+        ✓ missing posted relationship_title (2059ms)
+        ✓ invalid posted relationship_title (1966ms)
       invalid-relationship_executive
-        ✓ invalid representative must be an executive (1978ms)
+        ✓ invalid representative must be an executive (1844ms)
     receives
-      ✓ optional posted relationship_representative (3574ms)
-      ✓ optionally-required posted relationship_executive (3222ms)
-      ✓ optional posted relationship_director (4736ms)
-      ✓ optional posted relationship_owner (4109ms)
-      ✓ required posted relationship_percent_ownership (4468ms)
-      ✓ required posted relationship_title (4282ms)
+      ✓ optional posted relationship_representative (3114ms)
+      ✓ optionally-required posted relationship_executive (3396ms)
+      ✓ optional posted relationship_director (4210ms)
+      ✓ optional posted relationship_owner (4627ms)
+      ✓ required posted relationship_percent_ownership (4280ms)
+      ✓ required posted relationship_title (4922ms)
     returns
-      ✓ object (3364ms)
+      ✓ object (3041ms)
 
   /api/user/connect/create-stripe-account
     exceptions
@@ -2348,7 +2348,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (40ms)
+        ✓ ineligible accessing account
       invalid-type
         ✓ missing posted type
         ✓ invalid posted type
@@ -2356,7 +2356,7 @@
         ✓ invalid posted country
         ✓ invalid posted country
     returns
-      ✓ object (1546ms)
+      ✓ object (1461ms)
 
   /api/user/connect/delete-person
     exceptions
@@ -2364,11 +2364,11 @@
         ✓ missing querystring personid
         ✓ invalid querystring personid
       invalid-account
-        ✓ ineligible accessing account (4199ms)
+        ✓ ineligible accessing account (3908ms)
       invalid-person
-        ✓ ineligible querystring person is representative (10231ms)
+        ✓ ineligible querystring person is representative (10709ms)
     returns
-      ✓ boolean (6256ms)
+      ✓ boolean (6528ms)
 
   /api/user/connect/delete-stripe-account
     exceptions
@@ -2376,9 +2376,9 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1431ms)
+        ✓ ineligible accessing account (1612ms)
     returns
-      ✓ boolean (2815ms)
+      ✓ boolean (2678ms)
 
   /api/user/connect/payout
     exceptions
@@ -2386,9 +2386,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (77970ms)
+        ✓ ineligible accessing account (58271ms)
     returns
-      ✓ object (97497ms)
+      ✓ object (69829ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -2396,9 +2396,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (39ms)
+        ✓ ineligible accessing account
     returns
-      ✓ integer (114156ms)
+      ✓ integer (82116ms)
 
   /api/user/connect/payouts
     exceptions
@@ -2406,7 +2406,7 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (40ms)
+        ✓ ineligible accessing account (44ms)
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -2423,31 +2423,31 @@
         ✓ missing querystring personid
         ✓ invalid querystring personid
       invalid-account
-        ✓ ineligible accessing account (11968ms)
+        ✓ ineligible accessing account (10199ms)
     returns
-      ✓ object (9997ms)
+      ✓ object (10614ms)
 
   /api/user/connect/persons-count
     exceptions
       invalid-stripeid
-        ✓ missing querystring stripeid (1371ms)
+        ✓ missing querystring stripeid (1462ms)
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1313ms)
+        ✓ ineligible accessing account (1607ms)
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1544ms)
+        ✓ ineligible stripe account for individual (1774ms)
     returns
-      ✓ integer (7778ms)
+      ✓ integer (8360ms)
 
   /api/user/connect/persons
     exceptions
       invalid-stripeid
-        ✓ missing querystring stripeid (1390ms)
+        ✓ missing querystring stripeid (1639ms)
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1510ms)
+        ✓ ineligible accessing account (1451ms)
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1918ms)
+        ✓ ineligible stripe account for individual (1887ms)
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -2463,12 +2463,12 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1748ms)
-        ✓ ineligible beneficial owners are submitted (3739ms)
+        ✓ ineligible stripe account for individual (1839ms)
+        ✓ ineligible beneficial owners are submitted (4096ms)
       invalid-account
-        ✓ ineligible accessing account (1874ms)
+        ✓ ineligible accessing account (1824ms)
     returns
-      ✓ object (4733ms)
+      ✓ object (5158ms)
 
   /api/user/connect/set-company-directors-submitted
     exceptions
@@ -2476,12 +2476,12 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1924ms)
-        ✓ ineligible company directors are submitted (4329ms)
+        ✓ ineligible stripe account for individual (1853ms)
+        ✓ ineligible company directors are submitted (4912ms)
       invalid-account
-        ✓ ineligible accessing account (1850ms)
+        ✓ ineligible accessing account (1768ms)
     returns
-      ✓ object (3195ms)
+      ✓ object (3402ms)
 
   /api/user/connect/set-stripe-account-submitted
     exceptions
@@ -2489,18 +2489,18 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account is submitted (84716ms)
+        ✓ ineligible stripe account is submitted (69481ms)
       invalid-account
-        ✓ ineligible accessing account (1922ms)
+        ✓ ineligible accessing account (2064ms)
       invalid-payment-details
-        ✓ ineligible Stripe account missing payment details (32232ms)
+        ✓ ineligible Stripe account missing payment details (20291ms)
       invalid-registration
-        ✓ ineligible Stripe account missing information (4124ms)
+        ✓ ineligible Stripe account missing information (3893ms)
       invalid-person
-        ✓ ineligible company person missing information (24239ms)
+        ✓ ineligible company person missing information (24052ms)
     returns
-      ✓ object (individual) (90099ms)
-      ✓ object (company) (139298ms)
+      ✓ object (individual) (43433ms)
+      ✓ object (company) (116440ms)
 
   /api/user/connect/stripe-account
     exceptions
@@ -2508,9 +2508,9 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1643ms)
+        ✓ ineligible accessing account (1539ms)
     returns
-      ✓ object (1953ms)
+      ✓ object (2270ms)
 
   /api/user/connect/stripe-accounts-count
     exceptions
@@ -2518,9 +2518,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (39ms)
+        ✓ ineligible accessing account (48ms)
     returns
-      ✓ integer (5943ms)
+      ✓ integer (4134ms)
 
   /api/user/connect/stripe-accounts
     exceptions
@@ -2528,7 +2528,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (40ms)
+        ✓ ineligible accessing account
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -2544,7 +2544,7 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1762ms)
+        ✓ ineligible accessing account (1568ms)
       invalid-account_holder_name
         ✓ missing posted account_holder_name
       invalid-account_holder_type
@@ -2595,21 +2595,21 @@
       ✓ optionally-required posted bank_code
       ✓ optionally-required posted routing_number
     returns
-      ✓ object (3368ms)
+      ✓ object (3122ms)
 
   /api/user/connect/update-person
     exceptions
       invalid-personid
         ✓ missing querystring personid
-        ✓ invalid querystring personid (40ms)
+        ✓ invalid querystring personid
       invalid-account
-        ✓ ineligible accessing account (11031ms)
+        ✓ ineligible accessing account (9306ms)
       invalid-person
-        ✓ ineligible querystring person has no required information (149992ms)
+        ✓ ineligible querystring person has no required information (139575ms)
     returns
-      ✓ object (9586ms)
+      ✓ object (9020ms)
     configuration
-      ✓ environment STRIPE_JS (20460ms)
+      ✓ environment STRIPE_JS (20239ms)
 
   /api/user/connect/update-stripe-account
     exceptions
@@ -2617,7 +2617,7 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1736ms)
+        ✓ ineligible accessing account (1750ms)
       invalid-business_profile_mcc
         ✓ missing posted business_profile_mcc (company)
       invalid-business_profile_url
@@ -2721,18 +2721,18 @@
       invalid-ssn_last_4
         ✓ missing posted ssn_last_4 (individual)
       invalid-token
-        ✓ missing posted token (1818ms)
-        ✓ invalid posted token (2842ms)
+        ✓ missing posted token (1709ms)
+        ✓ invalid posted token (2846ms)
     receives
-      ✓ optionally-required patched verification_document_front (4407ms)
-      ✓ optionally-required patched verification_document_back (4495ms)
-      ✓ optionally-required patched verification_additional_document_front (3774ms)
-      ✓ optionally-required patched verification_additional_document_back (4401ms)
+      ✓ optionally-required patched verification_document_front (4218ms)
+      ✓ optionally-required patched verification_document_back (4156ms)
+      ✓ optionally-required patched verification_additional_document_front (4017ms)
+      ✓ optionally-required patched verification_additional_document_back (4072ms)
     returns
-      ✓ object (company) (4348ms)
-      ✓ object (individual) (3735ms)
+      ✓ object (company) (3598ms)
+      ✓ object (individual) (2893ms)
     configuration
-      ✓ environment STRIPE_JS (13095ms)
+      ✓ environment STRIPE_JS (12873ms)
 
 
   1604 passing (3h)
