@@ -109,5 +109,4 @@ jobs:
         external_repository: "userdashboard/userdashboard.github.io"
         personal_token: ${{ secrets.DOCUMENTATION_PAT }}
         publish_dir: documentation
-        publish_branch: master
         keep_files: true
