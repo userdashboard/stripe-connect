@@ -110,3 +110,4 @@ jobs:
         personal_token: ${{ secrets.DOCUMENTATION_PAT }}
         publish_dir: documentation
         keep_files: true
+        publish_branch: master
