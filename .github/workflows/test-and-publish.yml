@@ -77,8 +77,8 @@ jobs:
         TEST_SUITE_REUSABLE_WEBHOOK: true
         GENERATE_RESPONSE: true
         GENERATE_SCREENSHOTS: true
-        RESPONSE_PATH: "/home/runner/work/organizations/organizations/documentation"
-        SCREENSHOT_PATH: "/home/runner/work/organizations/organizations/documentation/screenshots"
+        RESPONSE_PATH: "/home/runner/work/stripe-connect/stripe-connect/documentation"
+        SCREENSHOT_PATH: "/home/runner/work/stripe-connect/stripe-connect/documentation/screenshots"
         SCREENSHOT_LANGUAGES: "en,es"
     - name: Generate supporting texts
       run: node main.js
