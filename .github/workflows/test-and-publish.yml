@@ -54,7 +54,7 @@ jobs:
       run: standard src
     - name: Test (redis)
       run: |
-        mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/stripe-connect/{,!(public)}/*.test.js" | tee /home/runner/work/stripe-connect/stripe-connect/tests.txt
+        mocha --retries 2 --file main.js --bail --exit --full-trace --recursive --timeout 90000000 "./node_modules/@userdashboard/stripe-connect/**/{,!(public)}/.test.js" | tee /home/runner/work/stripe-connect/stripe-connect/tests.txt
         TESTS=`cat /home/runner/work/stripe-connect/stripe-connect/tests.txt`
         if [[ "$TESTS" == *" 1)"* ]]; then
           exit 1
