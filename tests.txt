@@ -1,24 +1,4 @@
 
 
-  index
-    STRIPE_JS
-      Use client-side stripe.js in browser
-        ✓ default unset
-        ✓ Integer
-    MAXIMUM_STRIPE_RETRIES
-      Retry Stripe web requests
-        ✓ default 0
-        ✓ Integer
-    CONNECT_WEBHOOK_ENDPOINT_SECRET
-      Secret provided by Stripe to sign webhooks
-        ✓ String
-    STRIPE_KEY
-      The `sk_test_xxx` key from Stripe
-        ✓ String
-    STRIPE_PUBLISHABLE_KEY
-      The `pk_test_xxx` key from Stripe
-        ✓ String
-
-
-  7 passing (101ms)
+  0 passing (1ms)
 
