@@ -1,2 +1,863 @@
 @userdashboard/dashboard 1.0.299
 http://localhost:9000
+
+|----------------------------------------------------------|
+| /account/connect/create-person                           |
+| EXCEPTIONS-----------------------------------------------|
+| undefined                                                |
+|  * should reject invalid stripeid                        |
+|  * should reject individual registration (1732ms)        |
+| view                                                     |
+|  * should present the form (3727ms)                      |
+|  * should remove director option (2129ms)                |
+|  * should remove owner option (2040ms)                   |
+| submit                                                   |
+|  * should create representative (screenshots) (84402ms)  |
+|  * should create director (8925ms)                       |
+|  * should create owner (9006ms)                          |
+|----------------------------------------------------------|
+
+|---------------------------------------------------|
+| /account/connect/delete-person                    |
+| EXCEPTIONS----------------------------------------|
+| undefined                                         |
+|  * should reject invalid personid                 |
+|  * should require own Stripe account (3811ms)     |
+| before                                            |
+|  * should bind data to req (4995ms)               |
+| view                                              |
+|  * should present the form (5339ms)               |
+| submit                                            |
+|  * should delete person (screenshots) (111786ms)  |
+|---------------------------------------------------|
+
+|----------------------------------------------------------|
+| /account/connect/delete-stripe-account                   |
+| EXCEPTIONS-----------------------------------------------|
+| undefined                                                |
+|  * should reject invalid stripeid                        |
+|  * should require own Stripe account (1466ms)            |
+| before                                                   |
+|  * should bind data to req (1686ms)                      |
+| view                                                     |
+|  * should present the form (2071ms)                      |
+| submit                                                   |
+|  * should delete Stripe account (screenshots) (52411ms)  |
+|----------------------------------------------------------|
+
+|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| /account/connect/edit-person                                                                                                                     |
+| RECEIVES-------------------------------------------------------------| EXCEPTIONS----------------------------------------------------------------|
+| required upload verification_additional_document_back stripe.js v3   | undefined                                                                 |
+| required upload verification_additional_document_back no stripe.js   |  * should reject invalid person                                           |
+| required upload verification_additional_document_front stripe.js v3  | view                                                                      |
+| required upload verification_additional_document_front no stripe.js  |  * should have element for address_city                                   |
+| required upload verification_document_back stripe.js v3              |  * should have element for address_line1                                  |
+| required upload verification_document_back no stripe.js              |  * should have element for address_postal_code                            |
+| required upload verification_document_front stripe.js v3             |  * should have element for dob_day                                        |
+| required upload verification_document_front no stripe.js             |  * should have element for dob_month                                      |
+| required ssn_last_4 stripe.js v3                                     |  * should have element for dob_year                                       |
+| required ssn_last_4 no stripe.js                                     |  * should have element for phone                                          |
+| required id_number stripe.js v3                                      |  * should have element for first_name                                     |
+| required id_number no stripe.js                                      |  * should have element for last_name                                      |
+| required last_name_kanji stripe.js v3                                |  * should have element for email                                          |
+| required last_name_kanji no stripe.js                                |  * should have element for address_state                                  |
+| required last_name_kana stripe.js v3                                 |  * should have element for address_kana_city                              |
+| required last_name_kana no stripe.js                                 |  * should have element for address_kana_line1                             |
+| required gender stripe.js v3                                         |  * should have element for address_kana_postal_code                       |
+| required gender no stripe.js                                         |  * should have element for address_kana_state                             |
+| required first_name_kanji stripe.js v3                               |  * should have element for address_kana_town                              |
+| required first_name_kanji no stripe.js                               |  * should have element for address_kanji_city                             |
+| required first_name_kana stripe.js v3                                |  * should have element for address_kanji_line1                            |
+| required first_name_kana no stripe.js                                |  * should have element for address_kanji_postal_code                      |
+| required address_kanji_town stripe.js v3                             |  * should have element for address_kanji_state                            |
+| required address_kanji_town no stripe.js                             |  * should have element for address_kanji_town                             |
+| required address_kanji_state stripe.js v3                            |  * should have element for first_name_kana                                |
+| required address_kanji_state no stripe.js                            |  * should have element for first_name_kanji                               |
+| required address_kanji_postal_code stripe.js v3                      |  * should have element for gender                                         |
+| required address_kanji_postal_code no stripe.js                      |  * should have element for last_name_kana                                 |
+| required address_kanji_line1 stripe.js v3                            |  * should have element for last_name_kanji                                |
+| required address_kanji_line1 no stripe.js                            |  * should have element for id_number                                      |
+| required address_kanji_city stripe.js v3                             |  * should have element for ssn_last_4                                     |
+| required address_kanji_city no stripe.js                             |  * should have element for upload verification_document_front             |
+| required address_kana_town stripe.js v3                              |  * should have element for upload verification_document_back              |
+| required address_kana_town no stripe.js                              |  * should have element for upload verification_additional_document_front  |
+| required address_kana_state stripe.js v3                             |  * should have element for upload verification_additional_document_back   |
+| required address_kana_state no stripe.js                             | submit                                                                    |
+| required address_kana_postal_code stripe.js v3                       |  * should update person (screenshots) no stripe.js (152952ms)             |
+| required address_kana_postal_code no stripe.js                       |  * should update person stripe.js v3 (19994ms)                            |
+| required address_kana_line1 stripe.js v3                             | invalid-address_city                                                      |
+| required address_kana_line1 no stripe.js                             |  * missing address_city no stripe.js                                      |
+| required address_kana_city stripe.js v3                              |  * missing address_city stripe.js v3                                      |
+| required address_kana_city no stripe.js                              | invalid-address_line1                                                     |
+| required address_state stripe.js v3                                  |  * missing address_line1 no stripe.js                                     |
+| required address_state no stripe.js                                  |  * missing address_line1 stripe.js v3                                     |
+| required email stripe.js v3                                          | invalid-address_postal_code                                               |
+| required email no stripe.js                                          |  * missing address_postal_code no stripe.js                               |
+| required last_name stripe.js v3                                      |  * missing address_postal_code stripe.js v3                               |
+| required last_name no stripe.js                                      | invalid-dob_day                                                           |
+| required first_name stripe.js v3                                     |  * missing dob_day no stripe.js                                           |
+| required first_name no stripe.js                                     |  * missing dob_day stripe.js v3                                           |
+| required phone stripe.js v3                                          | invalid-dob_month                                                         |
+| required phone no stripe.js                                          |  * missing dob_month no stripe.js                                         |
+| required dob_year stripe.js v3                                       |  * missing dob_month stripe.js v3                                         |
+| required dob_year no stripe.js                                       | invalid-dob_year                                                          |
+| required dob_month stripe.js v3                                      |  * missing dob_year no stripe.js                                          |
+| required dob_month no stripe.js                                      |  * missing dob_year stripe.js v3                                          |
+| required dob_day stripe.js v3                                        | invalid-phone                                                             |
+| required dob_day no stripe.js                                        |  * missing phone no stripe.js                                             |
+| required address_postal_code stripe.js v3                            |  * missing phone stripe.js v3                                             |
+| required address_postal_code no stripe.js                            | invalid-first_name                                                        |
+| required address_line1 stripe.js v3                                  |  * missing first_name no stripe.js                                        |
+| required address_line1 no stripe.js                                  |  * missing first_name stripe.js v3                                        |
+| required address_city stripe.js v3                                   | invalid-last_name                                                         |
+| required address_city no stripe.js                                   |  * missing last_name no stripe.js                                         |
+|                                                                      |  * missing last_name stripe.js v3                                         |
+|                                                                      | invalid-email                                                             |
+|                                                                      |  * missing email no stripe.js                                             |
+|                                                                      |  * missing email stripe.js v3                                             |
+|                                                                      | invalid-address_state                                                     |
+|                                                                      |  * missing address_state no stripe.js                                     |
+|                                                                      |  * missing address_state stripe.js v3                                     |
+|                                                                      | invalid-address_kana_city                                                 |
+|                                                                      |  * missing address_kana_city no stripe.js                                 |
+|                                                                      |  * missing address_kana_city stripe.js v3                                 |
+|                                                                      | invalid-address_kana_line1                                                |
+|                                                                      |  * missing address_kana_line1 no stripe.js                                |
+|                                                                      |  * missing address_kana_line1 stripe.js v3                                |
+|                                                                      | invalid-address_kana_postal_code                                          |
+|                                                                      |  * missing address_kana_postal_code no stripe.js                          |
+|                                                                      |  * missing address_kana_postal_code stripe.js v3                          |
+|                                                                      | invalid-address_kana_state                                                |
+|                                                                      |  * missing address_kana_state no stripe.js                                |
+|                                                                      |  * missing address_kana_state stripe.js v3                                |
+|                                                                      | invalid-address_kana_town                                                 |
+|                                                                      |  * missing address_kana_town no stripe.js                                 |
+|                                                                      |  * missing address_kana_town stripe.js v3                                 |
+|                                                                      | invalid-address_kanji_city                                                |
+|                                                                      |  * missing address_kanji_city no stripe.js                                |
+|                                                                      |  * missing address_kanji_city stripe.js v3                                |
+|                                                                      | invalid-address_kanji_line1                                               |
+|                                                                      |  * missing address_kanji_line1 no stripe.js                               |
+|                                                                      |  * missing address_kanji_line1 stripe.js v3                               |
+|                                                                      | invalid-address_kanji_postal_code                                         |
+|                                                                      |  * missing address_kanji_postal_code no stripe.js                         |
+|                                                                      |  * missing address_kanji_postal_code stripe.js v3                         |
+|                                                                      | invalid-address_kanji_state                                               |
+|                                                                      |  * missing address_kanji_state no stripe.js                               |
+|                                                                      |  * missing address_kanji_state stripe.js v3                               |
+|                                                                      | invalid-address_kanji_town                                                |
+|                                                                      |  * missing address_kanji_town no stripe.js                                |
+|                                                                      |  * missing address_kanji_town stripe.js v3                                |
+|                                                                      | invalid-first_name_kana                                                   |
+|                                                                      |  * missing first_name_kana no stripe.js                                   |
+|                                                                      |  * missing first_name_kana stripe.js v3                                   |
+|                                                                      | invalid-first_name_kanji                                                  |
+|                                                                      |  * missing first_name_kanji no stripe.js                                  |
+|                                                                      |  * missing first_name_kanji stripe.js v3                                  |
+|                                                                      | invalid-gender                                                            |
+|                                                                      |  * missing gender no stripe.js                                            |
+|                                                                      |  * missing gender stripe.js v3                                            |
+|                                                                      | invalid-last_name_kana                                                    |
+|                                                                      |  * missing last_name_kana no stripe.js                                    |
+|                                                                      |  * missing last_name_kana stripe.js v3                                    |
+|                                                                      | invalid-last_name_kanji                                                   |
+|                                                                      |  * missing last_name_kanji no stripe.js                                   |
+|                                                                      |  * missing last_name_kanji stripe.js v3                                   |
+|                                                                      | invalid-id_number                                                         |
+|                                                                      |  * missing id_number no stripe.js                                         |
+|                                                                      |  * missing id_number stripe.js v3                                         |
+|                                                                      | invalid-ssn_last_4                                                        |
+|                                                                      |  * missing ssn_last_4 no stripe.js                                        |
+|                                                                      |  * missing ssn_last_4 stripe.js v3                                        |
+|                                                                      | invalid-verification_document_front                                       |
+|                                                                      |  * missing upload verification_document_front no stripe.js                |
+|                                                                      |  * missing upload verification_document_front stripe.js v3                |
+|                                                                      | invalid-verification_document_back                                        |
+|                                                                      |  * missing upload verification_document_back no stripe.js                 |
+|                                                                      |  * missing upload verification_document_back stripe.js v3                 |
+|                                                                      | invalid-verification_additional_document_front                            |
+|                                                                      |  * missing upload verification_additional_document_front no stripe.js     |
+|                                                                      |  * missing upload verification_additional_document_front stripe.js v3     |
+|                                                                      | invalid-verification_additional_document_back                             |
+|                                                                      |  * missing upload verification_additional_document_back no stripe.js      |
+|                                                                      |  * missing upload verification_additional_document_back stripe.js v3      |
+|----------------------------------------------------------------------|---------------------------------------------------------------------------|
+
+|-----------------------------------------------------------------------------------|
+| /account/connect/edit-stripe-account                                              |
+| EXCEPTIONS------------------------------------------------------------------------|
+| undefined                                                                         |
+|  * should reject invalid Stripe account                                           |
+| view                                                                              |
+|  * should have element for business_profile_mcc (company)                         |
+|  * should have element for business_profile_url (company)                         |
+|  * should have element for address_city (company)                                 |
+|  * should have element for address_line1 (company)                                |
+|  * should have element for address_postal_code (company)                          |
+|  * should have element for name (company)                                         |
+|  * should have element for phone (company)                                        |
+|  * should have element for tax_id (company)                                       |
+|  * should have element for address_state (company)                                |
+|  * should have element for address_kana_city (company)                            |
+|  * should have element for address_kana_line1 (company)                           |
+|  * should have element for address_kana_postal_code (company)                     |
+|  * should have element for address_kana_state (company)                           |
+|  * should have element for address_kana_town (company)                            |
+|  * should have element for address_kanji_city (company)                           |
+|  * should have element for address_kanji_line1 (company)                          |
+|  * should have element for address_kanji_postal_code (company)                    |
+|  * should have element for address_kanji_state (company)                          |
+|  * should have element for address_kanji_town (company)                           |
+|  * should have element for name_kana (company)                                    |
+|  * should have element for name_kanji (company)                                   |
+|  * should have element for address_city (individual)                              |
+|  * should have element for address_line1 (individual)                             |
+|  * should have element for address_postal_code (individual)                       |
+|  * should have element for dob_day (individual)                                   |
+|  * should have element for dob_month (individual)                                 |
+|  * should have element for dob_year (individual)                                  |
+|  * should have element for phone (individual)                                     |
+|  * should have element for first_name (individual)                                |
+|  * should have element for last_name (individual)                                 |
+|  * should have element for email (individual)                                     |
+|  * should have element for business_profile_mcc (individual)                      |
+|  * should have element for business_profile_url (individual)                      |
+|  * should have element for address_state (individual)                             |
+|  * should have element for address_kana_city (individual)                         |
+|  * should have element for address_kana_line1 (individual)                        |
+|  * should have element for address_kana_postal_code (individual)                  |
+|  * should have element for address_kana_state (individual)                        |
+|  * should have element for address_kana_town (individual)                         |
+|  * should have element for address_kanji_city (individual)                        |
+|  * should have element for address_kanji_line1 (individual)                       |
+|  * should have element for address_kanji_postal_code (individual)                 |
+|  * should have element for address_kanji_state (individual)                       |
+|  * should have element for address_kanji_town (individual)                        |
+|  * should have element for first_name_kana (individual)                           |
+|  * should have element for first_name_kanji (individual)                          |
+|  * should have element for gender (individual)                                    |
+|  * should have element for last_name_kana (individual)                            |
+|  * should have element for last_name_kanji (individual)                           |
+|  * should have element for id_number (individual)                                 |
+|  * should have element for ssn_last_4 (individual)                                |
+| submit                                                                            |
+|  * should update registration no stripe.js (individual) (12777ms)                 |
+|  * should update registration stripe.js v3 (individual) (screenshots) (127917ms)  |
+|  * should update registration no stripe.js (company) (13452ms)                    |
+|  * should update registration stripe.js v3 (company) (14201ms)                    |
+| errors                                                                            |
+|  * should reject missing business_profile_mcc no stripe.js (company)              |
+|  * should reject missing business_profile_mcc stripe.js v3 (company)              |
+|  * should reject missing business_profile_url no stripe.js (company)              |
+|  * should reject missing business_profile_url stripe.js v3 (company)              |
+|  * should reject missing address_city no stripe.js (company)                      |
+|  * should reject missing address_city stripe.js v3 (company)                      |
+|  * should reject missing address_line1 no stripe.js (company)                     |
+|  * should reject missing address_line1 stripe.js v3 (company)                     |
+|  * should reject missing address_postal_code no stripe.js (company)               |
+|  * should reject missing address_postal_code stripe.js v3 (company) (60ms)        |
+|  * should reject missing name no stripe.js (company) (45ms)                       |
+|  * should reject missing name stripe.js v3 (company)                              |
+|  * should reject missing phone no stripe.js (company)                             |
+|  * should reject missing phone stripe.js v3 (company)                             |
+|  * should reject missing tax_id no stripe.js (company)                            |
+|  * should reject missing tax_id stripe.js v3 (company)                            |
+|  * should reject missing address_state no stripe.js (company)                     |
+|  * should reject missing address_state stripe.js v3 (company)                     |
+|  * should reject missing address_kana_city no stripe.js (company)                 |
+|  * should reject missing address_kana_city stripe.js v3 (company)                 |
+|  * should reject missing address_kana_line1 no stripe.js (company)                |
+|  * should reject missing address_kana_line1 stripe.js v3 (company)                |
+|  * should reject missing address_kana_postal_code no stripe.js (company)          |
+|  * should reject missing address_kana_postal_code stripe.js v3 (company)          |
+|  * should reject missing address_kana_state no stripe.js (company)                |
+|  * should reject missing address_kana_state stripe.js v3 (company)                |
+|  * should reject missing address_kana_town no stripe.js (company)                 |
+|  * should reject missing address_kana_town stripe.js v3 (company)                 |
+|  * should reject missing address_kanji_city no stripe.js (company)                |
+|  * should reject missing address_kanji_city stripe.js v3 (company)                |
+|  * should reject missing address_kanji_line1 no stripe.js (company)               |
+|  * should reject missing address_kanji_line1 stripe.js v3 (company)               |
+|  * should reject missing address_kanji_postal_code no stripe.js (company)         |
+|  * should reject missing address_kanji_postal_code stripe.js v3 (company)         |
+|  * should reject missing address_kanji_state no stripe.js (company)               |
+|  * should reject missing address_kanji_state stripe.js v3 (company)               |
+|  * should reject missing address_kanji_town no stripe.js (company)                |
+|  * should reject missing address_kanji_town stripe.js v3 (company)                |
+|  * should reject missing name_kana no stripe.js (company)                         |
+|  * should reject missing name_kana stripe.js v3 (company)                         |
+|  * should reject missing name_kanji no stripe.js (company)                        |
+|  * should reject missing name_kanji stripe.js v3 (company)                        |
+|  * should reject missing address_city no stripe.js (individual)                   |
+|  * should reject missing address_city stripe.js v3 (individual)                   |
+|  * should reject missing address_line1 no stripe.js (individual)                  |
+|  * should reject missing address_line1 stripe.js v3 (individual)                  |
+|  * should reject missing address_postal_code no stripe.js (individual)            |
+|  * should reject missing address_postal_code stripe.js v3 (individual)            |
+|  * should reject missing dob_day no stripe.js (individual)                        |
+|  * should reject missing dob_day stripe.js v3 (individual)                        |
+|  * should reject missing dob_month no stripe.js (individual)                      |
+|  * should reject missing dob_month stripe.js v3 (individual)                      |
+|  * should reject missing dob_year no stripe.js (individual)                       |
+|  * should reject missing dob_year stripe.js v3 (individual)                       |
+|  * should reject missing phone no stripe.js (individual)                          |
+|  * should reject missing phone stripe.js v3 (individual)                          |
+|  * should reject missing first_name no stripe.js (individual)                     |
+|  * should reject missing first_name stripe.js v3 (individual)                     |
+|  * should reject missing last_name no stripe.js (individual)                      |
+|  * should reject missing last_name stripe.js v3 (individual)                      |
+|  * should reject missing email no stripe.js (individual)                          |
+|  * should reject missing email stripe.js v3 (individual)                          |
+|  * should reject missing business_profile_mcc no stripe.js (individual)           |
+|  * should reject missing business_profile_mcc stripe.js v3 (individual)           |
+|  * should reject missing business_profile_url no stripe.js (individual)           |
+|  * should reject missing business_profile_url stripe.js v3 (individual)           |
+|  * should reject missing address_state no stripe.js (individual)                  |
+|  * should reject missing address_state stripe.js v3 (individual)                  |
+|  * should reject missing address_kana_city no stripe.js (individual)              |
+|  * should reject missing address_kana_city stripe.js v3 (individual)              |
+|  * should reject missing address_kana_line1 no stripe.js (individual)             |
+|  * should reject missing address_kana_line1 stripe.js v3 (individual)             |
+|  * should reject missing address_kana_postal_code no stripe.js (individual)       |
+|  * should reject missing address_kana_postal_code stripe.js v3 (individual)       |
+|  * should reject missing address_kana_state no stripe.js (individual)             |
+|  * should reject missing address_kana_state stripe.js v3 (individual)             |
+|  * should reject missing address_kana_town no stripe.js (individual)              |
+|  * should reject missing address_kana_town stripe.js v3 (individual)              |
+|  * should reject missing address_kanji_city no stripe.js (individual)             |
+|  * should reject missing address_kanji_city stripe.js v3 (individual)             |
+|  * should reject missing address_kanji_line1 no stripe.js (individual)            |
+|  * should reject missing address_kanji_line1 stripe.js v3 (individual)            |
+|  * should reject missing address_kanji_postal_code no stripe.js (individual)      |
+|  * should reject missing address_kanji_postal_code stripe.js v3 (individual)      |
+|  * should reject missing address_kanji_state no stripe.js (individual)            |
+|  * should reject missing address_kanji_state stripe.js v3 (individual)            |
+|  * should reject missing address_kanji_town no stripe.js (individual)             |
+|  * should reject missing address_kanji_town stripe.js v3 (individual)             |
+|  * should reject missing first_name_kana no stripe.js (individual)                |
+|  * should reject missing first_name_kana stripe.js v3 (individual)                |
+|  * should reject missing first_name_kanji no stripe.js (individual)               |
+|  * should reject missing first_name_kanji stripe.js v3 (individual)               |
+|  * should reject missing gender no stripe.js (individual)                         |
+|  * should reject missing gender stripe.js v3 (individual)                         |
+|  * should reject missing last_name_kana no stripe.js (individual)                 |
+|  * should reject missing last_name_kana stripe.js v3 (individual)                 |
+|  * should reject missing last_name_kanji no stripe.js (individual)                |
+|  * should reject missing last_name_kanji stripe.js v3 (individual)                |
+|  * should reject missing id_number no stripe.js (individual)                      |
+|  * should reject missing id_number stripe.js v3 (individual)                      |
+|  * should reject missing ssn_last_4 no stripe.js (individual)                     |
+|  * should reject missing ssn_last_4 stripe.js v3 (individual)                     |
+|-----------------------------------------------------------------------------------|
+
+|----------------------------------------------------|
+| /account/connect/persons                           |
+| EXCEPTIONS-----------------------------------------|
+| undefined                                          |
+|  * should reject invalid stripeid                  |
+|  * should reject individual registration (1656ms)  |
+| before                                             |
+|  * should bind data to req                         |
+| view                                               |
+|  * should have row for each owner (screenshots)    |
+|  * should have row for each director               |
+|  * should have row for each representative         |
+|----------------------------------------------------|
+
+|-----------------------------------------------------------------------|
+| /account/connect/submit-beneficial-owners                             |
+| EXCEPTIONS------------------------------------------------------------|
+| undefined                                                             |
+|  * should reject invalid stripeid                                     |
+|  * should reject individual registration (1987ms)                     |
+|  * should reject Stripe account that doesn't require owners (1904ms)  |
+| before                                                                |
+|  * should bind data to req (8597ms)                                   |
+| view                                                                  |
+|  * should reject if an owner requires information (5706ms)            |
+|  * should present the form without owners (2983ms)                    |
+|  * should present the form with completed owners (92195ms)            |
+| submit                                                                |
+|  * should submit owners (screenshots) (165059ms)                      |
+|  * should submit without owners (6617ms)                              |
+|-----------------------------------------------------------------------|
+
+|--------------------------------------------------------------------------|
+| /account/connect/submit-company-directors                                |
+| EXCEPTIONS---------------------------------------------------------------|
+| undefined                                                                |
+|  * should reject invalid stripeid                                        |
+|  * should reject individual registration (1994ms)                        |
+|  * should reject Stripe account that doesn't require directors (1658ms)  |
+| before                                                                   |
+|  * should bind data to req (8970ms)                                      |
+| view                                                                     |
+|  * should reject if a director requires information (5756ms)             |
+|  * should present the form without directors (2803ms)                    |
+|  * should present the form with directors (9902ms)                       |
+| submit                                                                   |
+|  * should submit directors (screenshots) (91469ms)                       |
+|  * should submit without directors (7290ms)                              |
+|--------------------------------------------------------------------------|
+
+|--------------------------------------------------------------------------------------|
+| /account/connect/submit-stripe-account                                               |
+| EXCEPTIONS---------------------------------------------------------------------------|
+| undefined                                                                            |
+|  * should reject invalid stripeid                                                    |
+| before                                                                               |
+|  * should bind data to req (141450ms)                                                |
+| view                                                                                 |
+|  * should reject registration that hasn't submitted payment details (25040ms)        |
+|  * should reject company that hasn't submitted beneficial owners (28864ms)           |
+|  * should reject company that hasn't submitted company directors (46361ms)           |
+|  * should reject company that hasn't submitted representative information (14152ms)  |
+|  * should reject company that hasn't submitted information (18482ms)                 |
+|  * should reject individual that hasn't submitted information (5098ms)               |
+|  * should present the form (individual) (7081ms)                                     |
+|  * should present the form (company) (22018ms)                                       |
+| submit                                                                               |
+|  * should submit registration (company) (screenshots) (174439ms)                     |
+|  * should submit registration (individual) (92039ms)                                 |
+|--------------------------------------------------------------------------------------|
+
+|-----------------------------------------------------------------------------------------------|
+| /api/administrator/connect/delete-stripe-account                                              |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-------------------------------|
+| required querystring stripeid  | boolean (2866ms)  | invalid-stripeid                         |
+|                                |                   |  * missing querystring stripeid          |
+|                                |                   |  * invalid querystring stripeid (138ms)  |
+|--------------------------------|-------------------|------------------------------------------|
+
+|---------------------------------------------------------------------------------------|
+| /api/administrator/connect/payout                                                     |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-----------------------|
+| required querystring payoutid  | object (68840ms)  | invalid-payoputid                |
+|                                |                   |  * missing querystring payoutid  |
+|                                |                   |  * invalid querystring payoutid  |
+|--------------------------------|-------------------|----------------------------------|
+
+|------------------------------------------------------------------------------|
+| /api/administrator/connect/payouts                                           |
+| RECEIVES---------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer)    | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)     |          |                        |
+| optional querystring all (boolean)       |          |                        |
+| optional querystring accountid (string)  |          |                        |
+| optional querystring stripeid (string)   |          |                        |
+|------------------------------------------|----------|------------------------|
+
+|-------------------------------------------|
+| /api/administrator/connect/payouts-count  |
+| RETURNS-----------------------------------|
+| integer (253037ms)                        |
+|-------------------------------------------|
+
+|-----------------------------------------------------------------------------------------------|
+| /api/administrator/connect/set-stripe-account-rejected                                        |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-------------------------------|
+| required posted reason         | boolean (2893ms)  | invalid-stripeid                         |
+| required querystring stripeid  |                   |  * missing querystring stripeid          |
+|                                |                   |  * invalid querystring stripeid (215ms)  |
+|                                |                   | invalid-reason                           |
+|                                |                   |  * missing posted reason                 |
+|                                |                   |  * invalid posted reason                 |
+|--------------------------------|-------------------|------------------------------------------|
+
+|----------------------------------------------------------------------------------------------|
+| /api/administrator/connect/stripe-account                                                    |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS-------------------------------|
+| required querystring stripeid  | object (1729ms)  | invalid-stripeid                         |
+|                                |                  |  * missing querystring stripeid          |
+|                                |                  |  * invalid querystring stripeid (142ms)  |
+|--------------------------------|------------------|------------------------------------------|
+
+|------------------------------------------------------------------------------------------------------------------|
+| /api/administrator/connect/stripe-accounts                                                                       |
+| RECEIVES---------------------------------| RETURNS--| EXCEPTIONS------------------------| CONFIGURATION----------|
+| optional querystring offset (integer)    | array    | invalid-accountid                 | environment PAGE_SIZE  |
+| optional querystring limit (integer)     |          |  * invalid querystring accountid  |                        |
+| optional querystring all (boolean)       |          |                                   |                        |
+| optional querystring accountid (string)  |          |                                   |                        |
+|------------------------------------------|----------|-----------------------------------|------------------------|
+
+|---------------------------------------------------|
+| /api/administrator/connect/stripe-accounts-count  |
+| RETURNS-------------------------------------------|
+| integer (4338ms)                                  |
+|---------------------------------------------------|
+
+|-----------------------------------------------------------------------------------|
+| /api/user/connect/country-spec                                                    |
+| RECEIVES----------------------| RETURNS---------| EXCEPTIONS----------------------|
+| required querystring country  | object (211ms)  | undefined                       |
+|                               |                 |  * missing querystring country  |
+|                               |                 |  * invalid querystring country  |
+|-------------------------------|-----------------|---------------------------------|
+
+|-------------------------------------------------------------------------------------|
+| /api/user/connect/country-specs                                                     |
+| RECEIVES----------------------------------------| RETURNS--| CONFIGURATION----------|
+| optional querystring offset (integer) (2282ms)  | array    | environment PAGE_SIZE  |
+| optional querystring limit (integer)            |          |                        |
+| optional querystring all (boolean)              |          |                        |
+|-------------------------------------------------|----------|------------------------|
+
+|----------------------------------------|
+| /api/user/connect/country-specs-count  |
+| RETURNS--------------------------------|
+| integer (2066ms)                       |
+|----------------------------------------|
+
+|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/create-person                                                                                                                    |
+| RECEIVES----------------------------------------------------| RETURNS----------| EXCEPTIONS--------------------------------------------------------|
+| required posted relationship_title (1943ms)                 | object (2964ms)  | invalid-stripeid                                                  |
+| required posted relationship_percent_ownership (1772ms)     |                  |  * missing querystring stripeid                                   |
+| required querystring stripeid                               |                  |  * invalid querystring stripeid                                   |
+| optional posted relationship_representative (3495ms)        |                  | invalid-stripe-account                                            |
+| optionally-required posted relationship_executive (3211ms)  |                  |  * ineligible stripe account for individuals (1736ms)             |
+| optional posted relationship_director (3883ms)              |                  |  * ineligible stripe account does not require directors (1894ms)  |
+| optional posted relationship_owner (3749ms)                 |                  |  * ineligible stripe account does not require owners (1653ms)     |
+| required posted relationship_percent_ownership (3975ms)     |                  | invalid-account                                                   |
+| required posted relationship_title (4005ms)                 |                  |  * ineligible accessing account (1754ms)                          |
+|                                                             |                  | invalid-relationship_percent_ownership                            |
+|                                                             |                  |  * missing posted relationship_percent_ownership (1772ms)         |
+|                                                             |                  |  * invalid posted relationship_percent_ownership (1662ms)         |
+|                                                             |                  | invalid-relationship_title                                        |
+|                                                             |                  |  * missing posted relationship_title (1943ms)                     |
+|                                                             |                  |  * invalid posted relationship_title (1901ms)                     |
+|                                                             |                  | invalid-relationship_executive                                    |
+|                                                             |                  |  * invalid representative must be an executive (1852ms)           |
+|-------------------------------------------------------------|------------------|-------------------------------------------------------------------|
+
+|----------------------------------------------------------------------------------------------|
+| /api/user/connect/create-stripe-account                                                      |
+| RECEIVES------------------------| RETURNS----------| EXCEPTIONS------------------------------|
+| required posted type (42ms)     | object (1431ms)  | invalid-accountid                       |
+| required querystring accountid  |                  |  * missing querystring accountid        |
+|                                 |                  |  * invalid querystring accountid        |
+|                                 |                  | invalid-account                         |
+|                                 |                  |  * ineligible accessing account (42ms)  |
+|                                 |                  | invalid-type                            |
+|                                 |                  |  * missing posted type (42ms)           |
+|                                 |                  |  * invalid posted type                  |
+|                                 |                  | invalid-country                         |
+|                                 |                  |  * invalid posted country               |
+|                                 |                  |  * invalid posted country               |
+|---------------------------------|------------------|-----------------------------------------|
+
+|-------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/delete-person                                                                                   |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS---------------------------------------------------|
+| required querystring personid  | boolean (6131ms)  | invalid-personid                                             |
+|                                |                   |  * missing querystring personid                              |
+|                                |                   |  * invalid querystring personid                              |
+|                                |                   | invalid-account                                              |
+|                                |                   |  * ineligible accessing account (3853ms)                     |
+|                                |                   | invalid-person                                               |
+|                                |                   |  * ineligible querystring person is representative (8999ms)  |
+|--------------------------------|-------------------|--------------------------------------------------------------|
+
+|------------------------------------------------------------------------------------------------|
+| /api/user/connect/delete-stripe-account                                                        |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS--------------------------------|
+| required querystring stripeid  | boolean (2928ms)  | invalid-stripeid                          |
+|                                |                   |  * missing querystring stripeid           |
+|                                |                   |  * invalid querystring stripeid           |
+|                                |                   | invalid-account                           |
+|                                |                   |  * ineligible accessing account (1473ms)  |
+|--------------------------------|-------------------|-------------------------------------------|
+
+|-------------------------------------------------------------------------------------------------|
+| /api/user/connect/payout                                                                        |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS---------------------------------|
+| required querystring payoutid  | object (73940ms)  | invalid-payoutid                           |
+|                                |                   |  * missing querystring payoutid            |
+|                                |                   |  * invalid querystring payoutid            |
+|                                |                   | invalid-account                            |
+|                                |                   |  * ineligible accessing account (83081ms)  |
+|--------------------------------|-------------------|--------------------------------------------|
+
+|------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/payouts                                                                                              |
+| RECEIVES---------------------------------| RETURNS--| EXCEPTIONS------------------------------| CONFIGURATION----------|
+| required querystring payoutid            | array    | invalid-payoutid                        | environment PAGE_SIZE  |
+| optional querystring offset (integer)    |          |  * missing querystring payoutid         |                        |
+| optional querystring limit (integer)     |          |  * invalid querystring payoutid         |                        |
+| optional querystring all (boolean)       |          | invalid-account                         |                        |
+| optional querystring stripeid (boolean)  |          |  * ineligible accessing account (38ms)  |                        |
+|------------------------------------------|----------|-----------------------------------------|------------------------|
+
+|----------------------------------------------------------------------------------------|
+| /api/user/connect/payouts-count                                                        |
+| RECEIVES-----------------------| RETURNS------------| EXCEPTIONS-----------------------|
+| required querystring payoutid  | integer (79664ms)  | invalid-payoutid                 |
+|                                |                    |  * missing querystring payoutid  |
+|                                |                    |  * invalid querystring payoutid  |
+|                                |                    | invalid-account                  |
+|                                |                    |  * ineligible accessing account  |
+|--------------------------------|--------------------|----------------------------------|
+
+|-----------------------------------------------------------------------------------------------|
+| /api/user/connect/person                                                                      |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS--------------------------------|
+| required querystring personid  | object (9123ms)  | invalid-personid                          |
+|                                |                  |  * missing querystring personid           |
+|                                |                  |  * invalid querystring personid           |
+|                                |                  | invalid-account                           |
+|                                |                  |  * ineligible accessing account (8744ms)  |
+|--------------------------------|------------------|-------------------------------------------|
+
+|-------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/persons                                                                                                           |
+| RECEIVES--------------------------------| RETURNS--| EXCEPTIONS--------------------------------------------| CONFIGURATION----------|
+| required querystring stripeid (1333ms)  | array    | invalid-stripeid                                      | environment PAGE_SIZE  |
+| optional querystring offset (integer)   |          |  * missing querystring stripeid (1333ms)              |                        |
+| optional querystring limit (integer)    |          |  * invalid querystring stripeid                       |                        |
+| optional querystring all (boolean)      |          | invalid-account                                       |                        |
+|                                         |          |  * ineligible accessing account (1384ms)              |                        |
+|                                         |          | invalid-stripe-account                                |                        |
+|                                         |          |  * ineligible stripe account for individual (1859ms)  |                        |
+|-----------------------------------------|----------|-------------------------------------------------------|------------------------|
+
+|---------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/persons-count                                                                                     |
+| RECEIVES--------------------------------| RETURNS-----------| EXCEPTIONS--------------------------------------------|
+| required querystring stripeid (1576ms)  | integer (7505ms)  | invalid-stripeid                                      |
+|                                         |                   |  * missing querystring stripeid (1576ms)              |
+|                                         |                   |  * invalid querystring stripeid                       |
+|                                         |                   | invalid-account                                       |
+|                                         |                   |  * ineligible accessing account (1401ms)              |
+|                                         |                   | invalid-stripe-account                                |
+|                                         |                   |  * ineligible stripe account for individual (1769ms)  |
+|-----------------------------------------|-------------------|-------------------------------------------------------|
+
+|-------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/set-beneficial-owners-submitted                                                           |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS----------------------------------------------|
+| required querystring stripeid  | object (5102ms)  | invalid-stripeid                                        |
+|                                |                  |  * missing querystring stripeid                         |
+|                                |                  |  * invalid querystring stripeid                         |
+|                                |                  | invalid-stripe-account                                  |
+|                                |                  |  * ineligible stripe account for individual (1728ms)    |
+|                                |                  |  * ineligible beneficial owners are submitted (3778ms)  |
+|                                |                  | invalid-account                                         |
+|                                |                  |  * ineligible accessing account (1708ms)                |
+|--------------------------------|------------------|---------------------------------------------------------|
+
+|-------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/set-company-directors-submitted                                                           |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS----------------------------------------------|
+| required querystring stripeid  | object (3251ms)  | invalid-stripeid                                        |
+|                                |                  |  * missing querystring stripeid                         |
+|                                |                  |  * invalid querystring stripeid                         |
+|                                |                  | invalid-stripe-account                                  |
+|                                |                  |  * ineligible stripe account for individual (1835ms)    |
+|                                |                  |  * ineligible company directors are submitted (4449ms)  |
+|                                |                  | invalid-account                                         |
+|                                |                  |  * ineligible accessing account (1546ms)                |
+|--------------------------------|------------------|---------------------------------------------------------|
+
+|-----------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/set-stripe-account-submitted                                                                                    |
+| RECEIVES-----------------------| RETURNS------------------------| EXCEPTIONS------------------------------------------------------|
+| required querystring stripeid  | object (individual) (32873ms)  | invalid-stripeid                                                |
+|                                | object (company) (119356ms)    |  * missing querystring stripeid                                 |
+|                                |                                |  * invalid querystring stripeid                                 |
+|                                |                                | invalid-stripe-account                                          |
+|                                |                                |  * ineligible stripe account is submitted (77090ms)             |
+|                                |                                | invalid-account                                                 |
+|                                |                                |  * ineligible accessing account (1667ms)                        |
+|                                |                                | invalid-payment-details                                         |
+|                                |                                |  * ineligible Stripe account missing payment details (33494ms)  |
+|                                |                                | invalid-registration                                            |
+|                                |                                |  * ineligible Stripe account missing information (3864ms)       |
+|                                |                                | invalid-person                                                  |
+|                                |                                |  * ineligible company person missing information (31662ms)      |
+|--------------------------------|--------------------------------|-----------------------------------------------------------------|
+
+|-----------------------------------------------------------------------------------------------|
+| /api/user/connect/stripe-account                                                              |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS--------------------------------|
+| required querystring stripeid  | object (1755ms)  | invalid-stripeid                          |
+|                                |                  |  * missing querystring stripeid           |
+|                                |                  |  * invalid querystring stripeid           |
+|                                |                  | invalid-account                           |
+|                                |                  |  * ineligible accessing account (1584ms)  |
+|--------------------------------|------------------|-------------------------------------------|
+
+|----------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/stripe-accounts                                                                              |
+| RECEIVES-------------------------------| RETURNS--| EXCEPTIONS------------------------| CONFIGURATION----------|
+| required querystring accountid         | array    | invalid-accountid                 | environment PAGE_SIZE  |
+| optional querystring offset (integer)  |          |  * missing querystring accountid  |                        |
+| optional querystring limit (integer)   |          |  * invalid querystring accountid  |                        |
+| optional querystring all (boolean)     |          | invalid-account                   |                        |
+|                                        |          |  * ineligible accessing account   |                        |
+|----------------------------------------|----------|-----------------------------------|------------------------|
+
+|---------------------------------------------------------------------------------------|
+| /api/user/connect/stripe-accounts-count                                               |
+| RECEIVES-----------------------| RETURNS-----------| EXCEPTIONS-----------------------|
+| required querystring payoutid  | integer (4000ms)  | invalid-payoutid                 |
+|                                |                   |  * missing querystring payoutid  |
+|                                |                   |  * invalid querystring payoutid  |
+|                                |                   | invalid-account                  |
+|                                |                   |  * ineligible accessing account  |
+|--------------------------------|-------------------|----------------------------------|
+
+|----------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-payment-information                                                                   |
+| RECEIVES----------------------------------------| RETURNS----------| EXCEPTIONS--------------------------------|
+| required posted routing_number                  | object (2833ms)  | invalid-stripeid                          |
+| required posted bank_code                       |                  |  * missing querystring stripeid           |
+| required posted clearing_code                   |                  |  * invalid querystring stripeid           |
+| required posted branch_code                     |                  | invalid-account                           |
+| required posted sort_code                       |                  |  * ineligible accessing account (1771ms)  |
+| required posted transit_number                  |                  | invalid-account_holder_name               |
+| required posted institution_number              |                  |  * missing posted account_holder_name     |
+| required posted bsb_number                      |                  | invalid-account_holder_type               |
+| required posted account_number                  |                  |  * missing posted account_holder_type     |
+| required posted iban                            |                  |  * invalid posted account_holder_type     |
+| required posted currency                        |                  | invalid-country                           |
+| required posted country                         |                  |  * missing posted country                 |
+| required posted account_holder_type             |                  |  * invalid posted country                 |
+| required posted account_holder_name             |                  | invalid-currency                          |
+| required querystring stripeid                   |                  |  * missing posted currency                |
+| optionally-required posted account_holder_name  |                  |  * invalid posted currency                |
+| optionally-required posted account_holder_type  |                  | invalid-iban                              |
+| optionally-required posted country              |                  |  * missing posted iban                    |
+| optionally-required posted currency             |                  |  * invalid posted iban                    |
+| optionally-required posted iban                 |                  | invalid-account_number                    |
+| optionally-required posted account_number       |                  |  * missing posted account_number          |
+| optionally-required posted bsb_number           |                  |  * invalid posted account_number          |
+| optionally-required posted institution_number   |                  | invalid-bsb_number                        |
+| optionally-required posted transit_number       |                  |  * missing posted bsb_number              |
+| optionally-required posted sort_code            |                  | invalid-institution_number                |
+| optionally-required posted branch_code          |                  |  * missing posted institution_number      |
+| optionally-required posted clearing_code        |                  | invalid-transit_number                    |
+| optionally-required posted bank_code            |                  |  * missing posted transit_number          |
+| optionally-required posted routing_number       |                  | invalid-sort_code                         |
+|                                                 |                  |  * missing posted sort_code               |
+|                                                 |                  | invalid-branch_code                       |
+|                                                 |                  |  * missing posted branch_code             |
+|                                                 |                  | invalid-clearing_code                     |
+|                                                 |                  |  * missing posted clearing_code           |
+|                                                 |                  | invalid-bank_code                         |
+|                                                 |                  |  * missing posted bank_code               |
+|                                                 |                  | invalid-routing_number                    |
+|                                                 |                  |  * missing posted routing_number          |
+|                                                 |                  |  * invalid posted routing_number          |
+|-------------------------------------------------|------------------|-------------------------------------------|
+
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-person                                                                                                                                 |
+| RECEIVES-----------------------| RETURNS----------| EXCEPTIONS---------------------------------------------------------------| CONFIGURATION--------------------|
+| required querystring personid  | object (8265ms)  | invalid-personid                                                         | environment STRIPE_JS (18248ms)  |
+|                                |                  |  * missing querystring personid                                          |                                  |
+|                                |                  |  * invalid querystring personid                                          |                                  |
+|                                |                  | invalid-account                                                          |                                  |
+|                                |                  |  * ineligible accessing account (8328ms)                                 |                                  |
+|                                |                  | invalid-person                                                           |                                  |
+|                                |                  |  * ineligible querystring person has no required information (122669ms)  |                                  |
+|--------------------------------|------------------|--------------------------------------------------------------------------|----------------------------------|
+
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| /api/user/connect/update-stripe-account                                                                                                                                                                     |
+| RECEIVES---------------------------------------------------------------------| RETURNS-----------------------| EXCEPTIONS------------------------------------------------| CONFIGURATION--------------------|
+| required posted token (1705ms)                                               | object (company) (3559ms)     | invalid-stripeid                                          | environment STRIPE_JS (12768ms)  |
+| required posted ssn_last_4 (individual)                                      | object (individual) (3979ms)  |  * missing querystring stripeid                           |                                  |
+| required posted id_number (individual)                                       |                               |  * invalid querystring stripeid                           |                                  |
+| required posted last_name_kanji (individual)                                 |                               | invalid-account                                           |                                  |
+| required posted last_name_kana (individual)                                  |                               |  * ineligible accessing account (1687ms)                  |                                  |
+| required posted gender (individual)                                          |                               | invalid-business_profile_mcc                              |                                  |
+| required posted first_name_kanji (individual)                                |                               |  * missing posted business_profile_mcc (company)          |                                  |
+| required posted first_name_kana (individual)                                 |                               |  * missing posted business_profile_mcc (individual)       |                                  |
+| required posted email (individual)                                           |                               | invalid-business_profile_url                              |                                  |
+| required posted last_name (individual)                                       |                               |  * missing posted business_profile_url (company)          |                                  |
+| required posted first_name (individual)                                      |                               |  * missing posted business_profile_url (individual)       |                                  |
+| required posted dob_year (individual)                                        |                               | invalid-address_city                                      |                                  |
+| required posted dob_month (individual)                                       |                               |  * missing posted address_city (company)                  |                                  |
+| required posted dob_day (individual)                                         |                               |  * missing posted address_city (individual)               |                                  |
+| required posted name_kanji (company)                                         |                               | invalid-address_line1                                     |                                  |
+| required posted name_kana (company)                                          |                               |  * missing posted address_line1 (company)                 |                                  |
+| required posted address_kanji_town (individual)                              |                               |  * missing posted address_line1 (individual)              |                                  |
+| required posted address_kanji_town (company)                                 |                               | invalid-address_postal_code                               |                                  |
+| required posted address_kanji_state (individual)                             |                               |  * missing posted address_postal_code (company)           |                                  |
+| required posted address_kanji_state (company)                                |                               |  * missing posted address_postal_code (individual)        |                                  |
+| required posted address_kanji_postal_code (individual)                       |                               | invalid-name                                              |                                  |
+| required posted address_kanji_postal_code (company)                          |                               |  * missing posted name (company)                          |                                  |
+| required posted address_kanji_line1 (individual)                             |                               | invalid-phone                                             |                                  |
+| required posted address_kanji_line1 (company)                                |                               |  * missing posted phone (company)                         |                                  |
+| required posted address_kanji_city (individual)                              |                               |  * missing posted phone (individual)                      |                                  |
+| required posted address_kanji_city (company)                                 |                               | invalid-tax_id                                            |                                  |
+| required posted address_kana_town (individual)                               |                               |  * missing posted tax_id (company)                        |                                  |
+| required posted address_kana_town (company)                                  |                               | invalid-address_state                                     |                                  |
+| required posted address_kana_state (individual)                              |                               |  * missing posted address_state (company)                 |                                  |
+| required posted address_kana_state (company)                                 |                               |  * missing posted address_state (individual)              |                                  |
+| required posted address_kana_postal_code (individual)                        |                               | invalid-address_kana_city                                 |                                  |
+| required posted address_kana_postal_code (company)                           |                               |  * missing posted address_kana_city (company)             |                                  |
+| required posted address_kana_line1 (individual)                              |                               |  * missing posted address_kana_city (individual)          |                                  |
+| required posted address_kana_line1 (company)                                 |                               | invalid-address_kana_line1                                |                                  |
+| required posted address_kana_city (individual)                               |                               |  * missing posted address_kana_line1 (company)            |                                  |
+| required posted address_kana_city (company)                                  |                               |  * missing posted address_kana_line1 (individual)         |                                  |
+| required posted address_state (individual)                                   |                               | invalid-address_kana_postal_code                          |                                  |
+| required posted address_state (company)                                      |                               |  * missing posted address_kana_postal_code (company)      |                                  |
+| required posted tax_id (company)                                             |                               |  * missing posted address_kana_postal_code (individual)   |                                  |
+| required posted phone (individual)                                           |                               | invalid-address_kana_state                                |                                  |
+| required posted phone (company)                                              |                               |  * missing posted address_kana_state (company)            |                                  |
+| required posted name (company)                                               |                               |  * missing posted address_kana_state (individual)         |                                  |
+| required posted address_postal_code (individual)                             |                               | invalid-address_kana_town                                 |                                  |
+| required posted address_postal_code (company)                                |                               |  * missing posted address_kana_town (company)             |                                  |
+| required posted address_line1 (individual)                                   |                               |  * missing posted address_kana_town (individual)          |                                  |
+| required posted address_line1 (company)                                      |                               | invalid-address_kanji_city                                |                                  |
+| required posted address_city (individual)                                    |                               |  * missing posted address_kanji_city (company)            |                                  |
+| required posted address_city (company)                                       |                               |  * missing posted address_kanji_city (individual)         |                                  |
+| required posted business_profile_url (individual)                            |                               | invalid-address_kanji_line1                               |                                  |
+| required posted business_profile_url (company)                               |                               |  * missing posted address_kanji_line1 (company)           |                                  |
+| required posted business_profile_mcc (individual)                            |                               |  * missing posted address_kanji_line1 (individual)        |                                  |
+| required posted business_profile_mcc (company)                               |                               | invalid-address_kanji_postal_code                         |                                  |
+| required querystring stripeid                                                |                               |  * missing posted address_kanji_postal_code (company)     |                                  |
+| optionally-required patched verification_document_front (3950ms)             |                               |  * missing posted address_kanji_postal_code (individual)  |                                  |
+| optionally-required patched verification_document_back (3939ms)              |                               | invalid-address_kanji_state                               |                                  |
+| optionally-required patched verification_additional_document_front (3825ms)  |                               |  * missing posted address_kanji_state (company)           |                                  |
+| optionally-required patched verification_additional_document_back (3831ms)   |                               |  * missing posted address_kanji_state (individual)        |                                  |
+|                                                                              |                               | invalid-address_kanji_town                                |                                  |
+|                                                                              |                               |  * missing posted address_kanji_town (company)            |                                  |
+|                                                                              |                               |  * missing posted address_kanji_town (individual)         |                                  |
+|                                                                              |                               | invalid-name_kana                                         |                                  |
+|                                                                              |                               |  * missing posted name_kana (company)                     |                                  |
+|                                                                              |                               | invalid-name_kanji                                        |                                  |
+|                                                                              |                               |  * missing posted name_kanji (company)                    |                                  |
+|                                                                              |                               | invalid-dob_day                                           |                                  |
+|                                                                              |                               |  * missing posted dob_day (individual)                    |                                  |
+|                                                                              |                               | invalid-dob_month                                         |                                  |
+|                                                                              |                               |  * missing posted dob_month (individual)                  |                                  |
+|                                                                              |                               | invalid-dob_year                                          |                                  |
+|                                                                              |                               |  * missing posted dob_year (individual)                   |                                  |
+|                                                                              |                               | invalid-first_name                                        |                                  |
+|                                                                              |                               |  * missing posted first_name (individual)                 |                                  |
+|                                                                              |                               | invalid-last_name                                         |                                  |
+|                                                                              |                               |  * missing posted last_name (individual)                  |                                  |
+|                                                                              |                               | invalid-email                                             |                                  |
+|                                                                              |                               |  * missing posted email (individual)                      |                                  |
+|                                                                              |                               | invalid-first_name_kana                                   |                                  |
+|                                                                              |                               |  * missing posted first_name_kana (individual)            |                                  |
+|                                                                              |                               | invalid-first_name_kanji                                  |                                  |
+|                                                                              |                               |  * missing posted first_name_kanji (individual)           |                                  |
+|                                                                              |                               | invalid-gender                                            |                                  |
+|                                                                              |                               |  * missing posted gender (individual)                     |                                  |
+|                                                                              |                               | invalid-last_name_kana                                    |                                  |
+|                                                                              |                               |  * missing posted last_name_kana (individual)             |                                  |
+|                                                                              |                               | invalid-last_name_kanji                                   |                                  |
+|                                                                              |                               |  * missing posted last_name_kanji (individual)            |                                  |
+|                                                                              |                               | invalid-id_number                                         |                                  |
+|                                                                              |                               |  * missing posted id_number (individual)                  |                                  |
+|                                                                              |                               | invalid-ssn_last_4                                        |                                  |
+|                                                                              |                               |  * missing posted ssn_last_4 (individual)                 |                                  |
+|                                                                              |                               | invalid-token                                             |                                  |
+|                                                                              |                               |  * missing posted token (1705ms)                          |                                  |
+|                                                                              |                               |  * invalid posted token (2938ms)                          |                                  |
+|------------------------------------------------------------------------------|-------------------------------|-----------------------------------------------------------|----------------------------------|
