@@ -91,6 +91,10 @@ module.exports = {
 }
 
 const TestHelper = require('@userdashboard/dashboard/test-helper.js')
+TestHelper.defaultConfiguration.stripeJS = false
+TestHelper.defaultConfiguration.maximumStripeRetries = 0
+TestHelper.defaultConfiguration.webhooks = []
+
 for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
 }
@@ -100,8 +104,6 @@ const createRequest = module.exports.createRequest = (rawURL, method) => {
   return req
 }
 
-module.exports.setupBeforeEach = setupBeforeEach
-
 async function setupBefore () {
   const connect = require('./index.js')
   if (process.env.GENERATE_COUNTRY) {
@@ -109,21 +111,14 @@ async function setupBefore () {
       connect.countrySpecIndex[process.env.GENERATE_COUNTRY]
     ]
   }
-  await deleteOldWebhooks()
-}
-
-async function setupBeforeEach () {
   const helperRoutes = require('./test-helper-routes.js')
   global.sitemap['/api/fake-payout'] = helperRoutes.fakePayout
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
-  global.stripeJS = false
-  global.maximumStripeRetries = 0
-  global.webhooks = []
+  await deleteOldWebhooks()
 }
 
 let webhook, tunnel, data
-
 async function setupWebhook () {
   if (webhook) {
     return
