@@ -174,7 +174,6 @@ async function setupWebhook () {
   }
 }
 
-beforeEach(setupBeforeEach)
 before(setupBefore)
 
 afterEach(async () => {
