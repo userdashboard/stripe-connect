@@ -2,9 +2,6 @@
 global.applicationPath = global.applicationPath || __dirname
 global.stripeAPIVersion = '2020-03-02'
 global.maximumStripeRetries = 0
-global.defaultConfiguration.stripeJS = false
-global.defaultConfiguration.maximumStripeRetries = 0
-global.defaultConfiguration.webhooks = []
 
 const fs = require('fs')
 const Log = require('@userdashboard/dashboard/src/log.js')('stripe-connect')
@@ -94,6 +91,9 @@ module.exports = {
 }
 
 const TestHelper = require('@userdashboard/dashboard/test-helper.js')
+global.defaultConfiguration.stripeJS = false
+global.defaultConfiguration.maximumStripeRetries = 0
+global.defaultConfiguration.webhooks = []
 
 for (const x in TestHelper) {
   module.exports[x] = TestHelper[x]
