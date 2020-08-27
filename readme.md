@@ -37,9 +37,9 @@ You will need to retrieve various keys from [Stripe](https://stripe.com).  Durin
 
 When a user has completed a Stripe account registration and it has been approved by Stripe their status will be changed to `payouts_enabled`.  Your application should use this information to control access to your platform functionality.
 
-### Request Connect data from your application server
+### Request Connect data from your Dashboard server
 
-Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's organizations from the Dashboard server, your application server can be in any language.
+Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's Stripe accounts from the Dashboard server, your application server can be in any language.
 
 You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/stripe-connect-api).
 
