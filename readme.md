@@ -43,34 +43,34 @@ Dashboard and official modules are completely API-driven and you can access the 
 
 You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/stripe-connect-api).
 
-        const requestOptions = {
-            host: 'dashboard.example.com',
-            path: `/api/user/connect/stripe-accounts?accountid=${accountid}`,
-            port: '443',
-            method: 'GET',
-            headers: {
-                'x-application-server': 'application.example.com',
-                'x-application-server-token': process.env.APPLICATION_SERVER_TOKEN
-            }
+    const requestOptions = {
+        host: 'dashboard.example.com',
+        path: `/api/user/connect/stripe-accounts?accountid=${accountid}`,
+        port: '443',
+        method: 'GET',
+        headers: {
+            'x-application-server': 'application.example.com',
+            'x-application-server-token': process.env.APPLICATION_SERVER_TOKEN
         }
-        if (accountid) {
-            requestOptions.headers['x-accountid'] = accountid
-            requestOptions.headers['x-sessionid'] = sessionid
-        }
-        const stripeAccounts = await proxy(requestOptions)
+    }
+    if (accountid) {
+        requestOptions.headers['x-accountid'] = accountid
+        requestOptions.headers['x-sessionid'] = sessionid
+    }
+    const stripeAccounts = await proxy(requestOptions)
 
-        function proxy = util.promisify((requestOptions, callback) => {
-          const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
-              let body = ''
-              proxyResponse.on('data', (chunk) => {
-                  body += chunk
-              })
-              return proxyResponse.on('end', () => {
-                  return callback(null, JSON.parse(body))
-              })
-          })
-          proxyRequest.on('error', (error) => {
-              return callback(error)
-          })
-          return proxyRequest.end()
+    function proxy = util.promisify((requestOptions, callback) => {
+        const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
+            let body = ''
+            proxyResponse.on('data', (chunk) => {
+                body += chunk
+            })
+            return proxyResponse.on('end', () => {
+                return callback(null, JSON.parse(body))
+            })
         })
+        proxyRequest.on('error', (error) => {
+            return callback(error)
+        })
+        return proxyRequest.end()
+    })
