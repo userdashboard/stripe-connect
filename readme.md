@@ -1,13 +1,39 @@
-# Stripe Connect module for Dashboard
-![Test suite status](https://github.com/userdashboard/stripe-connect/workflows/test-and-publish/badge.svg?branch=master)
+# Documentation for Stripe Connect
+
+#### Index
+
+- [Introduction](#stripe-connect-module)
+- [Module contents](#module-contents)
+- [Import this module](#import-this-module)
+- [Setting up your Stripe credentials](#setting-up-your-stripe-credentials)
+- [Storage engine](#storage-engine)
+- [Access the API](#access-the-api)
+- [Github repository](https://github.com/userdashboard/stripe-connect)
+- [NPM package](https://npmjs.org/userdashboard/stripe-connect)
+
+# Introduction
 
 Dashboard bundles everything a web app needs, all the "boilerplate" like signing in and changing passwords, into a parallel server so you can write a much smaller web app.
 
-The Stripe Connect module adds a complete "custom" integration of Stripe's Connect API, allowing your users to provide personal or company information and receive payouts on your platform.  A complete UI is provided for users to create and manage their registrations, and a basic administrator UI is provided for oversight but has limited functionality so far.
+The Stripe Connect module adds a complete "custom" integration of Stripe's Connect API, allowing your users to provide personal or company information and receive payouts on your platform.  A complete UI is provided for users to create and manage their registrations, and a basic administrator UI is provided for oversight.
 
-Your application server can use the Stripe Connect module's API to ensure the user has a valid Connect account with payouts enabled.
+When a user has completed a Stripe account registration and it has been approved by Stripe their status will be changed to `payouts_enabled`.  Your application should use this information to control access to your platform functionality.
 
 Currently only automatic payouts are supported.  Countries that are "in beta" support by Stripe are not supported and need to be added as they become generally available. 
+
+# Module contents 
+
+Dashboard modules can add pages and API routes.  For more details check the `sitemap.txt` and `api.txt` or the online documentation.
+
+| Content type             |     |
+|--------------------------|-----|
+| Proxy scripts            |     |
+| Server scripts           | Yes |
+| Content scripts          |     |
+| User pages               | Yes |
+| User API routes          | Yes | 
+| Administrator pages      | Yes |
+| Administrator API routes | Yes | 
 
 ## Import this module
 
@@ -33,33 +59,36 @@ You will need to retrieve various keys from [Stripe](https://stripe.com).  Durin
 - environment STRIPE_PUBLISHABLE_KEY=pk_test_xxxxxxx
 - environment CONNECT_WEBHOOK_ENDPOINT_SECRET=whsec_xxxxxxxx
 
-## Integrating the Connect platform information
+## Storage engine
 
-When a user has completed a Stripe account registration and it has been approved by Stripe their status will be changed to `payouts_enabled`.  Your application should use this information to control access to your platform functionality.
+By default this module will share whatever storage you use for Dashboard.  You can specify an alternate storage module to use instead, or the same module with a separate database.
 
-### Request Connect data from your Dashboard server
+    CONNECT_STORAGE=@userdashboard/storage-mongodb
+    CONNECT_MONGODB_URL=mongo://localhost:27017/connect
 
-Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example uses NodeJS to fetch the user's Stripe accounts from the Dashboard server, your application server can be in any language.
+### Access the API
 
-You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/stripe-connect-api).
+Dashboard and official modules are completely API-driven and you can access the same APIs on behalf of the user making requests.  You perform `GET`, `POST`, `PATCH`, and `DELETE` HTTP requests against the API endpoints to fetch or modify data.  This example fetches the user's Connect accounts using NodeJS, you can do this with any language:
 
-    const requestOptions = {
-        host: 'dashboard.example.com',
-        path: `/api/user/connect/stripe-accounts?accountid=${accountid}`,
-        port: '443',
-        method: 'GET',
-        headers: {
-            'x-application-server': 'application.example.com',
-            'x-application-server-token': process.env.APPLICATION_SERVER_TOKEN
+You can view API documentation within the NodeJS modules' `api.txt` files, or on the [documentation site](https://userdashboard.github.io/organizations-api).
+
+    const stripeAccounts = await proxy(`/api/user/connect/stripe-accounts?accountid=${accountid}&all=true`, accountid, sessionid)
+
+    const proxy = util.promisify((path, accountid, sessionid, callback) => {
+        const requestOptions = {
+            host: 'dashboard.example.com',
+            path: path,
+            port: '443',
+            method: 'GET',
+            headers: {
+                'x-application-server': 'application.example.com',
+                'x-application-server-token': process.env.APPLICATION_SERVER_TOKEN
+            }
         }
-    }
-    if (accountid) {
-        requestOptions.headers['x-accountid'] = accountid
-        requestOptions.headers['x-sessionid'] = sessionid
-    }
-    const stripeAccounts = await proxy(requestOptions)
-
-    function proxy = util.promisify((requestOptions, callback) => {
+        if (accountid) {
+            requestOptions.headers['x-accountid'] = accountid
+            requestOptions.headers['x-sessionid'] = sessionid
+        }
         const proxyRequest = require('https').request(requestOptions, (proxyResponse) => {
             let body = ''
             proxyResponse.on('data', (chunk) => {
@@ -73,4 +102,5 @@ You can view API documentation within the NodeJS modules' `api.txt` files, or on
             return callback(error)
         })
         return proxyRequest.end()
-    })
+      })
+    }
