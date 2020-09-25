@@ -2,20 +2,20 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">Silin ${stripeAccount.id}</title>
+  <title translate="yes">Sil ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">Silin ${stripeAccount.id}</h1>
+  <h1 translate="yes">Sil ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table object-table">
     <thead>
       <tr>
         <th>ID</th>
-        <th translate="yes">Adı</th>
+        <th translate="yes">Ad</th>
         <th translate="yes">Vəziyyət</th>
       </tr>
     </thead>
@@ -23,7 +23,7 @@
       <td>
         <a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a>
       </td>
-      <td id="blank-name" translate="yes">Not yet provided</td>
+      <td id="blank-name" translate="yes">Hələ verilməyib</td>
       <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
       <td id="business-name">${stripeAccount.company.name || ""}</td>
       <td id="mcc-description"></td>
@@ -31,7 +31,7 @@
     </tr>
   </table>
   <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
-    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Silin</button>
+    <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Sil</button>
   </form>
   <template id="success">
     <div class="success message" translate="yes">

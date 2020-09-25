@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">দৃশ্য ${stripeAccount.id}</title>
+  <title translate="yes">দেখুন ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">দৃশ্য ${stripeAccount.id}</h1>
+  <h1 translate="yes">দেখুন ${stripeAccount.id}</h1>
   <table id="stripe-accounts-table" class="pure-table pure-table-striped data-table">
     <tbody id="${stripeAccount.id}">
       <tr>
@@ -18,12 +18,12 @@
       </tr>
       <tr>
         <th translate="yes">আদর্শ</th>
-        <td id="business" translate="yes">কোম্পানি নিবন্ধন</td>
-        <td id="individual" translate="yes">Individual registration</td>
+        <td id="business" translate="yes">কোম্পানি নিবন্ধিকরন</td>
+        <td id="individual" translate="yes">স্বতন্ত্র নিবন্ধকরণ</td>
       </tr>
       <tr>
         <th translate="yes">নাম</th>
-        <td id="blank-name" translate="yes">Not yet provided</td>
+        <td id="blank-name" translate="yes">এখনও সরবরাহ করা হয়নি</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>

@@ -2,14 +2,14 @@
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
 <head>
   <meta charset="utf-8" /> 
-  <title translate="yes">ikusi ${stripeAccount.id}</title>
+  <title translate="yes">Ikusi ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
 <body>
-  <h1 translate="yes">ikusi ${stripeAccount.id}</h1>
+  <h1 translate="yes">Ikusi ${stripeAccount.id}</h1>
   <div id="message-container"></div>
   <table id="stripe-accounts-table" class="pure-table data-table">
     <tbody id="${stripeAccount.id}">
@@ -22,8 +22,8 @@
         <td id="mcc-description"></td>
       </tr>
       <tr>
-        <th translate="yes">izena</th>
-        <td id="blank-name" translate="yes">Not yet provided</td>
+        <th translate="yes">Izena</th>
+        <td id="blank-name" translate="yes">Oraindik ez da eman</td>
         <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
         <td id="business-name">${stripeAccount.company.name || ""}</td>
       </tr>
