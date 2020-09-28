@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" data-navbar="/account/connect/navbar-stripe-account.html">
+
 <head>
-  <meta charset="utf-8" /> 
+  <meta charset="utf-8" />
   <title translate="yes">Bezuelungsinformatioune fir ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
@@ -26,11 +27,13 @@
     }
   </style>
 </head>
+
 <body>
   <h1 translate="yes">Bezuelungsinformatioune fir ${stripeAccount.id}</h1>
   <p translate="yes">Update de Bankkonto deen Äert Akommesbezuelen kritt.</p>
   <div id="message-container"></div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
+    action="/account/connect/edit-payment-information?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="country pure-control-group">
       <label for="country" translate="yes">Land vun der Bank</label>
       <select class="country" name="country" id="country">
@@ -43,10 +46,16 @@
     <div class="pure-control-group">
       <label translate="yes">Kont Kont</label>
       <div class="pure-checkbox">
-        <label><input id="individual" type="radio" name="account_holder_type" value="individual"> Individual</label>
+        <label>
+          <input id="individual" type="radio" name="account_holder_type" value="individual">
+          <span translate="yes">Individual</span>
+        </label>
       </div>
       <div class="pure-checkbox">
-        <label><input id="company" type="radio" name="account_holder_type" value="company"> Company</label>
+        <label>
+          <input id="company" type="radio" name="account_holder_type" value="company">
+          <span translate="yes">Company</span>
+        </label>
       </div>
     </div>
     <div class="pure-g">
@@ -76,11 +85,11 @@
       </div>
     </div>
     <div id="AT-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="BE-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="CA-container">
@@ -98,36 +107,36 @@
       </div>
     </div>
     <div id="CH-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="DE-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="DK-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="EE-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="ES-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="FI-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="FR-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="GB-container">
       <div class="pure-control-group">
-        <label for="iban" >IBAN</label>
+        <label for="iban">IBAN</label>
         <input required="required" id="iban" name="iban" type="text" maxlength="50">
       </div>
       <h2 translate="yes">Alternativ Format</h2>
@@ -144,7 +153,7 @@
       </div>
     </div>
     <div id="GR-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="HK-container">
@@ -162,11 +171,11 @@
       </div>
     </div>
     <div id="IE-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="IT-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="JP-container">
@@ -184,15 +193,15 @@
       </div>
     </div>
     <div id="LT-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="LU-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="LV-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="MY-container" class="pure-control-group">
@@ -206,7 +215,7 @@
       </div>
     </div>
     <div id="NL-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="NZ-container" class="pure-control-group">
@@ -220,15 +229,15 @@
       </div>
     </div>
     <div id="NO-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="PL-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="PT-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="SG-container">
@@ -246,15 +255,15 @@
       </div>
     </div>
     <div id="SE-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="SI-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="SK-container" class="pure-control-group">
-      <label for="iban" >IBAN</label>
+      <label for="iban">IBAN</label>
       <input required="required" id="iban" name="iban" type="text" maxlength="50">
     </div>
     <div id="US-container">
@@ -268,7 +277,8 @@
       </div>
     </div>
     <div class="pure-controls">
-      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Späichert Bezuelungsinformatioun</button>
+      <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Save payment
+        information</button>
     </div>
   </form>
   <template id="country-option">
@@ -288,7 +298,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Feeler! E Feeler ass beim Update vun der Bezuelinformatioun
+      Error! An error occurred updating the payment information
     </div>
   </template>
   <template id="invalid-country">
@@ -362,4 +372,5 @@
     </div>
   </template>
 </body>
+
 </html>

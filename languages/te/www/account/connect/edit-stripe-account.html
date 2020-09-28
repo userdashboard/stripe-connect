@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" data-template="false">
+
 <head>
-  <meta charset="utf-8" /> 
+  <meta charset="utf-8" />
   <title translate="yes">మార్చు ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
@@ -14,8 +15,11 @@
     window.stripePublishableKey = "${stripeAccount.stripePublishableKey}"
   </script>
 </head>
+
 <body class="entry">
-  <form id="submit-form" enctype="multipart/form-data" method="POST" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form"> 
+  <form id="submit-form" enctype="multipart/form-data" method="POST"
+    class="pure-form pure-form-stacked entry-form connect-form"
+    action="/account/connect/edit-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <input type="hidden" name="token" id="token">
     <h1 translate="yes">మార్చు ${stripeAccount.id}</h1>
     <div id="message-container"></div>
@@ -26,7 +30,8 @@
       </div>
       <div id="business_profile_product_description-container" class="pure-control-group">
         <label for="business_profile_product_description" translate="yes">ఉత్పత్తి వివరణ</label>
-        <input id="business_profile_product_description" name="business_profile_product_description" type="text" maxlength="50">
+        <input id="business_profile_product_description" name="business_profile_product_description" type="text"
+          maxlength="50">
       </div>
       <div id="business_profile_mcc-container" class="pure-control-group">
         <label for="business_profile_mcc" translate="yes">వ్యాపారి వర్గం కోడ్</label>
@@ -48,7 +53,7 @@
         </div>
         <div class="pure-u-1-24"></div>
         <div class="pure-u-11-24">
-          <div id ="tax_id-container" class="pure-control-group">
+          <div id="tax_id-container" class="pure-control-group">
             <a id="tax_id-anchor"></a>
             <label for="tax_id" translate="yes">పన్ను ID సంఖ్య</label>
             <input required="required" id="tax_id" name="tax_id" type="text" maxlength="50">
@@ -162,9 +167,12 @@
     </div>
     <div id="dob-container" class="pure-control-group">
       <label for="dob_day" translate="yes">పుట్టిన తేది</label>
-      <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2" placeholder="DD">
-      <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2" placeholder="MM">
-      <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4" placeholder="YYYY">
+      <input class="adjacent" required="required" id="dob_day" name="dob_day" type="text" size="2" maxlength="2"
+        placeholder="DD">
+      <input class="adjacent" required="required" id="dob_month" name="dob_month" type="text" size="2" maxlength="2"
+        placeholder="MM">
+      <input class="adjacent" required="required" id="dob_year" name="dob_year" type="text" size="4" maxlength="4"
+        placeholder="YYYY">
     </div>
     <div id="ssn_last_4-container" class="pure-control-group">
       <label for="ssn_last_4" translate="yes">SSN చివరి 4 అంకెలు</label>
@@ -173,7 +181,8 @@
     <div id="gender-container" class="pure-control-group">
       <label for="gender" translate="yes">జెండర్</label>
       <div class="pure-checkbox">
-        <label><input id="female" type="radio" name="gender" value="female" /> <span translate="yes">స్త్రీ</span></label>
+        <label><input id="female" type="radio" name="gender" value="female" /> <span
+            translate="yes">స్త్రీ</span></label>
         <label><input id="male" type="radio" name="gender" value="male" /> <span translate="yes">పురుషుడు</span></label>
       </div>
     </div>
@@ -203,11 +212,13 @@
       <h2 translate="yes">చిరునామా</h2>
       <div id="address_line1-container" class="pure-control-group">
         <label for="address_line1" translate="yes">1 వ పంక్తి</label>
-        <input class="full-width" required="required" id="address_line1" name="address_line1" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_line1" name="address_line1" type="text"
+          maxlength="100">
       </div>
       <div id="address_line2-container" class="pure-control-group">
         <label for="address_line2" translate="yes">2 వ పంక్తి</label>
-        <input class="full-width" required="required" id="address_line2" name="address_line2" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_line2" name="address_line2" type="text"
+          maxlength="100">
       </div>
       <div id="address_city-container" class="pure-control-group">
         <label for="address_city" translate="yes">నగరం</label>
@@ -226,8 +237,9 @@
           <div id="address_state-container-bridge" class="pure-u-1-24"></div>
           <div id="address_postal_code-container" class="pure-u-6-24">
             <div class="pure-control-group">
-              <label for="address_postal_code" >ZIP</label>
-              <input class="full-width" required="required" id="address_postal_code" name="address_postal_code" type="text" maxlength="50">
+              <label for="address_postal_code">ZIP</label>
+              <input class="full-width" required="required" id="address_postal_code" name="address_postal_code"
+                type="text" maxlength="50">
             </div>
           </div>
         </div>
@@ -237,46 +249,56 @@
       <h2 translate="yes">కనా చిరునామా</h2>
       <div id="address_kana_line1-container" class="pure-control-group">
         <label for="address_kana_line1" translate="yes">1 వ పంక్తి</label>
-        <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kana_line1" name="address_kana_line1" type="text"
+          maxlength="100">
       </div>
       <div id="address_kana_city-container" class="pure-control-group">
         <label for="address_kana_city" translate="yes">నగరం</label>
-        <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kana_city" name="address_kana_city" type="text"
+          maxlength="100">
       </div>
       <div id="address_kana_town-container" class="pure-control-group">
         <label for="address_kana_town" translate="yes">టౌన్</label>
-        <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kana_town" name="address_kana_town" type="text"
+          maxlength="100">
       </div>
       <div id="address_kana_state-container" class="pure-control-group">
         <label for="address_kana_state" translate="yes">రాష్ట్రం</label>
-        <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kana_state" name="address_kana_state" type="text"
+          maxlength="100">
       </div>
       <div id="address_kana_postal_code-container" class="pure-control-group">
         <label for="address_kana_postal_code" translate="yes">పోస్టల్ కోడ్</label>
-        <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kana_postal_code" name="address_kana_postal_code"
+          type="text" maxlength="100">
       </div>
     </div>
     <div id="kanji-address-container">
       <h2 translate="yes">కంజి చిరునామా</h2>
       <div id="address_kanji_line1-container" class="pure-control-group">
         <label for="address_kanji_line1" translate="yes">1 వ పంక్తి</label>
-        <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kanji_line1" name="address_kanji_line1" type="text"
+          maxlength="100">
       </div>
       <div id="address_kanji_city-container" class="pure-control-group">
         <label for="address_kanji_city" translate="yes">నగరం</label>
-        <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kanji_city" name="address_kanji_city" type="text"
+          maxlength="100">
       </div>
       <div id="address_kanji_town-container" class="pure-control-group">
         <label for="address_kanji_town" translate="yes">టౌన్</label>
-        <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kanji_town" name="address_kanji_town" type="text"
+          maxlength="100">
       </div>
       <div id="address_kanji_state-container" class="pure-control-group">
         <label for="address_kanji_state" translate="yes">రాష్ట్రం</label>
-        <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kanji_state" name="address_kanji_state" type="text"
+          maxlength="100">
       </div>
       <div id="address_kanji_postal_code-container" class="pure-control-group">
         <label for="address_kanji_postal_code" translate="yes">పోస్టల్ కోడ్</label>
-        <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code" type="text" maxlength="100">
+        <input class="full-width" required="required" id="address_kanji_postal_code" name="address_kanji_postal_code"
+          type="text" maxlength="100">
       </div>
     </div>
     <div id="submit-container" class="pure-controls">
@@ -506,4 +528,5 @@
     </div>
   </template>
 </body>
+
 </html>

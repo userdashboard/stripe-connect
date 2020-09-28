@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+
 <head>
-  <meta charset="utf-8" /> 
+  <meta charset="utf-8" />
   <title translate="yes">Xyeej ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
+
 <body>
   <h1 translate="yes">Xyeej ${stripeAccount.id}</h1>
   <div id="message-container"></div>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
+    action="/administrator/connect/reject-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <div class="pure-control-group">
       <label for="reason" translate="yes">Kev tsis lees paub vim li cas</label>
       <select id="reason" name="reason">
@@ -42,7 +45,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Yuam Kev! Ib qho yuam kev tshwm sim tshem tus lej Stripe tus as khauj
+      Error! An error occurred rejecting the Stripe account
     </div>
   </template>
   <template id="not-submitted">
@@ -64,16 +67,20 @@
     <span translate="yes">Tseem tos</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Tso tseg los ntawm Stripe, saib</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Cov ntaub ntawv ntxiv yuav tsum muaj</span>
@@ -85,7 +92,9 @@
     <span translate="yes">Tshawb xyuas hauv Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Xiam Oob Qhab los ntawm Stripe, saib</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Xiam Oob Qhab los ntawm Stripe, saib</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
 </body>
+
 </html>

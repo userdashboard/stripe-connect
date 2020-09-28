@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" data-navbar="/administrator/connect/navbar-stripe-account.html">
+
 <head>
-  <meta charset="utf-8" /> 
+  <meta charset="utf-8" />
   <title translate="yes">Eyða ${stripeAccount.id}</title>
   <link rel="stylesheet" href="/public/pure-min.css">
   <link rel="stylesheet" href="/public/content.css">
   <link rel="stylesheet" href="/public/content-additional.css">
   <base target="_top" href="/">
 </head>
+
 <body>
   <h1 translate="yes">Eyða ${stripeAccount.id}</h1>
   <div id="message-container"></div>
@@ -24,13 +26,15 @@
         <a href="/account/connect/stripe-account?stripeid=${stripeAccount.id}">${stripeAccount.id}</a>
       </td>
       <td id="blank-name" translate="yes">Ekki enn veitt</td>
-      <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}</td>
+      <td id="individual-name">${stripeAccount.individual.first_name || ""} ${stripeAccount.individual.last_name || ""}
+      </td>
       <td id="business-name">${stripeAccount.company.name || ""}</td>
       <td id="mcc-description"></td>
       <td id="account-status"></td>
     </tr>
   </table>
-  <form id="submit-form" method="post" class="pure-form pure-form-stacked" action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
+  <form id="submit-form" method="post" class="pure-form pure-form-stacked"
+    action="/administrator/connect/delete-stripe-account?stripeid=${stripeAccount.id}" name="submit-form">
     <button id="submit-button" class="pure-button pure-button-primary" translate="yes">Eyða</button>
   </form>
   <template id="success">
@@ -40,7 +44,7 @@
   </template>
   <template id="unknown-error">
     <div class="error message" translate="yes">
-      Villa! Villa kom upp við að eyða Stripe reikningi
+      Error! An error occurred deleting the Stripe account
     </div>
   </template>
   <template id="not-submitted">
@@ -62,16 +66,20 @@
     <span translate="yes">Bíður framlagningar</span>
   </template>
   <template id="rejected.fraud">
-    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.terms">
-    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.listed">
-    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="rejected.other">
-    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Hafnað af Stripe, sjáðu</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="fields_needed">
     <span translate="yes">Nánari upplýsingar eru nauðsynlegar</span>
@@ -83,10 +91,12 @@
     <span translate="yes">Í skoðun Stripe</span>
   </template>
   <template id="disabled">
-    <span><span translate="yes">Óvirkt af Stripe, sjáðu</span> <a href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
+    <span><span translate="yes">Óvirkt af Stripe, sjáðu</span> <a
+        href="https://stripe.com/blog/why-some-businesses-arent-allowed">common reasons</a></span>
   </template>
   <template id="deleted">
     <span translate="yes">Eytt</span>
   </template>
 </body>
+
 </html>
