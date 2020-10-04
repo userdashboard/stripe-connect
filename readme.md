@@ -2,7 +2,7 @@
 
 #### Index
 
-- [Introduction](#stripe-connect-module)
+- [Introduction](#introduction)
 - [Module contents](#module-contents)
 - [Import this module](#import-this-module)
 - [Setting up your Stripe credentials](#setting-up-your-stripe-credentials)
@@ -21,7 +21,7 @@ Currently only automatic payouts are supported.  Countries that are "in beta" su
 
 # Module contents 
 
-Dashboard modules can add pages and API routes.  For more details check the `sitemap.txt` and `api.txt` or the online documentation.
+Dashboard modules can add pages and API routes.  For more details check the `sitemap.txt` and `api.txt` or `env.txt` also contained in the online documentation.
 
 | Content type             |     |
 |--------------------------|-----|
