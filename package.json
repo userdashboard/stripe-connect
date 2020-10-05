@@ -1,6 +1,6 @@
 {
   "name": "@userdashboard/stripe-connect",
-  "version": "1.0.100",
+  "version": "1.0.99",
   "scripts": {
     "test": "mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'"
   },
@@ -19,7 +19,7 @@
     "npm": "6.14.6"
   },
   "dashboard": {
-    "title": "Dashboard",
+    "title": "Stripe Connect module",
     "modules": [
       "@userdashboard/maxmind-geoip"
     ],
