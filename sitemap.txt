@@ -2,11 +2,11 @@
 http://localhost:9000
 
 Administrator menu:
-stripe-connect/src/www/administrator/connect "Stripe Connect <span translate="yes">module</span>"
+@userdashboard/stripe-connect/src/www/administrator/connect "Stripe Connect <span translate="yes">module</span>"
 /administrator "Dashboard administration"
 
 Account menu:
-stripe-connect/src/www/account/connect "Stripe Connect <span translate="yes">accounts</span>"
+@userdashboard/stripe-connect/src/www/account/connect "Stripe Connect <span translate="yes">accounts</span>"
 /account "My account"
 
 Special HTML files:

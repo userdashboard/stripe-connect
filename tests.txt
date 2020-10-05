@@ -21,53 +21,53 @@
 
   server/bind-stripekey
     after
-      ✓ should bind data to req (77ms)
+      ✓ should bind data to req (70ms)
 
   /account/connect/create-person
     exceptions
-      ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1759ms)
+      ✓ should reject invalid stripeid (39ms)
+      ✓ should reject individual registration (2145ms)
     view
-      ✓ should present the form (3103ms)
-      ✓ should remove director option (2073ms)
-      ✓ should remove owner option (2492ms)
+      ✓ should present the form (3489ms)
+      ✓ should remove director option (2326ms)
+      ✓ should remove owner option (2382ms)
     submit
-      ✓ should create representative (screenshots) (50495ms)
-      ✓ should create director (6734ms)
-      ✓ should create owner (7386ms)
+      ✓ should create representative (screenshots) (49949ms)
+      ✓ should create director (6473ms)
+      ✓ should create owner (8170ms)
 
   /account/connect/create-stripe-account
     view
-      ✓ should present the form (531ms)
+      ✓ should present the form (523ms)
     submit
-      ✓ should create Stripe account (screenshots) (20809ms)
+      ✓ should create Stripe account (screenshots) (20879ms)
 
   /account/connect/delete-person
     exceptions
       ✓ should reject invalid personid
-      ✓ should require own Stripe account (3992ms)
+      ✓ should require own Stripe account (4002ms)
     before
-      ✓ should bind data to req (4745ms)
+      ✓ should bind data to req (4818ms)
     view
-      ✓ should present the form (5042ms)
+      ✓ should present the form (6024ms)
     submit
-      ✓ should delete person (screenshots) (65819ms)
+      ✓ should delete person (screenshots) (65817ms)
 
   /account/connect/delete-stripe-account
     exceptions
-      ✓ should reject invalid stripeid
-      ✓ should require own Stripe account (3710ms)
+      ✓ should reject invalid stripeid (52ms)
+      ✓ should require own Stripe account (1489ms)
     before
-      ✓ should bind data to req (2128ms)
+      ✓ should bind data to req (1776ms)
     view
-      ✓ should present the form (2331ms)
+      ✓ should present the form (2017ms)
     submit
-      ✓ should delete Stripe account (screenshots) (31675ms)
+      ✓ should delete Stripe account (screenshots) (30600ms)
 
   /account/connect/edit-payment-information
     before
       ✓ should reject invalid stripeid
-      ✓ should bind Stripe account to req (2270ms)
+      ✓ should bind Stripe account to req (1935ms)
     view
       ✓ should present the form (AT)
       ✓ should present the form (AU)
@@ -132,39 +132,39 @@
       ✓ submit payment information (SI)
       ✓ submit payment information (SK)
       ✓ submit payment information (US)
-      ✓ submit payment information (screenshots) (35212ms)
+      ✓ submit payment information (screenshots) (33957ms)
     errors
       ✓ reject invalid fields (AT)
-      ✓ reject invalid fields (AU) (38ms)
-      ✓ reject invalid fields (BE) (67ms)
-      ✓ reject invalid fields (CA)
+      ✓ reject invalid fields (AU)
+      ✓ reject invalid fields (BE)
+      ✓ reject invalid fields (CA) (105ms)
       ✓ reject invalid fields (CH)
       ✓ reject invalid fields (DE)
       ✓ reject invalid fields (DK)
       ✓ reject invalid fields (EE)
-      ✓ reject invalid fields (ES) (45ms)
-      ✓ reject invalid fields (FI) (59ms)
+      ✓ reject invalid fields (ES)
+      ✓ reject invalid fields (FI)
       ✓ reject invalid fields (FR)
-      ✓ reject invalid fields (GB) (67ms)
-      ✓ reject invalid fields (GR)
-      ✓ reject invalid fields (HK) (44ms)
-      ✓ reject invalid fields (IE) (68ms)
-      ✓ reject invalid fields (IT) (47ms)
-      ✓ reject invalid fields (JP) (44ms)
+      ✓ reject invalid fields (GB) (64ms)
+      ✓ reject invalid fields (GR) (51ms)
+      ✓ reject invalid fields (HK) (57ms)
+      ✓ reject invalid fields (IE)
+      ✓ reject invalid fields (IT)
+      ✓ reject invalid fields (JP) (39ms)
       ✓ reject invalid fields (LT)
       ✓ reject invalid fields (LU)
       ✓ reject invalid fields (LV)
-      ✓ reject invalid fields (MY) (39ms)
+      ✓ reject invalid fields (MY)
       ✓ reject invalid fields (NL)
       ✓ reject invalid fields (NO)
-      ✓ reject invalid fields (NZ) (40ms)
+      ✓ reject invalid fields (NZ)
       ✓ reject invalid fields (PL)
       ✓ reject invalid fields (PT)
       ✓ reject invalid fields (SE)
-      ✓ reject invalid fields (SG) (47ms)
+      ✓ reject invalid fields (SG)
       ✓ reject invalid fields (SI)
       ✓ reject invalid fields (SK)
-      ✓ reject invalid fields (US) (43ms)
+      ✓ reject invalid fields (US)
 
   /account/connect/edit-person
     exceptions
@@ -203,8 +203,8 @@
       ✓ should have element for upload verification_additional_document_front
       ✓ should have element for upload verification_additional_document_back
     submit
-      ✓ should update person (screenshots) no stripe.js (87439ms)
-      ✓ should update person stripe.js v3 (15936ms)
+      ✓ should update person (screenshots) no stripe.js (89066ms)
+      ✓ should update person stripe.js v3 (19824ms)
     errors
       invalid-address_city
         ✓ missing address_city no stripe.js
@@ -359,14 +359,14 @@
       ✓ should have element for id_number (individual)
       ✓ should have element for ssn_last_4 (individual)
     submit
-      ✓ should update registration no stripe.js (individual) (12926ms)
-      ✓ should update registration stripe.js v3 (individual) (screenshots) (67586ms)
-      ✓ should update registration no stripe.js (company) (13599ms)
-      ✓ should update registration stripe.js v3 (company) (14275ms)
+      ✓ should update registration no stripe.js (individual) (11794ms)
+      ✓ should update registration stripe.js v3 (individual) (screenshots) (70261ms)
+      ✓ should update registration no stripe.js (company) (13343ms)
+      ✓ should update registration stripe.js v3 (company) (13801ms)
     errors
       ✓ should reject missing business_profile_mcc no stripe.js (company)
       ✓ should reject missing business_profile_mcc stripe.js v3 (company)
-      ✓ should reject missing business_profile_url no stripe.js (company) (99ms)
+      ✓ should reject missing business_profile_url no stripe.js (company)
       ✓ should reject missing business_profile_url stripe.js v3 (company)
       ✓ should reject missing address_city no stripe.js (company)
       ✓ should reject missing address_city stripe.js v3 (company)
@@ -378,10 +378,10 @@
       ✓ should reject missing name stripe.js v3 (company)
       ✓ should reject missing phone no stripe.js (company)
       ✓ should reject missing phone stripe.js v3 (company)
-      ✓ should reject missing tax_id no stripe.js (company)
+      ✓ should reject missing tax_id no stripe.js (company) (39ms)
       ✓ should reject missing tax_id stripe.js v3 (company)
       ✓ should reject missing address_state no stripe.js (company)
-      ✓ should reject missing address_state stripe.js v3 (company)
+      ✓ should reject missing address_state stripe.js v3 (company) (48ms)
       ✓ should reject missing address_kana_city no stripe.js (company)
       ✓ should reject missing address_kana_city stripe.js v3 (company)
       ✓ should reject missing address_kana_line1 no stripe.js (company)
@@ -406,13 +406,13 @@
       ✓ should reject missing name_kana stripe.js v3 (company)
       ✓ should reject missing name_kanji no stripe.js (company)
       ✓ should reject missing name_kanji stripe.js v3 (company)
-      ✓ should reject missing address_city no stripe.js (individual) (67ms)
+      ✓ should reject missing address_city no stripe.js (individual)
       ✓ should reject missing address_city stripe.js v3 (individual)
       ✓ should reject missing address_line1 no stripe.js (individual)
       ✓ should reject missing address_line1 stripe.js v3 (individual)
       ✓ should reject missing address_postal_code no stripe.js (individual)
       ✓ should reject missing address_postal_code stripe.js v3 (individual)
-      ✓ should reject missing dob_day no stripe.js (individual)
+      ✓ should reject missing dob_day no stripe.js (individual) (82ms)
       ✓ should reject missing dob_day stripe.js v3 (individual)
       ✓ should reject missing dob_month no stripe.js (individual)
       ✓ should reject missing dob_month stripe.js v3 (individual)
@@ -464,30 +464,30 @@
       ✓ should reject missing last_name_kanji stripe.js v3 (individual)
       ✓ should reject missing id_number no stripe.js (individual)
       ✓ should reject missing id_number stripe.js v3 (individual)
-      ✓ should reject missing ssn_last_4 no stripe.js (individual) (76ms)
-      ✓ should reject missing ssn_last_4 stripe.js v3 (individual) (67ms)
+      ✓ should reject missing ssn_last_4 no stripe.js (individual)
+      ✓ should reject missing ssn_last_4 stripe.js v3 (individual)
 
   /account/connect
     before
-      ✓ should bind data to req (4661ms)
+      ✓ should bind data to req (6509ms)
     view
-      ✓ should have row for each Stripe account (screenshots) (15077ms)
+      ✓ should have row for each Stripe account (screenshots) (14197ms)
 
   /account/connect/person
     before
       ✓ should reject invalid personid
-      ✓ should bind data to req (4620ms)
+      ✓ should bind data to req (4160ms)
     view
-      ✓ should show table for person (screenshots) (49918ms)
-      ✓ should show person is representative (7314ms)
-      ✓ should show person is owner (5416ms)
-      ✓ should show person is director (5355ms)
-      ✓ should show person requires additional information (4948ms)
+      ✓ should show table for person (screenshots) (49375ms)
+      ✓ should show person is representative (7416ms)
+      ✓ should show person is owner (5101ms)
+      ✓ should show person is director (5053ms)
+      ✓ should show person requires additional information (4729ms)
 
   /account/connect/persons
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1919ms)
+      ✓ should reject individual registration (1867ms)
     before
       ✓ should bind data to req
     view
@@ -497,16 +497,16 @@
 
   /account/connect/stripe-account
     before
-      ✓ should reject invalid stripeid (1297ms)
-      ✓ should reject other account's stripeid (1720ms)
-      ✓ should bind data to req (3739ms)
+      ✓ should reject invalid stripeid (1369ms)
+      ✓ should reject other account's stripeid (3521ms)
+      ✓ should bind data to req (1914ms)
     view
-      ✓ should show registration unstarted (screenshots) (25310ms)
-      ✓ should show registration completed (5347ms)
-      ✓ should show payment information required (6697ms)
-      ✓ should show payment information created (11342ms)
-      ✓ should show ready to submit (5097ms)
-      ✓ should show registration is submitted (84170ms)
+      ✓ should show registration unstarted (screenshots) (24755ms)
+      ✓ should show registration completed (4583ms)
+      ✓ should show payment information required (6871ms)
+      ✓ should show payment information created (8540ms)
+      ✓ should show ready to submit (5020ms)
+      ✓ should show registration is submitted (63333ms)
 
   /account/connect/stripe-accounts
     before
@@ -517,72 +517,72 @@
   /account/connect/submit-beneficial-owners
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1625ms)
-      ✓ should reject Stripe account that doesn't require owners (1615ms)
+      ✓ should reject individual registration (1831ms)
+      ✓ should reject Stripe account that doesn't require owners (1873ms)
     before
-      ✓ should bind data to req (8628ms)
+      ✓ should bind data to req (8078ms)
     view
-      ✓ should reject if an owner requires information (5959ms)
-      ✓ should present the form without owners (3307ms)
-      ✓ should present the form with completed owners (90579ms)
+      ✓ should reject if an owner requires information (7325ms)
+      ✓ should present the form without owners (3055ms)
+      ✓ should present the form with completed owners (88409ms)
     submit
-      ✓ should submit owners (screenshots) (134191ms)
-      ✓ should submit without owners (6623ms)
+      ✓ should submit owners (screenshots) (131583ms)
+      ✓ should submit without owners (6544ms)
 
   /account/connect/submit-company-directors
     exceptions
       ✓ should reject invalid stripeid
-      ✓ should reject individual registration (1588ms)
-      ✓ should reject Stripe account that doesn't require directors (1584ms)
+      ✓ should reject individual registration (1575ms)
+      ✓ should reject Stripe account that doesn't require directors (1683ms)
     before
-      ✓ should bind data to req (7144ms)
+      ✓ should bind data to req (7743ms)
     view
-      ✓ should reject if a director requires information (6340ms)
-      ✓ should present the form without directors (2984ms)
-      ✓ should present the form with directors (9857ms)
+      ✓ should reject if a director requires information (7613ms)
+      ✓ should present the form without directors (2860ms)
+      ✓ should present the form with directors (10132ms)
     submit
-      ✓ should submit directors (screenshots) (56005ms)
-      ✓ should submit without directors (6814ms)
+      ✓ should submit directors (screenshots) (58929ms)
+      ✓ should submit without directors (7231ms)
 
   /account/connect/submit-stripe-account
     exceptions
       ✓ should reject invalid stripeid
     before
-      ✓ should bind data to req (118963ms)
+      ✓ should bind data to req (120483ms)
     view
-      ✓ should reject registration that hasn't submitted payment details (29736ms)
-      ✓ should reject company that hasn't submitted beneficial owners (34649ms)
-      ✓ should reject company that hasn't submitted company directors (36025ms)
-      ✓ should reject company that hasn't submitted representative information (21135ms)
-      ✓ should reject company that hasn't submitted information (13103ms)
-      ✓ should reject individual that hasn't submitted information (4641ms)
-      ✓ should present the form (individual) (93541ms)
-      ✓ should present the form (company) (133920ms)
+      ✓ should reject registration that hasn't submitted payment details (22618ms)
+      ✓ should reject company that hasn't submitted beneficial owners (18418ms)
+      ✓ should reject company that hasn't submitted company directors (39544ms)
+      ✓ should reject company that hasn't submitted representative information (15743ms)
+      ✓ should reject company that hasn't submitted information (13727ms)
+      ✓ should reject individual that hasn't submitted information (5091ms)
+      ✓ should present the form (individual) (91293ms)
+      ✓ should present the form (company) (117256ms)
     submit
-      ✓ should submit registration (company) (screenshots) (171185ms)
-      ✓ should submit registration (individual) (96444ms)
+      ✓ should submit registration (company) (screenshots) (108545ms)
+      ✓ should submit registration (individual) (94338ms)
 
   /administrator/connect/delete-stripe-account
     before
-      ✓ should bind data to req (1923ms)
+      ✓ should bind data to req (2131ms)
     view
-      ✓ should present the form (2344ms)
-      ✓ should present the Stripe account table (2252ms)
+      ✓ should present the form (2495ms)
+      ✓ should present the Stripe account table (2417ms)
     submit
-      ✓ should delete Stripe account (screenshots) (39457ms)
+      ✓ should delete Stripe account (screenshots) (39795ms)
 
   /administrator/connect
     before
-      ✓ should bind data to req (1830ms)
+      ✓ should bind data to req (1853ms)
     view
-      ✓ should have row for each Stripe account (screenshots) (10918ms)
+      ✓ should have row for each Stripe account (screenshots) (10878ms)
 
   /administrator/connect/payout
     before
       ✓ should reject invalid payoutid
-      ✓ should bind data to req (78465ms)
+      ✓ should bind data to req (86131ms)
     view
-      ✓ should have row for payout (screenshots) (93389ms)
+      ✓ should have row for payout (screenshots) (94438ms)
 
   /administrator/connect/payouts
     before
@@ -594,18 +594,18 @@
 
   /administrator/connect/reject-stripe-account
     before
-      ✓ should bind data to req (1920ms)
+      ✓ should bind data to req (1578ms)
     view
-      ✓ should present the form (2270ms)
+      ✓ should present the form (2512ms)
     submit
-      ✓ should update the Stripe account as rejected (screenshots) (38509ms)
+      ✓ should update the Stripe account as rejected (screenshots) (38056ms)
 
   /administrator/connect/stripe-account
     before
-      ✓ should reject invalid stripeid (1822ms)
-      ✓ should bind data to req (1929ms)
+      ✓ should reject invalid stripeid (1590ms)
+      ✓ should bind data to req (1590ms)
     view
-      ✓ should have row for Stripe account (screenshots) (15138ms)
+      ✓ should have row for Stripe account (screenshots) (15284ms)
 
   /administrator/connect/stripe-accounts
     before
@@ -619,9 +619,9 @@
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid (130ms)
+        ✓ invalid querystring stripeid (119ms)
     returns
-      ✓ boolean (2832ms)
+      ✓ boolean (2930ms)
 
   /api/administrator/connect/payout
     exceptions
@@ -629,11 +629,11 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
     returns
-      ✓ object (63627ms)
+      ✓ object (70586ms)
 
   /api/administrator/connect/payouts-count
     returns
-      ✓ integer (246265ms)
+      ✓ integer (240011ms)
 
   /api/administrator/connect/payouts
     receives
@@ -651,24 +651,24 @@
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid (118ms)
+        ✓ invalid querystring stripeid (138ms)
       invalid-reason
         ✓ missing posted reason
         ✓ invalid posted reason
     returns
-      ✓ boolean (3001ms)
+      ✓ boolean (3083ms)
 
   /api/administrator/connect/stripe-account
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid (129ms)
+        ✓ invalid querystring stripeid (113ms)
     returns
-      ✓ object (1947ms)
+      ✓ object (2225ms)
 
   /api/administrator/connect/stripe-accounts-count
     returns
-      ✓ integer (4424ms)
+      ✓ integer (4401ms)
 
   /api/administrator/connect/stripe-accounts
     exceptions
@@ -689,15 +689,15 @@
       ✓ missing querystring country
       ✓ invalid querystring country
     returns
-      ✓ object (200ms)
+      ✓ object (222ms)
 
   /api/user/connect/country-specs-count
     returns
-      ✓ integer (2492ms)
+      ✓ integer (2265ms)
 
   /api/user/connect/country-specs
     receives
-      ✓ optional querystring offset (integer) (2631ms)
+      ✓ optional querystring offset (integer) (2217ms)
       ✓ optional querystring limit (integer)
       ✓ optional querystring all (boolean)
     returns
@@ -711,28 +711,28 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account for individuals (1893ms)
-        ✓ ineligible stripe account does not require directors (2158ms)
-        ✓ ineligible stripe account does not require owners (1429ms)
+        ✓ ineligible stripe account for individuals (1695ms)
+        ✓ ineligible stripe account does not require directors (1968ms)
+        ✓ ineligible stripe account does not require owners (2046ms)
       invalid-account
-        ✓ ineligible accessing account (1408ms)
+        ✓ ineligible accessing account (1646ms)
       invalid-relationship_percent_ownership
-        ✓ missing posted relationship_percent_ownership (1988ms)
-        ✓ invalid posted relationship_percent_ownership (1895ms)
+        ✓ missing posted relationship_percent_ownership (1845ms)
+        ✓ invalid posted relationship_percent_ownership (1831ms)
       invalid-relationship_title
-        ✓ missing posted relationship_title (1678ms)
-        ✓ invalid posted relationship_title (1851ms)
+        ✓ missing posted relationship_title (2157ms)
+        ✓ invalid posted relationship_title (1859ms)
       invalid-relationship_executive
-        ✓ invalid representative must be an executive (1845ms)
+        ✓ invalid representative must be an executive (1914ms)
     receives
-      ✓ optional posted relationship_representative (3102ms)
-      ✓ optionally-required posted relationship_executive (3273ms)
-      ✓ optional posted relationship_director (6222ms)
-      ✓ optional posted relationship_owner (4277ms)
-      ✓ required posted relationship_percent_ownership (4097ms)
-      ✓ required posted relationship_title (3727ms)
+      ✓ optional posted relationship_representative (3334ms)
+      ✓ optionally-required posted relationship_executive (3217ms)
+      ✓ optional posted relationship_director (4001ms)
+      ✓ optional posted relationship_owner (3928ms)
+      ✓ required posted relationship_percent_ownership (4035ms)
+      ✓ required posted relationship_title (3650ms)
     returns
-      ✓ object (3242ms)
+      ✓ object (3379ms)
 
   /api/user/connect/create-stripe-account
     exceptions
@@ -740,7 +740,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (40ms)
+        ✓ ineligible accessing account
       invalid-type
         ✓ missing posted type
         ✓ invalid posted type
@@ -748,7 +748,7 @@
         ✓ invalid posted country
         ✓ invalid posted country
     returns
-      ✓ object (1461ms)
+      ✓ object (1453ms)
 
   /api/user/connect/delete-person
     exceptions
@@ -756,11 +756,11 @@
         ✓ missing querystring personid
         ✓ invalid querystring personid
       invalid-account
-        ✓ ineligible accessing account (3817ms)
+        ✓ ineligible accessing account (3962ms)
       invalid-person
-        ✓ ineligible querystring person is representative (8287ms)
+        ✓ ineligible querystring person is representative (8348ms)
     returns
-      ✓ boolean (5355ms)
+      ✓ boolean (6016ms)
 
   /api/user/connect/delete-stripe-account
     exceptions
@@ -768,9 +768,9 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1291ms)
+        ✓ ineligible accessing account (1686ms)
     returns
-      ✓ boolean (2570ms)
+      ✓ boolean (2740ms)
 
   /api/user/connect/payout
     exceptions
@@ -778,9 +778,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (65110ms)
+        ✓ ineligible accessing account (68669ms)
     returns
-      ✓ object (84177ms)
+      ✓ object (96642ms)
 
   /api/user/connect/payouts-count
     exceptions
@@ -788,9 +788,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (41ms)
+        ✓ ineligible accessing account
     returns
-      ✓ integer (113926ms)
+      ✓ integer (80925ms)
 
   /api/user/connect/payouts
     exceptions
@@ -798,7 +798,7 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (46ms)
+        ✓ ineligible accessing account
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -815,31 +815,31 @@
         ✓ missing querystring personid
         ✓ invalid querystring personid
       invalid-account
-        ✓ ineligible accessing account (8240ms)
+        ✓ ineligible accessing account (8453ms)
     returns
-      ✓ object (8736ms)
+      ✓ object (9100ms)
 
   /api/user/connect/persons-count
     exceptions
       invalid-stripeid
-        ✓ missing querystring stripeid (3661ms)
+        ✓ missing querystring stripeid (1453ms)
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1882ms)
+        ✓ ineligible accessing account (1465ms)
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (2287ms)
+        ✓ ineligible stripe account for individual (2205ms)
     returns
-      ✓ integer (6726ms)
+      ✓ integer (6458ms)
 
   /api/user/connect/persons
     exceptions
       invalid-stripeid
-        ✓ missing querystring stripeid (1654ms)
+        ✓ missing querystring stripeid (1485ms)
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1749ms)
+        ✓ ineligible accessing account (1819ms)
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1734ms)
+        ✓ ineligible stripe account for individual (2000ms)
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -855,25 +855,25 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1794ms)
-        ✓ ineligible beneficial owners are submitted (3568ms)
+        ✓ ineligible stripe account for individual (1822ms)
+        ✓ ineligible beneficial owners are submitted (3717ms)
       invalid-account
-        ✓ ineligible accessing account (2115ms)
+        ✓ ineligible accessing account (1977ms)
     returns
-      ✓ object (4988ms)
+      ✓ object (4805ms)
 
   /api/user/connect/set-company-directors-submitted
     exceptions
       invalid-stripeid
         ✓ missing querystring stripeid
-        ✓ invalid querystring stripeid
+        ✓ invalid querystring stripeid (38ms)
       invalid-stripe-account
-        ✓ ineligible stripe account for individual (1791ms)
-        ✓ ineligible company directors are submitted (4723ms)
+        ✓ ineligible stripe account for individual (2078ms)
+        ✓ ineligible company directors are submitted (4429ms)
       invalid-account
-        ✓ ineligible accessing account (1884ms)
+        ✓ ineligible accessing account (1808ms)
     returns
-      ✓ object (3315ms)
+      ✓ object (2620ms)
 
   /api/user/connect/set-stripe-account-submitted
     exceptions
@@ -881,18 +881,18 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-stripe-account
-        ✓ ineligible stripe account is submitted (66612ms)
+        ✓ ineligible stripe account is submitted (92058ms)
       invalid-account
-        ✓ ineligible accessing account (1973ms)
+        ✓ ineligible accessing account (1783ms)
       invalid-payment-details
-        ✓ ineligible Stripe account missing payment details (28230ms)
+        ✓ ineligible Stripe account missing payment details (37500ms)
       invalid-registration
-        ✓ ineligible Stripe account missing information (3971ms)
+        ✓ ineligible Stripe account missing information (4565ms)
       invalid-person
-        ✓ ineligible company person missing information (28423ms)
+        ✓ ineligible company person missing information (27221ms)
     returns
-      ✓ object (individual) (98035ms)
-      ✓ object (company) (129471ms)
+      ✓ object (individual) (98026ms)
+      ✓ object (company) (124961ms)
 
   /api/user/connect/stripe-account
     exceptions
@@ -900,9 +900,9 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1514ms)
+        ✓ ineligible accessing account (1445ms)
     returns
-      ✓ object (1946ms)
+      ✓ object (1932ms)
 
   /api/user/connect/stripe-accounts-count
     exceptions
@@ -910,9 +910,9 @@
         ✓ missing querystring payoutid
         ✓ invalid querystring payoutid
       invalid-account
-        ✓ ineligible accessing account (45ms)
+        ✓ ineligible accessing account
     returns
-      ✓ integer (4462ms)
+      ✓ integer (4096ms)
 
   /api/user/connect/stripe-accounts
     exceptions
@@ -920,7 +920,7 @@
         ✓ missing querystring accountid
         ✓ invalid querystring accountid
       invalid-account
-        ✓ ineligible accessing account (41ms)
+        ✓ ineligible accessing account (44ms)
     receives
       ✓ optional querystring offset (integer)
       ✓ optional querystring limit (integer)
@@ -936,7 +936,7 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1407ms)
+        ✓ ineligible accessing account (1504ms)
       invalid-account_holder_name
         ✓ missing posted account_holder_name
       invalid-account_holder_type
@@ -987,7 +987,7 @@
       ✓ optionally-required posted bank_code
       ✓ optionally-required posted routing_number
     returns
-      ✓ object (2914ms)
+      ✓ object (3052ms)
 
   /api/user/connect/update-person
     exceptions
@@ -995,13 +995,13 @@
         ✓ missing querystring personid
         ✓ invalid querystring personid
       invalid-account
-        ✓ ineligible accessing account (8360ms)
+        ✓ ineligible accessing account (7947ms)
       invalid-person
-        ✓ ineligible querystring person has no required information (115557ms)
+        ✓ ineligible querystring person has no required information (149091ms)
     returns
-      ✓ object (8724ms)
+      ✓ object (8765ms)
     configuration
-      ✓ environment STRIPE_JS (17242ms)
+      ✓ environment STRIPE_JS (18220ms)
 
   /api/user/connect/update-stripe-account
     exceptions
@@ -1009,7 +1009,7 @@
         ✓ missing querystring stripeid
         ✓ invalid querystring stripeid
       invalid-account
-        ✓ ineligible accessing account (1652ms)
+        ✓ ineligible accessing account (1580ms)
       invalid-business_profile_mcc
         ✓ missing posted business_profile_mcc (company)
       invalid-business_profile_url
@@ -1113,18 +1113,18 @@
       invalid-ssn_last_4
         ✓ missing posted ssn_last_4 (individual)
       invalid-token
-        ✓ missing posted token (1681ms)
-        ✓ invalid posted token (2761ms)
+        ✓ missing posted token (1702ms)
+        ✓ invalid posted token (4895ms)
     receives
-      ✓ optionally-required patched verification_document_front (4486ms)
-      ✓ optionally-required patched verification_document_back (5884ms)
-      ✓ optionally-required patched verification_additional_document_front (3583ms)
-      ✓ optionally-required patched verification_additional_document_back (4284ms)
+      ✓ optionally-required patched verification_document_front (4309ms)
+      ✓ optionally-required patched verification_document_back (4738ms)
+      ✓ optionally-required patched verification_additional_document_front (3688ms)
+      ✓ optionally-required patched verification_additional_document_back (4364ms)
     returns
-      ✓ object (company) (4014ms)
-      ✓ object (individual) (3528ms)
+      ✓ object (company) (3965ms)
+      ✓ object (individual) (3630ms)
     configuration
-      ✓ environment STRIPE_JS (13336ms)
+      ✓ environment STRIPE_JS (13063ms)
 
 
   713 passing (2h)
