@@ -19,7 +19,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.route.html, null, null, req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, null, null, req.language)
   if (req.data.payouts && req.data.payouts.length) {
     dashboard.HTML.renderTable(doc, req.data.payouts, 'payout-row', 'payouts-table')
     if (req.data.total <= global.PAGE_SIZE) {

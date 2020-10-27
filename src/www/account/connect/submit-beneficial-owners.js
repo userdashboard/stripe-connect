@@ -41,7 +41,7 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || req.error || (req.query ? req.query.message : null)
-  const doc = dashboard.HTML.parse(req.route.html, req.data.stripeAccount, 'stripeAccount', req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.stripeAccount, 'stripeAccount', req.language)
   navbar.setup(doc, req.data.stripeAccount)
   if (messageTemplate) {
     dashboard.HTML.renderTemplate(doc, null, messageTemplate, 'message-container')
