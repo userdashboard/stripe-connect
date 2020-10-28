@@ -1,4 +1,4 @@
-@userdashboard/dashboard 1.0.327
+@userdashboard/dashboard 1.0.340
 http://localhost:9000
 
 Administrator menu:
@@ -50,7 +50,6 @@ URL -------------------------------------------------- AUTH - TEMPLATE - HTTP RE
 /account/edit-profile                                                    GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/end-all-sessions                                                GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/end-session                                                     GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
-/account/language                                                        GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
 /account/profile                                                         GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/profiles                                                        GET             @userdashboard/dashboard         @userdashboard/dashboard    
 /account/register                                      GUEST  FULLSCREEN GET POST        @userdashboard/dashboard         @userdashboard/dashboard    
@@ -167,7 +166,6 @@ URL -------------------------------------------------- AUTH - TEMPLATE - HTTP RE
 /api/user/sessions                                                       GET             @userdashboard/dashboard                                     
 /api/user/sessions-count                                                 GET             @userdashboard/dashboard                                     
 /api/user/set-account-deleted                                            PATCH           @userdashboard/dashboard                                     
-/api/user/set-account-language                                           PATCH           @userdashboard/dashboard                                     
 /api/user/set-account-password                                           PATCH           @userdashboard/dashboard                                     
 /api/user/set-account-profile                                            PATCH           @userdashboard/dashboard                                     
 /api/user/set-account-username                                           PATCH           @userdashboard/dashboard                                     
