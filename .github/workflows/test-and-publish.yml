@@ -20,9 +20,9 @@ jobs:
     - name: Set up as module
       run: |
         HERE=`pwd`
-        npm version patch
         git config --global user.name "${{ secrets.NAME }}"
         git config --global user.email "${{ secrets.EMAIL }}"
+        npm version patch
         npm install
         npm install @userdashboard/dashboard --no-save
         mkdir /tmp/project
