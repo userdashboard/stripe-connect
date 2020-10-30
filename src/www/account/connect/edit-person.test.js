@@ -117,7 +117,7 @@ describe('/account/connect/edit-person', function () {
         req3.waitAfter = async (page) => {
           while (true) {
             const message = await page.evaluate(() => {
-              var container = document.getElementById('message-container')
+              const container = document.getElementById('message-container')
               return container.children.length
             })
             if (message > 0) {
@@ -198,7 +198,7 @@ describe('/account/connect/edit-person', function () {
       req2.waitAfter = async (page) => {
         while (true) {
           const message = await page.evaluate(() => {
-            var container = document.getElementById('message-container')
+            const container = document.getElementById('message-container')
             return container.children.length
           })
           if (message > 0) {

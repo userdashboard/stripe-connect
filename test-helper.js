@@ -18,8 +18,8 @@ if (process.env.NGROK) {
 } else if (process.env.LOCAL_TUNNEL) {
   localTunnel = require('localtunnel')
 }
-
 const packageJSON = require('./package.json')
+const path = require('path')
 const stripe = require('stripe')()
 stripe.setApiVersion(global.stripeAPIVersion)
 if (global.maxmimumStripeRetries) {
@@ -39,9 +39,9 @@ const wait = util.promisify((callback) => {
   return setTimeout(callback, 100)
 })
 
-let eventFolderPath = `${__dirname}/src/www/webhooks/connect/stripe-webhooks`
+let eventFolderPath = path.join(__dirname, '/src/www/webhooks/connect/stripe-webhooks')
 if (!fs.existsSync(eventFolderPath)) {
-  eventFolderPath = `${__dirname}/node_modules/@userdashboard/stripe-connect/src/www/webhooks/connect/stripe-webhooks`
+  eventFolderPath = path.join(__dirname, '/node_modules/@userdashboard/stripe-connect/src/www/webhooks/connect/stripe-webhooks')
 }
 const events = fs.readdirSync(eventFolderPath)
 const eventList = []
@@ -75,22 +75,22 @@ module.exports = {
   'success_id_scan_front.png': {
     filename: 'id_scan_front.png',
     name: 'id_scan_front.png',
-    path: `${__dirname}/test-documentid-success.png`
+    path: path.join(__dirname, '/test-documentid-success.png')
   },
   'fail_id_scan_front.png': {
     filename: 'id_scan_front.png',
     name: 'id_scan_front.png',
-    path: `${__dirname}/test-documentid-failed.png`
+    path: path.join(__dirname, '/test-documentid-failed.png')
   },
   'success_id_scan_back.png': {
     filename: 'id_scan_back.png',
     name: 'id_scan_back.png',
-    path: `${__dirname}/test-documentid-success.png`
+    path: path.join(__dirname, '/test-documentid-success.png')
   },
   'fail_id_scan_back.png': {
     filename: 'id_scan_back.png',
     name: 'id_scan_back.png',
-    path: `${__dirname}/test-documentid-failed.png`
+    path: path.join(__dirname, '/test-documentid-failed.png')
   }
 }
 
@@ -421,9 +421,9 @@ async function submitStripeAccount (user) {
       if (user.stripeAccount.requirements.pending_verification.length) {
         return wait()
       }
+      return user.stripeAccount
     } catch (error) {
     }
-    return user.account
   }
 }
 

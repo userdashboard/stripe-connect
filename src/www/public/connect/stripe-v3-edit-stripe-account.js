@@ -1,7 +1,7 @@
-var stripe
+let stripe
 window.onload = function () {
   stripe = window.Stripe(window.stripePublishableKey)
-  var submit = document.getElementById('submit-form')
+  const submit = document.getElementById('submit-form')
   submit.addEventListener('submit', updateStripeAccount)
   window.loaded = true
 }
@@ -12,117 +12,117 @@ function updateStripeAccount (e) {
   setTimeout(function () {
     e.target.disabled = false
   }, 1000)
-  var businessType = document.getElementById('company-container') ? 'company' : 'individual'
-  var accountData = {}
+  const businessType = document.getElementById('company-container') ? 'company' : 'individual'
+  const accountData = {}
   accountData[businessType] = {}
-  var firstName = document.getElementById('first_name')
+  const firstName = document.getElementById('first_name')
   if (firstName) {
     if (!firstName.value) {
       return window.renderError('invalid-first_name')
     }
     accountData[businessType].first_name = firstName.value
   }
-  var lastName = document.getElementById('last_name')
+  const lastName = document.getElementById('last_name')
   if (lastName) {
     if (!lastName.value) {
       return window.renderError('invalid-last_name')
     }
     accountData[businessType].last_name = lastName.value
   }
-  var firstNameKanji = document.getElementById('first_name_kanji')
+  const firstNameKanji = document.getElementById('first_name_kanji')
   if (firstNameKanji) {
     if (!firstNameKanji.value || !firstNameKanji.value.length) {
       return window.renderError('invalid-first_name_kanji')
     }
     accountData[businessType].first_name_kanji = firstNameKanji.value
   }
-  var lastNameKanji = document.getElementById('last_name_kanji')
+  const lastNameKanji = document.getElementById('last_name_kanji')
   if (lastNameKanji) {
     if (!lastNameKanji.value || !lastNameKanji.value.length) {
       return window.renderError('invalid-last_name_kanji')
     }
     accountData[businessType].last_name_kanji = lastNameKanji.value
   }
-  var firstNameKana = document.getElementById('first_name_kana')
+  const firstNameKana = document.getElementById('first_name_kana')
   if (firstNameKana) {
     if (!firstNameKana.value || !firstNameKana.value.length) {
       return window.renderError('invalid-first_name_kana')
     }
     accountData[businessType].first_name_kana = firstNameKana.value
   }
-  var lastNameKana = document.getElementById('last_name_kana')
+  const lastNameKana = document.getElementById('last_name_kana')
   if (lastNameKana) {
     if (!lastNameKana.value || !lastNameKana.value.length) {
       return window.renderError('invalid-last_name_kana')
     }
     accountData[businessType].last_name_kana = lastNameKana.value
   }
-  var companyName = document.getElementById('name')
+  const companyName = document.getElementById('name')
   if (companyName) {
     if (!companyName.value) {
       return window.renderError('invalid-name')
     }
     accountData[businessType].name = companyName.value
   }
-  var companyNameKana = document.getElementById('name_kana')
+  const companyNameKana = document.getElementById('name_kana')
   if (companyNameKana) {
     if (!companyNameKana.value) {
       return window.renderError('invalid-name_kana')
     }
     accountData[businessType].name_kana = companyNameKana.value
   }
-  var companyNameKanji = document.getElementById('name_kanji')
+  const companyNameKanji = document.getElementById('name_kanji')
   if (companyNameKanji) {
     if (!companyNameKanji.value) {
       return window.renderError('invalid-name_kanji')
     }
     accountData[businessType].name_kanji = companyNameKanji.value
   }
-  var companyTaxID = document.getElementById('tax_id')
+  const companyTaxID = document.getElementById('tax_id')
   if (companyTaxID) {
     if (!companyTaxID.value) {
       return window.renderError('invalid-tax_id')
     }
     accountData[businessType].tax_id = companyTaxID.value
   }
-  var email = document.getElementById('email')
+  const email = document.getElementById('email')
   if (email) {
     if (!email.value || !email.value.length) {
       return window.renderError('invalid-email')
     }
     accountData[businessType].email = email.value
   }
-  var phone = document.getElementById('phone')
+  const phone = document.getElementById('phone')
   if (phone) {
     if (!phone.value || !phone.value.length) {
       return window.renderError('invalid-phone')
     }
     accountData[businessType].phone = phone.value
   }
-  var ssnLast4 = document.getElementById('ssn_last_4')
+  const ssnLast4 = document.getElementById('ssn_last_4')
   if (ssnLast4) {
     if (!ssnLast4.value || !ssnLast4.value.length) {
       return window.renderError('invalid-ssn_last_4')
     }
     accountData[businessType].ssn_last_4 = ssnLast4.value
   }
-  var gender = document.getElementById('gender-container')
+  const gender = document.getElementById('gender-container')
   if (gender) {
-    var female = document.getElementById('female')
-    var male = document.getElementById('male')
+    const female = document.getElementById('female')
+    const male = document.getElementById('male')
     if (!female.checked && !male.checked) {
       return window.renderError('invalid-gender')
     }
     accountData[businessType].gender = female.checked ? 'female' : 'male'
   }
-  var idNumber = document.getElementById('id_number')
+  const idNumber = document.getElementById('id_number')
   if (idNumber) {
     if (!idNumber.value || !idNumber.value.length) {
       return window.renderError('invalid-id_number')
     }
     accountData.id_number = idNumber.value
   }
-  var dobDay = document.getElementById('dob_day')
+  const dobDay = document.getElementById('dob_day')
   if (dobDay) {
     accountData[businessType].dob = {
       day: dobDay.value,
@@ -144,19 +144,19 @@ function updateStripeAccount (e) {
       return window.renderError('invalid-dob_day')
     }
   }
-  var businessProfileURL = document.getElementById('business_profile_url')
+  const businessProfileURL = document.getElementById('business_profile_url')
   if (businessProfileURL) {
     if (!businessProfileURL.value) {
       return window.renderError('invalid-business_profile_url')
     }
   }
-  var businessProfileMCC = document.getElementById('business_profile_mcc')
+  const businessProfileMCC = document.getElementById('business_profile_mcc')
   if (businessProfileMCC) {
     if (businessProfileMCC.selectedIndex < 1) {
       return window.renderError('invalid-business_profile_mcc')
     }
   }
-  var fields, i, len, property, element
+  let fields, i, len, property, element
   if (document.getElementById('address-container')) {
     accountData[businessType].address = {}
     fields = ['address_line1', 'address_city', 'address_state', 'address_country', 'address_postal_code']
@@ -170,7 +170,7 @@ function updateStripeAccount (e) {
         accountData[businessType].address[property] = element.value
       }
     }
-    var addressLine2 = document.getElementById('address_line2')
+    const addressLine2 = document.getElementById('address_line2')
     if (addressLine2 && addressLine2.value) {
       accountData[businessType].address.line2 = addressLine2.value
     }
@@ -203,8 +203,8 @@ function updateStripeAccount (e) {
       }
     }
   }
-  var documentFront = document.getElementById('verification_document_front')
-  var documentBack = document.getElementById('verification_document_back')
+  const documentFront = document.getElementById('verification_document_front')
+  const documentBack = document.getElementById('verification_document_back')
   return window.uploadDocumentFiles(documentFront, documentBack, function (error, front, back) {
     if (error) {
       return window.renderError(error.message)
@@ -225,8 +225,8 @@ function updateStripeAccount (e) {
     } else if (documentBack) {
       return window.renderError('invalid-verification_document_back')
     }
-    var additionalDocumentFront = document.getElementById('verification_additional_document_front')
-    var additionalDocumentBack = document.getElementById('verification_additional_document_back')
+    const additionalDocumentFront = document.getElementById('verification_additional_document_front')
+    const additionalDocumentBack = document.getElementById('verification_additional_document_back')
     return window.uploadDocumentFiles(additionalDocumentFront, additionalDocumentBack, function (error, front, back) {
       if (error) {
         return window.renderError(error.message)
@@ -247,16 +247,16 @@ function updateStripeAccount (e) {
         return window.renderError('invalid-verification_additional_document_back')
       }
       if (!Object.keys(accountData[businessType]).length) {
-        var form = document.getElementById('submit-form')
+        const form = document.getElementById('submit-form')
         return form.submit()
       }
       return stripe.createToken('account', accountData).then(function (result) {
         if (!result || result.error) {
           return window.renderError(result.error)
         }
-        var token = document.getElementById('token')
+        const token = document.getElementById('token')
         token.value = result.token.id
-        var form = document.getElementById('submit-form')
+        const form = document.getElementById('submit-form')
         return form.submit()
       })
     })

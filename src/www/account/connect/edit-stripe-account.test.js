@@ -80,7 +80,7 @@ describe('/account/connect/edit-stripe-account', function () {
         req3.waitAfter = async (page) => {
           while (true) {
             const message = await page.evaluate(() => {
-              var container = document.getElementById('message-container')
+              const container = document.getElementById('message-container')
               return container && container.children.length
             })
             if (message > 0) {
@@ -145,7 +145,7 @@ describe('/account/connect/edit-stripe-account', function () {
           while (true) {
             try {
               const message = await page.evaluate(() => {
-                var container = document.getElementById('message-container')
+                const container = document.getElementById('message-container')
                 return container ? container.children.length : 0
               })
               if (message > 0) {
@@ -380,7 +380,7 @@ describe('/account/connect/edit-stripe-account', function () {
                 const frame = await page.frames().find(f => f.name() === 'application-iframe')
                 if (frame) {
                   const loaded = await frame.evaluate(() => {
-                    var accountTable = document.getElementById('stripe-accounts-table')
+                    const accountTable = document.getElementById('stripe-accounts-table')
                     return accountTable && accountTable.children.length
                   })
                   if (loaded) {

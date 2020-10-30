@@ -155,7 +155,7 @@ describe('/account/connect/submit-beneficial-owners', function () {
                 const frame = await page.frames().find(f => f.name() === 'application-iframe')
                 if (frame) {
                   const loaded = await frame.evaluate(() => {
-                    var accountTable = document.getElementById('stripe-accounts-table')
+                    const accountTable = document.getElementById('stripe-accounts-table')
                     return accountTable && accountTable.children.length
                   })
                   if (loaded) {
