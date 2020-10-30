@@ -8,7 +8,7 @@ module.exports = {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  const doc = dashboard.HML.parse(req.html || req.route.html)
+  const doc = dashboard.HTML.parse(req.html || req.route.html)
   if (!messageTemplate && req.method === 'GET' && req.query && req.query['return-url']) {
     const submitForm = doc.getElementById('submit-form')
     const divider = submitForm.attr.action.indexOf('?') > -1 ? '&' : '?'
