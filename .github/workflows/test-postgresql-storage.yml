@@ -1,9 +1,9 @@
-name: test-redis-cache
+name: test-postgresql-storage
 
 on: [push]
 
 jobs:
-  test-redis-cache:
+  test-postgresql-storage:
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -30,10 +30,6 @@ jobs:
           npm install standard -g
         fi        
         standard
-    - uses: zhulik/redis-action@1.1.0
-      with:
-        redis version: 5
-        number of databases: 1
     - name: Optionally install Chromium via APT instead of puppeteer
       run: |
         if [ ! -z "$PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" ]; then
@@ -54,24 +50,22 @@ jobs:
           alias npm=`find /opt/hostedtoolcache/node/ -maxdepth 4 -name npm`
         fi
         npm init -y
-        npm install "$HERE" @userdashboard/dashboard @userdashboard/storage-cache-redis @userdashboard/storage-postgresql ngrok faker puppeteer mocha
+        npm install "$HERE" @userdashboard/dashboard @userdashboard/storage-postgresql ngrok faker puppeteer mocha
         echo "global.applicationPath = __dirname" > main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
-    - name: Test Redis cache with encrypted data
+    - name: Test encrypted PostgreSQL storage
       run: ./node_modules/.bin/mocha --file main.js --bail --exit --recursive --timeout 90000000 $(find ./node_modules/@userdashboard/*/ -name "*.test.js" | grep -i -v [a-z0-9]/node_modules | sort -k5.1,8.1 -t /)
       working-directory: /tmp/project
       env:
         NODE_ENV: testing
         STORAGE: "@userdashboard/storage-postgresql"
         DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-        CACHE: "@userdashboard/storage-cache-redis"
-        CACHE_REDIS_URL: redis://localhost:6379
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_7 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
-        STRIPE_JS: false
         TEST_SUITE_REUSABLE_WEBHOOK: true
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_6 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_6 }}
+        STRIPE_JS: false
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
         NGROK: true
         ENCRYPTION_SECRET: abc45678901234567890123456789012

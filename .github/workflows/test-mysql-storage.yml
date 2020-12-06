@@ -1,22 +1,19 @@
-name: test-redis-cache
+name: test-mysql-storage
 
 on: [push]
 
 jobs:
-  test-redis-cache:
+  test-mysql-storage:
     runs-on: ubuntu-latest
     services:
-      postgres:
-        image: postgres
+      mysql:
+        image: mysql:8.0
         env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: dashboard
         ports:
-          - 5432:5432
+            - '8888:3306'
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
@@ -30,10 +27,6 @@ jobs:
           npm install standard -g
         fi        
         standard
-    - uses: zhulik/redis-action@1.1.0
-      with:
-        redis version: 5
-        number of databases: 1
     - name: Optionally install Chromium via APT instead of puppeteer
       run: |
         if [ ! -z "$PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" ]; then
@@ -54,22 +47,20 @@ jobs:
           alias npm=`find /opt/hostedtoolcache/node/ -maxdepth 4 -name npm`
         fi
         npm init -y
-        npm install "$HERE" @userdashboard/dashboard @userdashboard/storage-cache-redis @userdashboard/storage-postgresql ngrok faker puppeteer mocha
+        npm install "$HERE" @userdashboard/dashboard @userdashboard/storage-mysql ngrok faker puppeteer mocha
         echo "global.applicationPath = __dirname" > main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
-    - name: Test Redis cache with encrypted data
+    - name: Test encrypted MySQL storage
       run: ./node_modules/.bin/mocha --file main.js --bail --exit --recursive --timeout 90000000 $(find ./node_modules/@userdashboard/*/ -name "*.test.js" | grep -i -v [a-z0-9]/node_modules | sort -k5.1,8.1 -t /)
       working-directory: /tmp/project
       env:
         NODE_ENV: testing
-        STORAGE: "@userdashboard/storage-postgresql"
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-        CACHE: "@userdashboard/storage-cache-redis"
-        CACHE_REDIS_URL: redis://localhost:6379
-        STRIPE_KEY: ${{ secrets.STRIPE_KEY_7 }}
-        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_7 }}
+        STORAGE: "@userdashboard/storage-mysql"
+        DATABASE_URL: "mysql://root:password@127.0.0.1:8888/dashboard"
+        STRIPE_KEY: ${{ secrets.STRIPE_KEY_4 }}
+        STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_4 }}
         STRIPE_JS: false
         TEST_SUITE_REUSABLE_WEBHOOK: true
         CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
