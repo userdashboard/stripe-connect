@@ -1,4 +1,6 @@
 node_modules
 data
 documentation
+package-lock.json
+npm-shrinkwrap.json
 .env
