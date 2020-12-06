@@ -1,23 +1,4 @@
 {
-  "name": "@userdashboard/stripe-connect",
-  "version": "1.0.101",
-  "scripts": {
-    "test": "mocha --retries 2 --exit --inline-diffs --full-trace --async-only --recursive --timeout 240000 --slow 240000 './{,!(public|node_modules)/**}/*.test.js'"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/userdashboard/stripe-connect.git"
-  },
-  "license": "MIT",
-  "main": "index.js",
-  "dependencies": {
-    "@userdashboard/maxmind-geoip": "^1.0.58",
-    "stripe": "^7.15.0"
-  },
-  "engines": {
-    "node": "12.18.4",
-    "npm": "6.14.6"
-  },
   "dashboard": {
     "title": "Stripe Connect module",
     "modules": [
@@ -26,5 +7,25 @@
     "server": [
       "/src/server/bind-stripekey.js"
     ]
-  }
+  },
+  "dependencies": {
+    "@userdashboard/dashboard": ">=1",
+    "@userdashboard/maxmind-geoip": ">=1",
+    "stripe": "^8.127.0"
+  },
+  "engines": {
+    "node": ">=14",
+    "npm": ">=6"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "@userdashboard/stripe-connect",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/userdashboard/stripe-connect.git"
+  },
+  "scripts": {
+    "test": "act -j test-fs-storage"
+  },
+  "version": "1.0.101"
 }
