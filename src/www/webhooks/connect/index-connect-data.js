@@ -1,5 +1,5 @@
 const fs = require('fs')
-const packageJSON = require('./package.json')
+const packageJSON = require('../../../../package.json')
 const path = require('path')
 const stripe = require('stripe')({
   apiVersion: global.stripeAPIVersion,
