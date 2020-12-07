@@ -17,14 +17,6 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: Lint JavaScript source with standard.js
-      run: |
-        if [ ! -z "$NPM_PROXY" ]; then
-          npm --registry=$NPM_PROXY install standard -g
-        else
-          npm install standard -g
-        fi        
-        standard
     - name: Optionally install Chromium via APT instead of puppeteer
       run: |
         if [ ! -z "$PUPPETEER_SKIP_CHROMIUM_DOWNLOAD" ]; then
@@ -67,7 +59,7 @@ jobs:
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_9 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_9 }}
         STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: replaced-at-runtime
         NGROK: true
         TEST_SUITE_REUSABLE_WEBHOOK: true
         ENCRYPTION_SECRET: abc45678901234567890123456789012

@@ -79,7 +79,7 @@ jobs:
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_1 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_1 }}
         STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: replaced-at-runtime
         NGROK: true
         TEST_SUITE_REUSABLE_WEBHOOK: true
         GENERATE_RESPONSE: true
@@ -96,7 +96,7 @@ jobs:
         STRIPE_KEY: ${{ secrets.STRIPE_KEY_1 }}
         STRIPE_PUBLISHABLE_KEY: ${{ secrets.STRIPE_PUBLISHABLE_KEY_1 }}
         STRIPE_JS: false
-        CONNECT_WEBHOOK_ENDPOINT_SECRET: "replaced-at-runtime"
+        CONNECT_WEBHOOK_ENDPOINT_SECRET: replaced-at-runtime
         NGROK: true
         TEST_SUITE_REUSABLE_WEBHOOK: true
     - name: Publish to Github
