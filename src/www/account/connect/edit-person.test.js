@@ -111,7 +111,7 @@ describe('/account/connect/edit-person', function () {
             if (loaded) {
               break
             }
-            await page.waitFor(100)
+            await page.waitForTimeout(100)
           }
         }
         req3.waitAfter = async (page) => {
@@ -123,7 +123,7 @@ describe('/account/connect/edit-person', function () {
             if (message > 0) {
               return
             }
-            await page.waitFor(100)
+            await page.waitForTimeout(100)
           }
         }
         req3.uploads = {
@@ -192,7 +192,7 @@ describe('/account/connect/edit-person', function () {
           if (loaded) {
             break
           }
-          await page.waitFor(100)
+          await page.waitForTimeout(100)
         }
       }
       req2.waitAfter = async (page) => {
@@ -204,7 +204,7 @@ describe('/account/connect/edit-person', function () {
           if (message > 0) {
             return
           }
-          await page.waitFor(100)
+          await page.waitForTimeout(100)
         }
       }
       req2.account = user.account
@@ -340,7 +340,7 @@ describe('/account/connect/edit-person', function () {
           if (loaded) {
             break
           }
-          await page.waitFor(100)
+          await page.waitForTimeout(100)
         }
       }
       req.waitAfter = async (page) => {
@@ -352,7 +352,7 @@ describe('/account/connect/edit-person', function () {
             }
           } catch (error) {
           }
-          await page.waitFor(100)
+          await page.waitForTimeout(100)
         }
       }
       global.stripeJS = 3

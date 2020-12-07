@@ -74,7 +74,7 @@ describe('/account/connect/edit-stripe-account', function () {
             if (loaded) {
               break
             }
-            await page.waitFor(100)
+            await page.waitForTimeout(100)
           }
         }
         req3.waitAfter = async (page) => {
@@ -86,7 +86,7 @@ describe('/account/connect/edit-stripe-account', function () {
             if (message > 0) {
               return
             }
-            await page.waitFor(100)
+            await page.waitForTimeout(100)
           }
         }
         req3.uploads = {
@@ -138,7 +138,7 @@ describe('/account/connect/edit-stripe-account', function () {
             if (loaded) {
               break
             }
-            await page.waitFor(100)
+            await page.waitForTimeout(100)
           }
         }
         req4.waitAfter = async (page) => {
@@ -153,7 +153,7 @@ describe('/account/connect/edit-stripe-account', function () {
               }
             } catch (error) {
             }
-            await page.waitFor(100)
+            await page.waitForTimeout(100)
           }
         }
         global.stripeJS = 3
@@ -203,7 +203,7 @@ describe('/account/connect/edit-stripe-account', function () {
     //       if (loaded) {
     //         break
     //       }
-    //       await page.waitFor(100)
+    //       await page.waitForTimeout(100)
     //     }
     //   }
     //   req2.waitAfter = async (page) => {
@@ -215,7 +215,7 @@ describe('/account/connect/edit-stripe-account', function () {
     //       if (message > 0) {
     //         return
     //       }
-    //       await page.waitFor(100)
+    //       await page.waitForTimeout(100)
     //     }
     //   }
     //   req2.account = user.account
@@ -389,7 +389,7 @@ describe('/account/connect/edit-stripe-account', function () {
                 }
               } catch (error) {
               }
-              await page.waitFor(100)
+              await page.waitForTimeout(100)
             }
           }
         }
@@ -444,7 +444,7 @@ describe('/account/connect/edit-stripe-account', function () {
             }
           } catch (error) {
           }
-          await page.waitFor(100)
+          await page.waitForTimeout(100)
         }
       }
       req.body = TestStripeAccounts.createPostData(TestStripeAccounts.companyData[country.id])

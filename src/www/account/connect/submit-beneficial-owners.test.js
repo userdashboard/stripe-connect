@@ -164,7 +164,7 @@ describe('/account/connect/submit-beneficial-owners', function () {
                 }
               } catch (error) {
               }
-              await page.waitFor(100)
+              await page.waitForTimeout(100)
             }
           }
         }
