@@ -29,8 +29,16 @@ jobs:
           alias node=`find /opt/hostedtoolcache/node/ -maxdepth 4 -name node`
           alias npm=`find /opt/hostedtoolcache/node/ -maxdepth 4 -name npm`
         fi
+        FORWARDER=""
+        if [ ! -z "$NGROK" ]; then
+          FORWARDER="ngrok"
+        elif [ ! -z "$PUBLIC_IP" ]; then
+          FORWARDER="public-ip"
+        elif [ ! -z "$LOCALTUNNEL" ]; then
+          FORWARDER="localtunnel"
+        fi
         npm init -y
-        npm install "$HERE" @userdashboard/dashboard ngrok faker puppeteer mocha
+        npm install "$HERE" @userdashboard/dashboard faker puppeteer mocha $FORWARDER
         echo "global.applicationPath = __dirname" > main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
