@@ -21,7 +21,7 @@ module.exports = {
     }
     const accountKey = {
       apiKey: req.stripeKey.apiKey,
-      stripe_account: stripeid
+      stripeAccount: stripeid
     }
     const person = await stripeCache.retrievePerson(stripeid, req.query.personid, accountKey)
     if (!person) {

@@ -715,7 +715,7 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
 async function triggerVerification (user) {
   const accountKey = {
     apiKey: stripeKey.apiKey,
-    stripe_account: user.stripeAccount.id
+    stripeAccount: user.stripeAccount.id
   }
   const chargeInfo = {
     amount: 2000,
