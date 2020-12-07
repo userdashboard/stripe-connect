@@ -14,16 +14,15 @@ if (!global.stripeKey) {
   throw new Error('invalid-stripe-key')
 }
 const packageJSON = require('./package.json')
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
-stripe.setAppInfo({
-  version: packageJSON.version,
-  name: '@userdashboard/stripe-connect',
-  url: 'https://github.com/userdashboard/stripe-connect'
+require('stripe')({
+  apiVersion: global.stripeAPIVersion,
+  telemetry: false,
+  maxNetworkRetries: global.maximumStripeRetries || 0,
+  appInfo: {
+    version: packageJSON.version,
+    name: '@userdashboard/stripe-connect',
+    url: 'https://github.com/userdashboard/stripe-connect'
+  }
 })
 const countryList = require('./countries.json')
 const countryNameIndex = {}

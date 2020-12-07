@@ -20,7 +20,7 @@ module.exports = {
       throw new Error('invalid-payoutid')
     }
     const accountKey = {
-      api_key: req.stripeKey.api_key,
+      apiKey: req.stripeKey.apiKey,
       stripe_account: stripeid
     }
     const payout = await stripeCache.retrieve(req.query.payoutid, 'payouts', accountKey)

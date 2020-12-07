@@ -5,13 +5,15 @@
       "@userdashboard/maxmind-geoip"
     ],
     "server": [
-      "/src/server/bind-stripekey.js"
+      "/src/server/stripe-connect/bind-stripekey.js"
     ]
   },
   "dependencies": {
-    "@userdashboard/dashboard": ">=1",
-    "@userdashboard/maxmind-geoip": ">=1",
+    "@userdashboard/maxmind-geoip": "latest",
     "stripe": "^8.127.0"
+  },
+  "peerDependencies": {
+    "@userdashboard/dashboard": "1.0.0 - 9999.9999.9999"
   },
   "engines": {
     "node": ">=14",

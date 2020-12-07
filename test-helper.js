@@ -15,24 +15,23 @@ if (process.env.NGROK) {
   ngrok = require('ngrok')
 } else if (process.env.PUBLIC_IP) {
   publicIP = require('public-ip')
-} else if (process.env.LOCAL_TUNNEL) {
+} else if (process.env.LOCALTUNNEL) {
   localTunnel = require('localtunnel')
 }
 const packageJSON = require('./package.json')
 const path = require('path')
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
-stripe.setAppInfo({
-  version: packageJSON.version,
-  name: '@userdashboard/stripe-connect (test suite)',
-  url: 'https://github.com/userdashboard/stripe-connect'
+const stripe = require('stripe')({
+  apiVersion: global.stripeAPIVersion,
+  telemetry: false,
+  maxNetworkRetries: global.maximumStripeRetries || 0,
+  appInfo: {
+    version: packageJSON.version,
+    name: '@userdashboard/stripe-connect (test suite)',
+    url: 'https://github.com/userdashboard/stripe-connect'
+  }
 })
 const stripeKey = {
-  api_key: process.env.STRIPE_KEY
+  apiKey: process.env.STRIPE_KEY
 }
 
 const wait = util.promisify((callback) => {
@@ -148,7 +147,7 @@ async function setupWebhook () {
   } else if (process.env.PUBLIC_IP) {
     const ip = await publicIP.v4()
     newAddress = `http://${ip}:${global.port}`
-  } else if (process.env.LOCAL_TUNNEL) {
+  } else if (process.env.LOCALTUNNEL) {
     if (tunnel) {
       tunnel.close()
     }
@@ -193,7 +192,7 @@ after(async () => {
     if (ngrok) {
       ngrok.kill()
     }
-  } else if (process.env.LOCAL_TUNNEL) {
+  } else if (process.env.LOCALTUNNEL) {
     if (tunnel) {
       tunnel.close()
     }
@@ -715,7 +714,7 @@ async function waitForPersonRequirement (user, personid, requirement, callback) 
 
 async function triggerVerification (user) {
   const accountKey = {
-    api_key: stripeKey.api_key,
+    apiKey: stripeKey.apiKey,
     stripe_account: user.stripeAccount.id
   }
   const chargeInfo = {

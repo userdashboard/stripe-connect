@@ -1,11 +1,16 @@
 const fs = require('fs')
+const packageJSON = require('./package.json')
 const path = require('path')
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
+const stripe = require('stripe')({
+  apiVersion: global.stripeAPIVersion,
+  telemetry: false,
+  maxNetworkRetries: global.maximumStripeRetries || 0,
+  appInfo: {
+    version: packageJSON.version,
+    name: '@userdashboard/stripe-connect',
+    url: 'https://github.com/userdashboard/stripe-connect'
+  }
+})
 const Log = require('@userdashboard/dashboard/src/log.js')('stripe-connect')
 const stripeCache = require('../../../stripe-cache.js')
 const webhookPath = path.join(__dirname, '.')

@@ -1,9 +1,9 @@
 /* eslint-env mocha */
 const assert = require('assert')
 const BindStripeKey = require('./bind-stripekey.js')
-const TestHelper = require('../../test-helper.js')
+const TestHelper = require('../../../test-helper.js')
 
-describe('server/bind-stripekey', () => {
+describe('server/stripe-connect/bind-stripekey', () => {
   describe('after', () => {
     it('should bind data to req', async () => {
       const user = await TestHelper.createUser()
@@ -12,8 +12,8 @@ describe('server/bind-stripekey', () => {
       req.account = user.account
       req.session = user.session
       await BindStripeKey.after(req)
-      assert.notStrictEqual(req.stripeKey.api_key, undefined)
-      assert.notStrictEqual(req.stripeKey.api_key, null)
+      assert.notStrictEqual(req.stripeKey.apiKey, undefined)
+      assert.notStrictEqual(req.stripeKey.apiKey, null)
     })
   })
 })

@@ -1,11 +1,16 @@
 const connect = require('../index.js')
 const Log = require('@userdashboard/dashboard/src/log.js')('stripe-connect')
-const stripe = require('stripe')()
-stripe.setApiVersion(global.stripeAPIVersion)
-if (global.maxmimumStripeRetries) {
-  stripe.setMaxNetworkRetries(global.maximumStripeRetries)
-}
-stripe.setTelemetryEnabled(false)
+const packageJSON = require('../package.json')
+const stripe = require('stripe')({
+  apiVersion: global.stripeAPIVersion,
+  telemetry: false,
+  maxNetworkRetries: global.maximumStripeRetries || 0,
+  appInfo: {
+    version: packageJSON.version,
+    name: '@userdashboard/stripe-connect',
+    url: 'https://github.com/userdashboard/stripe-connect'
+  }
+})
 const util = require('util')
 
 function retriableError (error) {

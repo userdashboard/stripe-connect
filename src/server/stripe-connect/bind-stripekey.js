@@ -4,6 +4,6 @@ module.exports = {
 
 async function bindStripeKey (req) {
   req.stripeKey = req.stripeKey || {
-    api_key: process.env.STRIPE_KEY
+    apiKey: process.env.STRIPE_KEY
   }
 }

@@ -20,7 +20,7 @@ module.exports = {
       throw new Error('invalid-stripeid')
     }
     const accountKey = {
-      api_key: req.stripeKey.api_key,
+      apiKey: req.stripeKey.apiKey,
       stripe_account: stripeid
     }
     const person = await stripeCache.retrievePerson(stripeid, req.query.personid, accountKey)
