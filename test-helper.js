@@ -40,7 +40,7 @@ const wait = util.promisify((callback) => {
 
 let eventFolderPath = path.join(__dirname, '/src/www/webhooks/connect/stripe-webhooks')
 if (!fs.existsSync(eventFolderPath)) {
-  eventFolderPath = path.join(__dirname, '/node_modules/@userdashboard/stripe-connect/src/www/webhooks/connect/stripe-webhooks')
+  eventFolderPath = require.resolve('@userdashboard/stripe-connect/src/www/webhooks/connect/stripe-webhooks')
 }
 const events = fs.readdirSync(eventFolderPath)
 const eventList = []
