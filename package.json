@@ -15,11 +15,7 @@
   "peerDependencies": {
     "@userdashboard/dashboard": "1.x - latest"
   },
-  "devDependencies": {
-    "@userdashboard/dashboard": "1.x - latest"
-  },
   "optionalDependencies": {
-    "@userdashboard/dashboard": "1.x - latest",
     "ngrok": "latest",
     "public-ip": "latest",
     "localtunnel": "latest"
