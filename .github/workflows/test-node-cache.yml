@@ -52,6 +52,7 @@ jobs:
         npm init -y
         npm install "$HERE" @userdashboard/dashboard @userdashboard/maxmind-geoip @userdashboard/storage-postgresql faker puppeteer mocha $FORWARDER
         echo "global.applicationPath = __dirname" > main.js
+        echo "require('@userdashboard/stripe-connect/test-helper.js')" >> main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
         echo $PACKAGE > package.json
@@ -72,4 +73,3 @@ jobs:
         ENCRYPTION_SECRET: abc45678901234567890123456789012
         ENCRYPTION_SECRET_IV: abc4123412341234
         NODE_OPTIONS: --preserve-symlinks
-        LOG_LEVEL: "info,error,warn,log"
