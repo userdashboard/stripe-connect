@@ -71,3 +71,4 @@ jobs:
         ENCRYPTION_SECRET: abc45678901234567890123456789012
         ENCRYPTION_SECRET_IV: abc4123412341234
         NODE_OPTIONS: --preserve-symlinks
+        LOG_LEVEL: "info,error,warn,log"
