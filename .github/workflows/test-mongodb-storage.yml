@@ -41,7 +41,7 @@ jobs:
           FORWARDER="localtunnel"
         fi
         npm init -y
-        npm install "$HERE" @userdashboard/dashboard @userdashboard/storage-mongodb faker puppeteer mocha $FORWARDER
+        npm install "$HERE" @userdashboard/dashboard @userdashboard/maxmind-geoip @userdashboard/storage-mongodb faker puppeteer mocha $FORWARDER
         echo "global.applicationPath = __dirname" > main.js
         PACKAGE=`cat package.json`
         PACKAGE=${PACKAGE/\"description\"\: \"\"/\"dashboard\": \{ \"modules\"\: \[\"@userdashboard/stripe-connect\"\] \}}
