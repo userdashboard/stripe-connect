@@ -9,7 +9,7 @@
     ]
   },
   "dependencies": {
-    "@userdashboard/maxmind-geoip": "latest",
+    "@userdashboard/maxmind-geoip": "1.x - latest",
     "stripe": "^8.127.0"
   },
   "peerDependencies": {
