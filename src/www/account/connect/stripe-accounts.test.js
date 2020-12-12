@@ -4,7 +4,6 @@ const TestHelper = require('../../../../test-helper.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/account/connect/stripe-accounts', function () {
-  this.timeout(30 * 60 * 1000)
   const cachedResponses = {}
   const cachedStripeAccounts = []
   before(async () => {

@@ -4,7 +4,6 @@ const TestHelper = require('../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 
 describe('/account/connect/delete-person', function () {
-  this.timeout(10 * 60 * 1000)
   describe('exceptions', () => {
     it('should reject invalid personid', async () => {
       const user = await TestHelper.createUser()

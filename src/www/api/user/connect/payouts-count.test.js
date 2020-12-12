@@ -4,7 +4,6 @@ const TestHelper = require('../../../../../test-helper.js')
 const TestStripeAccounts = require('../../../../../test-stripe-accounts.js')
 
 describe('/api/user/connect/payouts-count', function () {
-  this.timeout(60 * 60 * 1000)
   after(TestHelper.deleteOldWebhooks)
   before(TestHelper.setupWebhook)
   describe('exceptions', () => {

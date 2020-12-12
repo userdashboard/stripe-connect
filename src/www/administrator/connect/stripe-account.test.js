@@ -3,7 +3,6 @@ const assert = require('assert')
 const TestHelper = require('../../../../test-helper.js')
 
 describe('/administrator/connect/stripe-account', function () {
-  this.timeout(10 * 60 * 1000)
   describe('before', () => {
     it('should reject invalid stripeid', async () => {
       const administrator = await TestHelper.createOwner()

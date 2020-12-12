@@ -12,8 +12,7 @@ describe('/api/user/connect/update-person', function () {
   // the Stripe account.requirements or person.requirements
 
   // Note:  this test requires about a half-hour
-  // this.timeout(30 * 60 * 1000)
-  // const updateResponses = {}
+  //   // const updateResponses = {}
   // const fields = [
   //   'address_city',
   //   'address_line1',
