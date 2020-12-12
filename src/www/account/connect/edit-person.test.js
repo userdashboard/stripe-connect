@@ -6,7 +6,7 @@ const TestStripeAccounts = require('../../../../test-stripe-accounts.js')
 const DashboardTestHelper = require('@userdashboard/dashboard/test-helper.js')
 
 describe('/account/connect/edit-person', function () {
-  this.timeout(40 * 60 * 1000)
+  this.timeout(60 * 60 * 1000)
   const fields = [
     'address_city',
     'address_line1',
