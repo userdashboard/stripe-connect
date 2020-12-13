@@ -14,7 +14,7 @@ module.exports = {
         if (!stripeAccount.payouts_enabled) {
           throw new Error('invalid-stripe-account')
         }
-        req.stripeKey.stripe_account = req.query.stripeid
+        req.stripeKey.stripeAccount = req.query.stripeid
         const chargeInfo = {
           amount: 2500,
           currency: stripeAccount.default_currency,
