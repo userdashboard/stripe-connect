@@ -57,10 +57,10 @@ describe('/api/administrator/connect/stripe-accounts', function () {
   describe('exceptions', () => {
     describe('invalid-accountid', () => {
       it('invalid querystring accountid', async () => {
-        const user = await TestHelper.createUser()
+        const administrator = await TestHelper.createOwner()
         const req = TestHelper.createRequest('/api/administrator/connect/stripe-accounts?accountid=invalid')
-        req.account = user.account
-        req.session = user.session
+        req.account = administrator.account
+        req.session = administrator.session
         let errorMessage
         try {
           await req.get()
