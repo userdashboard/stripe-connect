@@ -80,7 +80,7 @@ jobs:
         TESTS=`cat $HERE/tests.txt`
         if [[ "$TESTS" == *" 1)"* ]]; then
           exit 1
-        fi'
+        fi
       env:
         NODE_ENV: testing
         STORAGE: "@userdashboard/storage-redis"
