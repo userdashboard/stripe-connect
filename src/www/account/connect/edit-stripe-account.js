@@ -26,6 +26,8 @@ async function renderPage (req, res, messageTemplate) {
   if (global.stripeJS !== 3) {
     removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')
   } else {
+    const stripePublishableKey = doc.getElementById('stripe-publishable-key')
+    stripePublishableKey.setAttribute('value', global.stripePublishableKey)
     res.setHeader('content-security-policy',
       'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/v1/files https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +

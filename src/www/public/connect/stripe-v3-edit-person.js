@@ -1,6 +1,7 @@
 let stripe
 window.onload = function () {
-  stripe = window.Stripe(window.stripePublishableKey)
+  const stripePublishableKey = document.getElementById('stripe-publishable-key')
+  stripe = window.Stripe(stripePublishableKey.value)
   const submit = document.getElementById('submit-form')
   submit.addEventListener('submit', updatePerson)
   window.loaded = true

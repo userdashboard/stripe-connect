@@ -10,13 +10,10 @@
     <script id="stripe-v3" src="https://js.stripe.com/v3/"></script>
     <script id="connect-v3" src="/public/connect/connect.js"></script>
     <script id="handler-v3" src="/public/connect/stripe-v3-edit-person.js"></script>
-    <script id="client-v3">
-      window.stripePublishableKey = "${person.stripePublishableKey}"
-      window.isAccountOpener = "${person.metadata.submitted ? false : true}"
-    </script>
   </head>
   <body>
   <form id="submit-form" enctype="multipart/form-data" method="post" class="pure-form pure-form-stacked entry-form connect-form" action="/account/connect/edit-person?personid=${person.id}" name="submit-form">
+    <input type="hidden" id="stripe-publishable-key">
     <input type="hidden" name="token" id="token">
     <h1 translate="yes">Edit person</h1>
     <div id="message-container"></div>

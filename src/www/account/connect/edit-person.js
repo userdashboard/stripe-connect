@@ -19,7 +19,6 @@ async function beforeRequest (req) {
       !person.requirements.eventually_due.length) {
     throw new Error('invalid-person')
   }
-  person.stripePublishableKey = global.stripePublishableKey
   req.query.stripeid = person.account
   const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
   if (!stripeAccount) {
@@ -33,11 +32,13 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.person, 'person', req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.person, 'person')
   const removeElements = []
   if (global.stripeJS !== 3) {
-    removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')
+    removeElements.push('stripe-v3', 'connect-v3', 'handler-v3')
   } else {
+    const stripePublishableKey = doc.getElementById('stripe-publishable-key')
+    stripePublishableKey.setAttribute('value', global.stripePublishableKey)
     res.setHeader('content-security-policy',
       'default-src * \'unsafe-inline\'; ' +
     `style-src https://uploads.stripe.com/ https://m.stripe.com/ https://m.stripe.network/ https://js.stripe.com/v3/ https://js.stripe.com/v2/ ${global.dashboardServer}/public/ 'unsafe-inline'; ` +
