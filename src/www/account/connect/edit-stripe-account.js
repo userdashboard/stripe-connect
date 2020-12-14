@@ -21,7 +21,7 @@ async function beforeRequest (req) {
 
 async function renderPage (req, res, messageTemplate) {
   messageTemplate = messageTemplate || (req.query ? req.query.message : null)
-  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.stripeAccount, 'stripeAccount', req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
     removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')

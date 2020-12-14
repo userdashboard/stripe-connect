@@ -16,7 +16,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res, messageTemplate) {
-  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.payout, 'payout', req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.payout, 'payout')
   if (req.data.payout.failure_code) {
     dashboard.HTML.renderTemplate(doc, null, req.data.payout.failure_code, `status-${req.data.payout.id}`)
   }

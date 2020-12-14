@@ -15,7 +15,7 @@ async function beforeRequest (req) {
 }
 
 async function renderPage (req, res) {
-  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.person, 'person', req.language)
+  const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.person, 'person')
   await navbar.setup(doc, req.data.person)
   const removeElements = []
   if (!req.data.person.requirements.currently_due.length) {
