@@ -18,11 +18,12 @@ window.uploadDocumentFiles = function (documentFront, documentBack, callback) {
         return callback(null, frontFile, backFile)
       }
     }
+    const stripePublishableKey = document.getElementById('stripe-publishable-key')
     const data = new window.FormData()
     data.append('file', field.files[0])
     data.append('purpose', 'identity_document')
     const headers = {
-      Authorization: 'Bearer ' + window.stripePublishableKey
+      Authorization: 'Bearer ' + stripePublishableKey.value
     }
     return window.send('https://uploads.stripe.com/v1/files', data, headers, 'POST', function (error, file) {
       if (error) {
