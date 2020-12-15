@@ -24,7 +24,7 @@ async function renderPage (req, res, messageTemplate) {
   const doc = dashboard.HTML.parse(req.html || req.route.html, req.data.stripeAccount, 'stripeAccount')
   const removeElements = []
   if (global.stripeJS !== 3) {
-    removeElements.push('stripe-v3', 'client-v3', 'connect-v3', 'handler-v3')
+    removeElements.push('stripe-v3', 'connect-v3', 'handler-v3')
   } else {
     const stripePublishableKey = doc.getElementById('stripe-publishable-key')
     stripePublishableKey.setAttribute('value', global.stripePublishableKey)
