@@ -74,7 +74,7 @@ describe('/account/connect/edit-person', function () {
           type: 'company'
         })
         await TestHelper.createPerson(user, {
-          relationship_representative: 'true',
+          relationship_representative: 'false',
           relationship_executive: 'true',
           relationship_title: 'SVP Testing',
           relationship_percent_ownership: '0'
