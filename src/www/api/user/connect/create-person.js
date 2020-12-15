@@ -13,7 +13,7 @@ module.exports = {
     if (stripeAccount.business_type !== 'company') {
       throw new Error('invalid-stripe-account')
     }
-    if (!req.body.relationship_representative && !req.body.relationship_director && !req.body.relationship_owner) {
+    if (!req.body.relationship_representative && !req.body.relationship_director && !req.body.relationship_owner && !req.body.relationship_executive) {
       throw new Error('invalid-selection')
     }
     if (req.body.relationship_representative && !req.body.relationship_executive) {
