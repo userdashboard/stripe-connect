@@ -54,6 +54,8 @@ module.exports = {
   createPerson,
   createStripeAccount,
   deleteOldWebhooks,
+  setupBefore,
+  setupBeforeEach,
   setupWebhook,
   submitBeneficialOwners,
   submitCompanyDirectors,
@@ -71,6 +73,7 @@ module.exports = {
   waitForVerificationFailure: util.promisify(waitForVerificationFailure),
   waitForVerificationStart: util.promisify(waitForVerificationStart),
   waitForPayout: util.promisify(waitForPayout),
+  waitForWebhook: util.promisify(waitForWebhook),
   'success_id_scan_front.png': {
     filename: 'id_scan_front.png',
     name: 'id_scan_front.png',
@@ -116,6 +119,10 @@ async function setupBefore () {
   global.sitemap['/api/substitute-failed-document-front'] = helperRoutes.substituteFailedDocumentFront
   global.sitemap['/api/substitute-failed-document-back'] = helperRoutes.substituteFailedDocumentBack
   await deleteOldWebhooks()
+}
+
+async function setupBeforeEach () {
+  global.webhooks = []
 }
 
 let webhook, tunnel, data
@@ -175,6 +182,7 @@ async function setupWebhook () {
 }
 
 before(setupBefore)
+beforeEach(setupBeforeEach)
 
 afterEach(async () => {
   if (data) {
@@ -730,4 +738,29 @@ async function triggerVerification (user) {
   }
   user.charge = charge
   return charge
+}
+
+async function waitForWebhook (webhookType, matching, callback) {
+  Log.info('waitForWebhook', webhookType)
+  if (!webhook) {
+    return callback()
+  }
+  async function wait () {
+    if (global.testEnded) {
+      return
+    }
+    if (!global.webhooks || !global.webhooks.length) {
+      return setTimeout(wait, 10)
+    }
+    for (const received of global.webhooks) {
+      if (received.type !== webhookType) {
+        continue
+      }
+      if (matching(received)) {
+        return callback()
+      }
+    }
+    return setTimeout(wait, 10)
+  }
+  return setTimeout(wait, 10)
 }

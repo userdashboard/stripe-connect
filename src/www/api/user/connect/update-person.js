@@ -10,29 +10,15 @@ module.exports = {
     if (!person) {
       throw new Error('invalid-personid')
     }
+    if (!person.requirements.currently_due.length &&
+        !person.requirements.eventually_due.length) {
+      throw new Error('invalid-person')
+    }
     if (global.stripeJS === 3 && !req.body.token) {
       throw new Error('invalid-token')
     }
     req.query.stripeid = person.account
     const stripeAccount = await global.api.user.connect.StripeAccount.get(req)
-    let requiresInfo = false
-    for (const requirement of stripeAccount.requirements.currently_due) {
-      requiresInfo = requirement.startsWith(person.id)
-      if (requiresInfo) {
-        break
-      }
-    }
-    if (!requiresInfo) {
-      for (const requirement of stripeAccount.requirements.eventually_due) {
-        requiresInfo = requirement.startsWith(person.id)
-        if (requiresInfo) {
-          break
-        }
-      }
-    }
-    if (!requiresInfo) {
-      throw new Error('invalid-person')
-    }
     const updateInfo = {}
     if (global.stripeJS === 3) {
       updateInfo.person_token = req.body.token
@@ -141,7 +127,7 @@ module.exports = {
           req.body.verification_additional_document_back = back.id
         }
       }
-      for (const fullField of stripeAccount.requirements.currently_due) {
+      for (const fullField of person.requirements.currently_due) {
         if (!fullField.startsWith(person.id)) {
           continue
         }
@@ -185,12 +171,12 @@ module.exports = {
           updateInfo[field] = req.body[posted]
         }
       }
-      for (const fullField of stripeAccount.requirements.eventually_due) {
+      for (const fullField of person.requirements.eventually_due) {
         if (!fullField.startsWith(person.id)) {
           continue
         }
         const field = fullField.substring(`${person.id}.`.length)
-        if (stripeAccount.requirements.currently_due.indexOf(field) > -1) {
+        if (person.requirements.currently_due.indexOf(field) > -1) {
           continue
         }
         const posted = field.split('.').join('_')
