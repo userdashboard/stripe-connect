@@ -37,7 +37,7 @@ describe('/account/connect/edit-person', function () {
     'ssn_last_4'
   ]
   const hasElementResults = {}
-  const hasElementUploadResults = {}
+  // const hasElementUploadResults = {}
   const rejectMissingResults = {}
   const rejectMissingResultsStripeV3 = {}
   const rejectMissingUploadResults = {}
